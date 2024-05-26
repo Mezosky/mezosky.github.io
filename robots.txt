@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://iamdelajara.github.io/sitemap.xml
+Sitemap: https://mezosky.github.io/sitemap.xml
