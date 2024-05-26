@@ -111,7 +111,6 @@ youtube_id: # your youtube channel id (youtube.com/@<youtube_id>)
 zotero_username: # your zotero username
 
 contact_note: >
-  
 
 # -----------------------------------------------------------------------------
 # Analytics and search engine verification
@@ -161,7 +160,6 @@ giscus:
 # Disqus comments (DEPRECATED)
 disqus_shortname: al-folio # put your disqus shortname
 # https://help.disqus.com/en/articles/1717111-what-s-a-shortname
-
 
 # -----------------------------------------------------------------------------
 # Collections
