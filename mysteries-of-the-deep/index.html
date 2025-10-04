@@ -1072,6 +1072,30 @@
         calculateBtn.addEventListener("click", calculatePerformance);
         resetBtn.addEventListener("click", initializeControls);
 
+        // MODIFIED: Added image modal logic
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("modalImage");
+        const closeModal = document.getElementById("closeModal");
+        const zoomableImages = document.querySelectorAll(".zoomable-image");
+
+        zoomableImages.forEach((img) => {
+          img.addEventListener("click", () => {
+            modal.style.display = "flex";
+            modalImg.src = img.src;
+          });
+        });
+
+        closeModal.addEventListener("click", () => {
+          modal.style.display = "none";
+        });
+
+        modal.addEventListener("click", (e) => {
+          if (e.target === modal) {
+            // Close only if clicking on the background
+            modal.style.display = "none";
+          }
+        });
+
         // Initial render
         initializeControls();
       });
