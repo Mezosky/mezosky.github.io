@@ -682,6 +682,67 @@
           },
         });
 
+        // --- Interactive Explorer ---
+        let performanceData = {};
+
+        let currentArch = "clip-b16-fixed";
+        let selectedLayers = [];
+
+        const archSelect = document.getElementById("architecture");
+        const calculateBtn = document.getElementById("calculate-btn");
+        const resetBtn = document.getElementById("reset-btn");
+        const svg = document.getElementById("interactive-diagram");
+        const diagramContainer = document.getElementById("diagram-content-container");
+
+        // MODIFIED: This helper processes a single CSV data structure with a more robust parser
+        function processSingleCsv(data, numLayers) {
+          const archData = {
+            numLayers: numLayers,
+            baseline: {},
+            layerCombinations: {},
+          };
+
+          data.forEach((row) => {
+            if (!row.Combination) return;
+
+            let layers;
+            try {
+              // Robustly parse the combination string, removing brackets/spaces and splitting
+              const layerString = row.Combination.replace(/[\[\]\s]/g, "");
+              layers = layerString.split(",").filter(Boolean).map(Number);
+            } catch (e) {
+              console.error("Could not parse combination string:", row.Combination);
+              return; // Skip this row if combination is malformed
+            }
+
+            const key = layers
+              .map((l) => l + 1)
+              .sort((a, b) => a - b)
+              .join(",");
+
+            const combinationData = {
+              fpr: parseFloat(row["Average FPR"]) * 100,
+              auroc: parseFloat(row["Average AUC"]) * 100,
+              datasets: {
+                SUN: { fpr: parseFloat(row["FPR SUN"]) * 100, auroc: parseFloat(row["AUC SUN"]) * 100 },
+                Places: { fpr: parseFloat(row["FPR Places"]) * 100, auroc: parseFloat(row["AUC Places"]) * 100 },
+                DTD: { fpr: parseFloat(row["FPR DTD"]) * 100, auroc: parseFloat(row["AUC DTD"]) * 100 },
+                iNaturalist: { fpr: parseFloat(row["FPR iNaturalist"]) * 100, auroc: parseFloat(row["AUC iNaturalist"]) * 100 },
+              },
+            };
+
+            archData.layerCombinations[key] = combinationData;
+
+            if (key === String(numLayers)) {
+              archData.baseline = {
+                fpr: combinationData.fpr,
+                auroc: combinationData.auroc,
+              };
+            }
+          });
+          return archData;
+        }
+
         // MODIFIED: This function builds the main data object from multiple CSVs
         function buildPerformanceData(dataB16, dataB32) {
           return {
