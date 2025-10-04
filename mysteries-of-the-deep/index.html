@@ -149,83 +149,127 @@
         </h2>
         <p class="text-justify leading-relaxed text-slate-600">
           Out-of-distribution (OOD) detection is essential for reliably
-          deploying machine learning models in the wild. Yet, most methods treat
-          large pre-trained models as monolithic encoders and rely solely on
-          their final-layer representations for detection. We challenge this
-          wisdom. We reveal the intermediate layers of pre-trained models, shaped
-          by residual connections that subtly transform input projections, can
-          encode surprisingly rich and diverse signals for detecting
-          distributional shifts. Importantly, to exploit latent representation
-          diversity across layers, we introduce an entropy-based criterion to
-          automatically identify layers offering the most complementary
-          information in a training-free setting—without access to OOD data. We
-          show that selectively incorporating these intermediate representations
-          can increase the accuracy of OOD detection by up to 10% in far-OOD and
-          over 7% in near-OOD benchmarks compared to state-of-the-art
-          training-free methods across various model architectures and training
-          objectives.
+          deploying machine learning models in the wild. Yet, most methods
+          treat large pre-trained models as monolithic encoders and rely solely
+          on their final-layer representations for detection. We challenge this
+          wisdom. We reveal the intermediate layers of pre-trained models,
+          shaped by residual connections that subtly transform input
+          projections, can encode surprisingly rich and diverse signals for
+          detecting distributional shifts. Importantly, to exploit latent
+          representation diversity across layers, we introduce an entropy-based
+          criterion to automatically identify layers offering the most
+          complementary information in a training-free setting—without access
+          to OOD data. We show that selectively incorporating these
+          intermediate representations can increase the accuracy of OOD
+          detection by up to 10% in far-OOD and over 7% in near-OOD benchmarks
+          compared to state-of-the-art training-free methods across various
+          model architectures and training objectives.
         </p>
       </section>
 
       <!-- Separator -->
       <hr class="mx-auto my-16 max-w-xl border-slate-200" />
-      
+
       <!-- Why CLIP? Section -->
       <section class="mx-auto mb-16 max-w-4xl">
-          <h2 class="mb-6 text-center text-2xl font-bold text-slate-900">
-              Why Does This Effect Occur in CLIP?
-          </h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-              <div>
-                  <p class="text-justify leading-relaxed text-slate-600 mb-4">
-                      Our analysis reveals that models like CLIP are uniquely suited for multi-layer fusion. They exhibit two key properties:
-                  </p>
-                  <ul class="list-disc list-inside space-y-2 text-slate-600">
-                      <li><strong>High Inter-Layer Diversity:</strong> As shown by Singular Vector Canonical Correlation Analysis (SVCCA), CLIP layers transform representations progressively. There is low similarity between distant layers, meaning each layer provides unique, non-redundant information.</li>
-                      <li><strong>Prediction Consistency:</strong> Despite this diversity, CLIP models show stable prediction behavior across their depth. This means the intermediate layers provide coherent signals that don't conflict with each other, making them ideal for aggregation.
-                      </li>
-                  </ul>
-                  <p class="text-justify leading-relaxed text-slate-600 mt-4">
-                    In contrast, supervised and some self-supervised models show high redundancy or abrupt, unstable shifts between layers, which makes fusing their representations less effective.
-                  </p>
-              </div>
-              <div>
-                  <img src="plot_svcca.png" alt="SVCCA Similarity Plot" class="rounded-lg shadow-md">
-                   <p class="text-center text-sm text-slate-500 mt-2">Figure 3 from the paper: Layer-wise SVCCA similarity decay. CLIP models (blue) show faster decay, indicating higher diversity compared to supervised models (yellow).</p>
-              </div>
+        <h2 class="mb-6 text-center text-2xl font-bold text-slate-900">
+          Why Does This Effect Occur in CLIP?
+        </h2>
+        <div class="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
+          <div>
+            <p class="mb-4 text-justify leading-relaxed text-slate-600">
+              Our analysis reveals that models like CLIP are uniquely suited
+              for multi-layer fusion. They exhibit two key properties:
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-slate-600">
+              <li>
+                <strong>High Inter-Layer Diversity:</strong> As shown by
+                Singular Vector Canonical Correlation Analysis (SVCCA), CLIP
+                layers transform representations progressively. There is low
+                similarity between distant layers, meaning each layer provides
+                unique, non-redundant information.
+              </li>
+              <li>
+                <strong>Prediction Consistency:</strong> Despite this diversity,
+                CLIP models show stable prediction behavior across their depth.
+                This means the intermediate layers provide coherent signals
+                that don't conflict with each other, making them ideal for
+                aggregation.
+              </li>
+            </ul>
+            <p class="mt-4 text-justify leading-relaxed text-slate-600">
+              In contrast, supervised and some self-supervised models show high
+              redundancy or abrupt, unstable shifts between layers, which makes
+              fusing their representations less effective.
+            </p>
           </div>
+          <div>
+            <img
+              src="plot_svcca.png"
+              alt="SVCCA Similarity Plot"
+              class="rounded-lg shadow-md"
+            />
+            <p class="mt-2 text-center text-sm text-slate-500">
+              Figure 3 from the paper: Layer-wise SVCCA similarity decay. CLIP
+              models (blue) show faster decay, indicating higher diversity
+              compared to supervised models (yellow).
+            </p>
+          </div>
+        </div>
       </section>
-      
+
       <!-- Separator -->
       <hr class="mx-auto my-16 max-w-xl border-slate-200" />
-      
+
       <!-- Method Section -->
-        <section class="mx-auto mb-16 max-w-4xl">
-            <h2 class="mb-6 text-center text-2xl font-bold text-slate-900">
-                Our Method: Entropy-Based Layer Selection
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                 <div>
-                    <img src="new_method_diagram.svg" alt="Method Diagram" class="rounded-lg shadow-md">
-                     <p class="text-center text-sm text-slate-500 mt-2">Figure 5 from the paper: Overview of our proposed method.</p>
-                </div>
-                <div>
-                    <p class="text-justify leading-relaxed text-slate-600 mb-4">
-                        We introduce a training-free extension of Maximum Concept Matching (MCM). Instead of relying on just the final layer, our method intelligently selects and fuses the most informative intermediate layers.
-                    </p>
-                    <ol class="list-decimal list-inside space-y-2 text-slate-600">
-                        <li><strong>Fuse Scores:</strong> We first calculate OOD scores (using MCM) for various combinations of layers.</li>
-                        <li><strong>Entropy-Based Selection:</strong> We evaluate each combination by computing the entropy of its score distribution on unlabeled in-distribution data. A low-entropy distribution indicates confident, concentrated scores, which is a strong proxy for good ID/OOD separability.</li>
-                        <li><strong>Select Optimal Layers:</strong> The layer combination that minimizes this entropy is chosen as the optimal one for OOD detection.
-                        </li>
-                    </ol>
-                     <p class="text-justify leading-relaxed text-slate-600 mt-4">
-                        This entire process is training-free, requires no OOD data for selection, and remains architecture-agnostic for models like CLIP.
-                    </p>
-                </div>
-               
-            </div>
-        </section>
+      <section class="mx-auto mb-16 max-w-4xl">
+        <h2 class="mb-6 text-center text-2xl font-bold text-slate-900">
+          Our Method: Entropy-Based Layer Selection
+        </h2>
+        <div class="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
+          <div>
+            <img
+              src="new_method_diagram.svg"
+              alt="Method Diagram"
+              class="rounded-lg shadow-md"
+            />
+            <p class="mt-2 text-center text-sm text-slate-500">
+              Figure 5 from the paper: Overview of our proposed method.
+            </p>
+          </div>
+          <div>
+            <p class="mb-4 text-justify leading-relaxed text-slate-600">
+              We introduce a training-free extension of Maximum Concept Matching
+              (MCM). Instead of relying on just the final layer, our method
+              intelligently selects and fuses the most informative intermediate
+              layers.
+            </p>
+            <ol class="list-decimal list-inside space-y-2 text-slate-600">
+              <li>
+                <strong>Fuse Scores:</strong> We first calculate OOD scores
+                (using MCM) for various combinations of layers.
+              </li>
+              <li>
+                <strong>Entropy-Based Selection:</strong> We evaluate each
+                combination by computing the entropy of its score distribution
+                on unlabeled in-distribution data. A low-entropy distribution
+                indicates confident, concentrated scores, which is a strong
+                proxy for good ID/OOD separability.
+              </li>
+              <li>
+                <strong>Select Optimal Layers:</strong> The layer combination
+                that minimizes this entropy is chosen as the optimal one for OOD
+                detection.
+              </li>
+            </ol>
+            <p class="mt-4 text-justify leading-relaxed text-slate-600">
+              This entire process is training-free, requires no OOD data for
+              selection, and remains architecture-agnostic for models like
+              CLIP.
+            </p>
+          </div>
+        </div>
+      </section>
 
       <!-- Separator -->
       <hr class="mx-auto my-16 max-w-xl border-slate-200" />
@@ -237,7 +281,9 @@
         </h2>
         <p class="mx-auto mb-10 max-w-2xl text-center text-slate-500">
           Experiment with different layer combinations to see how fusing
-          intermediate representations via <strong>Maximum Concept Matching (MCM)</strong> impacts OOD detection performance.
+          intermediate representations via
+          <strong>Maximum Concept Matching (MCM)</strong> impacts OOD detection
+          performance.
         </p>
 
         <div class="grid grid-cols-1 gap-8 lg:grid-cols-5 lg:gap-12">
@@ -328,9 +374,7 @@
               >
                 Average FPR@95
               </h4>
-              <p id="fpr-value" class="text-4xl font-light text-slate-900">
-                -
-              </p>
+              <p id="fpr-value" class="text-4xl font-light text-slate-900">-</p>
               <div id="fpr-change" class="mt-2"></div>
             </div>
             <div
@@ -390,57 +434,90 @@
           </div>
         </div>
       </section>
-      
+
       <!-- Separator -->
       <hr class="mx-auto my-16 max-w-xl border-slate-200" />
-      
-       <!-- Understanding the Results Section -->
-        <section class="mx-auto mb-16 max-w-4xl">
-            <h2 class="mb-6 text-center text-2xl font-bold text-slate-900">
-                Understanding the Results: Entropy vs. FPR
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                <div>
-                    <p class="text-justify leading-relaxed text-slate-600 mb-4">
-                        A key metric we use is <strong>FPR@95</strong>, which stands for the False Positive Rate when the True Positive Rate is at 95%. A lower FPR@95 indicates better OOD detection performance.
-                    </p>
-                    <p class="text-justify leading-relaxed text-slate-600 mb-4">
-                        Our core finding is the strong positive correlation between the <strong>entropy</strong> of a layer combination's scores and its resulting <strong>FPR@95</strong>.
-                    </p>
-                    <ul class="list-disc list-inside space-y-2 text-slate-600">
-                        <li><strong>Good Selections (Low Entropy):</strong> Layer combinations that produce low-entropy (confident and sharp) score distributions for in-distribution data consistently yield lower FPR and better OOD performance.</li>
-                        <li><strong>Bad Selections (High Entropy):</strong> Combinations with high-entropy (uncertain and flat) score distributions perform poorly, often no better than the baseline.</li>
-                    </ul>
-                     <p class="text-justify leading-relaxed text-slate-600 mt-4">
-                       This relationship validates our use of entropy as an effective, unsupervised criterion for selecting the best layers for OOD detection.
-                    </p>
-                </div>
-                 <div>
-                    <img src="fpr_vs_entropy.jpg" alt="Entropy vs FPR Plot" class="rounded-lg shadow-md">
-                     <p class="text-center text-sm text-slate-500 mt-2">Figure G.11 from the paper: A clear correlation between lower entropy and lower FPR@95.</p>
-                </div>
-            </div>
-        </section>
+
+      <!-- Understanding the Results Section -->
+      <section class="mx-auto mb-16 max-w-4xl">
+        <h2 class="mb-6 text-center text-2xl font-bold text-slate-900">
+          Understanding the Results: Entropy vs. FPR
+        </h2>
+        <div class="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
+          <div>
+            <p class="mb-4 text-justify leading-relaxed text-slate-600">
+              A key metric we use is <strong>FPR@95</strong>, which stands for
+              the False Positive Rate when the True Positive Rate is at 95%. A
+              lower FPR@95 indicates better OOD detection performance.
+            </p>
+            <p class="mb-4 text-justify leading-relaxed text-slate-600">
+              Our core finding is the strong positive correlation between the
+              <strong>entropy</strong> of a layer combination's scores and its
+              resulting <strong>FPR@95</strong>.
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-slate-600">
+              <li>
+                <strong>Good Selections (Low Entropy):</strong> Layer
+                combinations that produce low-entropy (confident and sharp)
+                score distributions for in-distribution data consistently yield
+                lower FPR and better OOD performance.
+              </li>
+              <li>
+                <strong>Bad Selections (High Entropy):</strong> Combinations
+                with high-entropy (uncertain and flat) score distributions
+                perform poorly, often no better than the baseline.
+              </li>
+            </ul>
+            <p class="mt-4 text-justify leading-relaxed text-slate-600">
+              This relationship validates our use of entropy as an effective,
+              unsupervised criterion for selecting the best layers for OOD
+              detection.
+            </p>
+          </div>
+          <div>
+            <img
+              src="fpr_vs_entropy.jpg"
+              alt="Entropy vs FPR Plot"
+              class="rounded-lg shadow-md"
+            />
+            <p class="mt-2 text-center text-sm text-slate-500">
+              Figure G.11 from the paper: A clear correlation between lower
+              entropy and lower FPR@95.
+            </p>
+          </div>
+        </div>
+      </section>
 
       <!-- Separator -->
       <hr class="mx-auto my-16 max-w-xl border-slate-200" />
 
       <!-- What do layers learn Section -->
-        <section class="mx-auto mb-16 max-w-6xl">
-            <h2 class="mb-6 text-center text-2xl font-bold text-slate-900">
-                What Do Different Layers Learn?
-            </h2>
-             <p class="mx-auto mb-10 max-w-3xl text-center text-slate-500">
-               Not all layers are created equal. Our analysis shows a clear stratification of semantic concepts across the depth of the network. Early layers specialize in low-level features, while deeper layers capture more complex, high-level concepts. This confirms that to get a complete picture for OOD detection, we need to draw from the diverse specializations of multiple layers.
-            </p>
-            <div>
-                 <img src="concept_proportions.svg" alt="Semantic Concept Plots" class="rounded-lg shadow-md w-full">
-                 <p class="text-center text-sm text-slate-500 mt-2">
-                    Figure F.10 from the paper: Low-level concepts like <strong>Colors</strong> and <strong>Textures</strong> peak in early layers, while high-level concepts like <strong>Objects</strong> and <strong>Activities</strong> emerge in deeper layers.
-                </p>
-            </div>
-        </section>
-
+      <section class="mx-auto mb-16 max-w-6xl">
+        <h2 class="mb-6 text-center text-2xl font-bold text-slate-900">
+          What Do Different Layers Learn?
+        </h2>
+        <p class="mx-auto mb-10 max-w-3xl text-center text-slate-500">
+          Not all layers are created equal. Our analysis shows a clear
+          stratification of semantic concepts across the depth of the network.
+          Early layers specialize in low-level features, while deeper layers
+          capture more complex, high-level concepts. This confirms that to get a
+          complete picture for OOD detection, we need to draw from the diverse
+          specializations of multiple layers.
+        </p>
+        <div>
+          <img
+            src="concept_proportions.svg"
+            alt="Semantic Concept Plots"
+            class="w-full rounded-lg shadow-md"
+          />
+          <p class="mt-2 text-center text-sm text-slate-500">
+            Figure F.10 from the paper: Low-level concepts like
+            <strong>Colors</strong> and <strong>Textures</strong> peak in early
+            layers, while high-level concepts like <strong>Objects</strong> and
+            <strong>Activities</strong> emerge in deeper layers.
+          </p>
+        </div>
+      </section>
 
       <!-- Separator -->
       <hr class="mx-auto my-16 max-w-xl border-slate-200" />
@@ -531,8 +608,8 @@
             },
             {
               data: [
-                0.4227, 0.435, 0.4408, 0.4305, 0.4285, 0.4208, 0.4262,
-                0.431, 0.4388, 0.4577, 0.463, 0.4659,
+                0.4227, 0.435, 0.4408, 0.4305, 0.4285, 0.4208, 0.4262, 0.431,
+                0.4388, 0.4577, 0.463, 0.4659,
               ],
               fill: '+1',
               backgroundColor: bgColors.clipvit,
@@ -584,8 +661,8 @@
             {
               label: 'ViT B/16 (Supervised)',
               data: [
-                0.4686, 0.4702, 0.472, 0.4739, 0.4759, 0.478, 0.4801,
-                0.4823, 0.4845, 0.4867, 0.489, 0.4912,
+                0.4686, 0.4702, 0.472, 0.4739, 0.4759, 0.478, 0.4801, 0.4823,
+                0.4845, 0.4867, 0.489, 0.4912,
               ],
               borderColor: colors.vit,
               tension: 0.1,
@@ -593,8 +670,8 @@
             },
             {
               data: [
-                0.4686, 0.4747, 0.4825, 0.4871, 0.491, 0.494, 0.4973,
-                0.4993, 0.4995, 0.5005, 0.5005, 0.4912,
+                0.4686, 0.4747, 0.4825, 0.4871, 0.491, 0.494, 0.4973, 0.4993,
+                0.4995, 0.5005, 0.5005, 0.4912,
               ],
               fill: '+1',
               backgroundColor: bgColors.vit,
@@ -604,8 +681,8 @@
             },
             {
               data: [
-                0.4686, 0.4639, 0.4627, 0.4631, 0.463, 0.4642, 0.4658,
-                0.468, 0.4716, 0.4763, 0.4822, 0.4912,
+                0.4686, 0.4639, 0.4627, 0.4631, 0.463, 0.4642, 0.4658, 0.468,
+                0.4716, 0.4763, 0.4822, 0.4912,
               ],
               pointRadius: 0,
               borderWidth: 0,
@@ -615,8 +692,8 @@
             {
               label: 'PEv1-B16-224',
               data: [
-                0.369, 0.4443, 0.514, 0.576, 0.6293, 0.6748, 0.7134,
-                0.7463, 0.7745, 0.7988, 0.8203, 0.8388,
+                0.369, 0.4443, 0.514, 0.576, 0.6293, 0.6748, 0.7134, 0.7463,
+                0.7745, 0.7988, 0.8203, 0.8388,
               ],
               borderColor: colors.pe,
               tension: 0.1,
@@ -624,8 +701,8 @@
             },
             {
               data: [
-                0.369, 0.553, 0.6768, 0.757, 0.8097, 0.8311, 0.8387,
-                0.8423, 0.8446, 0.8444, 0.8422, 0.8388,
+                0.369, 0.553, 0.6768, 0.757, 0.8097, 0.8311, 0.8387, 0.8423,
+                0.8446, 0.8444, 0.8422, 0.8388,
               ],
               fill: '+1',
               backgroundColor: bgColors.pe,
@@ -635,8 +712,8 @@
             },
             {
               data: [
-                0.369, 0.3763, 0.3899, 0.4083, 0.4336, 0.4669, 0.5241,
-                0.599, 0.6571, 0.7112, 0.7768, 0.8388,
+                0.369, 0.3763, 0.3899, 0.4083, 0.4336, 0.4669, 0.5241, 0.599,
+                0.6571, 0.7112, 0.7768, 0.8388,
               ],
               pointRadius: 0,
               borderWidth: 0,
@@ -942,8 +1019,9 @@
         const calculateBtn = document.getElementById('calculate-btn');
         const resetBtn = document.getElementById('reset-btn');
         const svg = document.getElementById('interactive-diagram');
-        const diagramContainer =
-          document.getElementById('diagram-content-container');
+        const diagramContainer = document.getElementById(
+          'diagram-content-container'
+        );
 
         function initializeControls() {
           const numLayers = performanceData[currentArch].numLayers;
@@ -978,30 +1056,30 @@
 
           // Static elements
           content += `
-                        <rect x="230" y="80" width="550" height="${
-                          START_Y - 100 + numLayers * V_SPACING
-                        }" rx="10" class="svg-bg" />
-                        <rect x="230" y="${
-                          START_Y - 20 + numLayers * V_SPACING + 40
-                        }" width="550" height="70" rx="10" class="svg-bg" />
-                        <text x="505" y="105" text-anchor="middle" class="svg-text-label">Visual Encoders</text>
-                        <text x="505" y="${
-                          START_Y - 20 + numLayers * V_SPACING + 70
-                        }" text-anchor="middle" class="svg-text-label">Final Fused Score</text>
-                        <rect x="10" y="${
-                          TOTAL_HEIGHT / 2 - 40
-                        }" width="130" height="80" rx="5" fill="#eef2ff" stroke="#a5b4fc" stroke-width="2"/>
-                        <text x="75" y="${
-                          TOTAL_HEIGHT / 2 - 15
-                        }" text-anchor="middle" class="svg-text-label">ID Images</text>
-                        <text x="75" y="${
-                          TOTAL_HEIGHT / 2 + 15
-                        }" text-anchor="middle" font-size="30">🖼️</text>
-                        <rect x="160" y="10" width="200" height="40" rx="20" fill="#fff7ed" stroke="#fed7aa" stroke-width="2"/>
-                        <text x="260" y="35" text-anchor="middle" class="svg-text-label">ID Labels</text>
-                        <rect x="420" y="10" width="160" height="40" rx="5" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="2"/>
-                        <text x="500" y="35" text-anchor="middle" class="svg-text-label">Text Encoder</text>
-                    `;
+                                <rect x="230" y="80" width="550" height="${
+                                  START_Y - 100 + numLayers * V_SPACING
+                                }" rx="10" class="svg-bg" />
+                                <rect x="230" y="${
+                                  START_Y - 20 + numLayers * V_SPACING + 40
+                                }" width="550" height="70" rx="10" class="svg-bg" />
+                                <text x="505" y="105" text-anchor="middle" class="svg-text-label">Visual Encoders</text>
+                                <text x="505" y="${
+                                  START_Y - 20 + numLayers * V_SPACING + 70
+                                }" text-anchor="middle" class="svg-text-label">Final Fused Score</text>
+                                <rect x="10" y="${
+                                  TOTAL_HEIGHT / 2 - 40
+                                }" width="130" height="80" rx="5" fill="#eef2ff" stroke="#a5b4fc" stroke-width="2"/>
+                                <text x="75" y="${
+                                  TOTAL_HEIGHT / 2 - 15
+                                }" text-anchor="middle" class="svg-text-label">ID Images</text>
+                                <text x="75" y="${
+                                  TOTAL_HEIGHT / 2 + 15
+                                }" text-anchor="middle" font-size="30">🖼️</text>
+                                <rect x="160" y="10" width="200" height="40" rx="20" fill="#fff7ed" stroke="#fed7aa" stroke-width="2"/>
+                                <text x="260" y="35" text-anchor="middle" class="svg-text-label">ID Labels</text>
+                                <rect x="420" y="10" width="160" height="40" rx="5" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="2"/>
+                                <text x="500" y="35" text-anchor="middle" class="svg-text-label">Text Encoder</text>
+                              `;
 
           // Main bus lines
           const imageBusX = 260;
@@ -1040,17 +1118,17 @@
             content += `<polygon class="svg-layer-box" points="300,${layerY} 450,${layerY} 450,${
               layerY + LAYER_BOX_H
             } 300,${layerY + LAYER_BOX_H}"/>
-                                        <text x="375" y="${
-                                          center_y + 5
-                                        }" text-anchor="middle" class="svg-layer-text">Layer ${i}</text>
-                                        <g class="svg-score-group">
-                                            <text x="660" y="${
-                                              center_y + 6
-                                            }" font-size="20" class="font-bold">⊕</text>
-                                            <text x="715" y="${
-                                              center_y + 5
-                                            }" text-anchor="middle" class="svg-text-small">Scores ${i}</text>
-                                        </g>`;
+                                          <text x="375" y="${
+                                            center_y + 5
+                                          }" text-anchor="middle" class="svg-layer-text">Layer ${i}</text>
+                                          <g class="svg-score-group">
+                                              <text x="660" y="${
+                                                center_y + 6
+                                              }" font-size="20" class="font-bold">⊕</text>
+                                              <text x="715" y="${
+                                                center_y + 5
+                                              }" text-anchor="middle" class="svg-text-small">Scores ${i}</text>
+                                          </g>`;
             content += `</g>`;
           }
 
@@ -1058,13 +1136,13 @@
           const lastLayerY = START_Y + (numLayers - 1) * V_SPACING;
           const finalScoreY = lastLayerY + V_SPACING + 65;
           content += `
-                        <path class="svg-arrow-path" marker-end="url(#arrowhead)" d="M375 ${
-                          lastLayerY + LAYER_BOX_H
-                        } V ${finalScoreY}"/>
-                        <text x="505" y="${
-                          finalScoreY + 8
-                        }" font-size="24" fill="#1e293b" class="font-bold">⊕</text>
-                    `;
+                                <path class="svg-arrow-path" marker-end="url(#arrowhead)" d="M375 ${
+                                  lastLayerY + LAYER_BOX_H
+                                } V ${finalScoreY}"/>
+                                <text x="505" y="${
+                                  finalScoreY + 8
+                                }" font-size="24" fill="#1e293b" class="font-bold">⊕</text>
+                              `;
 
           diagramContainer.innerHTML = content;
           updateDiagramHighlights();
@@ -1077,14 +1155,14 @@
             labelElement.classList.remove(
               'bg-indigo-600',
               'text-white',
-              'border-indigo-600',
+              'border-indigo-600'
             );
           } else {
             selectedLayers.push(layer);
             labelElement.classList.add(
               'bg-indigo-600',
               'text-white',
-              'border-indigo-600',
+              'border-indigo-600'
             );
           }
           selectedLayers.sort((a, b) => a - b);
@@ -1098,7 +1176,7 @@
             if (group) {
               group.classList.toggle(
                 'highlighted',
-                selectedLayers.includes(i),
+                selectedLayers.includes(i)
               );
             }
           }
@@ -1118,7 +1196,7 @@
             const combLayers = combKey.split(',').map(Number);
             const sizeDiff = Math.abs(combLayers.length - layers.length);
             const overlap = combLayers.filter((l) =>
-              layers.includes(l),
+              layers.includes(l)
             ).length;
             const diff = sizeDiff * 2 - overlap;
             if (diff < minDiff) {
@@ -1134,7 +1212,7 @@
               'Please select at least one layer.';
             setTimeout(
               () => (document.getElementById('message-box').textContent = ''),
-              3000,
+              3000
             );
             return;
           }
@@ -1144,7 +1222,7 @@
               'No matching data for this combination.';
             setTimeout(
               () => (document.getElementById('message-box').textContent = ''),
-              3000,
+              3000
             );
             return;
           }
@@ -1156,9 +1234,8 @@
           updateMetricCard('auroc', metrics.auroc, baseline.auroc, true);
           document.getElementById('layers-count').textContent =
             selectedLayers.length;
-          document.getElementById('selected-layers').textContent = selectedLayers
-            .map((l) => `L${l}`)
-            .join(', ');
+          document.getElementById('selected-layers').textContent =
+            selectedLayers.map((l) => `L${l}`).join(', ');
           updateDatasetTable(metrics.datasets);
           resultsContainer.scrollIntoView({
             behavior: 'smooth',
@@ -1194,9 +1271,9 @@
           for (const [dataset, metrics] of Object.entries(datasets)) {
             const row = document.createElement('tr');
             row.innerHTML = ` <td class="p-3 text-sm text-slate-700">${dataset}</td> <td class="p-3 text-sm text-slate-700">${metrics.fpr.toFixed(
-              2,
+              2
             )}%</td> <td class="p-3 text-sm text-slate-700">${metrics.auroc.toFixed(
-              2,
+              2
             )}%</td> `;
             tbody.appendChild(row);
           }
@@ -1215,4 +1292,3 @@
     </script>
   </body>
 </html>
-
