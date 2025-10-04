@@ -402,6 +402,14 @@
       </footer>
     </div>
 
+    <!-- MODIFIED: Added Image Modal Structure -->
+    <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-75 hidden items-center justify-center p-4 z-50 transition-opacity duration-300">
+      <span id="closeModal" class="absolute top-4 right-6 text-white text-4xl font-bold cursor-pointer transition-transform hover:scale-110"
+        >&times;</span
+      >
+      <img id="modalImage" class="max-w-[90vw] max-h-[90vh] rounded-lg" src="" alt="Zoomed Image" />
+    </div>
+
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         // --- Teaser Charts ---
