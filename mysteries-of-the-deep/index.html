@@ -244,10 +244,11 @@
           <div class="self-start rounded-lg border border-slate-200 bg-white p-6 shadow-md lg:col-span-2">
             <div class="mb-6">
               <label for="architecture" class="mb-2 block text-sm font-medium text-slate-700">1. Select Architecture:</label>
-              <!-- MODIFIED: Reduced architecture options -->
               <select id="architecture" class="w-full rounded-md border border-slate-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                <option value="clip-b16-fixed">CLIP ViT-B/16 (Fixed Final Layer)</option>
-                <option value="clip-b32-fixed">CLIP ViT-B/32 (Fixed Final Layer)</option>
+                <option value="clip-b16">CLIP ViT-B/16 (12 Layers)</option>
+                <option value="clip-b32">CLIP ViT-B/32 (12 Layers)</option>
+                <option value="clip-l14">CLIP ViT-L/14 (24 Layers)</option>
+                <option value="resnet">ResNet-50 (16 Layers)</option>
               </select>
             </div>
 
@@ -643,6 +644,7 @@
           type: "bar",
           data: barChartData,
           options: {
+            // The indexAxis:'y' property has been removed to make the chart vertical
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
@@ -653,6 +655,7 @@
               },
               legend: { display: false },
             },
+            // The x and y axes have been swapped for a vertical layout
             scales: {
               x: {
                 grid: { display: false },
@@ -674,9 +677,8 @@
         });
 
         // --- Interactive Explorer ---
-        // MODIFIED: Reduced performance data to only the two requested architectures
         const performanceData = {
-          "clip-b16-fixed": {
+          "clip-b16": {
             numLayers: 12,
             baseline: { fpr: 42.27, auroc: 90.83 },
             layerCombinations: {
@@ -687,122 +689,32 @@
                   iNaturalist: { fpr: 30.67, auroc: 94.63 },
                   SUN: { fpr: 37.41, auroc: 92.57 },
                   Places: { fpr: 43.67, auroc: 89.96 },
-                  DTD: { fpr: 57.34, auroc: 86.17 },
+                  Textures: { fpr: 57.34, auroc: 86.18 },
                 },
               },
-              "1,12": {
-                fpr: 42.27,
-                auroc: 90.83,
+              "0,6,8,11,12": {
+                fpr: 30.7,
+                auroc: 93.54,
                 datasets: {
-                  iNaturalist: { fpr: 30.67, auroc: 94.63 },
-                  SUN: { fpr: 37.41, auroc: 92.57 },
-                  Places: { fpr: 43.67, auroc: 89.96 },
-                  DTD: { fpr: 57.34, auroc: 86.17 },
+                  iNaturalist: { fpr: 15.98, auroc: 96.9 },
+                  SUN: { fpr: 45.58, auroc: 89.69 },
+                  Places: { fpr: 35.71, auroc: 92.72 },
+                  Textures: { fpr: 25.51, auroc: 94.84 },
                 },
               },
-              "2,12": {
-                fpr: 44.53,
-                auroc: 89.54,
-                datasets: {
-                  iNaturalist: { fpr: 31.47, auroc: 94.55 },
-                  SUN: { fpr: 39.0, auroc: 92.27 },
-                  Places: { fpr: 45.11, auroc: 88.94 },
-                  DTD: { fpr: 62.53, auroc: 82.41 },
-                },
-              },
-              "3,12": {
-                fpr: 43.99,
-                auroc: 89.65,
-                datasets: {
-                  iNaturalist: { fpr: 30.79, auroc: 94.61 },
-                  SUN: { fpr: 38.8, auroc: 92.27 },
-                  Places: { fpr: 44.02, auroc: 88.98 },
-                  DTD: { fpr: 62.35, auroc: 82.74 },
-                },
-              },
-              "4,12": {
-                fpr: 40.78,
-                auroc: 90.53,
-                datasets: {
-                  iNaturalist: { fpr: 25.92, auroc: 95.29 },
-                  SUN: { fpr: 36.21, auroc: 92.74 },
-                  Places: { fpr: 41.44, auroc: 90.45 },
-                  DTD: { fpr: 59.54, auroc: 83.61 },
-                },
-              },
-              "5,12": {
-                fpr: 39.06,
-                auroc: 90.99,
-                datasets: {
-                  iNaturalist: { fpr: 28.43, auroc: 94.99 },
-                  SUN: { fpr: 39.94, auroc: 92.15 },
-                  Places: { fpr: 41.4, auroc: 90.62 },
-                  DTD: { fpr: 46.46, auroc: 86.21 },
-                },
-              },
-              "6,12": {
-                fpr: 36.23,
-                auroc: 91.58,
-                datasets: {
-                  iNaturalist: { fpr: 22.85, auroc: 95.77 },
-                  SUN: { fpr: 36.06, auroc: 93.06 },
-                  Places: { fpr: 37.46, auroc: 91.6 },
-                  DTD: { fpr: 48.95, auroc: 85.9 },
-                },
-              },
-              "7,12": {
-                fpr: 37.05,
-                auroc: 91.35,
-                datasets: {
-                  iNaturalist: { fpr: 27.89, auroc: 95.07 },
-                  SUN: { fpr: 41.1, auroc: 91.68 },
-                  Places: { fpr: 37.7, auroc: 90.89 },
-                  DTD: { fpr: 41.51, auroc: 87.75 },
-                },
-              },
-              "8,12": {
-                fpr: 33.91,
-                auroc: 92.51,
-                datasets: {
-                  iNaturalist: { fpr: 23.28, auroc: 95.83 },
-                  SUN: { fpr: 33.43, auroc: 93.22 },
-                  Places: { fpr: 37.39, auroc: 91.64 },
-                  DTD: { fpr: 41.56, auroc: 89.34 },
-                },
-              },
-              "9,12": {
-                fpr: 34.07,
-                auroc: 92.5,
-                datasets: {
-                  iNaturalist: { fpr: 22.24, auroc: 96.06 },
-                  SUN: { fpr: 35.22, auroc: 93.04 },
-                  Places: { fpr: 35.61, auroc: 92.03 },
-                  DTD: { fpr: 43.14, auroc: 88.85 },
-                },
-              },
-              "10,12": {
-                fpr: 33.4,
-                auroc: 92.83,
-                datasets: {
-                  iNaturalist: { fpr: 15.53, auroc: 96.95 },
-                  SUN: { fpr: 36.02, auroc: 92.54 },
-                  Places: { fpr: 36.8, auroc: 91.69 },
-                  DTD: { fpr: 45.24, auroc: 90.13 },
-                },
-              },
-              "11,12": {
+              "6,8,11,12": {
                 fpr: 32.15,
                 auroc: 92.8,
                 datasets: {
                   iNaturalist: { fpr: 18.2, auroc: 96.2 },
                   SUN: { fpr: 42.1, auroc: 90.8 },
                   Places: { fpr: 37.5, auroc: 91.9 },
-                  DTD: { fpr: 30.8, auroc: 92.3 },
+                  Textures: { fpr: 30.8, auroc: 92.3 },
                 },
               },
             },
           },
-          "clip-b32-fixed": {
+          "clip-b32": {
             numLayers: 12,
             baseline: { fpr: 45.61, auroc: 89.87 },
             layerCombinations: {
@@ -816,29 +728,19 @@
                   Textures: { fpr: 60.9, auroc: 85.03 },
                 },
               },
-              "4,12": {
-                fpr: 39.8,
-                auroc: 90.9,
+              "0,4,6,8,11,12": {
+                fpr: 29.01,
+                auroc: 93.42,
                 datasets: {
-                  iNaturalist: { fpr: 25.5, auroc: 95.1 },
-                  SUN: { fpr: 38.4, auroc: 91.7 },
-                  Places: { fpr: 42.2, auroc: 90.0 },
-                  Textures: { fpr: 53.1, auroc: 86.8 },
+                  iNaturalist: { fpr: 12.02, auroc: 97.64 },
+                  SUN: { fpr: 28.98, auroc: 93.37 },
+                  Places: { fpr: 35.69, auroc: 91.61 },
+                  Textures: { fpr: 39.36, auroc: 91.07 },
                 },
               },
-              "6,12": {
-                fpr: 37.5,
-                auroc: 91.2,
-                datasets: {
-                  iNaturalist: { fpr: 22.5, auroc: 95.6 },
-                  SUN: { fpr: 36.4, auroc: 91.9 },
-                  Places: { fpr: 41.2, auroc: 90.3 },
-                  Textures: { fpr: 50.0, auroc: 87.0 },
-                },
-              },
-              "8,12": {
-                fpr: 35.9,
-                auroc: 91.4,
+              "4,6,8,12": {
+                fpr: 35.2,
+                auroc: 91.5,
                 datasets: {
                   iNaturalist: { fpr: 20.5, auroc: 95.8 },
                   SUN: { fpr: 35.4, auroc: 92.1 },
@@ -848,9 +750,61 @@
               },
             },
           },
+          "clip-l14": {
+            numLayers: 24,
+            baseline: { fpr: 38.5, auroc: 92.1 },
+            layerCombinations: {
+              24: {
+                fpr: 38.5,
+                auroc: 92.1,
+                datasets: {
+                  iNaturalist: { fpr: 28.3, auroc: 95.2 },
+                  SUN: { fpr: 35.2, auroc: 93.4 },
+                  Places: { fpr: 41.8, auroc: 90.8 },
+                  Textures: { fpr: 48.7, auroc: 88.0 },
+                },
+              },
+              "6,12,18,20,22,24": {
+                fpr: 32.4,
+                auroc: 93.8,
+                datasets: {
+                  iNaturalist: { fpr: 18.9, auroc: 96.7 },
+                  SUN: { fpr: 30.5, auroc: 94.2 },
+                  Places: { fpr: 37.2, auroc: 92.4 },
+                  Textures: { fpr: 43.0, auroc: 91.9 },
+                },
+              },
+            },
+          },
+          resnet: {
+            numLayers: 16,
+            baseline: { fpr: 45.16, auroc: 89.95 },
+            layerCombinations: {
+              16: {
+                fpr: 45.16,
+                auroc: 89.95,
+                datasets: {
+                  iNaturalist: { fpr: 44.0, auroc: 91.59 },
+                  SUN: { fpr: 35.13, auroc: 92.83 },
+                  Places: { fpr: 44.3, auroc: 89.38 },
+                  Textures: { fpr: 57.22, auroc: 85.99 },
+                },
+              },
+              "8,12,14,16": {
+                fpr: 41.61,
+                auroc: 90.8,
+                datasets: {
+                  iNaturalist: { fpr: 41.79, auroc: 92.0 },
+                  SUN: { fpr: 31.83, auroc: 93.48 },
+                  Places: { fpr: 40.46, auroc: 90.36 },
+                  Textures: { fpr: 52.38, auroc: 87.37 },
+                },
+              },
+            },
+          },
         };
 
-        let currentArch = "clip-b16-fixed"; // MODIFIED: Set default architecture
+        let currentArch = "clip-b16";
         let selectedLayers = [];
 
         const archSelect = document.getElementById("architecture");
@@ -860,43 +814,24 @@
         const diagramContainer = document.getElementById("diagram-content-container");
 
         function initializeControls() {
-          const archData = performanceData[currentArch];
-          const numLayers = archData.numLayers;
+          const numLayers = performanceData[currentArch].numLayers;
           const checkboxContainer = document.getElementById("layer-checkboxes");
           checkboxContainer.innerHTML = "";
           selectedLayers = [];
-
-          if (archData.selectionMode === "single") {
-            selectedLayers.push(numLayers);
-          }
 
           for (let i = 1; i <= numLayers; i++) {
             const label = document.createElement("label");
             label.className =
               "flex items-center justify-center p-2 text-sm border-2 border-slate-300 rounded-md cursor-pointer transition-colors duration-200 select-none";
-
-            const checkboxInput = document.createElement("input");
-            checkboxInput.type = "checkbox";
-            checkboxInput.value = i;
-            checkboxInput.className = "hidden";
-            label.appendChild(checkboxInput);
-            label.innerHTML += `<span class="font-medium">${i}</span>`;
-
+            label.innerHTML = `<input type="checkbox" value="${i}" class="hidden"><span class="font-medium">${i}</span>`;
             label.addEventListener("click", (e) => {
               e.preventDefault();
               toggleLayer(i, label);
             });
-
-            if (archData.selectionMode === "single" && i === numLayers) {
-              checkboxInput.checked = true;
-              label.classList.add("bg-indigo-600", "text-white", "border-indigo-600", "cursor-not-allowed", "opacity-75");
-            }
-
             checkboxContainer.appendChild(label);
           }
 
           renderDiagram(numLayers);
-          updateDiagramHighlights();
           document.getElementById("results-container").style.display = "none";
         }
 
@@ -904,86 +839,80 @@
           const V_SPACING = 70;
           const LAYER_BOX_H = 40;
           const START_Y = 120;
-          const diagramHeight = Math.max(500, START_Y + numLayers * V_SPACING + 120);
+          const TOTAL_HEIGHT = START_Y + numLayers * V_SPACING + 120;
 
-          svg.setAttribute("viewBox", `0 0 800 ${diagramHeight}`);
+          svg.setAttribute("viewBox", `0 0 800 ${TOTAL_HEIGHT}`);
           let content = "";
 
           // Static elements
           content += `
-              <rect x="230" y="80" width="550" height="${START_Y - 100 + numLayers * V_SPACING}" rx="10" class="svg-bg" />
-              <rect x="230" y="${START_Y - 20 + numLayers * V_SPACING + 40}" width="550" height="70" rx="10" class="svg-bg" />
-              <text x="505" y="105" text-anchor="middle" class="svg-text-label">Visual Encoders</text>
-              <text x="505" y="${START_Y - 20 + numLayers * V_SPACING + 70}" text-anchor="middle" class="svg-text-label">Final Fused Score</text>
-              <rect x="10" y="${diagramHeight / 2 - 40}" width="130" height="80" rx="5" fill="#eef2ff" stroke="#a5b4fc" stroke-width="2"/>
-              <text x="75" y="${diagramHeight / 2 - 15}" text-anchor="middle" class="svg-text-label">ID Images</text>
-              <text x="75" y="${diagramHeight / 2 + 15}" text-anchor="middle" font-size="30">🖼️</text>
-              <rect x="160" y="10" width="200" height="40" rx="20" fill="#fff7ed" stroke="#fed7aa" stroke-width="2"/>
-              <text x="260" y="35" text-anchor="middle" class="svg-text-label">ID Labels</text>
-              <rect x="420" y="10" width="160" height="40" rx="5" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="2"/>
-              <text x="500" y="35" text-anchor="middle" class="svg-text-label">Text Encoder</text>
-            `;
+                                <rect x="230" y="80" width="550" height="${START_Y - 100 + numLayers * V_SPACING}" rx="10" class="svg-bg" />
+                                <rect x="230" y="${START_Y - 20 + numLayers * V_SPACING + 40}" width="550" height="70" rx="10" class="svg-bg" />
+                                <text x="505" y="105" text-anchor="middle" class="svg-text-label">Visual Encoders</text>
+                                <text x="505" y="${
+                                  START_Y - 20 + numLayers * V_SPACING + 70
+                                }" text-anchor="middle" class="svg-text-label">Final Fused Score</text>
+                                <rect x="10" y="${
+                                  TOTAL_HEIGHT / 2 - 40
+                                }" width="130" height="80" rx="5" fill="#eef2ff" stroke="#a5b4fc" stroke-width="2"/>
+                                <text x="75" y="${TOTAL_HEIGHT / 2 - 15}" text-anchor="middle" class="svg-text-label">ID Images</text>
+                                <text x="75" y="${TOTAL_HEIGHT / 2 + 15}" text-anchor="middle" font-size="30">🖼️</text>
+                                <rect x="160" y="10" width="200" height="40" rx="20" fill="#fff7ed" stroke="#fed7aa" stroke-width="2"/>
+                                <text x="260" y="35" text-anchor="middle" class="svg-text-label">ID Labels</text>
+                                <rect x="420" y="10" width="160" height="40" rx="5" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="2"/>
+                                <text x="500" y="35" text-anchor="middle" class="svg-text-label">Text Encoder</text>
+                              `;
 
           // Main bus lines
           const imageBusX = 260;
           const firstLayerCenterY = START_Y + LAYER_BOX_H / 2;
           const lastLayerCenterY = START_Y + (numLayers - 1) * V_SPACING + LAYER_BOX_H / 2;
-          content += `<path class="svg-arrow-path" d="M140 ${diagramHeight / 2} H ${imageBusX}"/>`;
+          content += `<path class="svg-arrow-path" d="M140 ${TOTAL_HEIGHT / 2} H ${imageBusX}"/>`;
           content += `<path class="svg-arrow-path" d="M${imageBusX} ${firstLayerCenterY} V ${lastLayerCenterY}"/>`;
 
+          // Dynamic layers
           for (let i = 1; i <= numLayers; i++) {
             const layerY = START_Y + (i - 1) * V_SPACING;
             const center_y = layerY + LAYER_BOX_H / 2;
 
+            // Layer group
             content += `<g id="svg-layer-group-${i}" class="svg-layer-group">`;
-            content += `<path class="svg-arrow-path" marker-end="url(#arrowhead)" d="M${imageBusX} ${center_y} H 300"/>`;
+            // Connections
+            content += `<path class="svg-arrow-path" marker-end="url(#arrowhead)" d="M${imageBusX} ${center_y} H 300"/>`; // From Img Bus
             if (i > 1) {
+              // Inter-layer
               const prev_center_y = center_y - V_SPACING;
               content += `<path class="svg-arrow-path" marker-end="url(#arrowhead)" d="M375 ${prev_center_y + LAYER_BOX_H / 2} Q 350 ${
                 prev_center_y + LAYER_BOX_H / 2 + V_SPACING / 2
               }, 375 ${center_y - LAYER_BOX_H / 2}" />`;
             }
-            content += `<path class="svg-arrow-path svg-output-arrow" marker-end="url(#arrowhead)" d="M450 ${center_y} H 650"/>`;
-            content += `<path class="svg-arrow-path" marker-end="url(#arrowhead)" d="M500 50 V 100 C 500 110, 580 110, 580 ${center_y - 10} H 640"/>`;
+            content += `<path class="svg-arrow-path svg-output-arrow" marker-end="url(#arrowhead)" d="M450 ${center_y} H 650"/>`; // To Score
+            content += `<path class="svg-arrow-path" marker-end="url(#arrowhead)" d="M500 50 V 100 C 500 110, 580 110, 580 ${center_y - 10} H 640"/>`; // From Text Encoder
+
+            // Layer and Score elements
             content += `<polygon class="svg-layer-box" points="300,${layerY} 450,${layerY} 450,${layerY + LAYER_BOX_H} 300,${layerY + LAYER_BOX_H}"/>
-                <text x="375" y="${center_y + 5}" text-anchor="middle" class="svg-layer-text">Layer ${i}</text>
-                <g class="svg-score-group">
-                    <text x="660" y="${center_y + 6}" font-size="20" class="font-bold">⊕</text>
-                    <text x="715" y="${center_y + 5}" text-anchor="middle" class="svg-text-small">Scores ${i}</text>
-                </g>`;
+                                          <text x="375" y="${center_y + 5}" text-anchor="middle" class="svg-layer-text">Layer ${i}</text>
+                                          <g class="svg-score-group">
+                                              <text x="660" y="${center_y + 6}" font-size="20" class="font-bold">⊕</text>
+                                              <text x="715" y="${center_y + 5}" text-anchor="middle" class="svg-text-small">Scores ${i}</text>
+                                          </g>`;
             content += `</g>`;
           }
 
+          // Final Score Connection
           const lastLayerY = START_Y + (numLayers - 1) * V_SPACING;
           const finalScoreY = lastLayerY + V_SPACING + 65;
           content += `
-              <path class="svg-arrow-path" marker-end="url(#arrowhead)" d="M375 ${lastLayerY + LAYER_BOX_H} V ${finalScoreY}"/>
-              <text x="505" y="${finalScoreY + 8}" font-size="24" fill="#1e293b" class="font-bold">⊕</text>
-            `;
+                                <path class="svg-arrow-path" marker-end="url(#arrowhead)" d="M375 ${lastLayerY + LAYER_BOX_H} V ${finalScoreY}"/>
+                                <text x="505" y="${finalScoreY + 8}" font-size="24" fill="#1e293b" class="font-bold">⊕</text>
+                              `;
 
           diagramContainer.innerHTML = content;
+          updateDiagramHighlights();
         }
 
         function toggleLayer(layer, labelElement) {
-          const archData = performanceData[currentArch];
-          const lastLayer = archData.numLayers;
-
-          if (archData.selectionMode === "single" && layer === lastLayer) {
-            return;
-          }
-
           const index = selectedLayers.indexOf(layer);
-
-          if (archData.selectionMode === "single") {
-            const otherSelected = selectedLayers.find((l) => l !== lastLayer && l !== layer);
-            if (otherSelected) {
-              const oldIndex = selectedLayers.indexOf(otherSelected);
-              selectedLayers.splice(oldIndex, 1);
-              const oldLabel = document.querySelector(`input[value="${otherSelected}"]`).parentElement;
-              oldLabel.classList.remove("bg-indigo-600", "text-white", "border-indigo-600");
-            }
-          }
-
           if (index > -1) {
             selectedLayers.splice(index, 1);
             labelElement.classList.remove("bg-indigo-600", "text-white", "border-indigo-600");
@@ -1005,50 +934,43 @@
           }
         }
 
-        function findExactCombination(layers) {
+        function getClosestCombination(layers) {
           if (layers.length === 0) return null;
-
-          // For single selection mode, if only the last layer is selected, create a key with just that layer
-          const archData = performanceData[currentArch];
-          if (archData.selectionMode === "single" && layers.length === 1) {
-            const key = layers[0].toString();
-            const combinations = performanceData[currentArch].layerCombinations;
-            return combinations[key] || null;
-          }
-
-          const key = layers.sort((a, b) => a - b).join(",");
+          const lastLayer = performanceData[currentArch].numLayers;
+          let key = layers.join(",");
+          if (layers.length === 1 && layers[0] === lastLayer) key = String(lastLayer);
           const combinations = performanceData[currentArch].layerCombinations;
-          return combinations[key] || null;
+          if (combinations[key]) return combinations[key];
+          let closest = null;
+          let minDiff = Infinity;
+          for (const combKey in combinations) {
+            const combLayers = combKey.split(",").map(Number);
+            const sizeDiff = Math.abs(combLayers.length - layers.length);
+            const overlap = combLayers.filter((l) => layers.includes(l)).length;
+            const diff = sizeDiff * 2 - overlap;
+            if (diff < minDiff) {
+              minDiff = diff;
+              closest = combinations[combKey];
+            }
+          }
+          return closest;
         }
-
         function calculatePerformance() {
-          const archData = performanceData[currentArch];
-          const minLayers = archData.selectionMode === "single" ? 1 : 1;
-
-          if (selectedLayers.length < minLayers) {
-            document.getElementById("message-box").textContent = `Please select at least one layer.`;
+          if (selectedLayers.length === 0) {
+            document.getElementById("message-box").textContent = "Please select at least one layer.";
             setTimeout(() => (document.getElementById("message-box").textContent = ""), 3000);
             return;
           }
-
-          // In single mode, if only last layer is selected, it's a valid combination
-          if (archData.selectionMode === "single" && selectedLayers.length === 1 && selectedLayers[0] !== archData.numLayers) {
-            document.getElementById("message-box").textContent = "Please select an additional layer.";
-            setTimeout(() => (document.getElementById("message-box").textContent = ""), 3000);
-            return;
-          }
-
-          const metrics = findExactCombination(selectedLayers);
+          const metrics = getClosestCombination(selectedLayers);
           if (!metrics) {
-            document.getElementById("message-box").textContent = "No pre-computed data for this combination.";
+            document.getElementById("message-box").textContent = "No matching data for this combination.";
             setTimeout(() => (document.getElementById("message-box").textContent = ""), 3000);
             return;
           }
-
           const resultsContainer = document.getElementById("results-container");
           resultsContainer.style.display = "block";
           resultsContainer.classList.add("fade-in");
-          const baseline = archData.baseline;
+          const baseline = performanceData[currentArch].baseline;
           updateMetricCard("fpr", metrics.fpr, baseline.fpr, false);
           updateMetricCard("auroc", metrics.auroc, baseline.auroc, true);
           document.getElementById("layers-count").textContent = selectedLayers.length;
@@ -1059,7 +981,6 @@
             block: "nearest",
           });
         }
-
         function updateMetricCard(type, value, baselineValue, higherIsBetter) {
           const valueEl = document.getElementById(`${type}-value`);
           const changeEl = document.getElementById(`${type}-change`);
@@ -1094,7 +1015,6 @@
           currentArch = e.target.value;
           initializeControls();
         });
-
         calculateBtn.addEventListener("click", calculatePerformance);
         resetBtn.addEventListener("click", initializeControls);
 
