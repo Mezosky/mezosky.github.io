@@ -190,7 +190,7 @@
                   </p>
               </div>
               <div>
-                  <img src="svcca_plot.png" alt="SVCCA Similarity Plot" class="rounded-lg shadow-md">
+                  <img src="plot_svcca.png" alt="SVCCA Similarity Plot" class="rounded-lg shadow-md">
                    <p class="text-center text-sm text-slate-500 mt-2">Figure 3 from the paper: Layer-wise SVCCA similarity decay. CLIP models (blue) show faster decay, indicating higher diversity compared to supervised models (yellow).</p>
               </div>
           </div>
@@ -416,7 +416,7 @@
                     </p>
                 </div>
                  <div>
-                    <img src="entropy_vs_fpr_plot.png" alt="Entropy vs FPR Plot" class="rounded-lg shadow-md">
+                    <img src="efpr_vs_entropy.jpg" alt="Entropy vs FPR Plot" class="rounded-lg shadow-md">
                      <p class="text-center text-sm text-slate-500 mt-2">Figure G.11 from the paper: A clear correlation between lower entropy and lower FPR@95.</p>
                 </div>
             </div>
@@ -434,7 +434,7 @@
                Not all layers are created equal. Our analysis shows a clear stratification of semantic concepts across the depth of the network. Early layers specialize in low-level features, while deeper layers capture more complex, high-level concepts. This confirms that to get a complete picture for OOD detection, we need to draw from the diverse specializations of multiple layers.
             </p>
             <div>
-                 <img src="semantic_concepts_plot.png" alt="Semantic Concept Plots" class="rounded-lg shadow-md w-full">
+                 <img src="concept_proportions.svg" alt="Semantic Concept Plots" class="rounded-lg shadow-md w-full">
                  <p class="text-center text-sm text-slate-500 mt-2">
                     Figure F.10 from the paper: Low-level concepts like <strong>Colors</strong> and <strong>Textures</strong> peak in early layers, while high-level concepts like <strong>Objects</strong> and <strong>Activities</strong> emerge in deeper layers.
                 </p>
