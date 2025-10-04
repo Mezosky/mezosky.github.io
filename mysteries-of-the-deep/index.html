@@ -9,6 +9,7 @@
     <!-- Chart.js for the interactive explorer -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.4.0"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/papaparse/5.3.2/papaparse.min.js"></script>
 
     <style>
       /* Custom styles to complement Tailwind */
@@ -681,191 +682,49 @@
           },
         });
 
-        // --- Interactive Explorer ---
-        // MODIFIED: Reduced performance data to only the two requested architectures
-        const performanceData = {
-          "clip-b16-fixed": {
-            numLayers: 12,
-            baseline: { fpr: 42.27, auroc: 90.83 },
-            layerCombinations: {
-              12: {
-                fpr: 42.27,
-                auroc: 90.83,
-                datasets: {
-                  iNaturalist: { fpr: 30.67, auroc: 94.63 },
-                  SUN: { fpr: 37.41, auroc: 92.57 },
-                  Places: { fpr: 43.67, auroc: 89.96 },
-                  DTD: { fpr: 57.34, auroc: 86.17 },
-                },
-              },
-              "1,12": {
-                fpr: 42.27,
-                auroc: 90.83,
-                datasets: {
-                  iNaturalist: { fpr: 30.67, auroc: 94.63 },
-                  SUN: { fpr: 37.41, auroc: 92.57 },
-                  Places: { fpr: 43.67, auroc: 89.96 },
-                  DTD: { fpr: 57.34, auroc: 86.17 },
-                },
-              },
-              "2,12": {
-                fpr: 44.53,
-                auroc: 89.54,
-                datasets: {
-                  iNaturalist: { fpr: 31.47, auroc: 94.55 },
-                  SUN: { fpr: 39.0, auroc: 92.27 },
-                  Places: { fpr: 45.11, auroc: 88.94 },
-                  DTD: { fpr: 62.53, auroc: 82.41 },
-                },
-              },
-              "3,12": {
-                fpr: 43.99,
-                auroc: 89.65,
-                datasets: {
-                  iNaturalist: { fpr: 30.79, auroc: 94.61 },
-                  SUN: { fpr: 38.8, auroc: 92.27 },
-                  Places: { fpr: 44.02, auroc: 88.98 },
-                  DTD: { fpr: 62.35, auroc: 82.74 },
-                },
-              },
-              "4,12": {
-                fpr: 40.78,
-                auroc: 90.53,
-                datasets: {
-                  iNaturalist: { fpr: 25.92, auroc: 95.29 },
-                  SUN: { fpr: 36.21, auroc: 92.74 },
-                  Places: { fpr: 41.44, auroc: 90.45 },
-                  DTD: { fpr: 59.54, auroc: 83.61 },
-                },
-              },
-              "5,12": {
-                fpr: 39.06,
-                auroc: 90.99,
-                datasets: {
-                  iNaturalist: { fpr: 28.43, auroc: 94.99 },
-                  SUN: { fpr: 39.94, auroc: 92.15 },
-                  Places: { fpr: 41.4, auroc: 90.62 },
-                  DTD: { fpr: 46.46, auroc: 86.21 },
-                },
-              },
-              "6,12": {
-                fpr: 36.23,
-                auroc: 91.58,
-                datasets: {
-                  iNaturalist: { fpr: 22.85, auroc: 95.77 },
-                  SUN: { fpr: 36.06, auroc: 93.06 },
-                  Places: { fpr: 37.46, auroc: 91.6 },
-                  DTD: { fpr: 48.95, auroc: 85.9 },
-                },
-              },
-              "7,12": {
-                fpr: 37.05,
-                auroc: 91.35,
-                datasets: {
-                  iNaturalist: { fpr: 27.89, auroc: 95.07 },
-                  SUN: { fpr: 41.1, auroc: 91.68 },
-                  Places: { fpr: 37.7, auroc: 90.89 },
-                  DTD: { fpr: 41.51, auroc: 87.75 },
-                },
-              },
-              "8,12": {
-                fpr: 33.91,
-                auroc: 92.51,
-                datasets: {
-                  iNaturalist: { fpr: 23.28, auroc: 95.83 },
-                  SUN: { fpr: 33.43, auroc: 93.22 },
-                  Places: { fpr: 37.39, auroc: 91.64 },
-                  DTD: { fpr: 41.56, auroc: 89.34 },
-                },
-              },
-              "9,12": {
-                fpr: 34.07,
-                auroc: 92.5,
-                datasets: {
-                  iNaturalist: { fpr: 22.24, auroc: 96.06 },
-                  SUN: { fpr: 35.22, auroc: 93.04 },
-                  Places: { fpr: 35.61, auroc: 92.03 },
-                  DTD: { fpr: 43.14, auroc: 88.85 },
-                },
-              },
-              "10,12": {
-                fpr: 33.4,
-                auroc: 92.83,
-                datasets: {
-                  iNaturalist: { fpr: 15.53, auroc: 96.95 },
-                  SUN: { fpr: 36.02, auroc: 92.54 },
-                  Places: { fpr: 36.8, auroc: 91.69 },
-                  DTD: { fpr: 45.24, auroc: 90.13 },
-                },
-              },
-              "11,12": {
-                fpr: 32.15,
-                auroc: 92.8,
-                datasets: {
-                  iNaturalist: { fpr: 18.2, auroc: 96.2 },
-                  SUN: { fpr: 42.1, auroc: 90.8 },
-                  Places: { fpr: 37.5, auroc: 91.9 },
-                  DTD: { fpr: 30.8, auroc: 92.3 },
-                },
-              },
-            },
-          },
-          "clip-b32-fixed": {
-            numLayers: 12,
-            baseline: { fpr: 45.61, auroc: 89.87 },
-            layerCombinations: {
-              12: {
-                fpr: 45.61,
-                auroc: 89.87,
-                datasets: {
-                  iNaturalist: { fpr: 33.85, auroc: 93.62 },
-                  SUN: { fpr: 40.99, auroc: 91.56 },
-                  Places: { fpr: 46.71, auroc: 89.25 },
-                  Textures: { fpr: 60.9, auroc: 85.03 },
-                },
-              },
-              "4,12": {
-                fpr: 39.8,
-                auroc: 90.9,
-                datasets: {
-                  iNaturalist: { fpr: 25.5, auroc: 95.1 },
-                  SUN: { fpr: 38.4, auroc: 91.7 },
-                  Places: { fpr: 42.2, auroc: 90.0 },
-                  Textures: { fpr: 53.1, auroc: 86.8 },
-                },
-              },
-              "6,12": {
-                fpr: 37.5,
-                auroc: 91.2,
-                datasets: {
-                  iNaturalist: { fpr: 22.5, auroc: 95.6 },
-                  SUN: { fpr: 36.4, auroc: 91.9 },
-                  Places: { fpr: 41.2, auroc: 90.3 },
-                  Textures: { fpr: 50.0, auroc: 87.0 },
-                },
-              },
-              "8,12": {
-                fpr: 35.9,
-                auroc: 91.4,
-                datasets: {
-                  iNaturalist: { fpr: 20.5, auroc: 95.8 },
-                  SUN: { fpr: 35.4, auroc: 92.1 },
-                  Places: { fpr: 40.2, auroc: 90.5 },
-                  Textures: { fpr: 44.7, auroc: 87.6 },
-                },
-              },
-            },
-          },
-        };
+        // MODIFIED: This function builds the main data object from multiple CSVs
+        function buildPerformanceData(dataB16, dataB32) {
+          return {
+            "clip-b16-fixed": processSingleCsv(dataB16, 12),
+            "clip-b32-fixed": processSingleCsv(dataB32, 12),
+          };
+        }
 
-        let currentArch = "clip-b16-fixed"; // MODIFIED: Set default architecture
-        let selectedLayers = [];
+        function initializeApp() {
+          currentArch = "clip-b16-fixed";
 
-        const archSelect = document.getElementById("architecture");
-        const calculateBtn = document.getElementById("calculate-btn");
-        const resetBtn = document.getElementById("reset-btn");
-        const svg = document.getElementById("interactive-diagram");
-        const diagramContainer = document.getElementById("diagram-content-container");
+          archSelect.addEventListener("change", (e) => {
+            currentArch = e.target.value;
+            initializeControls();
+          });
+
+          calculateBtn.addEventListener("click", calculatePerformance);
+          resetBtn.addEventListener("click", initializeControls);
+
+          const modal = document.getElementById("imageModal");
+          const modalImg = document.getElementById("modalImage");
+          const closeModal = document.getElementById("closeModal");
+          const zoomableImages = document.querySelectorAll(".zoomable-image");
+
+          zoomableImages.forEach((img) => {
+            img.addEventListener("click", () => {
+              modal.style.display = "flex";
+              modalImg.src = img.src;
+            });
+          });
+
+          closeModal.addEventListener("click", () => {
+            modal.style.display = "none";
+          });
+
+          modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+              modal.style.display = "none";
+            }
+          });
+
+          initializeControls();
+        }
 
         function initializeControls() {
           const archData = performanceData[currentArch];
@@ -874,7 +733,6 @@
           checkboxContainer.innerHTML = "";
           selectedLayers = [];
 
-          // MODIFIED: All architectures are now 'fixed', so this logic always runs
           if (currentArch.endsWith("-fixed")) {
             selectedLayers.push(numLayers);
           }
@@ -918,7 +776,6 @@
           svg.setAttribute("viewBox", `0 0 800 ${diagramHeight}`);
           let content = "";
 
-          // Static elements
           content += `
               <rect x="230" y="80" width="550" height="${START_Y - 100 + numLayers * V_SPACING}" rx="10" class="svg-bg" />
               <rect x="230" y="${START_Y - 20 + numLayers * V_SPACING + 40}" width="550" height="70" rx="10" class="svg-bg" />
@@ -933,7 +790,6 @@
               <text x="500" y="35" text-anchor="middle" class="svg-text-label">Text Encoder</text>
             `;
 
-          // Main bus lines
           const imageBusX = 260;
           const firstLayerCenterY = START_Y + LAYER_BOX_H / 2;
           const lastLayerCenterY = START_Y + (numLayers - 1) * V_SPACING + LAYER_BOX_H / 2;
@@ -973,16 +829,10 @@
           diagramContainer.innerHTML = content;
         }
 
-        // MODIFIED: Simplified toggle logic, selectionMode is removed
         function toggleLayer(layer, labelElement) {
           const lastLayer = performanceData[currentArch].numLayers;
-
-          if (currentArch.endsWith("-fixed") && layer === lastLayer) {
-            return; // Prevent deselection of the fixed last layer
-          }
-
+          if (currentArch.endsWith("-fixed") && layer === lastLayer) return;
           const index = selectedLayers.indexOf(layer);
-
           if (index > -1) {
             selectedLayers.splice(index, 1);
             labelElement.classList.remove("bg-indigo-600", "text-white", "border-indigo-600");
@@ -1004,10 +854,8 @@
           }
         }
 
-        // MODIFIED: Simplified find combination logic
         function findExactCombination(layers) {
           if (layers.length === 0) return null;
-
           const key = layers.sort((a, b) => a - b).join(",");
           const combinations = performanceData[currentArch].layerCombinations;
           return combinations[key] || null;
@@ -1072,40 +920,31 @@
           }
         }
 
-        archSelect.addEventListener("change", (e) => {
-          currentArch = e.target.value;
-          initializeControls();
-        });
+        // MODIFIED: Load both CSV files and then initialize the application
+        const csvB16FilePath = "web_clip-vit-b-16.csv";
+        const csvB32FilePath = "web_clip-vit-b-32.csv"; // Assumed path for the new file
 
-        calculateBtn.addEventListener("click", calculatePerformance);
-        resetBtn.addEventListener("click", initializeControls);
-
-        // MODIFIED: Added image modal logic
-        const modal = document.getElementById("imageModal");
-        const modalImg = document.getElementById("modalImage");
-        const closeModal = document.getElementById("closeModal");
-        const zoomableImages = document.querySelectorAll(".zoomable-image");
-
-        zoomableImages.forEach((img) => {
-          img.addEventListener("click", () => {
-            modal.style.display = "flex";
-            modalImg.src = img.src;
+        function loadCsv(filePath) {
+          return new Promise((resolve, reject) => {
+            Papa.parse(filePath, {
+              download: true,
+              header: true,
+              skipEmptyLines: true,
+              complete: resolve,
+              error: reject,
+            });
           });
-        });
+        }
 
-        closeModal.addEventListener("click", () => {
-          modal.style.display = "none";
-        });
-
-        modal.addEventListener("click", (e) => {
-          if (e.target === modal) {
-            // Close only if clicking on the background
-            modal.style.display = "none";
-          }
-        });
-
-        // Initial render
-        initializeControls();
+        Promise.all([loadCsv(csvB16FilePath), loadCsv(csvB32FilePath)])
+          .then(([resultsB16, resultsB32]) => {
+            performanceData = buildPerformanceData(resultsB16.data, resultsB32.data);
+            initializeApp();
+          })
+          .catch((error) => {
+            console.error("Error loading CSV data:", error);
+            alert("Could not load performance data. Please ensure 'web_clip-vit-b-16.csv' and 'web_clip-vit-b-32.csv' are available.");
+          });
       });
     </script>
   </body>
