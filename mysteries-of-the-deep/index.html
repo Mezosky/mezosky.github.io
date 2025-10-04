@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -13,10 +13,20 @@
     <style>
       /* Custom styles to complement Tailwind */
       body {
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-          Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
-          'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-          'Noto Color Emoji';
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          "Helvetica Neue",
+          Arial,
+          "Noto Sans",
+          sans-serif,
+          "Apple Color Emoji",
+          "Segoe UI Emoji",
+          "Segoe UI Symbol",
+          "Noto Color Emoji";
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
       }
@@ -97,30 +107,21 @@
     <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
       <!-- Header Section -->
       <header class="mb-12 text-center">
-        <h1
-          class="mb-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl"
-        >
-          Mysteries of the Deep: Role of Intermediate Representations in
-          Out-of-Distribution Detection
+        <h1 class="mb-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+          Mysteries of the Deep: Role of Intermediate Representations in Out-of-Distribution Detection
         </h1>
         <div class="mb-2 text-slate-600">
-          <a href="#" class="hover:underline">Ignacio Meza De la Jara</a
-          ><sup>1,4</sup>,
-          <a href="#" class="hover:underline">Cristian Rodriguez-Opazo</a
-          ><sup>1</sup>,
-          <a href="#" class="hover:underline">Damien Teney</a><sup>1,2</sup>,
-          <a href="#" class="hover:underline">Damith Ranasinghe</a><sup>1</sup>,
+          <a href="#" class="hover:underline">Ignacio Meza De la Jara</a><sup>1,4</sup>,
+          <a href="#" class="hover:underline">Cristian Rodriguez-Opazo</a><sup>1</sup>, <a href="#" class="hover:underline">Damien Teney</a
+          ><sup>1,2</sup>, <a href="#" class="hover:underline">Damith Ranasinghe</a><sup>1</sup>,
           <a href="#" class="hover:underline">Ehsan Abbasnejad</a><sup>1,3</sup>
         </div>
         <div class="mb-4 text-sm text-slate-500">
-          <sup>1</sup>Australian Institute for Machine Learning, University of
-          Adelaide&nbsp;&nbsp; <sup>2</sup>Idiap Research Institute<br />
+          <sup>1</sup>Australian Institute for Machine Learning, University of Adelaide&nbsp;&nbsp; <sup>2</sup>Idiap Research Institute<br />
           <sup>3</sup>Monash University&nbsp;&nbsp; <sup>4</sup>Naval Group
         </div>
         <p class="mb-6 text-lg font-semibold text-indigo-600">NeurIPS 2025</p>
-        <div
-          class="flex items-center justify-center gap-x-6 text-base font-medium text-indigo-600"
-        >
+        <div class="flex items-center justify-center gap-x-6 text-base font-medium text-indigo-600">
           <a href="#" class="transition-colors hover:text-indigo-800">Paper</a>
           <a href="#" class="transition-colors hover:text-indigo-800">Code</a>
           <a href="#" class="transition-colors hover:text-indigo-800">Data</a>
@@ -129,9 +130,7 @@
       </header>
 
       <!-- Teaser Figure (Updated) -->
-      <div
-        class="mb-16 rounded-lg border border-slate-200 bg-white p-4 shadow-lg sm:p-6"
-      >
+      <div class="mb-16 rounded-lg border border-slate-200 bg-white p-4 shadow-lg sm:p-6">
         <div class="grid grid-cols-1 gap-6 md:grid-cols-5">
           <div class="h-96 md:col-span-3">
             <canvas id="lineChart"></canvas>
@@ -144,26 +143,16 @@
 
       <!-- Abstract Section -->
       <section class="mx-auto mb-16 max-w-4xl">
-        <h2 class="mb-6 text-center text-2xl font-bold text-slate-900">
-          Abstract
-        </h2>
+        <h2 class="mb-6 text-center text-2xl font-bold text-slate-900">Abstract</h2>
         <p class="text-justify leading-relaxed text-slate-600">
-          Out-of-distribution (OOD) detection is essential for reliably
-          deploying machine learning models in the wild. Yet, most methods
-          treat large pre-trained models as monolithic encoders and rely solely
-          on their final-layer representations for detection. We challenge this
-          wisdom. We reveal the intermediate layers of pre-trained models,
-          shaped by residual connections that subtly transform input
-          projections, can encode surprisingly rich and diverse signals for
-          detecting distributional shifts. Importantly, to exploit latent
-          representation diversity across layers, we introduce an entropy-based
-          criterion to automatically identify layers offering the most
-          complementary information in a training-free setting—without access
-          to OOD data. We show that selectively incorporating these
-          intermediate representations can increase the accuracy of OOD
-          detection by up to 10% in far-OOD and over 7% in near-OOD benchmarks
-          compared to state-of-the-art training-free methods across various
-          model architectures and training objectives.
+          Out-of-distribution (OOD) detection is essential for reliably deploying machine learning models in the wild. Yet, most methods treat large
+          pre-trained models as monolithic encoders and rely solely on their final-layer representations for detection. We challenge this wisdom. We
+          reveal the intermediate layers of pre-trained models, shaped by residual connections that subtly transform input projections, can encode
+          surprisingly rich and diverse signals for detecting distributional shifts. Importantly, to exploit latent representation diversity across
+          layers, we introduce an entropy-based criterion to automatically identify layers offering the most complementary information in a
+          training-free setting—without access to OOD data. We show that selectively incorporating these intermediate representations can increase the
+          accuracy of OOD detection by up to 10% in far-OOD and over 7% in near-OOD benchmarks compared to state-of-the-art training-free methods
+          across various model architectures and training objectives.
         </p>
       </section>
 
@@ -172,47 +161,33 @@
 
       <!-- Why CLIP? Section -->
       <section class="mx-auto mb-16 max-w-4xl">
-        <h2 class="mb-6 text-center text-2xl font-bold text-slate-900">
-          Why Does This Effect Occur in CLIP?
-        </h2>
+        <h2 class="mb-6 text-center text-2xl font-bold text-slate-900">Why Does This Effect Occur in CLIP?</h2>
         <div class="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
           <div>
             <p class="mb-4 text-justify leading-relaxed text-slate-600">
-              Our analysis reveals that models like CLIP are uniquely suited
-              for multi-layer fusion. They exhibit two key properties:
+              Our analysis reveals that models like CLIP are uniquely suited for multi-layer fusion. They exhibit two key properties:
             </p>
             <ul class="list-disc list-inside space-y-2 text-slate-600">
               <li>
-                <strong>High Inter-Layer Diversity:</strong> As shown by
-                Singular Vector Canonical Correlation Analysis (SVCCA), CLIP
-                layers transform representations progressively. There is low
-                similarity between distant layers, meaning each layer provides
-                unique, non-redundant information.
+                <strong>High Inter-Layer Diversity:</strong> As shown by Singular Vector Canonical Correlation Analysis (SVCCA), CLIP layers transform
+                representations progressively. There is low similarity between distant layers, meaning each layer provides unique, non-redundant
+                information.
               </li>
               <li>
-                <strong>Prediction Consistency:</strong> Despite this diversity,
-                CLIP models show stable prediction behavior across their depth.
-                This means the intermediate layers provide coherent signals
-                that don't conflict with each other, making them ideal for
-                aggregation.
+                <strong>Prediction Consistency:</strong> Despite this diversity, CLIP models show stable prediction behavior across their depth. This
+                means the intermediate layers provide coherent signals that don't conflict with each other, making them ideal for aggregation.
               </li>
             </ul>
             <p class="mt-4 text-justify leading-relaxed text-slate-600">
-              In contrast, supervised and some self-supervised models show high
-              redundancy or abrupt, unstable shifts between layers, which makes
+              In contrast, supervised and some self-supervised models show high redundancy or abrupt, unstable shifts between layers, which makes
               fusing their representations less effective.
             </p>
           </div>
           <div>
-            <img
-              src="plot_svcca.png"
-              alt="SVCCA Similarity Plot"
-              class="rounded-lg shadow-md"
-            />
+            <img src="plot_svcca.png" alt="SVCCA Similarity Plot" class="rounded-lg shadow-md" />
             <p class="mt-2 text-center text-sm text-slate-500">
-              Figure 3 from the paper: Layer-wise SVCCA similarity decay. CLIP
-              models (blue) show faster decay, indicating higher diversity
-              compared to supervised models (yellow).
+              Figure 3 from the paper: Layer-wise SVCCA similarity decay. CLIP models (blue) show faster decay, indicating higher diversity compared
+              to supervised models (yellow).
             </p>
           </div>
         </div>
@@ -223,49 +198,31 @@
 
       <!-- Method Section -->
       <section class="mx-auto mb-16 max-w-4xl">
-        <h2 class="mb-6 text-center text-2xl font-bold text-slate-900">
-          Our Method: Entropy-Based Layer Selection
-        </h2>
+        <h2 class="mb-6 text-center text-2xl font-bold text-slate-900">Our Method: Entropy-Based Layer Selection</h2>
         <div class="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
           <div>
-            <img
-              src="new_method_diagram.svg"
-              alt="Method Diagram"
-              class="rounded-lg shadow-md"
-            />
-            <p class="mt-2 text-center text-sm text-slate-500">
-              Figure 5 from the paper: Overview of our proposed method.
-            </p>
+            <img src="new_method_diagram.svg" alt="Method Diagram" class="rounded-lg shadow-md" />
+            <p class="mt-2 text-center text-sm text-slate-500">Figure 5 from the paper: Overview of our proposed method.</p>
           </div>
           <div>
             <p class="mb-4 text-justify leading-relaxed text-slate-600">
-              We introduce a training-free extension of Maximum Concept Matching
-              (MCM). Instead of relying on just the final layer, our method
-              intelligently selects and fuses the most informative intermediate
-              layers.
+              We introduce a training-free extension of Maximum Concept Matching (MCM). Instead of relying on just the final layer, our method
+              intelligently selects and fuses the most informative intermediate layers.
             </p>
             <ol class="list-decimal list-inside space-y-2 text-slate-600">
+              <li><strong>Fuse Scores:</strong> We first calculate OOD scores (using MCM) for various combinations of layers.</li>
               <li>
-                <strong>Fuse Scores:</strong> We first calculate OOD scores
-                (using MCM) for various combinations of layers.
+                <strong>Entropy-Based Selection:</strong> We evaluate each combination by computing the entropy of its score distribution on unlabeled
+                in-distribution data. A low-entropy distribution indicates confident, concentrated scores, which is a strong proxy for good ID/OOD
+                separability.
               </li>
               <li>
-                <strong>Entropy-Based Selection:</strong> We evaluate each
-                combination by computing the entropy of its score distribution
-                on unlabeled in-distribution data. A low-entropy distribution
-                indicates confident, concentrated scores, which is a strong
-                proxy for good ID/OOD separability.
-              </li>
-              <li>
-                <strong>Select Optimal Layers:</strong> The layer combination
-                that minimizes this entropy is chosen as the optimal one for OOD
+                <strong>Select Optimal Layers:</strong> The layer combination that minimizes this entropy is chosen as the optimal one for OOD
                 detection.
               </li>
             </ol>
             <p class="mt-4 text-justify leading-relaxed text-slate-600">
-              This entire process is training-free, requires no OOD data for
-              selection, and remains architecture-agnostic for models like
-              CLIP.
+              This entire process is training-free, requires no OOD data for selection, and remains architecture-agnostic for models like CLIP.
             </p>
           </div>
         </div>
@@ -276,31 +233,18 @@
 
       <!-- Interactive Explorer Section -->
       <section class="mb-16">
-        <h2 class="mb-2 text-center text-2xl font-bold text-slate-900">
-          Interactive Explorer: Fusing Layer Representations
-        </h2>
+        <h2 class="mb-2 text-center text-2xl font-bold text-slate-900">Interactive Explorer: Fusing Layer Representations</h2>
         <p class="mx-auto mb-10 max-w-2xl text-center text-slate-500">
-          Experiment with different layer combinations to see how fusing
-          intermediate representations via
-          <strong>Maximum Concept Matching (MCM)</strong> impacts OOD detection
-          performance.
+          Experiment with different layer combinations to see how fusing intermediate representations via
+          <strong>Maximum Concept Matching (MCM)</strong> impacts OOD detection performance.
         </p>
 
         <div class="grid grid-cols-1 gap-8 lg:grid-cols-5 lg:gap-12">
           <!-- Controls Panel -->
-          <div
-            class="self-start rounded-lg border border-slate-200 bg-white p-6 shadow-md lg:col-span-2"
-          >
+          <div class="self-start rounded-lg border border-slate-200 bg-white p-6 shadow-md lg:col-span-2">
             <div class="mb-6">
-              <label
-                for="architecture"
-                class="mb-2 block text-sm font-medium text-slate-700"
-                >1. Select Architecture:</label
-              >
-              <select
-                id="architecture"
-                class="w-full rounded-md border border-slate-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-              >
+              <label for="architecture" class="mb-2 block text-sm font-medium text-slate-700">1. Select Architecture:</label>
+              <select id="architecture" class="w-full rounded-md border border-slate-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                 <option value="clip-b16">CLIP ViT-B/16 (12 Layers)</option>
                 <option value="clip-b32">CLIP ViT-B/32 (12 Layers)</option>
                 <option value="clip-l14">CLIP ViT-L/14 (24 Layers)</option>
@@ -309,13 +253,8 @@
             </div>
 
             <div class="mb-6">
-              <label class="mb-2 block text-sm font-medium text-slate-700"
-                >2. Select Layers to Fuse:</label
-              >
-              <div
-                id="layer-checkboxes"
-                class="grid grid-cols-4 gap-2 sm:grid-cols-5"
-              ></div>
+              <label class="mb-2 block text-sm font-medium text-slate-700">2. Select Layers to Fuse:</label>
+              <div id="layer-checkboxes" class="grid grid-cols-4 gap-2 sm:grid-cols-5"></div>
             </div>
 
             <div id="message-box" class="mb-4 h-5 text-sm text-red-600"></div>
@@ -327,34 +266,18 @@
               >
                 Calculate Performance
               </button>
-              <button
-                id="reset-btn"
-                class="flex-1 rounded-md bg-slate-200 py-3 px-4 font-semibold text-slate-700 transition-all hover:bg-slate-300"
-              >
+              <button id="reset-btn" class="flex-1 rounded-md bg-slate-200 py-3 px-4 font-semibold text-slate-700 transition-all hover:bg-slate-300">
                 Reset
               </button>
             </div>
           </div>
 
           <!-- Diagram -->
-          <div
-            class="min-h-[500px] rounded-lg border border-slate-200 bg-white p-4 shadow-md lg:col-span-3"
-          >
+          <div class="min-h-[500px] rounded-lg border border-slate-200 bg-white p-4 shadow-md lg:col-span-3">
             <svg id="interactive-diagram" class="h-auto w-full">
               <defs>
-                <marker
-                  id="arrowhead"
-                  markerWidth="8"
-                  markerHeight="6"
-                  refX="7"
-                  refY="3"
-                  orient="auto"
-                  markerUnits="strokeWidth"
-                >
-                  <polygon
-                    points="0 0, 8 3, 0 6"
-                    class="fill-current text-slate-400"
-                  />
+                <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+                  <polygon points="0 0, 8 3, 0 6" class="fill-current text-slate-400" />
                 </marker>
               </defs>
               <!-- This container will be populated dynamically -->
@@ -366,67 +289,30 @@
         <!-- Results Container -->
         <div id="results-container" class="mt-8" style="display: none">
           <div class="mb-6 grid grid-cols-1 gap-6 md:grid-cols-3">
-            <div
-              class="rounded-lg border border-slate-200 bg-white p-6 text-center shadow-md"
-            >
-              <h4
-                class="mb-2 text-sm font-semibold uppercase tracking-wider text-slate-500"
-              >
-                Average FPR@95
-              </h4>
+            <div class="rounded-lg border border-slate-200 bg-white p-6 text-center shadow-md">
+              <h4 class="mb-2 text-sm font-semibold uppercase tracking-wider text-slate-500">Average FPR@95</h4>
               <p id="fpr-value" class="text-4xl font-light text-slate-900">-</p>
               <div id="fpr-change" class="mt-2"></div>
             </div>
-            <div
-              class="rounded-lg border border-slate-200 bg-white p-6 text-center shadow-md"
-            >
-              <h4
-                class="mb-2 text-sm font-semibold uppercase tracking-wider text-slate-500"
-              >
-                Average AUROC
-              </h4>
-              <p id="auroc-value" class="text-4xl font-light text-slate-900">
-                -
-              </p>
+            <div class="rounded-lg border border-slate-200 bg-white p-6 text-center shadow-md">
+              <h4 class="mb-2 text-sm font-semibold uppercase tracking-wider text-slate-500">Average AUROC</h4>
+              <p id="auroc-value" class="text-4xl font-light text-slate-900">-</p>
               <div id="auroc-change" class="mt-2"></div>
             </div>
-            <div
-              class="rounded-lg border border-slate-200 bg-white p-6 text-center shadow-md"
-            >
-              <h4
-                class="mb-2 text-sm font-semibold uppercase tracking-wider text-slate-500"
-              >
-                Selected Layers
-              </h4>
-              <p id="layers-count" class="text-4xl font-light text-slate-900">
-                -
-              </p>
-              <p
-                id="selected-layers"
-                class="mt-2 truncate text-xs text-slate-500"
-              >
-                -
-              </p>
+            <div class="rounded-lg border border-slate-200 bg-white p-6 text-center shadow-md">
+              <h4 class="mb-2 text-sm font-semibold uppercase tracking-wider text-slate-500">Selected Layers</h4>
+              <p id="layers-count" class="text-4xl font-light text-slate-900">-</p>
+              <p id="selected-layers" class="mt-2 truncate text-xs text-slate-500">-</p>
             </div>
           </div>
-          <div
-            class="rounded-lg border border-slate-200 bg-white p-6 shadow-md"
-          >
-            <h3 class="mb-4 text-lg font-semibold text-slate-900">
-              Performance by Dataset
-            </h3>
+          <div class="rounded-lg border border-slate-200 bg-white p-6 shadow-md">
+            <h3 class="mb-4 text-lg font-semibold text-slate-900">Performance by Dataset</h3>
             <table class="w-full">
               <thead>
                 <tr class="border-b border-slate-200">
-                  <th class="p-3 text-left text-sm font-semibold text-slate-600">
-                    Dataset
-                  </th>
-                  <th class="p-3 text-left text-sm font-semibold text-slate-600">
-                    FPR@95 ↓
-                  </th>
-                  <th class="p-3 text-left text-sm font-semibold text-slate-600">
-                    AUROC ↑
-                  </th>
+                  <th class="p-3 text-left text-sm font-semibold text-slate-600">Dataset</th>
+                  <th class="p-3 text-left text-sm font-semibold text-slate-600">FPR@95 ↓</th>
+                  <th class="p-3 text-left text-sm font-semibold text-slate-600">AUROC ↑</th>
                 </tr>
               </thead>
               <tbody id="dataset-tbody"></tbody>
@@ -440,49 +326,35 @@
 
       <!-- Understanding the Results Section -->
       <section class="mx-auto mb-16 max-w-4xl">
-        <h2 class="mb-6 text-center text-2xl font-bold text-slate-900">
-          Understanding the Results: Entropy vs. FPR
-        </h2>
+        <h2 class="mb-6 text-center text-2xl font-bold text-slate-900">Understanding the Results: Entropy vs. FPR</h2>
         <div class="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
           <div>
             <p class="mb-4 text-justify leading-relaxed text-slate-600">
-              A key metric we use is <strong>FPR@95</strong>, which stands for
-              the False Positive Rate when the True Positive Rate is at 95%. A
-              lower FPR@95 indicates better OOD detection performance.
+              A key metric we use is <strong>FPR@95</strong>, which stands for the False Positive Rate when the True Positive Rate is at 95%. A lower
+              FPR@95 indicates better OOD detection performance.
             </p>
             <p class="mb-4 text-justify leading-relaxed text-slate-600">
               Our core finding is the strong positive correlation between the
-              <strong>entropy</strong> of a layer combination's scores and its
-              resulting <strong>FPR@95</strong>.
+              <strong>entropy</strong> of a layer combination's scores and its resulting <strong>FPR@95</strong>.
             </p>
             <ul class="list-disc list-inside space-y-2 text-slate-600">
               <li>
-                <strong>Good Selections (Low Entropy):</strong> Layer
-                combinations that produce low-entropy (confident and sharp)
-                score distributions for in-distribution data consistently yield
-                lower FPR and better OOD performance.
+                <strong>Good Selections (Low Entropy):</strong> Layer combinations that produce low-entropy (confident and sharp) score distributions
+                for in-distribution data consistently yield lower FPR and better OOD performance.
               </li>
               <li>
-                <strong>Bad Selections (High Entropy):</strong> Combinations
-                with high-entropy (uncertain and flat) score distributions
-                perform poorly, often no better than the baseline.
+                <strong>Bad Selections (High Entropy):</strong> Combinations with high-entropy (uncertain and flat) score distributions perform
+                poorly, often no better than the baseline.
               </li>
             </ul>
             <p class="mt-4 text-justify leading-relaxed text-slate-600">
-              This relationship validates our use of entropy as an effective,
-              unsupervised criterion for selecting the best layers for OOD
-              detection.
+              This relationship validates our use of entropy as an effective, unsupervised criterion for selecting the best layers for OOD detection.
             </p>
           </div>
           <div>
-            <img
-              src="fpr_vs_entropy.jpg"
-              alt="Entropy vs FPR Plot"
-              class="rounded-lg shadow-md"
-            />
+            <img src="fpr_vs_entropy.jpg" alt="Entropy vs FPR Plot" class="rounded-lg shadow-md" />
             <p class="mt-2 text-center text-sm text-slate-500">
-              Figure G.11 from the paper: A clear correlation between lower
-              entropy and lower FPR@95.
+              Figure G.11 from the paper: A clear correlation between lower entropy and lower FPR@95.
             </p>
           </div>
         </div>
@@ -493,27 +365,17 @@
 
       <!-- What do layers learn Section -->
       <section class="mx-auto mb-16 max-w-6xl">
-        <h2 class="mb-6 text-center text-2xl font-bold text-slate-900">
-          What Do Different Layers Learn?
-        </h2>
+        <h2 class="mb-6 text-center text-2xl font-bold text-slate-900">What Do Different Layers Learn?</h2>
         <p class="mx-auto mb-10 max-w-3xl text-center text-slate-500">
-          Not all layers are created equal. Our analysis shows a clear
-          stratification of semantic concepts across the depth of the network.
-          Early layers specialize in low-level features, while deeper layers
-          capture more complex, high-level concepts. This confirms that to get a
-          complete picture for OOD detection, we need to draw from the diverse
-          specializations of multiple layers.
+          Not all layers are created equal. Our analysis shows a clear stratification of semantic concepts across the depth of the network. Early
+          layers specialize in low-level features, while deeper layers capture more complex, high-level concepts. This confirms that to get a complete
+          picture for OOD detection, we need to draw from the diverse specializations of multiple layers.
         </p>
         <div>
-          <img
-            src="concept_proportions.svg"
-            alt="Semantic Concept Plots"
-            class="w-full rounded-lg shadow-md"
-          />
+          <img src="concept_proportions.svg" alt="Semantic Concept Plots" class="w-full rounded-lg shadow-md" />
           <p class="mt-2 text-center text-sm text-slate-500">
             Figure F.10 from the paper: Low-level concepts like
-            <strong>Colors</strong> and <strong>Textures</strong> peak in early
-            layers, while high-level concepts like <strong>Objects</strong> and
+            <strong>Colors</strong> and <strong>Textures</strong> peak in early layers, while high-level concepts like <strong>Objects</strong> and
             <strong>Activities</strong> emerge in deeper layers.
           </p>
         </div>
@@ -524,12 +386,8 @@
 
       <!-- Citation Section -->
       <section class="mx-auto max-w-4xl">
-        <h2 class="mb-6 text-center text-2xl font-bold text-slate-900">
-          Citation
-        </h2>
-        <div
-          class="overflow-x-auto rounded-lg bg-slate-100 p-6 text-sm text-slate-600"
-        >
+        <h2 class="mb-6 text-center text-2xl font-bold text-slate-900">Citation</h2>
+        <div class="overflow-x-auto rounded-lg bg-slate-100 p-6 text-sm text-slate-600">
           <pre><code>@inproceedings{meza2025mysteries,
   title     = {Mysteries of the Deep: Role of Intermediate Representations in Out-of-Distribution Detection},
   author    = {Meza De la Jara, Ignacio and Rodriguez-Opazo, Cristian and Teney, Damien and Ranasinghe, Damith and Abbasnejad, Ehsan},
@@ -546,36 +404,36 @@
     </div>
 
     <script>
-      document.addEventListener('DOMContentLoaded', function () {
+      document.addEventListener("DOMContentLoaded", function () {
         // --- Teaser Charts ---
-        const lineCtx = document.getElementById('lineChart').getContext('2d');
-        const barCtx = document.getElementById('barChart').getContext('2d');
+        const lineCtx = document.getElementById("lineChart").getContext("2d");
+        const barCtx = document.getElementById("barChart").getContext("2d");
 
         const colors = {
-          cliprn: 'rgba(44, 114, 142, 1)',
-          clipvit: 'rgba(143, 209, 158, 1)',
-          clipvitb32: 'rgba(168, 125, 194, 1)',
-          vit: 'rgba(220, 157, 73, 1)',
-          pe: 'rgba(241, 218, 91, 1)',
-          siglip: 'rgba(209, 124, 106, 1)',
+          cliprn: "rgba(44, 114, 142, 1)",
+          clipvit: "rgba(143, 209, 158, 1)",
+          clipvitb32: "rgba(168, 125, 194, 1)",
+          vit: "rgba(220, 157, 73, 1)",
+          pe: "rgba(241, 218, 91, 1)",
+          siglip: "rgba(209, 124, 106, 1)",
         };
         const bgColors = {
-          cliprn: 'rgba(44, 114, 142, 0.2)',
-          clipvit: 'rgba(143, 209, 158, 0.2)',
-          clipvitb32: 'rgba(168, 125, 194, 0.2)',
-          vit: 'rgba(220, 157, 73, 0.2)',
-          pe: 'rgba(241, 218, 91, 0.2)',
-          siglip: 'rgba(209, 124, 106, 0.2)',
+          cliprn: "rgba(44, 114, 142, 0.2)",
+          clipvit: "rgba(143, 209, 158, 0.2)",
+          clipvitb32: "rgba(168, 125, 194, 0.2)",
+          vit: "rgba(220, 157, 73, 0.2)",
+          pe: "rgba(241, 218, 91, 0.2)",
+          siglip: "rgba(209, 124, 106, 0.2)",
         };
 
-        const defaultFont = { family: 'system-ui, -apple-system, sans-serif' };
+        const defaultFont = { family: "system-ui, -apple-system, sans-serif" };
 
         const lineChartData = {
           labels: Array.from({ length: 12 }, (_, i) => i + 1),
           datasets: [
             // CLIP RN50
             {
-              label: 'CLIP RN50',
+              label: "CLIP RN50",
               data: [0.4516, 0.4473, 0.4415, 0.436],
               borderColor: colors.cliprn,
               tension: 0.1,
@@ -583,7 +441,7 @@
             },
             {
               data: [0.4516, 0.4738, 0.458, 0.436],
-              fill: '+1',
+              fill: "+1",
               backgroundColor: bgColors.cliprn,
               pointRadius: 0,
               borderWidth: 0,
@@ -597,155 +455,110 @@
             },
             // CLIP ViT-B/16
             {
-              label: 'CLIP ViT-B/16',
-              data: [
-                0.4227, 0.3814, 0.3573, 0.3538, 0.3507, 0.3544, 0.3611,
-                0.376, 0.399, 0.4262, 0.4457, 0.4659,
-              ],
+              label: "CLIP ViT-B/16",
+              data: [0.4227, 0.3814, 0.3573, 0.3538, 0.3507, 0.3544, 0.3611, 0.376, 0.399, 0.4262, 0.4457, 0.4659],
               borderColor: colors.clipvit,
               tension: 0.1,
               pointBackgroundColor: colors.clipvit,
             },
             {
-              data: [
-                0.4227, 0.435, 0.4408, 0.4305, 0.4285, 0.4208, 0.4262, 0.431,
-                0.4388, 0.4577, 0.463, 0.4659,
-              ],
-              fill: '+1',
+              data: [0.4227, 0.435, 0.4408, 0.4305, 0.4285, 0.4208, 0.4262, 0.431, 0.4388, 0.4577, 0.463, 0.4659],
+              fill: "+1",
               backgroundColor: bgColors.clipvit,
               pointRadius: 0,
               borderWidth: 0,
               showInLegend: false,
             },
             {
-              data: [
-                0.4227, 0.3192, 0.2859, 0.2918, 0.2856, 0.2954, 0.2984,
-                0.3169, 0.3476, 0.3781, 0.4238, 0.4659,
-              ],
+              data: [0.4227, 0.3192, 0.2859, 0.2918, 0.2856, 0.2954, 0.2984, 0.3169, 0.3476, 0.3781, 0.4238, 0.4659],
               pointRadius: 0,
               borderWidth: 0,
               showInLegend: false,
             },
             // CLIP ViT-B/32
             {
-              label: 'CLIP ViT-B/32',
-              data: [
-                0.4561, 0.4184, 0.3889, 0.3655, 0.3475, 0.3345, 0.3254,
-                0.3193, 0.3163, 0.3159, 0.3178, 0.3203,
-              ],
+              label: "CLIP ViT-B/32",
+              data: [0.4561, 0.4184, 0.3889, 0.3655, 0.3475, 0.3345, 0.3254, 0.3193, 0.3163, 0.3159, 0.3178, 0.3203],
               borderColor: colors.clipvitb32,
               tension: 0.1,
               pointBackgroundColor: colors.clipvitb32,
             },
             {
-              data: [
-                0.4561, 0.4607, 0.4665, 0.4703, 0.4617, 0.4514, 0.4337,
-                0.3962, 0.3724, 0.3545, 0.3363, 0.3203,
-              ],
-              fill: '+1',
+              data: [0.4561, 0.4607, 0.4665, 0.4703, 0.4617, 0.4514, 0.4337, 0.3962, 0.3724, 0.3545, 0.3363, 0.3203],
+              fill: "+1",
               backgroundColor: bgColors.clipvitb32,
               pointRadius: 0,
               borderWidth: 0,
               showInLegend: false,
             },
             {
-              data: [
-                0.4561, 0.3788, 0.3226, 0.2912, 0.2721, 0.2718, 0.2741,
-                0.2795, 0.2853, 0.2961, 0.3069, 0.3203,
-              ],
+              data: [0.4561, 0.3788, 0.3226, 0.2912, 0.2721, 0.2718, 0.2741, 0.2795, 0.2853, 0.2961, 0.3069, 0.3203],
               pointRadius: 0,
               borderWidth: 0,
               showInLegend: false,
             },
             // ViT (Supervised)
             {
-              label: 'ViT B/16 (Supervised)',
-              data: [
-                0.4686, 0.4702, 0.472, 0.4739, 0.4759, 0.478, 0.4801, 0.4823,
-                0.4845, 0.4867, 0.489, 0.4912,
-              ],
+              label: "ViT B/16 (Supervised)",
+              data: [0.4686, 0.4702, 0.472, 0.4739, 0.4759, 0.478, 0.4801, 0.4823, 0.4845, 0.4867, 0.489, 0.4912],
               borderColor: colors.vit,
               tension: 0.1,
               pointBackgroundColor: colors.vit,
             },
             {
-              data: [
-                0.4686, 0.4747, 0.4825, 0.4871, 0.491, 0.494, 0.4973, 0.4993,
-                0.4995, 0.5005, 0.5005, 0.4912,
-              ],
-              fill: '+1',
+              data: [0.4686, 0.4747, 0.4825, 0.4871, 0.491, 0.494, 0.4973, 0.4993, 0.4995, 0.5005, 0.5005, 0.4912],
+              fill: "+1",
               backgroundColor: bgColors.vit,
               pointRadius: 0,
               borderWidth: 0,
               showInLegend: false,
             },
             {
-              data: [
-                0.4686, 0.4639, 0.4627, 0.4631, 0.463, 0.4642, 0.4658, 0.468,
-                0.4716, 0.4763, 0.4822, 0.4912,
-              ],
+              data: [0.4686, 0.4639, 0.4627, 0.4631, 0.463, 0.4642, 0.4658, 0.468, 0.4716, 0.4763, 0.4822, 0.4912],
               pointRadius: 0,
               borderWidth: 0,
               showInLegend: false,
             },
             // PEv1-B16-224
             {
-              label: 'PEv1-B16-224',
-              data: [
-                0.369, 0.4443, 0.514, 0.576, 0.6293, 0.6748, 0.7134, 0.7463,
-                0.7745, 0.7988, 0.8203, 0.8388,
-              ],
+              label: "PEv1-B16-224",
+              data: [0.369, 0.4443, 0.514, 0.576, 0.6293, 0.6748, 0.7134, 0.7463, 0.7745, 0.7988, 0.8203, 0.8388],
               borderColor: colors.pe,
               tension: 0.1,
               pointBackgroundColor: colors.pe,
             },
             {
-              data: [
-                0.369, 0.553, 0.6768, 0.757, 0.8097, 0.8311, 0.8387, 0.8423,
-                0.8446, 0.8444, 0.8422, 0.8388,
-              ],
-              fill: '+1',
+              data: [0.369, 0.553, 0.6768, 0.757, 0.8097, 0.8311, 0.8387, 0.8423, 0.8446, 0.8444, 0.8422, 0.8388],
+              fill: "+1",
               backgroundColor: bgColors.pe,
               pointRadius: 0,
               borderWidth: 0,
               showInLegend: false,
             },
             {
-              data: [
-                0.369, 0.3763, 0.3899, 0.4083, 0.4336, 0.4669, 0.5241, 0.599,
-                0.6571, 0.7112, 0.7768, 0.8388,
-              ],
+              data: [0.369, 0.3763, 0.3899, 0.4083, 0.4336, 0.4669, 0.5241, 0.599, 0.6571, 0.7112, 0.7768, 0.8388],
               pointRadius: 0,
               borderWidth: 0,
               showInLegend: false,
             },
             // SiGLip2-B-16
             {
-              label: 'SiGLip2-B-16',
-              data: [
-                0.9509, 0.9458, 0.9433, 0.9416, 0.9404, 0.9397, 0.9394,
-                0.9391, 0.939, 0.9391, 0.9395, 0.9396,
-              ],
+              label: "SiGLip2-B-16",
+              data: [0.9509, 0.9458, 0.9433, 0.9416, 0.9404, 0.9397, 0.9394, 0.9391, 0.939, 0.9391, 0.9395, 0.9396],
               borderColor: colors.siglip,
               tension: 0.1,
               pointBackgroundColor: colors.siglip,
             },
             {
-              data: [
-                0.9509, 0.9671, 0.9736, 0.9748, 0.9765, 0.977, 0.9753,
-                0.9716, 0.962, 0.9554, 0.9463, 0.9396,
-              ],
-              fill: '+1',
+              data: [0.9509, 0.9671, 0.9736, 0.9748, 0.9765, 0.977, 0.9753, 0.9716, 0.962, 0.9554, 0.9463, 0.9396],
+              fill: "+1",
               backgroundColor: bgColors.siglip,
               pointRadius: 0,
               borderWidth: 0,
               showInLegend: false,
             },
             {
-              data: [
-                0.9509, 0.9232, 0.9131, 0.9057, 0.9019, 0.899, 0.9053,
-                0.9098, 0.9159, 0.9231, 0.929, 0.9396,
-              ],
+              data: [0.9509, 0.9232, 0.9131, 0.9057, 0.9019, 0.899, 0.9053, 0.9098, 0.9159, 0.9231, 0.929, 0.9396],
               pointRadius: 0,
               borderWidth: 0,
               showInLegend: false,
@@ -753,7 +566,7 @@
           ],
         };
         new Chart(lineCtx, {
-          type: 'line',
+          type: "line",
           data: lineChartData,
           options: {
             responsive: true,
@@ -761,11 +574,11 @@
             plugins: {
               title: {
                 display: true,
-                text: 'Effect of Layer Combination Length on OOD Detection',
-                font: { ...defaultFont, size: 16, weight: '600' },
+                text: "Effect of Layer Combination Length on OOD Detection",
+                font: { ...defaultFont, size: 16, weight: "600" },
               },
               legend: {
-                position: 'bottom',
+                position: "bottom",
                 labels: {
                   boxWidth: 20,
                   font: defaultFont,
@@ -777,12 +590,12 @@
                 annotations: {
                   // This box now correctly highlights the first data point (N=1)
                   box1: {
-                    type: 'box',
+                    type: "box",
                     xMin: -0.5,
                     xMax: 0.5,
                     yMin: 0.2,
                     yMax: 1.0,
-                    backgroundColor: 'rgba(203, 213, 225, 0.3)',
+                    backgroundColor: "rgba(203, 213, 225, 0.3)",
                   },
                 },
               },
@@ -791,7 +604,7 @@
               x: {
                 title: {
                   display: true,
-                  text: 'Size of Selected Layer Set (N)',
+                  text: "Size of Selected Layer Set (N)",
                   font: defaultFont,
                 },
                 ticks: { font: defaultFont },
@@ -799,7 +612,7 @@
               y: {
                 title: {
                   display: true,
-                  text: 'Average FPR @ 95%',
+                  text: "Average FPR @ 95%",
                   font: defaultFont,
                 },
                 min: 0.2,
@@ -811,45 +624,24 @@
         });
 
         const barChartData = {
-          labels: [
-            'SiGLip2',
-            'PEv1',
-            'ViT',
-            'CLIP RN50',
-            'CLIP ViT-B/16',
-            'CLIP ViT-B/32',
-          ],
+          labels: ["SiGLip2", "PEv1", "ViT", "CLIP RN50", "CLIP ViT-B/16", "CLIP ViT-B/32"],
           datasets: [
             {
-              label: 'Best FPR',
+              label: "Best FPR",
               data: [0.899, 0.369, 0.463, 0.416, 0.286, 0.272],
-              backgroundColor: [
-                colors.siglip,
-                colors.pe,
-                colors.vit,
-                colors.cliprn,
-                colors.clipvit,
-                colors.clipvitb32,
-              ],
+              backgroundColor: [colors.siglip, colors.pe, colors.vit, colors.cliprn, colors.clipvit, colors.clipvitb32],
             },
             {
-              label: 'Baseline FPR',
+              label: "Baseline FPR",
               data: [0.951, 0.369, 0.469, 0.452, 0.416, 0.4561],
-              backgroundColor: 'transparent',
-              borderColor: [
-                colors.siglip,
-                colors.pe,
-                colors.vit,
-                colors.cliprn,
-                colors.clipvit,
-                colors.clipvitb32,
-              ],
+              backgroundColor: "transparent",
+              borderColor: [colors.siglip, colors.pe, colors.vit, colors.cliprn, colors.clipvit, colors.clipvitb32],
               borderWidth: 2,
             },
           ],
         };
         new Chart(barCtx, {
-          type: 'bar',
+          type: "bar",
           data: barChartData,
           options: {
             // The indexAxis:'y' property has been removed to make the chart vertical
@@ -858,8 +650,8 @@
             plugins: {
               title: {
                 display: true,
-                text: 'Best FPR vs. Baseline',
-                font: { ...defaultFont, size: 16, weight: '600' },
+                text: "Best FPR vs. Baseline",
+                font: { ...defaultFont, size: 16, weight: "600" },
               },
               legend: { display: false },
             },
@@ -874,7 +666,7 @@
               y: {
                 title: {
                   display: true,
-                  text: 'FPR @ 95%',
+                  text: "FPR @ 95%",
                   font: defaultFont,
                 },
                 min: 0,
@@ -886,7 +678,7 @@
 
         // --- Interactive Explorer ---
         const performanceData = {
-          'clip-b16': {
+          "clip-b16": {
             numLayers: 12,
             baseline: { fpr: 42.27, auroc: 90.83 },
             layerCombinations: {
@@ -900,7 +692,7 @@
                   Textures: { fpr: 57.34, auroc: 86.18 },
                 },
               },
-              '0,6,8,11,12': {
+              "0,6,8,11,12": {
                 fpr: 30.7,
                 auroc: 93.54,
                 datasets: {
@@ -910,7 +702,7 @@
                   Textures: { fpr: 25.51, auroc: 94.84 },
                 },
               },
-              '6,8,11,12': {
+              "6,8,11,12": {
                 fpr: 32.15,
                 auroc: 92.8,
                 datasets: {
@@ -922,7 +714,7 @@
               },
             },
           },
-          'clip-b32': {
+          "clip-b32": {
             numLayers: 12,
             baseline: { fpr: 45.61, auroc: 89.87 },
             layerCombinations: {
@@ -936,7 +728,7 @@
                   Textures: { fpr: 60.9, auroc: 85.03 },
                 },
               },
-              '0,4,6,8,11,12': {
+              "0,4,6,8,11,12": {
                 fpr: 29.01,
                 auroc: 93.42,
                 datasets: {
@@ -946,7 +738,7 @@
                   Textures: { fpr: 39.36, auroc: 91.07 },
                 },
               },
-              '4,6,8,12': {
+              "4,6,8,12": {
                 fpr: 35.2,
                 auroc: 91.5,
                 datasets: {
@@ -958,7 +750,7 @@
               },
             },
           },
-          'clip-l14': {
+          "clip-l14": {
             numLayers: 24,
             baseline: { fpr: 38.5, auroc: 92.1 },
             layerCombinations: {
@@ -972,7 +764,7 @@
                   Textures: { fpr: 48.7, auroc: 88.0 },
                 },
               },
-              '6,12,18,20,22,24': {
+              "6,12,18,20,22,24": {
                 fpr: 32.4,
                 auroc: 93.8,
                 datasets: {
@@ -998,7 +790,7 @@
                   Textures: { fpr: 57.22, auroc: 85.99 },
                 },
               },
-              '8,12,14,16': {
+              "8,12,14,16": {
                 fpr: 41.61,
                 auroc: 90.8,
                 datasets: {
@@ -1012,29 +804,27 @@
           },
         };
 
-        let currentArch = 'clip-b16';
+        let currentArch = "clip-b16";
         let selectedLayers = [];
 
-        const archSelect = document.getElementById('architecture');
-        const calculateBtn = document.getElementById('calculate-btn');
-        const resetBtn = document.getElementById('reset-btn');
-        const svg = document.getElementById('interactive-diagram');
-        const diagramContainer = document.getElementById(
-          'diagram-content-container'
-        );
+        const archSelect = document.getElementById("architecture");
+        const calculateBtn = document.getElementById("calculate-btn");
+        const resetBtn = document.getElementById("reset-btn");
+        const svg = document.getElementById("interactive-diagram");
+        const diagramContainer = document.getElementById("diagram-content-container");
 
         function initializeControls() {
           const numLayers = performanceData[currentArch].numLayers;
-          const checkboxContainer = document.getElementById('layer-checkboxes');
-          checkboxContainer.innerHTML = '';
+          const checkboxContainer = document.getElementById("layer-checkboxes");
+          checkboxContainer.innerHTML = "";
           selectedLayers = [];
 
           for (let i = 1; i <= numLayers; i++) {
-            const label = document.createElement('label');
+            const label = document.createElement("label");
             label.className =
-              'flex items-center justify-center p-2 text-sm border-2 border-slate-300 rounded-md cursor-pointer transition-colors duration-200 select-none';
+              "flex items-center justify-center p-2 text-sm border-2 border-slate-300 rounded-md cursor-pointer transition-colors duration-200 select-none";
             label.innerHTML = `<input type="checkbox" value="${i}" class="hidden"><span class="font-medium">${i}</span>`;
-            label.addEventListener('click', (e) => {
+            label.addEventListener("click", (e) => {
               e.preventDefault();
               toggleLayer(i, label);
             });
@@ -1042,7 +832,7 @@
           }
 
           renderDiagram(numLayers);
-          document.getElementById('results-container').style.display = 'none';
+          document.getElementById("results-container").style.display = "none";
         }
 
         function renderDiagram(numLayers) {
@@ -1051,17 +841,13 @@
           const START_Y = 120;
           const TOTAL_HEIGHT = START_Y + numLayers * V_SPACING + 120;
 
-          svg.setAttribute('viewBox', `0 0 800 ${TOTAL_HEIGHT}`);
-          let content = '';
+          svg.setAttribute("viewBox", `0 0 800 ${TOTAL_HEIGHT}`);
+          let content = "";
 
           // Static elements
           content += `
-                                <rect x="230" y="80" width="550" height="${
-                                  START_Y - 100 + numLayers * V_SPACING
-                                }" rx="10" class="svg-bg" />
-                                <rect x="230" y="${
-                                  START_Y - 20 + numLayers * V_SPACING + 40
-                                }" width="550" height="70" rx="10" class="svg-bg" />
+                                <rect x="230" y="80" width="550" height="${START_Y - 100 + numLayers * V_SPACING}" rx="10" class="svg-bg" />
+                                <rect x="230" y="${START_Y - 20 + numLayers * V_SPACING + 40}" width="550" height="70" rx="10" class="svg-bg" />
                                 <text x="505" y="105" text-anchor="middle" class="svg-text-label">Visual Encoders</text>
                                 <text x="505" y="${
                                   START_Y - 20 + numLayers * V_SPACING + 70
@@ -1069,12 +855,8 @@
                                 <rect x="10" y="${
                                   TOTAL_HEIGHT / 2 - 40
                                 }" width="130" height="80" rx="5" fill="#eef2ff" stroke="#a5b4fc" stroke-width="2"/>
-                                <text x="75" y="${
-                                  TOTAL_HEIGHT / 2 - 15
-                                }" text-anchor="middle" class="svg-text-label">ID Images</text>
-                                <text x="75" y="${
-                                  TOTAL_HEIGHT / 2 + 15
-                                }" text-anchor="middle" font-size="30">🖼️</text>
+                                <text x="75" y="${TOTAL_HEIGHT / 2 - 15}" text-anchor="middle" class="svg-text-label">ID Images</text>
+                                <text x="75" y="${TOTAL_HEIGHT / 2 + 15}" text-anchor="middle" font-size="30">🖼️</text>
                                 <rect x="160" y="10" width="200" height="40" rx="20" fill="#fff7ed" stroke="#fed7aa" stroke-width="2"/>
                                 <text x="260" y="35" text-anchor="middle" class="svg-text-label">ID Labels</text>
                                 <rect x="420" y="10" width="160" height="40" rx="5" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="2"/>
@@ -1084,11 +866,8 @@
           // Main bus lines
           const imageBusX = 260;
           const firstLayerCenterY = START_Y + LAYER_BOX_H / 2;
-          const lastLayerCenterY =
-            START_Y + (numLayers - 1) * V_SPACING + LAYER_BOX_H / 2;
-          content += `<path class="svg-arrow-path" d="M140 ${
-            TOTAL_HEIGHT / 2
-          } H ${imageBusX}"/>`;
+          const lastLayerCenterY = START_Y + (numLayers - 1) * V_SPACING + LAYER_BOX_H / 2;
+          content += `<path class="svg-arrow-path" d="M140 ${TOTAL_HEIGHT / 2} H ${imageBusX}"/>`;
           content += `<path class="svg-arrow-path" d="M${imageBusX} ${firstLayerCenterY} V ${lastLayerCenterY}"/>`;
 
           // Dynamic layers
@@ -1103,31 +882,19 @@
             if (i > 1) {
               // Inter-layer
               const prev_center_y = center_y - V_SPACING;
-              content += `<path class="svg-arrow-path" marker-end="url(#arrowhead)" d="M375 ${
-                prev_center_y + LAYER_BOX_H / 2
-              } Q 350 ${
+              content += `<path class="svg-arrow-path" marker-end="url(#arrowhead)" d="M375 ${prev_center_y + LAYER_BOX_H / 2} Q 350 ${
                 prev_center_y + LAYER_BOX_H / 2 + V_SPACING / 2
               }, 375 ${center_y - LAYER_BOX_H / 2}" />`;
             }
             content += `<path class="svg-arrow-path svg-output-arrow" marker-end="url(#arrowhead)" d="M450 ${center_y} H 650"/>`; // To Score
-            content += `<path class="svg-arrow-path" marker-end="url(#arrowhead)" d="M500 50 V 100 C 500 110, 580 110, 580 ${
-              center_y - 10
-            } H 640"/>`; // From Text Encoder
+            content += `<path class="svg-arrow-path" marker-end="url(#arrowhead)" d="M500 50 V 100 C 500 110, 580 110, 580 ${center_y - 10} H 640"/>`; // From Text Encoder
 
             // Layer and Score elements
-            content += `<polygon class="svg-layer-box" points="300,${layerY} 450,${layerY} 450,${
-              layerY + LAYER_BOX_H
-            } 300,${layerY + LAYER_BOX_H}"/>
-                                          <text x="375" y="${
-                                            center_y + 5
-                                          }" text-anchor="middle" class="svg-layer-text">Layer ${i}</text>
+            content += `<polygon class="svg-layer-box" points="300,${layerY} 450,${layerY} 450,${layerY + LAYER_BOX_H} 300,${layerY + LAYER_BOX_H}"/>
+                                          <text x="375" y="${center_y + 5}" text-anchor="middle" class="svg-layer-text">Layer ${i}</text>
                                           <g class="svg-score-group">
-                                              <text x="660" y="${
-                                                center_y + 6
-                                              }" font-size="20" class="font-bold">⊕</text>
-                                              <text x="715" y="${
-                                                center_y + 5
-                                              }" text-anchor="middle" class="svg-text-small">Scores ${i}</text>
+                                              <text x="660" y="${center_y + 6}" font-size="20" class="font-bold">⊕</text>
+                                              <text x="715" y="${center_y + 5}" text-anchor="middle" class="svg-text-small">Scores ${i}</text>
                                           </g>`;
             content += `</g>`;
           }
@@ -1136,12 +903,8 @@
           const lastLayerY = START_Y + (numLayers - 1) * V_SPACING;
           const finalScoreY = lastLayerY + V_SPACING + 65;
           content += `
-                                <path class="svg-arrow-path" marker-end="url(#arrowhead)" d="M375 ${
-                                  lastLayerY + LAYER_BOX_H
-                                } V ${finalScoreY}"/>
-                                <text x="505" y="${
-                                  finalScoreY + 8
-                                }" font-size="24" fill="#1e293b" class="font-bold">⊕</text>
+                                <path class="svg-arrow-path" marker-end="url(#arrowhead)" d="M375 ${lastLayerY + LAYER_BOX_H} V ${finalScoreY}"/>
+                                <text x="505" y="${finalScoreY + 8}" font-size="24" fill="#1e293b" class="font-bold">⊕</text>
                               `;
 
           diagramContainer.innerHTML = content;
@@ -1152,18 +915,10 @@
           const index = selectedLayers.indexOf(layer);
           if (index > -1) {
             selectedLayers.splice(index, 1);
-            labelElement.classList.remove(
-              'bg-indigo-600',
-              'text-white',
-              'border-indigo-600'
-            );
+            labelElement.classList.remove("bg-indigo-600", "text-white", "border-indigo-600");
           } else {
             selectedLayers.push(layer);
-            labelElement.classList.add(
-              'bg-indigo-600',
-              'text-white',
-              'border-indigo-600'
-            );
+            labelElement.classList.add("bg-indigo-600", "text-white", "border-indigo-600");
           }
           selectedLayers.sort((a, b) => a - b);
           updateDiagramHighlights();
@@ -1174,10 +929,7 @@
           for (let i = 1; i <= numLayers; i++) {
             const group = document.getElementById(`svg-layer-group-${i}`);
             if (group) {
-              group.classList.toggle(
-                'highlighted',
-                selectedLayers.includes(i)
-              );
+              group.classList.toggle("highlighted", selectedLayers.includes(i));
             }
           }
         }
@@ -1185,19 +937,16 @@
         function getClosestCombination(layers) {
           if (layers.length === 0) return null;
           const lastLayer = performanceData[currentArch].numLayers;
-          let key = layers.join(',');
-          if (layers.length === 1 && layers[0] === lastLayer)
-            key = String(lastLayer);
+          let key = layers.join(",");
+          if (layers.length === 1 && layers[0] === lastLayer) key = String(lastLayer);
           const combinations = performanceData[currentArch].layerCombinations;
           if (combinations[key]) return combinations[key];
           let closest = null;
           let minDiff = Infinity;
           for (const combKey in combinations) {
-            const combLayers = combKey.split(',').map(Number);
+            const combLayers = combKey.split(",").map(Number);
             const sizeDiff = Math.abs(combLayers.length - layers.length);
-            const overlap = combLayers.filter((l) =>
-              layers.includes(l)
-            ).length;
+            const overlap = combLayers.filter((l) => layers.includes(l)).length;
             const diff = sizeDiff * 2 - overlap;
             if (diff < minDiff) {
               minDiff = diff;
@@ -1208,83 +957,66 @@
         }
         function calculatePerformance() {
           if (selectedLayers.length === 0) {
-            document.getElementById('message-box').textContent =
-              'Please select at least one layer.';
-            setTimeout(
-              () => (document.getElementById('message-box').textContent = ''),
-              3000
-            );
+            document.getElementById("message-box").textContent = "Please select at least one layer.";
+            setTimeout(() => (document.getElementById("message-box").textContent = ""), 3000);
             return;
           }
           const metrics = getClosestCombination(selectedLayers);
           if (!metrics) {
-            document.getElementById('message-box').textContent =
-              'No matching data for this combination.';
-            setTimeout(
-              () => (document.getElementById('message-box').textContent = ''),
-              3000
-            );
+            document.getElementById("message-box").textContent = "No matching data for this combination.";
+            setTimeout(() => (document.getElementById("message-box").textContent = ""), 3000);
             return;
           }
-          const resultsContainer = document.getElementById('results-container');
-          resultsContainer.style.display = 'block';
-          resultsContainer.classList.add('fade-in');
+          const resultsContainer = document.getElementById("results-container");
+          resultsContainer.style.display = "block";
+          resultsContainer.classList.add("fade-in");
           const baseline = performanceData[currentArch].baseline;
-          updateMetricCard('fpr', metrics.fpr, baseline.fpr, false);
-          updateMetricCard('auroc', metrics.auroc, baseline.auroc, true);
-          document.getElementById('layers-count').textContent =
-            selectedLayers.length;
-          document.getElementById('selected-layers').textContent =
-            selectedLayers.map((l) => `L${l}`).join(', ');
+          updateMetricCard("fpr", metrics.fpr, baseline.fpr, false);
+          updateMetricCard("auroc", metrics.auroc, baseline.auroc, true);
+          document.getElementById("layers-count").textContent = selectedLayers.length;
+          document.getElementById("selected-layers").textContent = selectedLayers.map((l) => `L${l}`).join(", ");
           updateDatasetTable(metrics.datasets);
           resultsContainer.scrollIntoView({
-            behavior: 'smooth',
-            block: 'nearest',
+            behavior: "smooth",
+            block: "nearest",
           });
         }
         function updateMetricCard(type, value, baselineValue, higherIsBetter) {
           const valueEl = document.getElementById(`${type}-value`);
           const changeEl = document.getElementById(`${type}-change`);
-          valueEl.textContent = value.toFixed(2) + '%';
+          valueEl.textContent = value.toFixed(2) + "%";
           const diff = value - baselineValue;
           const isImprovement = higherIsBetter ? diff > 0 : diff < 0;
-          changeEl.className =
-            'text-sm font-medium rounded-full px-3 py-1 inline-block';
+          changeEl.className = "text-sm font-medium rounded-full px-3 py-1 inline-block";
           if (Math.abs(diff) < 0.01) {
-            changeEl.textContent = 'Baseline';
-            changeEl.classList.add('bg-slate-100', 'text-slate-800');
+            changeEl.textContent = "Baseline";
+            changeEl.classList.add("bg-slate-100", "text-slate-800");
           } else if (isImprovement) {
-            changeEl.textContent = `${
-              higherIsBetter ? '↑' : '↓'
-            } ${Math.abs(diff).toFixed(2)}% improvement`;
-            changeEl.classList.add('bg-green-100', 'text-green-800');
+            changeEl.textContent = `${higherIsBetter ? "↑" : "↓"} ${Math.abs(diff).toFixed(2)}% improvement`;
+            changeEl.classList.add("bg-green-100", "text-green-800");
           } else {
-            changeEl.textContent = `${
-              higherIsBetter ? '↓' : '↑'
-            } ${Math.abs(diff).toFixed(2)}% worse`;
-            changeEl.classList.add('bg-red-100', 'text-red-800');
+            changeEl.textContent = `${higherIsBetter ? "↓" : "↑"} ${Math.abs(diff).toFixed(2)}% worse`;
+            changeEl.classList.add("bg-red-100", "text-red-800");
           }
         }
         function updateDatasetTable(datasets) {
-          const tbody = document.getElementById('dataset-tbody');
-          tbody.innerHTML = '';
+          const tbody = document.getElementById("dataset-tbody");
+          tbody.innerHTML = "";
           for (const [dataset, metrics] of Object.entries(datasets)) {
-            const row = document.createElement('tr');
+            const row = document.createElement("tr");
             row.innerHTML = ` <td class="p-3 text-sm text-slate-700">${dataset}</td> <td class="p-3 text-sm text-slate-700">${metrics.fpr.toFixed(
               2
-            )}%</td> <td class="p-3 text-sm text-slate-700">${metrics.auroc.toFixed(
-              2
-            )}%</td> `;
+            )}%</td> <td class="p-3 text-sm text-slate-700">${metrics.auroc.toFixed(2)}%</td> `;
             tbody.appendChild(row);
           }
         }
 
-        archSelect.addEventListener('change', (e) => {
+        archSelect.addEventListener("change", (e) => {
           currentArch = e.target.value;
           initializeControls();
         });
-        calculateBtn.addEventListener('click', calculatePerformance);
-        resetBtn.addEventListener('click', initializeControls);
+        calculateBtn.addEventListener("click", calculatePerformance);
+        resetBtn.addEventListener("click", initializeControls);
 
         // Initial render
         initializeControls();
