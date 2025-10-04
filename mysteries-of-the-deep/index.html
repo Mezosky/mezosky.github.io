@@ -125,7 +125,6 @@
         <div class="flex items-center justify-center gap-x-6 text-base font-medium text-indigo-600">
           <a href="https://neurips.cc/virtual/2025/poster/118891" class="transition-colors hover:text-indigo-800">Paper</a>
           <a href="#" class="transition-colors hover:text-indigo-800">Code</a>
-          <a href="#" class="transition-colors hover:text-indigo-800">Data</a>
           <a href="#" class="transition-colors hover:text-indigo-800">BibTeX</a>
         </div>
       </header>
@@ -867,7 +866,8 @@
           checkboxContainer.innerHTML = "";
           selectedLayers = [];
 
-          if (archData.selectionMode === "single") {
+          // MODIFIED: All architectures are now 'fixed', so this logic always runs
+          if (currentArch.endsWith("-fixed")) {
             selectedLayers.push(numLayers);
           }
 
@@ -888,7 +888,7 @@
               toggleLayer(i, label);
             });
 
-            if (archData.selectionMode === "single" && i === numLayers) {
+            if (currentArch.endsWith("-fixed") && i === numLayers) {
               checkboxInput.checked = true;
               label.classList.add("bg-indigo-600", "text-white", "border-indigo-600", "cursor-not-allowed", "opacity-75");
             }
@@ -965,25 +965,15 @@
           diagramContainer.innerHTML = content;
         }
 
+        // MODIFIED: Simplified toggle logic, selectionMode is removed
         function toggleLayer(layer, labelElement) {
-          const archData = performanceData[currentArch];
-          const lastLayer = archData.numLayers;
+          const lastLayer = performanceData[currentArch].numLayers;
 
-          if (archData.selectionMode === "single" && layer === lastLayer) {
-            return;
+          if (currentArch.endsWith("-fixed") && layer === lastLayer) {
+            return; // Prevent deselection of the fixed last layer
           }
 
           const index = selectedLayers.indexOf(layer);
-
-          if (archData.selectionMode === "single") {
-            const otherSelected = selectedLayers.find((l) => l !== lastLayer && l !== layer);
-            if (otherSelected) {
-              const oldIndex = selectedLayers.indexOf(otherSelected);
-              selectedLayers.splice(oldIndex, 1);
-              const oldLabel = document.querySelector(`input[value="${otherSelected}"]`).parentElement;
-              oldLabel.classList.remove("bg-indigo-600", "text-white", "border-indigo-600");
-            }
-          }
 
           if (index > -1) {
             selectedLayers.splice(index, 1);
@@ -1006,16 +996,9 @@
           }
         }
 
+        // MODIFIED: Simplified find combination logic
         function findExactCombination(layers) {
           if (layers.length === 0) return null;
-
-          // For single selection mode, if only the last layer is selected, create a key with just that layer
-          const archData = performanceData[currentArch];
-          if (archData.selectionMode === "single" && layers.length === 1) {
-            const key = layers[0].toString();
-            const combinations = performanceData[currentArch].layerCombinations;
-            return combinations[key] || null;
-          }
 
           const key = layers.sort((a, b) => a - b).join(",");
           const combinations = performanceData[currentArch].layerCombinations;
@@ -1023,18 +1006,8 @@
         }
 
         function calculatePerformance() {
-          const archData = performanceData[currentArch];
-          const minLayers = archData.selectionMode === "single" ? 1 : 1;
-
-          if (selectedLayers.length < minLayers) {
+          if (selectedLayers.length === 0) {
             document.getElementById("message-box").textContent = `Please select at least one layer.`;
-            setTimeout(() => (document.getElementById("message-box").textContent = ""), 3000);
-            return;
-          }
-
-          // In single mode, if only last layer is selected, it's a valid combination
-          if (archData.selectionMode === "single" && selectedLayers.length === 1 && selectedLayers[0] !== archData.numLayers) {
-            document.getElementById("message-box").textContent = "Please select an additional layer.";
             setTimeout(() => (document.getElementById("message-box").textContent = ""), 3000);
             return;
           }
@@ -1049,7 +1022,7 @@
           const resultsContainer = document.getElementById("results-container");
           resultsContainer.style.display = "block";
           resultsContainer.classList.add("fade-in");
-          const baseline = archData.baseline;
+          const baseline = performanceData[currentArch].baseline;
           updateMetricCard("fpr", metrics.fpr, baseline.fpr, false);
           updateMetricCard("auroc", metrics.auroc, baseline.auroc, true);
           document.getElementById("layers-count").textContent = selectedLayers.length;
