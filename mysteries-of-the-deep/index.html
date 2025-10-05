@@ -789,7 +789,17 @@
 
         function initializeControls() {
           const archData = performanceData[currentArch];
+          console.log("Current architecture:", currentArch);
+          console.log("Architecture data:", archData);
+
+          if (!archData) {
+            console.error("No data found for architecture:", currentArch);
+            return;
+          }
+
           const numLayers = archData.numLayers;
+          console.log("Number of layers:", numLayers);
+
           const checkboxContainer = document.getElementById("layer-checkboxes");
           checkboxContainer.innerHTML = "";
           selectedLayers = [];
@@ -822,6 +832,8 @@
 
             checkboxContainer.appendChild(label);
           }
+
+          console.log("Checkboxes created:", checkboxContainer.children.length);
 
           renderDiagram(numLayers);
           updateDiagramHighlights();
@@ -999,20 +1011,24 @@
           });
         }
 
-        function waitForPapa() {
-          return new Promise((resolve) => {
-            if (typeof Papa !== "undefined") {
-              resolve();
-            } else {
-              const checkInterval = setInterval(() => {
-                if (typeof Papa !== "undefined") {
-                  clearInterval(checkInterval);
-                  resolve();
-                }
-              }, 50);
-            }
-          });
-        }
+        function waitForPapa().then(() => {
+          console.log("Papa Parse loaded successfully");
+          Promise.all([loadCsv(csvB16FilePath), loadCsv(csvB32FilePath)])
+            .then(([resultsB16, resultsB32]) => {
+              console.log("CSV B16 loaded:", resultsB16.data.length, "rows");
+              console.log("CSV B32 loaded:", resultsB32.data.length, "rows");
+              console.log("Sample B16 row:", resultsB16.data[0]);
+
+              performanceData = buildPerformanceData(resultsB16.data, resultsB32.data);
+              console.log("Performance data built:", performanceData);
+
+              initializeApp();
+            })
+            .catch((error) => {
+              console.error("Error loading CSV data:", error);
+              alert("Could not load performance data. Please ensure the CSV files are available.");
+            });
+        });
 
         // Load CSVs after Papa is ready
         waitForPapa().then(() => {
