@@ -9,14 +9,8 @@
     <!-- Chart.js for the interactive explorer -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.4.0"></script>
-
-    <!-- Load Papa Parse and wait for it -->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/papaparse/5.3.2/papaparse.min.js"
-      integrity="sha512-gCClYgHNRwlVoGazMG4yZqCaKZRmb4FtBqE5jXLnCpiFZBvqfQrhdZdP9guNy3n+O4vvfqmVpLHX+KqAR+8d1g=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
+    <!-- Papa Parse for CSV parsing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/papaparse/5.3.2/papaparse.min.js"></script>
     <style>
       /* Custom styles to complement Tailwind */
       body {
@@ -191,7 +185,13 @@
             </p>
           </div>
           <div>
-            <img id="img-svcca" src="plot_svcca.png" alt="SVCCA Similarity Plot" class="rounded-lg shadow-md zoomable-image cursor-pointer" />
+            <!-- FIXED: Replaced local image path with a valid URL -->
+            <img
+              id="img-svcca"
+              src="https://raw.githubusercontent.com/Mezosky/mezosky.github.io/master/mysteries-of-the-deep/plot_svcca.png"
+              alt="SVCCA Similarity Plot"
+              class="rounded-lg shadow-md zoomable-image cursor-pointer"
+            />
             <p class="mt-2 text-center text-sm text-slate-500">
               Figure 3 from the paper: Layer-wise SVCCA similarity decay. CLIP models (blue) show faster decay, indicating higher diversity compared
               to supervised models (yellow).
@@ -208,7 +208,12 @@
         <h2 class="mb-6 text-center text-2xl font-bold text-slate-900">Our Method: Entropy-Based Layer Selection</h2>
         <div class="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
           <div>
-            <img src="new_method_diagram.svg" alt="Method Diagram" class="rounded-lg shadow-md zoomable-image cursor-pointer" />
+            <!-- FIXED: Replaced local image path with a valid URL -->
+            <img
+              src="https://raw.githubusercontent.com/Mezosky/mezosky.github.io/master/mysteries-of-the-deep/new_method_diagram.svg"
+              alt="Method Diagram"
+              class="rounded-lg shadow-md zoomable-image cursor-pointer"
+            />
             <p class="mt-2 text-center text-sm text-slate-500">Figure 5 from the paper: Overview of our proposed method.</p>
           </div>
           <div>
@@ -251,7 +256,6 @@
           <div class="self-start rounded-lg border border-slate-200 bg-white p-6 shadow-md lg:col-span-2">
             <div class="mb-6">
               <label for="architecture" class="mb-2 block text-sm font-medium text-slate-700">1. Select Architecture:</label>
-              <!-- MODIFIED: Reduced architecture options -->
               <select id="architecture" class="w-full rounded-md border border-slate-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                 <option value="clip-b16-fixed">CLIP ViT-B/16</option>
                 <option value="clip-b32-fixed">CLIP ViT-B/32</option>
@@ -263,7 +267,7 @@
               <div id="layer-checkboxes" class="grid grid-cols-4 gap-2 sm:grid-cols-5"></div>
             </div>
 
-            <div id="message-box" class="mb-4 h-5 text-sm text-red-600"></div>
+            <div id="message-box" class="mb-4 h-5 text-sm font-semibold text-red-600"></div>
 
             <div class="flex gap-4">
               <button
@@ -358,7 +362,13 @@
             </p>
           </div>
           <div>
-            <img id="img-fpr" src="fpr_vs_entropy.jpg" alt="Entropy vs FPR Plot" class="rounded-lg shadow-md zoomable-image cursor-pointer" />
+            <!-- FIXED: Replaced local image path with a valid URL -->
+            <img
+              id="img-fpr"
+              src="https://raw.githubusercontent.com/Mezosky/mezosky.github.io/master/mysteries-of-the-deep/fpr_vs_entropy.jpg"
+              alt="Entropy vs FPR Plot"
+              class="rounded-lg shadow-md zoomable-image cursor-pointer"
+            />
             <p class="mt-2 text-center text-sm text-slate-500">
               Figure G.11 from the paper: A clear correlation between lower entropy and lower FPR@95.
             </p>
@@ -378,7 +388,12 @@
           picture for OOD detection, we need to draw from the diverse specializations of multiple layers.
         </p>
         <div>
-          <img src="concept_proportions.svg" alt="Semantic Concept Plots" class="w-full rounded-lg shadow-md zoomable-image cursor-pointer" />
+          <!-- FIXED: Replaced local image path with a valid URL -->
+          <img
+            src="https://raw.githubusercontent.com/Mezosky/mezosky.github.io/master/mysteries-of-the-deep/concept_proportions.svg"
+            alt="Semantic Concept Plots"
+            class="w-full rounded-lg shadow-md zoomable-image cursor-pointer"
+          />
           <p class="mt-2 text-center text-sm text-slate-500">
             Figure F.10 from the paper: Low-level concepts like
             <strong>Colors</strong> and <strong>Textures</strong> peak in early layers, while high-level concepts like <strong>Objects</strong> and
@@ -409,24 +424,28 @@
       </footer>
     </div>
 
-    <!-- MODIFIED: Added Image Modal Structure -->
-    <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-75 hidden items-center justify-center p-4 z-50 transition-opacity duration-300">
-      <span id="closeModal" class="absolute top-4 right-6 text-white text-4xl font-bold cursor-pointer transition-transform hover:scale-110"
+    <!-- Image Modal Structure -->
+    <div id="imageModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-75 p-4 transition-opacity duration-300">
+      <span id="closeModal" class="absolute top-4 right-6 cursor-pointer text-4xl font-bold text-white transition-transform hover:scale-110"
         >&times;</span
       >
-      <img id="modalImage" class="max-w-[90vw] max-h-[90vh] rounded-lg" src="" alt="Zoomed Image" />
+      <img id="modalImage" class="max-h-[90vh] max-w-[90vw] rounded-lg" src="" alt="Zoomed Image" />
     </div>
 
     <script>
+      // FIXED: All JavaScript logic is now wrapped in a single DOMContentLoaded listener
+      // to ensure the page is fully loaded before scripts run.
       document.addEventListener("DOMContentLoaded", function () {
-        // Check if Papa is loaded
-        if (typeof Papa === "undefined") {
-          console.error("Papa Parse failed to load!");
-          alert("Required library failed to load. Please refresh the page.");
-          return;
+        const messageBox = document.getElementById("message-box");
+
+        // --- Library Checks ---
+        // FIXED: Check if libraries are loaded correctly before proceeding.
+        if (typeof Chart === "undefined" || typeof Papa === "undefined") {
+          console.error("A required library (Chart.js or PapaParse) failed to load.");
+          messageBox.textContent = "Error: A required library failed to load. Please refresh.";
+          return; // Stop execution if libraries are missing
         }
 
-        console.log("Papa Parse is available:", typeof Papa);
         // --- Teaser Charts ---
         const lineCtx = document.getElementById("lineChart").getContext("2d");
         const barCtx = document.getElementById("barChart").getContext("2d");
@@ -447,13 +466,11 @@
           pe: "rgba(241, 218, 91, 0.2)",
           siglip: "rgba(209, 124, 106, 0.2)",
         };
-
         const defaultFont = { family: "system-ui, -apple-system, sans-serif" };
 
         const lineChartData = {
           labels: Array.from({ length: 12 }, (_, i) => i + 1),
           datasets: [
-            // CLIP RN50
             {
               label: "CLIP RN50",
               data: [0.4516, 0.4473, 0.4415, 0.436],
@@ -469,13 +486,7 @@
               borderWidth: 0,
               showInLegend: false,
             },
-            {
-              data: [0.4516, 0.4297, 0.4161, 0.436],
-              pointRadius: 0,
-              borderWidth: 0,
-              showInLegend: false,
-            },
-            // CLIP ViT-B/16
+            { data: [0.4516, 0.4297, 0.4161, 0.436], pointRadius: 0, borderWidth: 0, showInLegend: false },
             {
               label: "CLIP ViT-B/16",
               data: [0.4227, 0.3814, 0.3573, 0.3538, 0.3507, 0.3544, 0.3611, 0.376, 0.399, 0.4262, 0.4457, 0.4659],
@@ -497,7 +508,6 @@
               borderWidth: 0,
               showInLegend: false,
             },
-            // CLIP ViT-B/32
             {
               label: "CLIP ViT-B/32",
               data: [0.4561, 0.4184, 0.3889, 0.3655, 0.3475, 0.3345, 0.3254, 0.3193, 0.3163, 0.3159, 0.3178, 0.3203],
@@ -519,7 +529,6 @@
               borderWidth: 0,
               showInLegend: false,
             },
-            // ViT (Supervised)
             {
               label: "ViT B/16 (Supervised)",
               data: [0.4686, 0.4702, 0.472, 0.4739, 0.4759, 0.478, 0.4801, 0.4823, 0.4845, 0.4867, 0.489, 0.4912],
@@ -541,7 +550,6 @@
               borderWidth: 0,
               showInLegend: false,
             },
-            // PEv1-B16-224
             {
               label: "PEv1-B16-224",
               data: [0.369, 0.4443, 0.514, 0.576, 0.6293, 0.6748, 0.7134, 0.7463, 0.7745, 0.7988, 0.8203, 0.8388],
@@ -563,7 +571,6 @@
               borderWidth: 0,
               showInLegend: false,
             },
-            // SiGLip2-B-16
             {
               label: "SiGLip2-B-16",
               data: [0.9509, 0.9458, 0.9433, 0.9416, 0.9404, 0.9397, 0.9394, 0.9391, 0.939, 0.9391, 0.9395, 0.9396],
@@ -587,6 +594,7 @@
             },
           ],
         };
+
         new Chart(lineCtx, {
           type: "line",
           data: lineChartData,
@@ -599,48 +607,14 @@
                 text: "Effect of Layer Combination Length on OOD Detection",
                 font: { ...defaultFont, size: 16, weight: "600" },
               },
-              legend: {
-                position: "bottom",
-                labels: {
-                  boxWidth: 20,
-                  font: defaultFont,
-                  // This filter removes the 'undefined' labels from the legend
-                  filter: (item) => item.text,
-                },
-              },
+              legend: { position: "bottom", labels: { boxWidth: 20, font: defaultFont, filter: (item) => item.text } },
               annotation: {
-                annotations: {
-                  // This box now correctly highlights the first data point (N=1)
-                  box1: {
-                    type: "box",
-                    xMin: -0.5,
-                    xMax: 0.5,
-                    yMin: 0.2,
-                    yMax: 1.0,
-                    backgroundColor: "rgba(203, 213, 225, 0.3)",
-                  },
-                },
+                annotations: { box1: { type: "box", xMin: -0.5, xMax: 0.5, yMin: 0.2, yMax: 1.0, backgroundColor: "rgba(203, 213, 225, 0.3)" } },
               },
             },
             scales: {
-              x: {
-                title: {
-                  display: true,
-                  text: "Size of Selected Layer Set (N)",
-                  font: defaultFont,
-                },
-                ticks: { font: defaultFont },
-              },
-              y: {
-                title: {
-                  display: true,
-                  text: "Average FPR @ 95%",
-                  font: defaultFont,
-                },
-                min: 0.2,
-                max: 1.0,
-                ticks: { font: defaultFont },
-              },
+              x: { title: { display: true, text: "Size of Selected Layer Set (N)", font: defaultFont }, ticks: { font: defaultFont } },
+              y: { title: { display: true, text: "Average FPR @ 95%", font: defaultFont }, min: 0.2, max: 1.0, ticks: { font: defaultFont } },
             },
           },
         });
@@ -669,36 +643,18 @@
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-              title: {
-                display: true,
-                text: "Best FPR vs. Baseline",
-                font: { ...defaultFont, size: 16, weight: "600" },
-              },
+              title: { display: true, text: "Best FPR vs. Baseline", font: { ...defaultFont, size: 16, weight: "600" } },
               legend: { display: false },
             },
             scales: {
-              x: {
-                grid: { display: false },
-                ticks: {
-                  font: defaultFont,
-                },
-              },
-              y: {
-                title: {
-                  display: true,
-                  text: "FPR @ 95%",
-                  font: defaultFont,
-                },
-                min: 0,
-                ticks: { font: defaultFont },
-              },
+              x: { grid: { display: false }, ticks: { font: defaultFont } },
+              y: { title: { display: true, text: "FPR @ 95%", font: defaultFont }, min: 0, ticks: { font: defaultFont } },
             },
           },
         });
 
         // --- Interactive Explorer ---
         let performanceData = {};
-
         let currentArch = "clip-b16-fixed";
         let selectedLayers = [];
 
@@ -708,32 +664,22 @@
         const svg = document.getElementById("interactive-diagram");
         const diagramContainer = document.getElementById("diagram-content-container");
 
-        // MODIFIED: This helper processes a single CSV data structure with a more robust parser
         function processSingleCsv(data, numLayers) {
-          const archData = {
-            numLayers: numLayers,
-            baseline: {},
-            layerCombinations: {},
-          };
-
+          const archData = { numLayers: numLayers, baseline: {}, layerCombinations: {} };
           data.forEach((row) => {
             if (!row.Combination) return;
-
             let layers;
             try {
-              // Robustly parse the combination string, removing brackets/spaces and splitting
               const layerString = row.Combination.replace(/[\[\]\s]/g, "");
               layers = layerString.split(",").filter(Boolean).map(Number);
             } catch (e) {
               console.error("Could not parse combination string:", row.Combination);
-              return; // Skip this row if combination is malformed
+              return;
             }
-
             const key = layers
               .map((l) => l + 1)
               .sort((a, b) => a - b)
               .join(",");
-
             const combinationData = {
               fpr: parseFloat(row["Average FPR"]) * 100,
               auroc: parseFloat(row["Average AUC"]) * 100,
@@ -744,20 +690,14 @@
                 iNaturalist: { fpr: parseFloat(row["FPR iNaturalist"]) * 100, auroc: parseFloat(row["AUC iNaturalist"]) * 100 },
               },
             };
-
             archData.layerCombinations[key] = combinationData;
-
             if (key === String(numLayers)) {
-              archData.baseline = {
-                fpr: combinationData.fpr,
-                auroc: combinationData.auroc,
-              };
+              archData.baseline = { fpr: combinationData.fpr, auroc: combinationData.auroc };
             }
           });
           return archData;
         }
 
-        // MODIFIED: This function builds the main data object from multiple CSVs
         function buildPerformanceData(dataB16, dataB32) {
           return {
             "clip-b16-fixed": processSingleCsv(dataB16, 12),
@@ -767,91 +707,75 @@
 
         function initializeApp() {
           currentArch = "clip-b16-fixed";
-
           archSelect.addEventListener("change", (e) => {
             currentArch = e.target.value;
             initializeControls();
           });
-
           calculateBtn.addEventListener("click", calculatePerformance);
           resetBtn.addEventListener("click", initializeControls);
-
-          const modal = document.getElementById("imageModal");
-          const modalImg = document.getElementById("modalImage");
-          const closeModal = document.getElementById("closeModal");
-          const zoomableImages = document.querySelectorAll(".zoomable-image");
-
-          zoomableImages.forEach((img) => {
-            img.addEventListener("click", () => {
-              modal.style.display = "flex";
-              modalImg.src = img.src;
-            });
-          });
-
-          closeModal.addEventListener("click", () => {
-            modal.style.display = "none";
-          });
-
-          modal.addEventListener("click", (e) => {
-            if (e.target === modal) {
-              modal.style.display = "none";
-            }
-          });
-
           initializeControls();
         }
 
+        // --- Image Modal Logic ---
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("modalImage");
+        const closeModal = document.getElementById("closeModal");
+        const zoomableImages = document.querySelectorAll(".zoomable-image");
+
+        zoomableImages.forEach((img) => {
+          img.addEventListener("click", () => {
+            modal.style.display = "flex";
+            modalImg.src = img.src;
+          });
+        });
+
+        closeModal.addEventListener("click", () => {
+          modal.style.display = "none";
+        });
+        modal.addEventListener("click", (e) => {
+          if (e.target === modal) {
+            modal.style.display = "none";
+          }
+        });
+
         function initializeControls() {
           const archData = performanceData[currentArch];
-          console.log("Current architecture:", currentArch);
-          console.log("Architecture data:", archData);
-
           if (!archData) {
             console.error("No data found for architecture:", currentArch);
+            messageBox.textContent = `Error: No data for ${currentArch}.`;
             return;
           }
-
           const numLayers = archData.numLayers;
-          console.log("Number of layers:", numLayers);
-
           const checkboxContainer = document.getElementById("layer-checkboxes");
           checkboxContainer.innerHTML = "";
           selectedLayers = [];
-
           if (currentArch.endsWith("-fixed")) {
             selectedLayers.push(numLayers);
           }
-
           for (let i = 1; i <= numLayers; i++) {
             const label = document.createElement("label");
             label.className =
               "flex items-center justify-center p-2 text-sm border-2 border-slate-300 rounded-md cursor-pointer transition-colors duration-200 select-none";
-
             const checkboxInput = document.createElement("input");
             checkboxInput.type = "checkbox";
             checkboxInput.value = i;
             checkboxInput.className = "hidden";
             label.appendChild(checkboxInput);
             label.innerHTML += `<span class="font-medium">${i}</span>`;
-
             label.addEventListener("click", (e) => {
               e.preventDefault();
               toggleLayer(i, label);
             });
-
             if (currentArch.endsWith("-fixed") && i === numLayers) {
               checkboxInput.checked = true;
               label.classList.add("bg-indigo-600", "text-white", "border-indigo-600", "cursor-not-allowed", "opacity-75");
             }
-
             checkboxContainer.appendChild(label);
           }
-
-          console.log("Checkboxes created:", checkboxContainer.children.length);
-
           renderDiagram(numLayers);
           updateDiagramHighlights();
           document.getElementById("results-container").style.display = "none";
+          messageBox.textContent = "";
         }
 
         function renderDiagram(numLayers) {
@@ -859,60 +783,42 @@
           const LAYER_BOX_H = 40;
           const START_Y = 120;
           const diagramHeight = Math.max(500, START_Y + numLayers * V_SPACING + 120);
-
           svg.setAttribute("viewBox", `0 0 800 ${diagramHeight}`);
-          let content = "";
-
-          content += `
-              <rect x="230" y="80" width="550" height="${START_Y - 100 + numLayers * V_SPACING}" rx="10" class="svg-bg" />
-              <rect x="230" y="${START_Y - 20 + numLayers * V_SPACING + 40}" width="550" height="70" rx="10" class="svg-bg" />
-              <text x="505" y="105" text-anchor="middle" class="svg-text-label">Visual Encoders</text>
-              <text x="505" y="${START_Y - 20 + numLayers * V_SPACING + 70}" text-anchor="middle" class="svg-text-label">Final Fused Score</text>
-              <rect x="10" y="${diagramHeight / 2 - 40}" width="130" height="80" rx="5" fill="#eef2ff" stroke="#a5b4fc" stroke-width="2"/>
-              <text x="75" y="${diagramHeight / 2 - 15}" text-anchor="middle" class="svg-text-label">ID Images</text>
-              <text x="75" y="${diagramHeight / 2 + 15}" text-anchor="middle" font-size="30">🖼️</text>
-              <rect x="160" y="10" width="200" height="40" rx="20" fill="#fff7ed" stroke="#fed7aa" stroke-width="2"/>
-              <text x="260" y="35" text-anchor="middle" class="svg-text-label">ID Labels</text>
-              <rect x="420" y="10" width="160" height="40" rx="5" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="2"/>
-              <text x="500" y="35" text-anchor="middle" class="svg-text-label">Text Encoder</text>
-            `;
-
+          let content = `
+                <rect x="230" y="80" width="550" height="${START_Y - 100 + numLayers * V_SPACING}" rx="10" class="svg-bg" />
+                <rect x="230" y="${START_Y - 20 + numLayers * V_SPACING + 40}" width="550" height="70" rx="10" class="svg-bg" />
+                <text x="505" y="105" text-anchor="middle" class="svg-text-label">Visual Encoders</text>
+                <text x="505" y="${START_Y - 20 + numLayers * V_SPACING + 70}" text-anchor="middle" class="svg-text-label">Final Fused Score</text>
+                <rect x="10" y="${diagramHeight / 2 - 40}" width="130" height="80" rx="5" fill="#eef2ff" stroke="#a5b4fc" stroke-width="2"/>
+                <text x="75" y="${diagramHeight / 2 - 15}" text-anchor="middle" class="svg-text-label">ID Images</text>
+                <text x="75" y="${diagramHeight / 2 + 15}" text-anchor="middle" font-size="30">🖼️</text>
+                <rect x="160" y="10" width="200" height="40" rx="20" fill="#fff7ed" stroke="#fed7aa" stroke-width="2"/>
+                <text x="260" y="35" text-anchor="middle" class="svg-text-label">ID Labels</text>
+                <rect x="420" y="10" width="160" height="40" rx="5" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="2"/>
+                <text x="500" y="35" text-anchor="middle" class="svg-text-label">Text Encoder</text>
+              `;
           const imageBusX = 260;
           const firstLayerCenterY = START_Y + LAYER_BOX_H / 2;
           const lastLayerCenterY = START_Y + (numLayers - 1) * V_SPACING + LAYER_BOX_H / 2;
           content += `<path class="svg-arrow-path" d="M140 ${diagramHeight / 2} H ${imageBusX}"/>`;
           content += `<path class="svg-arrow-path" d="M${imageBusX} ${firstLayerCenterY} V ${lastLayerCenterY}"/>`;
-
           for (let i = 1; i <= numLayers; i++) {
             const layerY = START_Y + (i - 1) * V_SPACING;
             const center_y = layerY + LAYER_BOX_H / 2;
-
             content += `<g id="svg-layer-group-${i}" class="svg-layer-group">`;
             content += `<path class="svg-arrow-path" marker-end="url(#arrowhead)" d="M${imageBusX} ${center_y} H 300"/>`;
             if (i > 1) {
               const prev_center_y = center_y - V_SPACING;
-              content += `<path class="svg-arrow-path" marker-end="url(#arrowhead)" d="M375 ${prev_center_y + LAYER_BOX_H / 2} Q 350 ${
-                prev_center_y + LAYER_BOX_H / 2 + V_SPACING / 2
-              }, 375 ${center_y - LAYER_BOX_H / 2}" />`;
+              content += `<path class="svg-arrow-path" marker-end="url(#arrowhead)" d="M375 ${prev_center_y + LAYER_BOX_H / 2} Q 350 ${prev_center_y + LAYER_BOX_H / 2 + V_SPACING / 2}, 375 ${center_y - LAYER_BOX_H / 2}" />`;
             }
             content += `<path class="svg-arrow-path svg-output-arrow" marker-end="url(#arrowhead)" d="M450 ${center_y} H 650"/>`;
             content += `<path class="svg-arrow-path" marker-end="url(#arrowhead)" d="M500 50 V 100 C 500 110, 580 110, 580 ${center_y - 10} H 640"/>`;
-            content += `<polygon class="svg-layer-box" points="300,${layerY} 450,${layerY} 450,${layerY + LAYER_BOX_H} 300,${layerY + LAYER_BOX_H}"/>
-                <text x="375" y="${center_y + 5}" text-anchor="middle" class="svg-layer-text">Layer ${i}</text>
-                <g class="svg-score-group">
-                    <text x="660" y="${center_y + 6}" font-size="20" class="font-bold">⊕</text>
-                    <text x="715" y="${center_y + 5}" text-anchor="middle" class="svg-text-small">Scores ${i}</text>
-                </g>`;
+            content += `<polygon class="svg-layer-box" points="300,${layerY} 450,${layerY} 450,${layerY + LAYER_BOX_H} 300,${layerY + LAYER_BOX_H}"/><text x="375" y="${center_y + 5}" text-anchor="middle" class="svg-layer-text">Layer ${i}</text><g class="svg-score-group"><text x="660" y="${center_y + 6}" font-size="20" class="font-bold">⊕</text><text x="715" y="${center_y + 5}" text-anchor="middle" class="svg-text-small">Scores ${i}</text></g>`;
             content += `</g>`;
           }
-
           const lastLayerY = START_Y + (numLayers - 1) * V_SPACING;
           const finalScoreY = lastLayerY + V_SPACING + 65;
-          content += `
-              <path class="svg-arrow-path" marker-end="url(#arrowhead)" d="M375 ${lastLayerY + LAYER_BOX_H} V ${finalScoreY}"/>
-              <text x="505" y="${finalScoreY + 8}" font-size="24" fill="#1e293b" class="font-bold">⊕</text>
-            `;
-
+          content += `<path class="svg-arrow-path" marker-end="url(#arrowhead)" d="M375 ${lastLayerY + LAYER_BOX_H} V ${finalScoreY}"/><text x="505" y="${finalScoreY + 8}" font-size="24" fill="#1e293b" class="font-bold">⊕</text>`;
           diagramContainer.innerHTML = content;
         }
 
@@ -948,20 +854,21 @@
           return combinations[key] || null;
         }
 
+        function showMessage(text, duration = 3000) {
+          messageBox.textContent = text;
+          setTimeout(() => (messageBox.textContent = ""), duration);
+        }
+
         function calculatePerformance() {
           if (selectedLayers.length === 0) {
-            document.getElementById("message-box").textContent = `Please select at least one layer.`;
-            setTimeout(() => (document.getElementById("message-box").textContent = ""), 3000);
+            showMessage(`Please select at least one layer.`);
             return;
           }
-
           const metrics = findExactCombination(selectedLayers);
           if (!metrics) {
-            document.getElementById("message-box").textContent = "No pre-computed data for this combination.";
-            setTimeout(() => (document.getElementById("message-box").textContent = ""), 3000);
+            showMessage("No pre-computed data for this combination.");
             return;
           }
-
           const resultsContainer = document.getElementById("results-container");
           resultsContainer.style.display = "block";
           resultsContainer.classList.add("fade-in");
@@ -971,10 +878,7 @@
           document.getElementById("layers-count").textContent = selectedLayers.length;
           document.getElementById("selected-layers").textContent = selectedLayers.map((l) => `L${l}`).join(", ");
           updateDatasetTable(metrics.datasets);
-          resultsContainer.scrollIntoView({
-            behavior: "smooth",
-            block: "nearest",
-          });
+          resultsContainer.scrollIntoView({ behavior: "smooth", block: "nearest" });
         }
 
         function updateMetricCard(type, value, baselineValue, higherIsBetter) {
@@ -1000,14 +904,11 @@
           tbody.innerHTML = "";
           for (const [dataset, metrics] of Object.entries(datasets)) {
             const row = document.createElement("tr");
-            row.innerHTML = ` <td class="p-3 text-sm text-slate-700">${dataset}</td> <td class="p-3 text-sm text-slate-700">${metrics.fpr.toFixed(
-              2
-            )}%</td> <td class="p-3 text-sm text-slate-700">${metrics.auroc.toFixed(2)}%</td> `;
+            row.innerHTML = ` <td class="p-3 text-sm text-slate-700">${dataset}</td> <td class="p-3 text-sm text-slate-700">${metrics.fpr.toFixed(2)}%</td> <td class="p-3 text-sm text-slate-700">${metrics.auroc.toFixed(2)}%</td> `;
             tbody.appendChild(row);
           }
         }
 
-        // MODIFIED: Load both CSV files and then initialize the application
         const csvB16FilePath =
           "https://raw.githubusercontent.com/Mezosky/mezosky.github.io/refs/heads/master/mysteries-of-the-deep/web_clip-vit-b-16.csv";
         const csvB32FilePath =
@@ -1015,30 +916,25 @@
 
         function loadCsv(filePath) {
           return new Promise((resolve, reject) => {
-            console.log("Loading:", filePath);
             Papa.parse(filePath, {
               download: true,
               header: true,
               skipEmptyLines: true,
-              complete: function (results) {
-                console.log("Loaded successfully:", filePath, "Rows:", results.data.length);
-                resolve(results);
-              },
-              error: reject,
+              complete: (results) => resolve(results),
+              error: (error) => reject(error),
             });
           });
         }
 
         Promise.all([loadCsv(csvB16FilePath), loadCsv(csvB32FilePath)])
           .then(([resultsB16, resultsB32]) => {
-            console.log("Both CSVs loaded");
             performanceData = buildPerformanceData(resultsB16.data, resultsB32.data);
-            console.log("Performance data built:", performanceData);
             initializeApp();
           })
           .catch((error) => {
-            console.error("Error loading CSV data:", error);
-            alert("Could not load performance data: " + error);
+            console.error("Error loading or parsing CSV data:", error);
+            // FIXED: Replaced alert with a non-blocking message
+            showMessage("Error: Could not load performance data.");
           });
       });
     </script>
