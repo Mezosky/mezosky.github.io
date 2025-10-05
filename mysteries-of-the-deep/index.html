@@ -104,6 +104,18 @@
     </style>
   </head>
   <body class="bg-slate-50 text-slate-800">
+    <!-- ADDED: Floating Table of Contents -->
+    <nav class="hidden lg:block fixed left-8 top-1/2 -translate-y-1/2 space-y-3 z-10">
+      <ul id="toc" class="space-y-3 border-l-2 border-slate-200 pl-4">
+        <li><a href="#abstract" class="toc-link text-sm font-medium text-slate-500 hover:text-indigo-600">Abstract</a></li>
+        <li><a href="#why-clip" class="toc-link text-sm font-medium text-slate-500 hover:text-indigo-600">Why CLIP?</a></li>
+        <li><a href="#method" class="toc-link text-sm font-medium text-slate-500 hover:text-indigo-600">Method</a></li>
+        <li><a href="#explorer" class="toc-link text-sm font-medium text-slate-500 hover:text-indigo-600">Explorer</a></li>
+        <li><a href="#results-understanding" class="toc-link text-sm font-medium text-slate-500 hover:text-indigo-600">Results</a></li>
+        <li><a href="#layer-concepts" class="toc-link text-sm font-medium text-slate-500 hover:text-indigo-600">Layer Concepts</a></li>
+        <li><a href="#citation" class="toc-link text-sm font-medium text-slate-500 hover:text-indigo-600">Citation</a></li>
+      </ul>
+    </nav>
     <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
       <!-- Header Section -->
       <header class="mb-12 text-center">
@@ -145,7 +157,7 @@
       </div>
 
       <!-- Abstract Section -->
-      <section class="mx-auto mb-16 max-w-4xl">
+      <section id="abstract" class="mx-auto mb-16 max-w-4xl">
         <h2 class="mb-6 text-center text-2xl font-bold text-slate-900">Abstract</h2>
         <p class="text-justify leading-relaxed text-slate-600">
           Out-of-distribution (OOD) detection is essential for reliably deploying machine learning models in the wild. Yet, most methods treat large
@@ -163,7 +175,7 @@
       <hr class="mx-auto my-16 max-w-xl border-slate-200" />
 
       <!-- Why CLIP? Section -->
-      <section class="mx-auto mb-16 max-w-4xl">
+      <section id="why-clip" class="mx-auto mb-16 max-w-4xl">
         <h2 class="mb-6 text-center text-2xl font-bold text-slate-900">Why Does This Effect Occur in CLIP?</h2>
         <div class="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
           <div>
@@ -205,7 +217,7 @@
       <hr class="mx-auto my-16 max-w-xl border-slate-200" />
 
       <!-- Method Section -->
-      <section class="mx-auto mb-16 max-w-4xl">
+      <section id="method" class="mx-auto mb-16 max-w-4xl">
         <h2 class="mb-6 text-center text-2xl font-bold text-slate-900">Our Method: Entropy-Based Layer Selection</h2>
         <div class="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
           <div>
@@ -244,7 +256,7 @@
       <hr class="mx-auto my-16 max-w-xl border-slate-200" />
 
       <!-- Interactive Explorer Section -->
-      <section class="mb-16">
+      <section id="explorer" class="mb-16">
         <h2 class="mb-2 text-center text-2xl font-bold text-slate-900">Interactive Explorer: Fusing Layer Representations</h2>
         <p class="mx-auto mb-10 max-w-2xl text-center text-slate-500">
           Experiment with different layer combinations to see how fusing intermediate representations via
@@ -336,7 +348,7 @@
       <hr class="mx-auto my-16 max-w-xl border-slate-200" />
 
       <!-- Understanding the Results Section -->
-      <section class="mx-auto mb-16 max-w-4xl">
+      <section id="results-understanding" class="mx-auto mb-16 max-w-4xl">
         <h2 class="mb-6 text-center text-2xl font-bold text-slate-900">Understanding the Results: Entropy vs. FPR</h2>
         <div class="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
           <div>
@@ -380,7 +392,7 @@
       <hr class="mx-auto my-16 max-w-xl border-slate-200" />
 
       <!-- What do layers learn Section -->
-      <section class="mx-auto mb-16 max-w-6xl">
+      <section id="layer-concepts" class="mx-auto mb-16 max-w-6xl">
         <h2 class="mb-6 text-center text-2xl font-bold text-slate-900">What Do Different Layers Learn?</h2>
         <p class="mx-auto mb-10 max-w-3xl text-center text-slate-500">
           Not all layers are created equal. Our analysis shows a clear stratification of semantic concepts across the depth of the network. Early
@@ -405,7 +417,7 @@
       <hr class="mx-auto my-16 max-w-xl border-slate-200" />
 
       <!-- Citation Section -->
-      <section class="mx-auto max-w-4xl">
+      <section id="citation" class="mx-auto max-w-4xl">
         <h2 class="mb-6 text-center text-2xl font-bold text-slate-900">Citation</h2>
         <div class="overflow-x-auto rounded-lg bg-slate-100 p-6 text-sm text-slate-600">
           <pre><code>@inproceedings{meza2025mysteries,
@@ -62081,6 +62093,43 @@
 
         // Initial setup call
         initializeApp();
+
+        // --- Table of Contents Active State ---
+        const sections = document.querySelectorAll("section[id]");
+        const tocLinks = document.querySelectorAll(".toc-link");
+
+        const observerOptions = {
+          root: null,
+          rootMargin: "0px",
+          threshold: 0.3,
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          let visibleSectionId = null;
+
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              // Find the topmost visible section
+              if (
+                !visibleSectionId ||
+                entry.target.getBoundingClientRect().top < document.getElementById(visibleSectionId).getBoundingClientRect().top
+              ) {
+                visibleSectionId = entry.target.getAttribute("id");
+              }
+            }
+          });
+
+          tocLinks.forEach((link) => {
+            link.classList.remove("active");
+            if (visibleSectionId && link.getAttribute("href") === `#${visibleSectionId}`) {
+              link.classList.add("active");
+            }
+          });
+        }, observerOptions);
+
+        sections.forEach((section) => {
+          observer.observe(section);
+        });
       });
     </script>
   </body>
