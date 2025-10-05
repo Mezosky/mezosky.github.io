@@ -9,8 +9,14 @@
     <!-- Chart.js for the interactive explorer -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.4.0"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/papaparse/5.3.2/papaparse.min.js"></script>
 
+    <!-- Load Papa Parse and wait for it -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/papaparse/5.3.2/papaparse.min.js"
+      integrity="sha512-gCClYgHNRwlVoGazMG4yZqCaKZRmb4FtBqE5jXLnCpiFZBvqfQrhdZdP9guNy3n+O4vvfqmVpLHX+KqAR+8d1g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <style>
       /* Custom styles to complement Tailwind */
       body {
@@ -413,6 +419,14 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
+        // Check if Papa is loaded
+        if (typeof Papa === "undefined") {
+          console.error("Papa Parse failed to load!");
+          alert("Required library failed to load. Please refresh the page.");
+          return;
+        }
+
+        console.log("Papa Parse is available:", typeof Papa);
         // --- Teaser Charts ---
         const lineCtx = document.getElementById("lineChart").getContext("2d");
         const barCtx = document.getElementById("barChart").getContext("2d");
@@ -1001,62 +1015,31 @@
 
         function loadCsv(filePath) {
           return new Promise((resolve, reject) => {
-            console.log("Attempting to load:", filePath);
+            console.log("Loading:", filePath);
             Papa.parse(filePath, {
               download: true,
               header: true,
               skipEmptyLines: true,
-              dynamicTyping: false, // Keep as strings initially
               complete: function (results) {
-                console.log("Successfully loaded:", filePath);
-                console.log("Rows:", results.data.length);
-                console.log("First row:", results.data[0]);
-                if (results.errors.length > 0) {
-                  console.warn("Parse warnings:", results.errors);
-                }
+                console.log("Loaded successfully:", filePath, "Rows:", results.data.length);
                 resolve(results);
               },
-              error: function (error) {
-                console.error("Parse error for", filePath, error);
-                reject(error);
-              },
+              error: reject,
             });
           });
         }
 
-        // Wait for Papa Parse to be available
-        function waitForPapa() {
-          return new Promise((resolve) => {
-            if (typeof Papa !== "undefined") {
-              console.log("Papa Parse already loaded");
-              resolve();
-            } else {
-              console.log("Waiting for Papa Parse...");
-              const checkInterval = setInterval(() => {
-                if (typeof Papa !== "undefined") {
-                  clearInterval(checkInterval);
-                  console.log("Papa Parse loaded");
-                  resolve();
-                }
-              }, 50);
-            }
+        Promise.all([loadCsv(csvB16FilePath), loadCsv(csvB32FilePath)])
+          .then(([resultsB16, resultsB32]) => {
+            console.log("Both CSVs loaded");
+            performanceData = buildPerformanceData(resultsB16.data, resultsB32.data);
+            console.log("Performance data built:", performanceData);
+            initializeApp();
+          })
+          .catch((error) => {
+            console.error("Error loading CSV data:", error);
+            alert("Could not load performance data: " + error);
           });
-        }
-
-        // Load CSVs after Papa is ready
-        waitForPapa().then(() => {
-          Promise.all([loadCsv(csvB16FilePath), loadCsv(csvB32FilePath)])
-            .then(([resultsB16, resultsB32]) => {
-              console.log("Both CSVs loaded successfully");
-              performanceData = buildPerformanceData(resultsB16.data, resultsB32.data);
-              console.log("Performance data:", performanceData);
-              initializeApp();
-            })
-            .catch((error) => {
-              console.error("Error loading CSV data:", error);
-              alert("Could not load performance data. Error: " + error.message);
-            });
-        });
       });
     </script>
   </body>
