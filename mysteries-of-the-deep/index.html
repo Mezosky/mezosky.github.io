@@ -999,15 +999,33 @@
           });
         }
 
-        Promise.all([loadCsv(csvB16FilePath), loadCsv(csvB32FilePath)])
-          .then(([resultsB16, resultsB32]) => {
-            performanceData = buildPerformanceData(resultsB16.data, resultsB32.data);
-            initializeApp();
-          })
-          .catch((error) => {
-            console.error("Error loading CSV data:", error);
-            alert("Could not load performance data. Please ensure 'web_clip-vit-b-16.csv' and 'web_clip-vit-b-32.csv' are available.");
+        function waitForPapa() {
+          return new Promise((resolve) => {
+            if (typeof Papa !== "undefined") {
+              resolve();
+            } else {
+              const checkInterval = setInterval(() => {
+                if (typeof Papa !== "undefined") {
+                  clearInterval(checkInterval);
+                  resolve();
+                }
+              }, 50);
+            }
           });
+        }
+
+        // Load CSVs after Papa is ready
+        waitForPapa().then(() => {
+          Promise.all([loadCsv(csvB16FilePath), loadCsv(csvB32FilePath)])
+            .then(([resultsB16, resultsB32]) => {
+              performanceData = buildPerformanceData(resultsB16.data, resultsB32.data);
+              initializeApp();
+            })
+            .catch((error) => {
+              console.error("Error loading CSV data:", error);
+              alert("Could not load performance data. Please ensure the CSV files are available.");
+            });
+        });
       });
     </script>
   </body>
