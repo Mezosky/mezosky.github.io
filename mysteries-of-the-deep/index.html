@@ -305,6 +305,17 @@
               </svg>
               <span class="text-slate-700 group-hover:text-indigo-600">Qualitative Analysis</span>
             </a>
+            <a href="#citation" class="group flex items-center gap-2 rounded-lg bg-white/60 p-3 backdrop-blur-sm transition-colors hover:bg-white">
+              <svg class="h-5 w-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
+                />
+              </svg>
+              <span class="text-slate-700 group-hover:text-indigo-600">Citation</span>
+            </a>
           </div>
         </div>
 
@@ -584,7 +595,7 @@
           </div>
           <!-- Text Right -->
           <div class="order-2">
-            <h3 class="mb-4 text-xl font-semibold text-slate-800">Prompt-Based Vision-Language Methods</h3>
+            <h3 class="mb-4 text-xl font-semibold text-slate-800">Plug-and-Play for Others CLIP-Backbone Methods</h3>
             <p class="mb-4 text-slate-600">
               Our approach also enhances prompt-based vision-language techniques such as
               <span class="font-semibold text-indigo-600">NegLabel and CSP</span>.
@@ -769,10 +780,10 @@
         <p class="mx-auto mb-10 max-w-3xl text-center text-slate-500">
           Beyond numbers, the heatmaps reveal how intermediate layers behave differently from the last layer. On out-of-distribution images, the final
           layer often places
-          <span class="font-semibold text-indigo-600">spurious attention on regions that match an in-distribution label</span> (red), which can
-          trigger overconfident mistakes. In contrast, a fusion of intermediate layers
-          <span class="font-semibold text-indigo-600">down-weights these ID-specific regions and amplifies OOD-sensitive evidence</span>
-          (blue), effectively “banishing” the misleading ID signal.
+          <span class="font-semibold text-indigo-600">spurious focus on regions that resemble an in-distribution label</span> (red), which can trigger
+          overconfident mistakes. In contrast, a fusion of intermediate layers
+          <span class="font-semibold text-indigo-600">down-weights these ID-biased regions and amplifies OOD-sensitive evidence</span> (blue),
+          effectively “banishing” the misleading ID signal.
         </p>
         <div>
           <img
@@ -806,6 +817,7 @@
 
       <!-- Footer -->
       <footer class="mt-16 text-center text-slate-500">
+        <div id="counter-box" class="mb-4 text-sm font-medium text-indigo-600">Loading…</div>
         <p>Questions? Contact us at firstname.lastname@adelaide.edu.au</p>
       </footer>
     </div>
@@ -62603,6 +62615,32 @@
           observer.observe(section);
         });
       });
+    </script>
+
+    <!-- Visitor Counter Script -->
+    <script>
+      const TOKEN = "ut_XOgvgRgByn6cueuRcoAGGXcTcDwpH6DAWsraS8e2";
+      const BUCKET = "mysteries-page-views";
+
+      async function incrementCounter() {
+        try {
+          const res = await fetch(`https://counterapi.dev/api/v1/counter/${BUCKET}/hit`, {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${TOKEN}`,
+              "Content-Type": "application/json",
+            },
+          });
+
+          const data = await res.json();
+          document.getElementById("counter-box").innerText = `Visits: ${data.value}`;
+        } catch (error) {
+          console.error("Counter error:", error);
+          document.getElementById("counter-box").innerText = "Visits: --";
+        }
+      }
+
+      incrementCounter();
     </script>
   </body>
 </html>
