@@ -177,6 +177,96 @@
         </div>
       </header>
 
+      <!-- Table of Contents -->
+      <nav class="mx-auto mb-16 max-w-4xl rounded-xl border border-slate-200 bg-white p-8 shadow-md">
+        <h2 class="mb-6 text-center text-xl font-semibold text-slate-900">Contents</h2>
+        <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
+          <a href="#abstract" class="group flex items-center gap-2 rounded-lg p-3 transition-colors hover:bg-indigo-50">
+            <svg class="h-5 w-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              />
+            </svg>
+            <span class="text-slate-700 group-hover:text-indigo-600">Abstract</span>
+          </a>
+          <a href="#why-clip" class="group flex items-center gap-2 rounded-lg p-3 transition-colors hover:bg-indigo-50">
+            <svg class="h-5 w-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <span class="text-slate-700 group-hover:text-indigo-600">Why Does This Effect Occur in CLIP?</span>
+          </a>
+          <a href="#method" class="group flex items-center gap-2 rounded-lg p-3 transition-colors hover:bg-indigo-50">
+            <svg class="h-5 w-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+              />
+            </svg>
+            <span class="text-slate-700 group-hover:text-indigo-600">Our Method: Entropy-Based Selection</span>
+          </a>
+          <a href="#improvements" class="group flex items-center gap-2 rounded-lg p-3 transition-colors hover:bg-indigo-50">
+            <svg class="h-5 w-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+            </svg>
+            <span class="text-slate-700 group-hover:text-indigo-600">How Much Do Intermediate Layers Improve?</span>
+          </a>
+          <a href="#explorer" class="group flex items-center gap-2 rounded-lg p-3 transition-colors hover:bg-indigo-50">
+            <svg class="h-5 w-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
+              />
+            </svg>
+            <span class="text-slate-700 group-hover:text-indigo-600">Interactive Explorer</span>
+          </a>
+          <a href="#entropy-correlation" class="group flex items-center gap-2 rounded-lg p-3 transition-colors hover:bg-indigo-50">
+            <svg class="h-5 w-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+              />
+            </svg>
+            <span class="text-slate-700 group-hover:text-indigo-600">Entropy & FPR Correlation</span>
+          </a>
+          <a href="#semantic-layers" class="group flex items-center gap-2 rounded-lg p-3 transition-colors hover:bg-indigo-50">
+            <svg class="h-5 w-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
+              />
+            </svg>
+            <span class="text-slate-700 group-hover:text-indigo-600">Semantic Concepts Across Layers</span>
+          </a>
+          <a href="#qualitative-layers" class="group flex items-center gap-2 rounded-lg p-3 transition-colors hover:bg-indigo-50">
+            <svg class="h-5 w-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+              />
+            </svg>
+            <span class="text-slate-700 group-hover:text-indigo-600">Qualitative Analysis</span>
+          </a>
+        </div>
+      </nav>
+
       <!-- Teaser Figure (Updated) -->
       <div class="mb-16 rounded-lg border border-slate-200 bg-white p-4 shadow-lg sm:p-6">
         <div class="grid grid-cols-1 gap-6 md:grid-cols-5">
@@ -217,13 +307,14 @@
             </p>
             <ul class="list-disc list-inside space-y-2 text-slate-600">
               <li>
-                <strong>High Inter-Layer Diversity:</strong> As shown by Singular Vector Canonical Correlation Analysis (SVCCA), CLIP layers transform
-                representations progressively. There is low similarity between distant layers, meaning each layer provides unique, non-redundant
-                information.
+                <strong class="text-indigo-600">High Inter-Layer Diversity:</strong> As shown by Singular Vector Canonical Correlation Analysis
+                (SVCCA), CLIP layers transform representations progressively. There is low similarity between distant layers, meaning each layer
+                provides unique, non-redundant information.
               </li>
               <li>
-                <strong>Prediction Consistency:</strong> Despite this diversity, CLIP models show stable prediction behavior across their depth. This
-                means the intermediate layers provide coherent signals that don't conflict with each other, making them ideal for aggregation.
+                <strong class="text-indigo-600">Prediction Consistency:</strong> Despite this diversity, CLIP models show stable prediction behavior
+                across their depth. This means the intermediate layers provide coherent signals that don't conflict with each other, making them ideal
+                for aggregation.
               </li>
             </ul>
             <p class="mt-4 text-justify leading-relaxed text-slate-600">
@@ -267,15 +358,17 @@
               intelligently selects and fuses the most informative intermediate layers.
             </p>
             <ol class="list-decimal list-inside space-y-2 text-slate-600">
-              <li><strong>Fuse Scores:</strong> We first calculate OOD scores (using MCM) for various combinations of layers.</li>
               <li>
-                <strong>Entropy-Based Selection:</strong> We evaluate each combination by computing the entropy of its score distribution on unlabeled
-                in-distribution data. A low-entropy distribution indicates confident, concentrated scores, which is a strong proxy for good ID/OOD
-                separability.
+                <strong class="text-indigo-600">Fuse Scores:</strong> We first calculate OOD scores (using MCM) for various combinations of layers.
               </li>
               <li>
-                <strong>Select Optimal Layers:</strong> The layer combination that minimizes this entropy is chosen as the optimal one for OOD
-                detection.
+                <strong class="text-indigo-600">Entropy-Based Selection:</strong> We evaluate each combination by computing the entropy of its score
+                distribution on unlabeled in-distribution data. A low-entropy distribution indicates confident, concentrated scores, which is a strong
+                proxy for good ID/OOD separability.
+              </li>
+              <li>
+                <strong class="text-indigo-600">Select Optimal Layers:</strong> The layer combination that minimizes this entropy is chosen as the
+                optimal one for OOD detection.
               </li>
             </ol>
             <p class="mt-4 text-justify leading-relaxed text-slate-600">
@@ -290,12 +383,21 @@
 
       <!-- Improvement Section -->
       <section id="improvements" class="mx-auto mb-20 max-w-6xl">
-        <h2 class="mb-6 text-center text-3xl font-bold text-slate-900">How Much Do Intermediate Layers Improve OOD Detection?</h2>
+        <h2 class="mb-8 text-center text-3xl font-bold text-slate-900">How Much Do Intermediate Layers Improve OOD Detection?</h2>
 
-        <p class="mx-auto mb-16 max-w-3xl text-center text-lg text-slate-600">
-          Our method does not replace existing OOD techniques—it strengthens them. By integrating the diverse semantic cues present in intermediate
-          layers, we consistently reduce the false positive rate (FPR@95) across several competitive baselines.
-        </p>
+        <blockquote
+          class="relative mx-auto mb-16 max-w-3xl rounded-xl border-l-4 border-indigo-500 bg-gradient-to-r from-indigo-50 to-purple-50 p-8 shadow-md"
+        >
+          <svg class="absolute left-6 top-6 h-8 w-8 text-indigo-300 opacity-50" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"
+            />
+          </svg>
+          <p class="relative text-lg italic leading-relaxed text-slate-700">
+            Our method does not replace existing OOD techniques—it strengthens them. By integrating the diverse semantic cues present in intermediate
+            layers, we consistently reduce the false positive rate (FPR@95) across several competitive baselines.
+          </p>
+        </blockquote>
 
         <!-- Chart 1: ViT-B/16 Comparison -->
         <div class="mb-20 grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
@@ -351,7 +453,7 @@
         <h2 class="mb-2 text-center text-2xl font-bold text-slate-900">Interactive Explorer: Fusing Layer Representations</h2>
         <p class="mx-auto mb-10 max-w-2xl text-center text-slate-500">
           Experiment with different layer combinations to see how fusing intermediate representations via
-          <strong>Maximum Concept Matching (MCM)</strong> impacts OOD detection performance.
+          <strong class="text-indigo-600">Maximum Concept Matching (MCM)</strong> impacts OOD detection performance.
         </p>
 
         <div class="grid grid-cols-1 gap-8 lg:grid-cols-5 lg:gap-12">
@@ -444,21 +546,22 @@
         <div class="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
           <div>
             <p class="mb-4 text-justify leading-relaxed text-slate-600">
-              A key metric we use is <strong>FPR@95</strong>, which stands for the False Positive Rate when the True Positive Rate is at 95%. A lower
-              FPR@95 indicates better OOD detection performance.
+              A key metric we use is <strong class="text-indigo-600">FPR@95</strong>, which stands for the False Positive Rate when the True Positive
+              Rate is at 95%. A lower FPR@95 indicates better OOD detection performance.
             </p>
             <p class="mb-4 text-justify leading-relaxed text-slate-600">
               Our core finding is the strong positive correlation between the
-              <strong>entropy</strong> of a layer combination's scores and its resulting <strong>FPR@95</strong>.
+              <strong class="text-indigo-600">entropy</strong> of a layer combination's scores and its resulting
+              <strong class="text-indigo-600">FPR@95</strong>.
             </p>
             <ul class="list-disc list-inside space-y-2 text-slate-600">
               <li>
-                <strong>Good Selections (Low Entropy):</strong> Layer combinations that produce low-entropy (confident and sharp) score distributions
-                for in-distribution data consistently yield lower FPR and better OOD performance.
+                <strong class="text-indigo-600">Good Selections (Low Entropy):</strong> Layer combinations that produce low-entropy (confident and
+                sharp) score distributions for in-distribution data consistently yield lower FPR and better OOD performance.
               </li>
               <li>
-                <strong>Bad Selections (High Entropy):</strong> Combinations with high-entropy (uncertain and flat) score distributions perform
-                poorly, often no better than the baseline.
+                <strong class="text-indigo-600">Bad Selections (High Entropy):</strong> Combinations with high-entropy (uncertain and flat) score
+                distributions perform poorly, often no better than the baseline.
               </li>
             </ul>
             <p class="mt-4 text-justify leading-relaxed text-slate-600">
@@ -498,8 +601,9 @@
           />
           <p class="mt-2 text-center text-sm text-slate-500">
             Figure F.10 from the paper: Low-level concepts like
-            <strong>Colors</strong> and <strong>Textures</strong> peak in early layers, while high-level concepts like <strong>Objects</strong> and
-            <strong>Activities</strong> emerge in deeper layers.
+            <strong class="text-indigo-600">Colors</strong> and <strong class="text-indigo-600">Textures</strong> peak in early layers, while
+            high-level concepts like <strong class="text-indigo-600">Objects</strong> and <strong class="text-indigo-600">Activities</strong> emerge
+            in deeper layers.
           </p>
         </div>
       </section>
@@ -513,9 +617,9 @@
         <p class="mx-auto mb-10 max-w-3xl text-center text-slate-500">
           Beyond numbers, the heatmaps reveal how intermediate layers behave differently from the last layer. On out-of-distribution images, the final
           layer often places
-          <span class="font-semibold text-slate-700">spurious attention on regions that match an in-distribution label</span> (red), which can trigger
-          overconfident mistakes. In contrast, a fusion of intermediate layers
-          <span class="font-semibold text-slate-700">down-weights these ID-specific regions and amplifies OOD-sensitive evidence</span>
+          <span class="font-semibold text-indigo-600">spurious attention on regions that match an in-distribution label</span> (red), which can
+          trigger overconfident mistakes. In contrast, a fusion of intermediate layers
+          <span class="font-semibold text-indigo-600">down-weights these ID-specific regions and amplifies OOD-sensitive evidence</span>
           (blue), effectively “banishing” the misleading ID signal.
         </p>
         <div>
