@@ -62620,20 +62620,20 @@
     <!-- Visitor Counter Script -->
     <script>
       const TOKEN = "ut_XOgvgRgByn6cueuRcoAGGXcTcDwpH6DAWsraS8e2";
-      const BUCKET = "mysteries-page-views";
+      const NAMESPACE = "ignacio-mezas-team-1962";
+      const COUNTER_NAME = "first-counter-1962";
 
       async function incrementCounter() {
         try {
-          const res = await fetch(`https://counterapi.dev/api/v1/counter/${BUCKET}/hit`, {
-            method: "POST",
+          const res = await fetch(`https://api.counterapi.dev/v2/${NAMESPACE}/${COUNTER_NAME}/up`, {
+            method: "GET",
             headers: {
               Authorization: `Bearer ${TOKEN}`,
-              "Content-Type": "application/json",
             },
           });
 
           const data = await res.json();
-          document.getElementById("counter-box").innerText = `Visits: ${data.value}`;
+          document.getElementById("counter-box").innerText = `Visits: ${data.count}`;
         } catch (error) {
           console.error("Counter error:", error);
           document.getElementById("counter-box").innerText = "Visits: --";
