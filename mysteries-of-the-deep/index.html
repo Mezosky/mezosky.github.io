@@ -62623,9 +62623,18 @@
       const NAMESPACE = "ignacio-mezas-team-1962";
       const COUNTER_NAME = "first-counter-1962";
 
-      async function incrementCounter() {
+      async function updateVisitorCount() {
         try {
-          const res = await fetch(`https://api.counterapi.dev/v2/${NAMESPACE}/${COUNTER_NAME}/up`, {
+          // Step 1: Increment the counter
+          await fetch(`https://api.counterapi.dev/v2/${NAMESPACE}/${COUNTER_NAME}/up`, {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${TOKEN}`,
+            },
+          });
+
+          // Step 2: Get the updated counter value
+          const res = await fetch(`https://api.counterapi.dev/v2/${NAMESPACE}/${COUNTER_NAME}`, {
             method: "GET",
             headers: {
               Authorization: `Bearer ${TOKEN}`,
@@ -62640,7 +62649,7 @@
         }
       }
 
-      incrementCounter();
+      updateVisitorCount();
     </script>
   </body>
 </html>
