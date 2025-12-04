@@ -62625,24 +62625,26 @@
 
       async function updateVisitorCount() {
         try {
-          // Step 1: Increment the counter
-          await fetch(`https://api.counterapi.dev/v2/${NAMESPACE}/${COUNTER_NAME}/up`, {
-            method: "GET",
+          // Increment the counter and get the updated value
+          const res = await fetch(`https://api.counterapi.dev/v2/${NAMESPACE}/${COUNTER_NAME}/up`, {
             headers: {
               Authorization: `Bearer ${TOKEN}`,
             },
           });
 
-          // Step 2: Get the updated counter value
-          const res = await fetch(`https://api.counterapi.dev/v2/${NAMESPACE}/${COUNTER_NAME}`, {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${TOKEN}`,
-            },
-          });
+          if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+          }
 
           const data = await res.json();
-          document.getElementById("counter-box").innerText = `Visits: ${data.count}`;
+          console.log("Counter response:", data);
+
+          // The response should contain the count
+          if (data.count !== undefined) {
+            document.getElementById("counter-box").innerText = `Visits: ${data.count}`;
+          } else {
+            document.getElementById("counter-box").innerText = `Visits: ${JSON.stringify(data)}`;
+          }
         } catch (error) {
           console.error("Counter error:", error);
           document.getElementById("counter-box").innerText = "Visits: --";
