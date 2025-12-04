@@ -62619,39 +62619,39 @@
 
     <!-- Visitor Counter Script -->
     <script>
-      const TOKEN = "ut_XOgvgRgByn6cueuRcoAGGXcTcDwpH6DAWsraS8e2";
-      const NAMESPACE = "ignacio-mezas-team-1962";
-      const COUNTER_NAME = "first-counter-1962";
+      (async function () {
+        const TOKEN = "ut_XOgvgRgByn6cueuRcoAGGXcTcDwpH6DAWsraS8e2";
+        const NAMESPACE = "ignacio-mezas-team-1962";
+        const COUNTER_NAME = "first-counter-1962";
 
-      async function updateVisitorCount() {
         try {
-          // Increment the counter and get the updated value
-          const res = await fetch(`https://api.counterapi.dev/v2/${NAMESPACE}/${COUNTER_NAME}/up`, {
-            headers: {
-              Authorization: `Bearer ${TOKEN}`,
-            },
+          // Increment counter with token as query parameter
+          const response = await fetch(`https://api.counterapi.dev/v2/${NAMESPACE}/${COUNTER_NAME}/up?token=${TOKEN}`, {
+            method: "GET",
+            mode: "cors",
           });
 
-          if (!res.ok) {
-            throw new Error(`HTTP error! status: ${res.status}`);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
           }
 
-          const data = await res.json();
+          const data = await response.json();
           console.log("Counter response:", data);
 
-          // The response should contain the count
+          // Display the count
+          const counterBox = document.getElementById("counter-box");
           if (data.count !== undefined) {
-            document.getElementById("counter-box").innerText = `Visits: ${data.count}`;
+            counterBox.innerText = `Visits: ${data.count}`;
+          } else if (data.value !== undefined) {
+            counterBox.innerText = `Visits: ${data.value}`;
           } else {
-            document.getElementById("counter-box").innerText = `Visits: ${JSON.stringify(data)}`;
+            counterBox.innerText = `Visits: ${JSON.stringify(data)}`;
           }
         } catch (error) {
           console.error("Counter error:", error);
           document.getElementById("counter-box").innerText = "Visits: --";
         }
-      }
-
-      updateVisitorCount();
+      })();
     </script>
   </body>
 </html>
