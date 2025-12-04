@@ -177,161 +177,235 @@
         </div>
       </header>
 
-      <!-- Table of Contents -->
-      <nav class="mx-auto mb-16 max-w-4xl rounded-xl border border-slate-200 bg-white p-8 shadow-md">
-        <h2 class="mb-6 text-center text-xl font-semibold text-slate-900">Contents</h2>
-        <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
-          <a href="#abstract" class="group flex items-center gap-2 rounded-lg p-3 transition-colors hover:bg-indigo-50">
-            <svg class="h-5 w-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-              />
-            </svg>
-            <span class="text-slate-700 group-hover:text-indigo-600">Abstract</span>
-          </a>
-          <a href="#why-clip" class="group flex items-center gap-2 rounded-lg p-3 transition-colors hover:bg-indigo-50">
-            <svg class="h-5 w-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-            <span class="text-slate-700 group-hover:text-indigo-600">Why Does This Effect Occur in CLIP?</span>
-          </a>
-          <a href="#method" class="group flex items-center gap-2 rounded-lg p-3 transition-colors hover:bg-indigo-50">
-            <svg class="h-5 w-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-              />
-            </svg>
-            <span class="text-slate-700 group-hover:text-indigo-600">Our Method: Entropy-Based Selection</span>
-          </a>
-          <a href="#improvements" class="group flex items-center gap-2 rounded-lg p-3 transition-colors hover:bg-indigo-50">
-            <svg class="h-5 w-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-            </svg>
-            <span class="text-slate-700 group-hover:text-indigo-600">How Much Do Intermediate Layers Improve?</span>
-          </a>
-          <a href="#explorer" class="group flex items-center gap-2 rounded-lg p-3 transition-colors hover:bg-indigo-50">
-            <svg class="h-5 w-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
-              />
-            </svg>
-            <span class="text-slate-700 group-hover:text-indigo-600">Interactive Explorer</span>
-          </a>
-          <a href="#results-understanding" class="group flex items-center gap-2 rounded-lg p-3 transition-colors hover:bg-indigo-50">
-            <svg class="h-5 w-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-              />
-            </svg>
-            <span class="text-slate-700 group-hover:text-indigo-600">Entropy & FPR Correlation</span>
-          </a>
-          <a href="#layer-concepts" class="group flex items-center gap-2 rounded-lg p-3 transition-colors hover:bg-indigo-50">
-            <svg class="h-5 w-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
-              />
-            </svg>
-            <span class="text-slate-700 group-hover:text-indigo-600">Semantic Concepts Across Layers</span>
-          </a>
-          <a href="#qualitative-layers" class="group flex items-center gap-2 rounded-lg p-3 transition-colors hover:bg-indigo-50">
-            <svg class="h-5 w-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-              />
-            </svg>
-            <span class="text-slate-700 group-hover:text-indigo-600">Qualitative Analysis</span>
-          </a>
-        </div>
-      </nav>
-
-      <!-- Key Takeaways Section -->
+      <!-- Tabbed Navigation Section -->
       <section
         class="mx-auto mb-16 max-w-4xl rounded-xl border-2 border-indigo-200 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 p-8 shadow-lg"
       >
-        <div class="mb-6 flex items-center justify-center gap-3">
-          <svg class="h-8 w-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          <h2 class="text-center text-2xl font-bold text-slate-900">Key Takeaways</h2>
+        <!-- Tab Buttons -->
+        <div class="mb-6 flex justify-center gap-4">
+          <button id="tab-contents" class="tab-button rounded-lg px-6 py-3 font-semibold transition-all duration-300" onclick="switchTab('contents')">
+            📑 Contents
+          </button>
+          <button
+            id="tab-takeaways"
+            class="tab-button rounded-lg px-6 py-3 font-semibold transition-all duration-300"
+            onclick="switchTab('takeaways')"
+          >
+            ✨ Key Takeaways
+          </button>
         </div>
-        <div class="space-y-4">
-          <div class="flex gap-3 rounded-lg bg-white/60 p-4 backdrop-blur-sm">
-            <svg class="mt-1 h-6 w-6 flex-shrink-0 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fill-rule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                clip-rule="evenodd"
-              />
-            </svg>
-            <p class="text-slate-700">
-              Our layer-wise analysis revealed that <span class="font-semibold text-indigo-600">the final layer isn't enough</span>—intermediate
-              layers carry complementary OOD signals that, when fused, greatly boost performance.
-            </p>
+
+        <!-- Contents Tab -->
+        <div id="content-contents" class="tab-content">
+          <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
+            <a href="#abstract" class="group flex items-center gap-2 rounded-lg bg-white/60 p-3 backdrop-blur-sm transition-colors hover:bg-white">
+              <svg class="h-5 w-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+              <span class="text-slate-700 group-hover:text-indigo-600">Abstract</span>
+            </a>
+            <a href="#why-clip" class="group flex items-center gap-2 rounded-lg bg-white/60 p-3 backdrop-blur-sm transition-colors hover:bg-white">
+              <svg class="h-5 w-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <span class="text-slate-700 group-hover:text-indigo-600">Why Does This Effect Occur in CLIP?</span>
+            </a>
+            <a href="#method" class="group flex items-center gap-2 rounded-lg bg-white/60 p-3 backdrop-blur-sm transition-colors hover:bg-white">
+              <svg class="h-5 w-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                />
+              </svg>
+              <span class="text-slate-700 group-hover:text-indigo-600">Our Method: Entropy-Based Selection</span>
+            </a>
+            <a
+              href="#improvements"
+              class="group flex items-center gap-2 rounded-lg bg-white/60 p-3 backdrop-blur-sm transition-colors hover:bg-white"
+            >
+              <svg class="h-5 w-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+              </svg>
+              <span class="text-slate-700 group-hover:text-indigo-600">How Much Do Intermediate Layers Improve?</span>
+            </a>
+            <a href="#explorer" class="group flex items-center gap-2 rounded-lg bg-white/60 p-3 backdrop-blur-sm transition-colors hover:bg-white">
+              <svg class="h-5 w-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
+                />
+              </svg>
+              <span class="text-slate-700 group-hover:text-indigo-600">Interactive Explorer</span>
+            </a>
+            <a
+              href="#results-understanding"
+              class="group flex items-center gap-2 rounded-lg bg-white/60 p-3 backdrop-blur-sm transition-colors hover:bg-white"
+            >
+              <svg class="h-5 w-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                />
+              </svg>
+              <span class="text-slate-700 group-hover:text-indigo-600">Entropy & FPR Correlation</span>
+            </a>
+            <a
+              href="#layer-concepts"
+              class="group flex items-center gap-2 rounded-lg bg-white/60 p-3 backdrop-blur-sm transition-colors hover:bg-white"
+            >
+              <svg class="h-5 w-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
+                />
+              </svg>
+              <span class="text-slate-700 group-hover:text-indigo-600">Semantic Concepts Across Layers</span>
+            </a>
+            <a
+              href="#qualitative-layers"
+              class="group flex items-center gap-2 rounded-lg bg-white/60 p-3 backdrop-blur-sm transition-colors hover:bg-white"
+            >
+              <svg class="h-5 w-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+              <span class="text-slate-700 group-hover:text-indigo-600">Qualitative Analysis</span>
+            </a>
           </div>
-          <div class="flex gap-3 rounded-lg bg-white/60 p-4 backdrop-blur-sm">
-            <svg class="mt-1 h-6 w-6 flex-shrink-0 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fill-rule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                clip-rule="evenodd"
-              />
-            </svg>
-            <p class="text-slate-700">
-              Through a deep analysis of <span class="font-semibold text-indigo-600">entropy, agreement, and SVCCA diversity</span>, we found that
-              intermediate layers provide information the final layer misses, enabling stronger OOD detection.
-            </p>
-          </div>
-          <div class="flex gap-3 rounded-lg bg-white/60 p-4 backdrop-blur-sm">
-            <svg class="mt-1 h-6 w-6 flex-shrink-0 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fill-rule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                clip-rule="evenodd"
-              />
-            </svg>
-            <p class="text-slate-700">
-              Our study shows that while <span class="font-semibold text-indigo-600">the final layer is overconfident</span>, intermediate layers
-              remain diverse and informative—fusing them yields significant OOD gains.
-            </p>
-          </div>
-          <div class="flex gap-3 rounded-lg bg-white/60 p-4 backdrop-blur-sm">
-            <svg class="mt-1 h-6 w-6 flex-shrink-0 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fill-rule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                clip-rule="evenodd"
-              />
-            </svg>
-            <p class="text-slate-700">
-              Comprehensive layer analysis uncovered <span class="font-semibold text-indigo-600">untapped signals inside the network</span>: combining
-              a few intermediate layers makes OOD detection far more robust.
-            </p>
+        </div>
+
+        <!-- Key Takeaways Tab -->
+        <div id="content-takeaways" class="tab-content hidden">
+          <div class="space-y-4">
+            <div class="flex gap-3 rounded-lg bg-white/60 p-4 backdrop-blur-sm">
+              <svg class="mt-1 h-6 w-6 flex-shrink-0 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <p class="text-slate-700">
+                Our layer-wise analysis revealed that <span class="font-semibold text-indigo-600">the final layer isn't enough</span>—intermediate
+                layers carry complementary OOD signals that, when fused, greatly boost performance.
+              </p>
+            </div>
+            <div class="flex gap-3 rounded-lg bg-white/60 p-4 backdrop-blur-sm">
+              <svg class="mt-1 h-6 w-6 flex-shrink-0 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <p class="text-slate-700">
+                Through a deep analysis of <span class="font-semibold text-indigo-600">entropy, agreement, and SVCCA diversity</span>, we found that
+                intermediate layers provide information the final layer misses, enabling stronger OOD detection.
+              </p>
+            </div>
+            <div class="flex gap-3 rounded-lg bg-white/60 p-4 backdrop-blur-sm">
+              <svg class="mt-1 h-6 w-6 flex-shrink-0 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <p class="text-slate-700">
+                Our study shows that while <span class="font-semibold text-indigo-600">the final layer is overconfident</span>, intermediate layers
+                remain diverse and informative—fusing them yields significant OOD gains.
+              </p>
+            </div>
+            <div class="flex gap-3 rounded-lg bg-white/60 p-4 backdrop-blur-sm">
+              <svg class="mt-1 h-6 w-6 flex-shrink-0 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <p class="text-slate-700">
+                Comprehensive layer analysis uncovered <span class="font-semibold text-indigo-600">untapped signals inside the network</span>:
+                combining a few intermediate layers makes OOD detection far more robust.
+              </p>
+            </div>
           </div>
         </div>
       </section>
+
+      <style>
+        .tab-button {
+          background-color: rgba(255, 255, 255, 0.4);
+          color: #64748b;
+        }
+        .tab-button.active {
+          background-color: white;
+          color: #4f46e5;
+          box-shadow:
+            0 4px 6px -1px rgb(0 0 0 / 0.1),
+            0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .tab-content {
+          animation: fadeIn 0.3s ease-in;
+        }
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      </style>
+
+      <script>
+        function switchTab(tab) {
+          // Hide all tab contents
+          document.querySelectorAll(".tab-content").forEach((content) => {
+            content.classList.add("hidden");
+          });
+
+          // Remove active class from all buttons
+          document.querySelectorAll(".tab-button").forEach((button) => {
+            button.classList.remove("active");
+          });
+
+          // Show selected tab content
+          document.getElementById("content-" + tab).classList.remove("hidden");
+
+          // Add active class to selected button
+          document.getElementById("tab-" + tab).classList.add("active");
+        }
+
+        // Initialize first tab as active
+        document.addEventListener("DOMContentLoaded", function () {
+          switchTab("contents");
+        });
+      </script>
 
       <!-- Teaser Figure (Updated) -->
       <div class="mb-16 rounded-lg border border-slate-200 bg-white p-4 shadow-lg sm:p-6">
