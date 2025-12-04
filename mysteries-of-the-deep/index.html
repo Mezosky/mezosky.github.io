@@ -290,33 +290,26 @@
 
       <!-- Improvement Section -->
       <section id="improvements" class="mx-auto mb-20 max-w-6xl">
-        <h2 class="mb-6 text-center text-3xl font-bold text-slate-900">
-          How Much Do Intermediate Layers Improve OOD Detection?
-        </h2>
+        <h2 class="mb-6 text-center text-3xl font-bold text-slate-900">How Much Do Intermediate Layers Improve OOD Detection?</h2>
 
         <p class="mx-auto mb-16 max-w-3xl text-center text-lg text-slate-600">
-          Our method does not replace existing OOD techniques—it strengthens them.
-          By integrating the diverse semantic cues present in intermediate layers,
-          we consistently reduce the false positive rate (FPR@95) across several competitive
-          baselines.
+          Our method does not replace existing OOD techniques—it strengthens them. By integrating the diverse semantic cues present in intermediate
+          layers, we consistently reduce the false positive rate (FPR@95) across several competitive baselines.
         </p>
 
         <!-- Chart 1: ViT-B/16 Comparison -->
         <div class="mb-20 grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
           <!-- Text Left -->
           <div class="order-2 lg:order-1">
-            <h3 class="mb-4 text-xl font-semibold text-slate-800">
-              Classical OOD Methods (ViT-B/16)
-            </h3>
+            <h3 class="mb-4 text-xl font-semibold text-slate-800">Classical OOD Methods (ViT-B/16)</h3>
             <p class="mb-4 text-slate-600">
-              The charts illustrate that <span class="font-semibold text-indigo-600">
-              intermediate-layer fusion provides a significant and universal boost</span>,
-              improving classical OOD detectors like MCM, GL-MCM, and SeTAR.
+              The charts illustrate that
+              <span class="font-semibold text-indigo-600"> intermediate-layer fusion provides a significant and universal boost</span>, improving
+              classical OOD detectors like MCM, GL-MCM, and SeTAR.
             </p>
             <p class="text-slate-600">
-              Intermediate layers consistently lower FPR@95 across datasets. Their complementary 
-              representations allow detectors to avoid spurious high-confidence ID activations, 
-              especially in ambiguous or complex OOD scenes.
+              Intermediate layers consistently lower FPR@95 across datasets. Their complementary representations allow detectors to avoid spurious
+              high-confidence ID activations, especially in ambiguous or complex OOD scenes.
             </p>
           </div>
           <!-- Chart Right -->
@@ -337,17 +330,14 @@
           </div>
           <!-- Text Right -->
           <div class="order-2">
-            <h3 class="mb-4 text-xl font-semibold text-slate-800">
-              Prompt-Based Vision-Language Methods
-            </h3>
+            <h3 class="mb-4 text-xl font-semibold text-slate-800">Prompt-Based Vision-Language Methods</h3>
             <p class="mb-4 text-slate-600">
-              Our approach also enhances prompt-based vision-language techniques such as 
+              Our approach also enhances prompt-based vision-language techniques such as
               <span class="font-semibold text-indigo-600">NegLabel and CSP</span>.
             </p>
             <p class="text-slate-600">
-              By leveraging intermediate representations, we achieve further reductions in 
-              FPR@95, demonstrating that the benefits of our method extend beyond traditional 
-              architectures to modern vision-language models.
+              By leveraging intermediate representations, we achieve further reductions in FPR@95, demonstrating that the benefits of our method
+              extend beyond traditional architectures to modern vision-language models.
             </p>
           </div>
         </div>
@@ -606,11 +596,11 @@
             data: {
               labels: ["ImageNet-1K", "Pascal-VOC"],
               datasets: [
-                { label: "MCM", data: [42.27, 40.20], backgroundColor: improvementColors.mcm },
+                { label: "MCM", data: [42.27, 40.2], backgroundColor: improvementColors.mcm },
                 { label: "SeTAR + MCM", data: [40.24, 34.01], backgroundColor: improvementColors.setar_mcm },
                 { label: "GL-MCM", data: [35.25, 29.44], backgroundColor: improvementColors.glmcm },
                 { label: "SeTAR + GL-MCM", data: [33.12, 26.74], backgroundColor: improvementColors.setar_glmcm },
-                { label: "Ours (Intermediate Layers)", data: [30.70, 26.97], backgroundColor: improvementColors.ours },
+                { label: "Ours (Intermediate Layers)", data: [30.7, 26.97], backgroundColor: improvementColors.ours },
               ],
             },
             options: {
@@ -622,9 +612,9 @@
                   display: true,
                   text: "ViT-B/16 Methods (FPR@95 ↓)",
                   font: { ...defaultFont, size: 16, weight: "600" },
-                  padding: { bottom: 20 }
+                  padding: { bottom: 20 },
                 },
-                tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y.toFixed(2)}` } },
+                tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${ctx.parsed.y.toFixed(2)}` } },
               },
               scales: {
                 x: {
@@ -646,7 +636,7 @@
             data: {
               labels: ["NegLabel", "CSP"],
               datasets: [
-                { label: "Baseline", data: [25.40, 17.51], backgroundColor: improvementColors.baseline },
+                { label: "Baseline", data: [25.4, 17.51], backgroundColor: improvementColors.baseline },
                 { label: "+ Intermediate Layers", data: [23.79, 15.52], backgroundColor: improvementColors.baselineOurs },
               ],
             },
@@ -659,9 +649,9 @@
                   display: true,
                   text: "Prompt-Based Methods (FPR@95 ↓)",
                   font: { ...defaultFont, size: 16, weight: "600" },
-                  padding: { bottom: 20 }
+                  padding: { bottom: 20 },
                 },
-                tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y.toFixed(2)}` } },
+                tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${ctx.parsed.y.toFixed(2)}` } },
               },
               scales: {
                 x: {
