@@ -426,6 +426,34 @@
       <!-- Separator -->
       <hr class="mx-auto my-16 max-w-xl border-slate-200" />
 
+      <!-- Qualitative Evidence Section -->
+      <section id="qualitative-layers" class="mx-auto mb-16 max-w-6xl">
+        <h2 class="mb-6 text-center text-2xl font-bold text-slate-900">Why Do Intermediate Layers Help? (Qualitative View)</h2>
+        <p class="mx-auto mb-10 max-w-3xl text-center text-slate-500">
+          Beyond numbers, the heatmaps reveal how intermediate layers behave differently from the last layer. On out-of-distribution images, the final
+          layer often places
+          <span class="font-semibold text-slate-700">spurious attention on regions that match an in-distribution label</span> (red), which can trigger
+          overconfident mistakes. In contrast, a fusion of intermediate layers
+          <span class="font-semibold text-slate-700">down-weights these ID-specific regions and amplifies OOD-sensitive evidence</span>
+          (blue), effectively “banishing” the misleading ID signal.
+        </p>
+        <div>
+          <img
+            src="https://raw.githubusercontent.com/Mezosky/mezosky.github.io/master/mysteries-of-the-deep/batch_comparison_layers_poster.png"
+            alt="Qualitative comparison between intermediate-layer fusion and last layer"
+            class="w-full rounded-lg shadow-md zoomable-image cursor-pointer"
+          />
+          <p class="mt-2 text-center text-sm text-slate-500">
+            Qualitative comparison of attention maps on OOD examples. <span class="font-semibold">Red</span> highlights regions used to support an
+            in-distribution prediction, while <span class="font-semibold">Blue</span> highlights evidence for the OOD label. Intermediate layers
+            suppress ID-focused regions and better localize the truly OOD content, explaining their superior detection performance.
+          </p>
+        </div>
+      </section>
+
+      <!-- Separator -->
+      <hr class="mx-auto my-16 max-w-xl border-slate-200" />
+
       <!-- Citation Section -->
       <section id="citation" class="mx-auto max-w-4xl">
         <h2 class="mb-6 text-center text-2xl font-bold text-slate-900">Citation</h2>
