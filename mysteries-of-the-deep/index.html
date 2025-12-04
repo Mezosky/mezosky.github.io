@@ -62076,7 +62076,7 @@
         function updateMetricCard(type, value, baselineValue, higherIsBetter) {
           const valueEl = document.getElementById(`${type}-value`);
           const changeEl = document.getElementById(`${type}-change`);
-          valueEl.textContent = value.toFixed(2) * 100 + "%";
+          valueEl.textContent = (value * 100).toFixed(2) + "%";
           const diff = value - baselineValue;
           const isImprovement = higherIsBetter ? diff > 0 : diff < 0;
           changeEl.className = "text-sm font-medium rounded-full px-3 py-1 inline-block";
@@ -62084,10 +62084,10 @@
             changeEl.textContent = "Baseline";
             changeEl.classList.add("bg-slate-100", "text-slate-800");
           } else if (isImprovement) {
-            changeEl.textContent = `${higherIsBetter ? "↑" : "↓"} ${Math.abs(diff).toFixed(2) * 100}% improvement`;
+            changeEl.textContent = `${higherIsBetter ? "↑" : "↓"} ${(Math.abs(diff) * 100).toFixed(2)}% improvement`;
             changeEl.classList.add("bg-green-100", "text-green-800");
           } else {
-            changeEl.textContent = `${higherIsBetter ? "↓" : "↑"} ${Math.abs(diff).toFixed(2) * 100}% worse`;
+            changeEl.textContent = `${higherIsBetter ? "↓" : "↑"} ${(Math.abs(diff) * 100).toFixed(2)}% worse`;
             changeEl.classList.add("bg-red-100", "text-red-800");
           }
         }
