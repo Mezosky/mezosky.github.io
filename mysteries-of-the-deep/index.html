@@ -288,6 +288,74 @@
       <!-- Separator -->
       <hr class="mx-auto my-16 max-w-xl border-slate-200" />
 
+      <!-- Improvement Section -->
+      <section id="improvements" class="mx-auto mb-20 max-w-6xl">
+        <h2 class="mb-6 text-center text-3xl font-bold text-slate-900">
+          How Much Do Intermediate Layers Improve OOD Detection?
+        </h2>
+
+        <p class="mx-auto mb-16 max-w-3xl text-center text-lg text-slate-600">
+          Our method does not replace existing OOD techniques—it strengthens them.
+          By integrating the diverse semantic cues present in intermediate layers,
+          we consistently reduce the false positive rate (FPR@95) across several competitive
+          baselines.
+        </p>
+
+        <!-- Chart 1: ViT-B/16 Comparison -->
+        <div class="mb-20 grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
+          <!-- Text Left -->
+          <div class="order-2 lg:order-1">
+            <h3 class="mb-4 text-xl font-semibold text-slate-800">
+              Classical OOD Methods (ViT-B/16)
+            </h3>
+            <p class="mb-4 text-slate-600">
+              The charts illustrate that <span class="font-semibold text-indigo-600">
+              intermediate-layer fusion provides a significant and universal boost</span>,
+              improving classical OOD detectors like MCM, GL-MCM, and SeTAR.
+            </p>
+            <p class="text-slate-600">
+              Intermediate layers consistently lower FPR@95 across datasets. Their complementary 
+              representations allow detectors to avoid spurious high-confidence ID activations, 
+              especially in ambiguous or complex OOD scenes.
+            </p>
+          </div>
+          <!-- Chart Right -->
+          <div class="order-1 lg:order-2">
+            <div class="rounded-lg border border-slate-200 bg-white p-6 shadow-md">
+              <canvas id="vitComparisonChart" class="h-80"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chart 2: Prompt-Based Methods -->
+        <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
+          <!-- Chart Left -->
+          <div class="order-1">
+            <div class="rounded-lg border border-slate-200 bg-white p-6 shadow-md">
+              <canvas id="promptBoostingChart" class="h-80"></canvas>
+            </div>
+          </div>
+          <!-- Text Right -->
+          <div class="order-2">
+            <h3 class="mb-4 text-xl font-semibold text-slate-800">
+              Prompt-Based Vision-Language Methods
+            </h3>
+            <p class="mb-4 text-slate-600">
+              Our approach also enhances prompt-based vision-language techniques such as 
+              <span class="font-semibold text-indigo-600">NegLabel and CSP</span>.
+            </p>
+            <p class="text-slate-600">
+              By leveraging intermediate representations, we achieve further reductions in 
+              FPR@95, demonstrating that the benefits of our method extend beyond traditional 
+              architectures to modern vision-language models.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Separator -->
+      <hr class="mx-auto my-16 max-w-xl border-slate-200" />
+
       <!-- Interactive Explorer Section -->
       <section id="explorer" class="mb-16">
         <h2 class="mb-2 text-center text-2xl font-bold text-slate-900">Interactive Explorer: Fusing Layer Representations</h2>
@@ -511,6 +579,103 @@
           console.error("Chart.js failed to load.");
           document.getElementById("message-box").textContent = "Error: Charting library failed to load. Please refresh.";
           return;
+        }
+
+        // --- Improvement Charts ---
+        const vitCtx = document.getElementById("vitComparisonChart");
+        const promptCtx = document.getElementById("promptBoostingChart");
+
+        if (vitCtx && promptCtx) {
+          const improvementColors = {
+            mcm: "rgba(211, 211, 211, 1)",
+            setar_mcm: "rgba(169, 169, 169, 1)",
+            glmcm: "rgba(120, 120, 120, 1)",
+            setar_glmcm: "rgba(90, 90, 90, 1)",
+            ours: "rgba(128, 90, 213, 1)",
+            baseline: "rgba(156, 163, 175, 1)",
+            baselineOurs: "rgba(128, 90, 213, 1)",
+          };
+
+          const defaultFont = {
+            family: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+          };
+
+          // Chart 1 — ViT-B/16 Methods
+          new Chart(vitCtx, {
+            type: "bar",
+            data: {
+              labels: ["ImageNet-1K", "Pascal-VOC"],
+              datasets: [
+                { label: "MCM", data: [42.27, 40.20], backgroundColor: improvementColors.mcm },
+                { label: "SeTAR + MCM", data: [40.24, 34.01], backgroundColor: improvementColors.setar_mcm },
+                { label: "GL-MCM", data: [35.25, 29.44], backgroundColor: improvementColors.glmcm },
+                { label: "SeTAR + GL-MCM", data: [33.12, 26.74], backgroundColor: improvementColors.setar_glmcm },
+                { label: "Ours (Intermediate Layers)", data: [30.70, 26.97], backgroundColor: improvementColors.ours },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: true,
+              plugins: {
+                legend: { position: "bottom", labels: { font: defaultFont, boxWidth: 12, padding: 10 } },
+                title: {
+                  display: true,
+                  text: "ViT-B/16 Methods (FPR@95 ↓)",
+                  font: { ...defaultFont, size: 16, weight: "600" },
+                  padding: { bottom: 20 }
+                },
+                tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y.toFixed(2)}` } },
+              },
+              scales: {
+                x: {
+                  ticks: { font: { ...defaultFont, size: 11 } },
+                  title: { display: true, text: "In-distribution Dataset", font: { ...defaultFont, size: 12 } },
+                },
+                y: {
+                  beginAtZero: true,
+                  ticks: { font: { ...defaultFont, size: 11 } },
+                  title: { display: true, text: "FPR@95", font: { ...defaultFont, size: 12 } },
+                },
+              },
+            },
+          });
+
+          // Chart 2 — Prompt-Based Boosts
+          new Chart(promptCtx, {
+            type: "bar",
+            data: {
+              labels: ["NegLabel", "CSP"],
+              datasets: [
+                { label: "Baseline", data: [25.40, 17.51], backgroundColor: improvementColors.baseline },
+                { label: "+ Intermediate Layers", data: [23.79, 15.52], backgroundColor: improvementColors.baselineOurs },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: true,
+              plugins: {
+                legend: { position: "bottom", labels: { font: defaultFont, boxWidth: 12, padding: 10 } },
+                title: {
+                  display: true,
+                  text: "Prompt-Based Methods (FPR@95 ↓)",
+                  font: { ...defaultFont, size: 16, weight: "600" },
+                  padding: { bottom: 20 }
+                },
+                tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y.toFixed(2)}` } },
+              },
+              scales: {
+                x: {
+                  ticks: { font: { ...defaultFont, size: 11 } },
+                  title: { display: true, text: "Prompting Strategy", font: { ...defaultFont, size: 12 } },
+                },
+                y: {
+                  beginAtZero: true,
+                  ticks: { font: { ...defaultFont, size: 11 } },
+                  title: { display: true, text: "FPR@95", font: { ...defaultFont, size: 12 } },
+                },
+              },
+            },
+          });
         }
 
         // --- Teaser Charts ---
