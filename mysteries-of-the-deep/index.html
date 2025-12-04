@@ -62638,9 +62638,11 @@
           const data = await response.json();
           console.log("Counter response:", data);
 
-          // Display the count
+          // Display the count - the API returns data.data.up_count
           const counterBox = document.getElementById("counter-box");
-          if (data.count !== undefined) {
+          if (data.data && data.data.up_count !== undefined) {
+            counterBox.innerText = `Visits: ${data.data.up_count}`;
+          } else if (data.count !== undefined) {
             counterBox.innerText = `Visits: ${data.count}`;
           } else if (data.value !== undefined) {
             counterBox.innerText = `Visits: ${data.value}`;
