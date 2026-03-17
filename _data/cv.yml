@@ -3,115 +3,60 @@
   contents:
     - name: Full Name
       value: Ignacio Alejandro Meza De la Jara
-    - name: Date of Birth
-      value: 17th January 1995
+    - name: Location
+      value: Adelaide, Australia
+    - name: Email
+      value: imezadelajara@gmail.com
     - name: Languages
       value: Spanish, English
 
 - title: Education
   type: time_table
   contents:
-    - title: PhD
-      institution: University of Zurich, Zurich, Switzerland
-      year: 1905
+    - title: Computer Science
+      institution: University of Chile
+      year: Completed
       description:
-        - Description 1.
-        - Description 2.
-        - title: Description 3.
-          contents:
-            - Sub-description 1.
-            - Sub-description 2.
-    - title: Federal teaching diploma
-      institution: Eidgenössische Technische Hochschule, Zurich, Switzerland
-      year: 1900
+        - Computer scientist with a strong interest in machine learning and research.
+    - title: PhD Studies in Computer Vision and Mathematics
+      institution: Adelaide, Australia
+      year: Current
       description:
-        - Description 1.
-        - Description 2.
-
-- title: Education
-  type: time_table
-  contents:
-    - title: PhD
-      institution: University of Zurich, Zurich, Switzerland
-      year: 1905
-      description:
-        - Description 1.
-        - Description 2.
-        - title: Description 3.
-          contents:
-            - Sub-description 1.
-            - Sub-description 2.
-    - title: Federal teaching diploma
-      institution: Eidgenössische Technische Hochschule, Zurich, Switzerland
-      year: 1900
-      description:
-        - Description 1.
-        - Description 2.
+        - Focused on computer vision, machine learning, and mathematical foundations.
 
 - title: Experience
   type: time_table
   contents:
-    - title: Professor of Theoretical Physics
-      institution: Institute for Advanced Study, Princeton University
-      year: 1933 - 1955
+    - title: Data Scientist
+      institution: BCI
+      year: Previous
       description:
-        - Description 1.
-        - Description 2.
-        - title: Description 3.
-          contents:
-            - Sub-description 1.
-            - Sub-description 2.
-    - title: Visiting Professor
-      institution: California Institute of Technology, Pasadena, California, US
-      year: 1933
+        - Worked on applied data science and machine learning problems.
+    - title: Part-time Professor
+      institution: University of Chile
+      year: Current
       description:
-        - Description 1.
-        - Description 2.
+        - Part-time professor for MDS7202.
 
-    - title: Director
-      institution: Kaiser Wilhelm Institute for Physics, Berlin, Germany.
-      year: 1917-1933
-
-    - title: Professor of Theoretical Physics
-      institution: Karl-Ferdinand University, Prague, Czechoslovakia
-      year: 1911 - 1917
-      description:
-
-    - title: Associate Professor of Theoretical Physics
-      institution: University of Zurich, Zurich, Switzerland
-      year: 1909 - 1911
-
-- title: Open Source Projects
-  type: time_table
+- title: Publications
+  type: list
   contents:
-    - title: <a href="https://github.com/alshedivat/al-folio">al-folio</a>
-      year: 2015-now
-      description: A beautiful, simple, clean, and responsive Jekyll theme for academics.
-
-- title: Honors and Awards
-  type: time_table
-  contents:
-    - year: 1921
-      items:
-        - Nobel Prize in Physics
-        - Matteucci Medal
-    - year: 2029
-      items:
-        - Max Planck Medal
+    - An Empirical Study of the Effect of Video Encoders on Temporal Video Grounding, ICCV Workshops 2023.
 
 - title: Academic Interests
   type: nested_list
   contents:
-    - title: Topic 1.
+    - title: Machine Learning
       items:
-        - Description 1.
-        - Description 2.
-    - title: Topic 2.
+        - Computer vision
+        - Neural networks
+        - Temporal video grounding
+    - title: Teaching
       items:
-        - Description 1.
-        - Description 2.
+        - Clear technical communication
+        - Making complex ideas easier to learn
 
 - title: Other Interests
   type: list
   contents:
-    - <u>Hobbies:</u> Hobby 1, Hobby 2, etc.
+    - Scientific communication, teaching, and research-driven projects.
