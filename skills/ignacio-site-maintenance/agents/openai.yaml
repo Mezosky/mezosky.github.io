@@ -1,0 +1,8 @@
+interface:
+  display_name: "Ignacio Site"
+  short_description: "Maintain Ignacio Meza's site standards."
+  brand_color: "#0F766E"
+  default_prompt: "Use $ignacio-site-maintenance to update Ignacio Meza's website while preserving its identity, design standards, and finish-by-pushing workflow."
+
+policy:
+  allow_implicit_invocation: true
