@@ -1,0 +1,26 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="720" rx="40" fill="#F7F9FC"/>
+  <rect x="58" y="58" width="1084" height="604" rx="34" fill="white" stroke="#D7E2F0" stroke-width="2"/>
+  <text x="98" y="126" fill="#0F172A" font-family="Plus Jakarta Sans, Segoe UI, sans-serif" font-size="42" font-weight="700">Directed acyclic graph</text>
+  <text x="98" y="164" fill="#64748B" font-family="Plus Jakarta Sans, Segoe UI, sans-serif" font-size="24">Tasks become visible as nodes and dependencies become explicit.</text>
+  <path d="M264 350H440" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
+  <path d="M528 350H704" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
+  <path d="M792 350H936" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
+  <path d="M352 330L440 350L352 370" fill="none" stroke="#2563EB" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M616 330L704 350L616 370" fill="none" stroke="#2563EB" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M848 330L936 350L848 370" fill="none" stroke="#2563EB" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="128" y="290" width="136" height="120" rx="28" fill="#0F172A"/>
+  <rect x="440" y="290" width="136" height="120" rx="28" fill="#E0ECFF"/>
+  <rect x="704" y="290" width="136" height="120" rx="28" fill="#E0ECFF"/>
+  <rect x="936" y="290" width="136" height="120" rx="28" fill="#0F172A"/>
+  <text x="163" y="346" fill="#F8FAFC" font-family="Plus Jakarta Sans, Segoe UI, sans-serif" font-size="26" font-weight="700">Start</text>
+  <text x="463" y="338" fill="#0F172A" font-family="Plus Jakarta Sans, Segoe UI, sans-serif" font-size="24" font-weight="700">Download</text>
+  <text x="744" y="338" fill="#0F172A" font-family="Plus Jakarta Sans, Segoe UI, sans-serif" font-size="24" font-weight="700">Process</text>
+  <text x="963" y="346" fill="#F8FAFC" font-family="Plus Jakarta Sans, Segoe UI, sans-serif" font-size="26" font-weight="700">Finish</text>
+  <path d="M772 290V208H916V290" stroke="#2563EB" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M772 410V512H916V410" stroke="#2563EB" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="850" y="154" width="168" height="88" rx="22" fill="#DBEAFE"/>
+  <rect x="850" y="480" width="168" height="88" rx="22" fill="#DBEAFE"/>
+  <text x="884" y="206" fill="#1D4ED8" font-family="Plus Jakarta Sans, Segoe UI, sans-serif" font-size="24" font-weight="700">Train A</text>
+  <text x="884" y="532" fill="#1D4ED8" font-family="Plus Jakarta Sans, Segoe UI, sans-serif" font-size="24" font-weight="700">Train B</text>
+</svg>
