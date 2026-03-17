@@ -2,6 +2,9 @@
 <html lang="{{ site.lang }}">
   <!-- Head -->
   <head>
+    <script>
+      document.documentElement.classList.add('js');
+    </script>
     {% if page.redirect %}
       {% if page.redirect == true %}
         {% assign redirect = site.baseurl | append: '/' %}
@@ -17,13 +20,13 @@
 
   <!-- Body -->
   <body
-    class="{% if site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %} {% if page.body_class %}{{ page.body_class }}{% endif %} layout-{{ page.layout | default: 'default' | slugify }}"
+    class="page-preload {% if site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %} {% if page.body_class %}{{ page.body_class }}{% endif %} layout-{{ page.layout | default: 'default' | slugify }}"
   >
     <!-- Header -->
     {% include header.liquid %}
 
     <!-- Content -->
-    <div class="container mt-5" role="main">
+    <div class="container mt-5" role="main" data-page-shell>
       {% if page.toc and page.toc.sidebar %}
         {% if page.toc.sidebar == 'right' %}
           <div class="row">

@@ -1,7 +1,8 @@
 .tab {
   display: flex;
   flex-wrap: wrap;
-  margin-left: -20px;
+  gap: 0.7rem;
+  margin-left: 0;
   padding: 0;
   list-style: none;
   position: relative;
@@ -9,26 +10,37 @@
 
 .tab > * {
   flex: none;
-  padding-left: 20px;
+  padding-left: 0;
   position: relative;
 }
 
 .tab > * > a {
   display: block;
   text-align: center;
-  padding: 9px 20px;
-  color: var(--global-text-color-light);
-  border-bottom: 2px solid transparent;
-  border-bottom-color: transparent;
-  font-size: 12px;
+  padding: 0.8rem 1.1rem;
+  color: var(--brand-muted, var(--global-text-color-light));
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid var(--brand-border, var(--global-divider-color));
+  border-radius: 999px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+  font-size: 0.77rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  transition: color 0.1s ease-in-out;
+  transition:
+    color 0.24s ease,
+    background-color 0.24s ease,
+    border-color 0.24s ease,
+    transform 0.24s ease,
+    box-shadow 0.24s ease;
   line-height: 20px;
 }
 
 .tab > .active > a {
-  color: var(--global-text-color);
-  border-color: var(--global-theme-color);
+  color: var(--brand-ink, var(--global-text-color));
+  background: var(--brand-accent-soft, rgba(37, 99, 235, 0.12));
+  border-color: rgba(37, 99, 235, 0.18);
+  box-shadow: 0 16px 30px rgba(15, 23, 42, 0.08);
 }
 
 .tab > li > a {
@@ -36,13 +48,46 @@
   cursor: pointer;
 }
 
+.tab > li > a:hover {
+  color: var(--brand-ink, var(--global-text-color));
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+
 .tab-content {
   padding: 0;
+  position: relative;
+  margin-top: 1rem;
 }
 
 .tab-content > li {
-  display: none;
-}
-.tab-content > li.active {
   display: block;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition:
+    max-height 0.35s ease,
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.tab-content > li.active {
+  max-height: 2400px;
+  opacity: 1;
+  overflow: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+html[data-theme="dark"] .tab > * > a {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tab > * > a,
+  .tab-content > li {
+    transition: none;
+  }
 }
