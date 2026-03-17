@@ -92,6 +92,59 @@ social: true # includes social icons at the bottom of the page
   </div>
 </section>
 
+<section class="paper-feature-section reveal-stagger" aria-label="Featured papers">
+  <div class="section-heading">
+    <span class="section-kicker">Featured Papers</span>
+    <h2>Latest papers, fast to open and easy to cite</h2>
+    <p>These two papers are linked directly here with hosted PDFs, arXiv versions, and one-click BibTeX downloads.</p>
+  </div>
+
+  <div class="paper-feature-grid">
+    <article class="paper-feature-card">
+      <div class="paper-feature-media">
+        <img
+          src="{{ '/assets/img/publication_preview/2025_NeurIPS_Mysteries_of_the_Deep.png' | relative_url }}"
+          alt="Preview image for Mysteries of the Deep"
+        >
+      </div>
+
+      <div class="paper-feature-copy">
+        <span class="paper-pill">NeurIPS 2025</span>
+        <h3>Mysteries of the Deep</h3>
+        <p>Intermediate representations can carry complementary signals for out-of-distribution detection, and careful layer selection improves performance without requiring OOD data.</p>
+        <div class="paper-feature-actions">
+          <a class="paper-action paper-action-primary" href="{{ '/assets/pdf/2025_NeurIPS_Mysteries_of_the_Deep.pdf' | relative_url }}">PDF</a>
+          <a class="paper-action" href="https://arxiv.org/abs/2510.05782">arXiv</a>
+          <a class="paper-action" href="{{ '/assets/bibliography/2025_NeurIPS_Mysteries_of_the_Deep.bib' | relative_url }}" download>Cite</a>
+          <a class="paper-action" href="https://mezosky.github.io/mysteries-of-the-deep/">Project page</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="paper-feature-card">
+      <div class="paper-feature-media">
+        <img
+          src="{{ '/assets/img/publication_preview/2026_ACL_Truth_as_a_Trajectory.png' | relative_url }}"
+          alt="Preview image for Truth as a Trajectory"
+        >
+      </div>
+
+      <div class="paper-feature-copy">
+        <span class="paper-pill">Findings of ACL 2026</span>
+        <h3>Truth as a Trajectory</h3>
+        <p>Reasoning quality becomes easier to read when the model is treated as a trajectory across layers rather than a single static hidden state.</p>
+        <div class="paper-feature-actions">
+          <a class="paper-action paper-action-primary" href="{{ '/assets/pdf/2026_ACL_Truth_as_a_Trajectory.pdf' | relative_url }}">PDF</a>
+          <a class="paper-action" href="https://arxiv.org/abs/2603.01326">arXiv</a>
+          <a class="paper-action" href="{{ '/assets/bibliography/2026_ACL_Truth_as_a_Trajectory.bib' | relative_url }}" download>Cite</a>
+          <a class="paper-action" href="{{ '/publications/#De_la_Jara_2026_ACL_Findings' | relative_url }}">Details</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
 <section class="capability-grid reveal-stagger">
   <article class="capability-card">
     <div class="capability-icon">
