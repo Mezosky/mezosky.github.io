@@ -38,10 +38,10 @@
   Current custom design system, homepage styling, and professional polish.
 - `assets/js/common.js`
   UI behavior and reveal animations.
-- `assets/img/prof_pic_color.png`
-  Preferred homepage portrait.
-- `assets/img/prof_pic.jpg`
-  Alternate portrait asset.
+- `assets/img/profile/ignacio-meza-portrait.jpg`
+  Published homepage portrait.
+- `assets/img/profile/ignacio-meza-original.jpg`
+  Original source photo kept for future cropping or edits.
 
 ## Repo Docs And Workflow
 

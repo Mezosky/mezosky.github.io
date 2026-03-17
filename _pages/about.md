@@ -50,7 +50,7 @@ social: true # includes social icons at the bottom of the page
       <div class="portrait-frame">
         <img
           class="portrait-image"
-          src="{{ '/assets/img/ignacio-meza-portrait.jpg' | relative_url }}"
+          src="{{ '/assets/img/profile/ignacio-meza-portrait.jpg' | relative_url }}"
           alt="Portrait of Ignacio Meza"
         >
       </div>
