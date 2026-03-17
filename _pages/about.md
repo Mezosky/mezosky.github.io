@@ -23,7 +23,7 @@ social: true # includes social icons at the bottom of the page
     </p>
     <p class="hero-lead hero-lead-secondary">
       My work spans academic research, industry data science, and university teaching. I am currently pursuing my PhD at the
-      University of Adelaide with scholarship support from Naval Group, with an emphasis on reproducible experiments, careful
+      University of Adelaide with scholarship support from Naval Group 🇫🇷, with an emphasis on reproducible experiments, careful
       evaluation, readable systems, and communication that stays clear from idea to delivery.
     </p>
     <div class="hero-actions">
@@ -41,7 +41,7 @@ social: true # includes social icons at the bottom of the page
       </article>
       <article class="hero-metric">
         <span class="hero-metric-value">PhD @ Adelaide</span>
-        <span class="hero-metric-label">Supported by a Naval Group scholarship</span>
+        <span class="hero-metric-label">Supported by a Naval Group 🇫🇷 scholarship</span>
       </article>
     </div>
   </div>
@@ -64,7 +64,7 @@ social: true # includes social icons at the bottom of the page
     <div class="signal-stack">
       <article class="signal-card signal-card-strong">
         <span class="signal-label">PhD research</span>
-        <p>PhD candidate at the University of Adelaide, supported by a Naval Group scholarship, focused on computer vision and interpretable machine learning with strong evaluation.</p>
+        <p>PhD candidate at the University of Adelaide, supported by a Naval Group 🇫🇷 scholarship, focused on computer vision and interpretable machine learning with strong evaluation.</p>
       </article>
 
       <article class="signal-card">
