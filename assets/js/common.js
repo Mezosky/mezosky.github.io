@@ -51,4 +51,49 @@ $(document).ready(function () {
       });
     }
   });
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const revealGroups = document.querySelectorAll(".reveal-stagger");
+  revealGroups.forEach((group) => {
+    Array.from(group.children).forEach((child, index) => {
+      child.style.setProperty("--reveal-delay", `${index * 110}ms`);
+    });
+  });
+
+  const revealTargets = document.querySelectorAll(".reveal-on-scroll, .reveal-stagger > *");
+  if (!revealTargets.length) {
+    return;
+  }
+
+  const makeVisible = (element) => {
+    element.classList.add("is-visible");
+  };
+
+  if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+    revealTargets.forEach(makeVisible);
+    return;
+  }
+
+  document.documentElement.classList.add("motion-ready");
+
+  const revealObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        makeVisible(entry.target);
+        observer.unobserve(entry.target);
+      });
+    },
+    {
+      threshold: 0.18,
+      rootMargin: "0px 0px -12% 0px",
+    }
+  );
+
+  revealTargets.forEach((target) => {
+    revealObserver.observe(target);
+  });
 });

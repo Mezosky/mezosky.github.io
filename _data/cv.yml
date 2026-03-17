@@ -56,6 +56,21 @@
         - Clear technical communication
         - Making complex ideas easier to learn
 
+- title: Good Practices
+  type: nested_list
+  contents:
+    - title: Engineering
+      items:
+        - Reproducible workflows
+        - Clear documentation
+        - Code review and maintainable code
+        - Testing and careful validation
+    - title: Research
+      items:
+        - Clear reporting of results
+        - Strong baselines and fair comparisons
+        - Careful experiment design
+
 - title: Other Interests
   type: list
   contents:

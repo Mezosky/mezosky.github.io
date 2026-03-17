@@ -76,6 +76,11 @@
       "name": "Teaching",
       "level": "Advanced",
       "keywords": ["Course Design", "Technical Communication", "Mentoring"]
+    },
+    {
+      "name": "Engineering Practices",
+      "level": "Strong",
+      "keywords": ["Reproducibility", "Documentation", "Code Review", "Testing", "Clear Communication", "Clean Workflows"]
     }
   ],
   "languages": [
