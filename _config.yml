@@ -10,9 +10,8 @@ email: imezadelajara@gmail.com
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
   Personal website of Ignacio Meza, with notes on machine learning, computer vision, research, and teaching.
 footer_text: >
-  Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
-  Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
-  Photos from <a href="https://unsplash.com" target="_blank">Unsplash</a>.
+  Built with <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> and hosted on
+  <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
 keywords: jekyll, jekyll-theme, academic-website, portfolio-website # add your own keywords or leave empty
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
 icon: 🦉 # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
@@ -53,7 +52,7 @@ search_enabled: true
 socials_in_search: true
 
 # Dimensions
-max_width: 930px
+max_width: 1120px
 
 # TODO: add layout settings (single page vs. multi-page)
 

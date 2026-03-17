@@ -35,13 +35,13 @@ social: true # includes social icons at the bottom of the page
       <div class="portrait-frame">
         <img
           class="portrait-image"
-          src="{{ '/assets/img/prof_pic_color.png' | relative_url }}"
+          src="{{ '/assets/img/ignacio-meza-portrait.jpg' | relative_url }}"
           alt="Portrait of Ignacio Meza"
         >
       </div>
       <figcaption class="portrait-meta">
         <span class="portrait-name">Ignacio Meza</span>
-        <span class="portrait-role">Machine Learning / Computer Vision / Teaching</span>
+        <span class="portrait-role">Machine Learning Research / Computer Vision / Teaching</span>
       </figcaption>
     </figure>
 

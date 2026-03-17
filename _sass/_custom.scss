@@ -109,6 +109,7 @@ html[data-theme="dark"] .navbar {
 
 .professional-home .container[role="main"] {
   margin-top: 1rem !important;
+  padding-bottom: 2rem;
 }
 
 .about-intro {
@@ -143,9 +144,9 @@ html[data-theme="dark"] .navbar {
 .hero-grid {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
-  gap: 1.5rem;
-  align-items: stretch;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  gap: 2rem;
+  align-items: start;
 }
 
 .hero-copy,
@@ -264,6 +265,9 @@ html[data-theme="dark"] .hero-button-secondary {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(244, 247, 248, 0.94));
   border: 1px solid rgba(15, 118, 110, 0.12);
   box-shadow: var(--brand-shadow);
+  width: 100%;
+  max-width: 24rem;
+  justify-self: end;
 }
 
 html[data-theme="dark"] .hero-panel {
@@ -309,13 +313,15 @@ html[data-theme="dark"] .hero-panel {
 .portrait-card {
   position: relative;
   z-index: 1;
-  margin: 0 0 1.1rem;
+  max-width: 18rem;
+  margin: 0 auto 1.1rem;
 }
 
 .portrait-frame {
   position: relative;
   overflow: hidden;
   border-radius: 26px;
+  aspect-ratio: 1 / 1;
   border: 1px solid rgba(19, 34, 56, 0.1);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(230, 239, 240, 0.35));
   box-shadow: 0 18px 36px rgba(19, 34, 56, 0.14);
@@ -338,15 +344,16 @@ html[data-theme="dark"] .portrait-frame {
 .portrait-image {
   display: block;
   width: 100%;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
-  object-position: center top;
+  object-position: center 30%;
 }
 
 .portrait-meta {
   display: grid;
   gap: 0.2rem;
   padding: 0.9rem 0.2rem 0;
+  text-align: center;
 }
 
 .portrait-name {
@@ -393,7 +400,7 @@ html[data-theme="dark"] .signal-card {
 
 .signal-mini-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 0.85rem;
 }
 
@@ -633,6 +640,11 @@ html[data-theme="dark"] .practice-band {
     grid-template-columns: 1fr;
   }
 
+  .hero-panel {
+    max-width: 30rem;
+    justify-self: center;
+  }
+
   .capability-grid,
   .experience-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -653,6 +665,10 @@ html[data-theme="dark"] .practice-band {
 
   .hero-heading {
     max-width: 100%;
+  }
+
+  .portrait-card {
+    max-width: 14rem;
   }
 }
 
