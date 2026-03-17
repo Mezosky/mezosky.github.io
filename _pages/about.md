@@ -14,16 +14,17 @@ social: true # includes social icons at the bottom of the page
 
 <section class="hero-grid reveal-stagger">
   <div class="hero-copy">
-    <span class="eyebrow">Adelaide, Australia</span>
+    <span class="eyebrow">🇨🇱 Chilean researcher in Adelaide, Australia</span>
     <p class="hero-overline">Machine Learning Research / Data Science / Teaching</p>
     <h2 class="hero-heading">Machine learning research with clarity, rigor, and product-level discipline.</h2>
     <p class="hero-lead">
-      I am Ignacio Meza, a computer scientist from the University of Chile working across machine learning, computer vision,
-      and neural networks.
+      I am Ignacio Meza, a Chilean computer scientist from the University of Chile and a PhD candidate at the University of
+      Adelaide, working across machine learning, computer vision, and neural networks.
     </p>
     <p class="hero-lead hero-lead-secondary">
-      My work spans academic research, industry data science, and university teaching, with an emphasis on reproducible
-      experiments, careful evaluation, readable systems, and communication that stays clear from idea to delivery.
+      My work spans academic research, industry data science, and university teaching. I am currently pursuing my PhD at the
+      University of Adelaide with scholarship support from Naval Group, with an emphasis on reproducible experiments, careful
+      evaluation, readable systems, and communication that stays clear from idea to delivery.
     </p>
     <div class="hero-actions">
       <a class="hero-button hero-button-primary" href="{{ '/publications/' | relative_url }}">View publications</a>
@@ -39,8 +40,8 @@ social: true # includes social icons at the bottom of the page
         <span class="hero-metric-label">Truth as a Trajectory</span>
       </article>
       <article class="hero-metric">
-        <span class="hero-metric-value">Research + Industry</span>
-        <span class="hero-metric-label">From experiments to practical systems</span>
+        <span class="hero-metric-value">PhD @ Adelaide</span>
+        <span class="hero-metric-label">Supported by a Naval Group scholarship</span>
       </article>
     </div>
   </div>
@@ -62,8 +63,8 @@ social: true # includes social icons at the bottom of the page
 
     <div class="signal-stack">
       <article class="signal-card signal-card-strong">
-        <span class="signal-label">Current focus</span>
-        <p>Computer vision, temporal video grounding, and interpretable machine learning systems built with strong evaluation.</p>
+        <span class="signal-label">PhD research</span>
+        <p>PhD candidate at the University of Adelaide, supported by a Naval Group scholarship, focused on computer vision and interpretable machine learning with strong evaluation.</p>
       </article>
 
       <article class="signal-card">

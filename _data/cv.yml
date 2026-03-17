@@ -5,6 +5,8 @@
       value: Ignacio Alejandro Meza De la Jara
     - name: Location
       value: Adelaide, Australia
+    - name: Background
+      value: Chilean researcher 🇨🇱
     - name: Email
       value: imezadelajara@gmail.com
     - name: Languages
@@ -18,11 +20,12 @@
       year: Completed
       description:
         - Computer scientist with a strong interest in machine learning and research.
-    - title: PhD Studies in Computer Vision and Mathematics
-      institution: Adelaide, Australia
+    - title: PhD Candidate in Computer Vision and Mathematics
+      institution: University of Adelaide
       year: Current
       description:
         - Focused on computer vision, machine learning, and mathematical foundations.
+        - Supported by a Naval Group scholarship.
 
 - title: Experience
   type: time_table

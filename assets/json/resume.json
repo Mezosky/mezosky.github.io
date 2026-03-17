@@ -1,10 +1,10 @@
 {
   "basics": {
     "name": "Ignacio Alejandro Meza De la Jara",
-    "label": "Data Scientist and Machine Learning Engineer",
+    "label": "PhD Candidate and Machine Learning Researcher",
     "email": "imezadelajara@gmail.com",
     "url": "https://mezosky.github.io/",
-    "summary": "Computer scientist from the University of Chile with interests in machine learning, computer vision, neural networks, and teaching.",
+    "summary": "Chilean computer scientist from the University of Chile and PhD candidate at the University of Adelaide, supported by a Naval Group scholarship, with interests in machine learning, computer vision, neural networks, and teaching.",
     "location": {
       "city": "Adelaide",
       "countryCode": "AU",
@@ -51,13 +51,19 @@
       "studyType": "Computer Scientist"
     },
     {
-      "institution": "PhD studies in Australia",
+      "institution": "University of Adelaide",
       "location": "Adelaide, Australia",
       "area": "Computer Vision and Mathematics",
       "studyType": "PhD"
     }
   ],
-  "awards": [],
+  "awards": [
+    {
+      "title": "Naval Group Scholarship",
+      "awarder": "Naval Group",
+      "summary": "Scholarship support for PhD studies at the University of Adelaide."
+    }
+  ],
   "certificates": [],
   "publications": [
     {
