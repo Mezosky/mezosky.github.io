@@ -7,3 +7,10 @@
 
 "Vision":
   color: "#009f36"
+
+"NeurIPS":
+  url: https://neurips.cc/
+  color: "#7c3aed"
+
+"ACLF":
+  color: "#0f766e"

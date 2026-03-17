@@ -61,6 +61,14 @@ social: true # includes social icons at the bottom of the page
           <p>Part-time professor for <a href="https://github.com/MDS7202/MDS7202">MDS7202</a> at the University of Chile.</p>
         </article>
       </div>
+
+      <article class="signal-card">
+        <span class="signal-label">Recent papers</span>
+        <p>
+          Featured work includes <a href="{{ '/publications/' | relative_url }}">Mysteries of the Deep</a> at NeurIPS 2025 and
+          <a href="{{ '/publications/' | relative_url }}">Truth as a Trajectory</a>, accepted to Findings of ACL 2026.
+        </p>
+      </article>
     </div>
 
   </aside>
