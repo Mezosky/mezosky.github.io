@@ -14,19 +14,34 @@ social: true # includes social icons at the bottom of the page
 
 <section class="hero-grid reveal-stagger">
   <div class="hero-copy">
-    <span class="eyebrow">Adelaide, Australia / Research / Engineering / Teaching</span>
-    <h2 class="hero-heading">Building machine learning systems with research depth and professional discipline.</h2>
+    <span class="eyebrow">Adelaide, Australia</span>
+    <p class="hero-overline">Machine Learning Research / Data Science / Teaching</p>
+    <h2 class="hero-heading">Machine learning research with clarity, rigor, and product-level discipline.</h2>
     <p class="hero-lead">
       I am Ignacio Meza, a computer scientist from the University of Chile working across machine learning, computer vision,
       and neural networks.
     </p>
     <p class="hero-lead hero-lead-secondary">
-      My work spans academic research, industry data science, and university teaching, so I care as much about clear
-      communication, reproducible workflows, and careful validation as I do about useful results.
+      My work spans academic research, industry data science, and university teaching, with an emphasis on reproducible
+      experiments, careful evaluation, readable systems, and communication that stays clear from idea to delivery.
     </p>
     <div class="hero-actions">
       <a class="hero-button hero-button-primary" href="{{ '/publications/' | relative_url }}">View publications</a>
       <a class="hero-button hero-button-secondary" href="{{ '/cv/' | relative_url }}">Open CV</a>
+    </div>
+    <div class="hero-metrics">
+      <article class="hero-metric">
+        <span class="hero-metric-value">NeurIPS 2025</span>
+        <span class="hero-metric-label">Mysteries of the Deep</span>
+      </article>
+      <article class="hero-metric">
+        <span class="hero-metric-value">ACL Findings 2026</span>
+        <span class="hero-metric-label">Truth as a Trajectory</span>
+      </article>
+      <article class="hero-metric">
+        <span class="hero-metric-value">Research + Industry</span>
+        <span class="hero-metric-label">From experiments to practical systems</span>
+      </article>
     </div>
   </div>
 
@@ -48,30 +63,33 @@ social: true # includes social icons at the bottom of the page
     <div class="signal-stack">
       <article class="signal-card signal-card-strong">
         <span class="signal-label">Current focus</span>
-        <p>Computer vision, temporal video grounding, and reliable machine learning workflows from experiment to delivery.</p>
+        <p>Computer vision, temporal video grounding, and interpretable machine learning systems built with strong evaluation.</p>
       </article>
 
-      <div class="signal-mini-grid">
-        <article class="signal-card">
-          <span class="signal-label">Industry</span>
-          <p>Applied data science experience at <a href="https://www.bci.cl/">BCI</a>.</p>
-        </article>
-        <article class="signal-card">
-          <span class="signal-label">Teaching</span>
-          <p>Part-time professor for <a href="https://github.com/MDS7202/MDS7202">MDS7202</a> at the University of Chile.</p>
-        </article>
-      </div>
+      <article class="signal-card">
+        <span class="signal-label">Work style</span>
+        <p>Reproducible workflows, careful validation, maintainable code, and decisions that stay documented and traceable.</p>
+      </article>
 
       <article class="signal-card">
-        <span class="signal-label">Recent papers</span>
+        <span class="signal-label">Teaching and industry</span>
         <p>
-          Featured work includes <a href="{{ '/publications/' | relative_url }}">Mysteries of the Deep</a> at NeurIPS 2025 and
-          <a href="{{ '/publications/' | relative_url }}">Truth as a Trajectory</a>, accepted to Findings of ACL 2026.
+          Part-time professor for <a href="https://github.com/MDS7202/MDS7202">MDS7202</a> at the University of Chile, with
+          applied data science experience at <a href="https://www.bci.cl/">BCI</a>.
         </p>
       </article>
     </div>
 
   </aside>
+</section>
+
+<section class="feature-banner reveal-on-scroll" aria-label="Core strengths">
+  <div class="feature-banner-track">
+    <span>Research depth</span>
+    <span>Reliable systems</span>
+    <span>Clear communication</span>
+    <span>Practical teaching</span>
+  </div>
 </section>
 
 <section class="capability-grid reveal-stagger">
@@ -80,7 +98,7 @@ social: true # includes social icons at the bottom of the page
       <i class="fa-solid fa-microscope"></i>
     </div>
     <h3>Research</h3>
-    <p>I explore computer vision and machine learning problems with a strong emphasis on useful baselines, careful evaluation, and honest reporting.</p>
+    <p>I explore machine learning and computer vision problems with an emphasis on useful baselines, solid evidence, and honest reporting.</p>
   </article>
 
   <article class="capability-card">
@@ -88,7 +106,7 @@ social: true # includes social icons at the bottom of the page
       <i class="fa-solid fa-laptop-code"></i>
     </div>
     <h3>Engineering</h3>
-    <p>I like workflows that are reproducible, readable, and maintainable, with clear experiments, documented assumptions, and clean implementation choices.</p>
+    <p>I build workflows that are reproducible, readable, and maintainable, with clean implementation choices and traceable experiments.</p>
   </article>
 
   <article class="capability-card">
@@ -96,7 +114,7 @@ social: true # includes social icons at the bottom of the page
       <i class="fa-solid fa-chalkboard-user"></i>
     </div>
     <h3>Teaching</h3>
-    <p>I enjoy turning difficult ideas into approachable explanations, whether through classes, notes, code, or research communication.</p>
+    <p>I enjoy turning difficult ideas into practical explanations through courses, notes, examples, and research communication.</p>
   </article>
 </section>
 
