@@ -2,22 +2,24 @@
   <!-- Nav Bar -->
   <nav id="navbar" class="navbar navbar-light navbar-expand-sm {% if site.navbar_fixed %}fixed-top{% else %}sticky-top{% endif %}" role="navigation">
     <div class="container">
-      <a class="navbar-brand title font-weight-lighter" href="{{ site.baseurl }}/">
-        {% if site.title == 'blank' %}
-          {% if site.first_name %}
-            <span class="font-weight-bold">
-              {{- site.first_name -}}
-            </span>
-          {% endif %}
-          {% if site.middle_name %}
-            {{- site.middle_name -}}
-          {% endif %}
-          {% if site.last_name %}
-            {{- site.last_name -}}
-          {% endif %}
-        {% else %}
-          {{- site.title -}}
-        {% endif %}
+      {% if site.title == 'blank' %}
+        {% capture brand_full %}
+          {% if site.first_name %}{{ site.first_name }}{% endif %}
+          {% if site.middle_name %} {{ site.middle_name }}{% endif %}
+          {% if site.last_name %} {{ site.last_name }}{% endif %}
+        {% endcapture %}
+      {% else %}
+        {% assign brand_full = site.title %}
+      {% endif %}
+      {% assign brand_full = brand_full | strip %}
+      {% assign brand_parts = brand_full | split: ' ' %}
+      {% assign brand_tail = brand_parts | last %}
+      {% assign brand_initial_source = site.first_name | default: brand_full %}
+      {% assign brand_initial = brand_initial_source | slice: 0, 1 %}
+      {% capture brand_compact %}{{ brand_initial }}. {{ brand_tail }}{% endcapture %}
+      <a class="navbar-brand title font-weight-lighter navbar-brand-dynamic" href="{{ site.baseurl }}/" aria-label="{{ brand_full }}">
+        <span class="navbar-brand-full" aria-hidden="true">{{- brand_full -}}</span>
+        <span class="navbar-brand-compact" aria-hidden="true">{{- brand_compact | strip -}}</span>
       </a>
       <!-- Navbar Toggle -->
       <button

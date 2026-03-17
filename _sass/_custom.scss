@@ -80,14 +80,33 @@ table.table a {
   backdrop-filter: blur(24px) saturate(150%);
   background-color: rgba(247, 249, 252, 0.72);
   border-bottom: 1px solid var(--brand-border);
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 html[data-theme="dark"] .navbar {
   background-color: rgba(8, 12, 22, 0.72);
 }
 
+.navbar.navbar-condensed {
+  background-color: rgba(247, 249, 252, 0.88);
+  box-shadow: 0 16px 42px rgba(15, 23, 42, 0.08);
+}
+
+html[data-theme="dark"] .navbar.navbar-condensed {
+  background-color: rgba(8, 12, 22, 0.88);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.26);
+}
+
 .navbar .container {
   min-height: 4.35rem;
+  transition: min-height 0.34s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.navbar.navbar-condensed .container {
+  min-height: 3.7rem;
 }
 
 .navbar .navbar-brand {
@@ -95,6 +114,52 @@ html[data-theme="dark"] .navbar {
   font-size: 1.02rem;
   font-weight: 700;
   letter-spacing: -0.04em;
+  position: relative;
+  display: inline-grid;
+  align-items: center;
+  min-height: 1.5rem;
+  overflow: hidden;
+  white-space: nowrap;
+  width: var(--brand-full-width, auto);
+  transition:
+    width 0.34s cubic-bezier(0.2, 0.8, 0.2, 1),
+    color 0.24s ease;
+}
+
+.navbar.navbar-condensed .navbar-brand {
+  width: var(--brand-compact-width, auto);
+}
+
+.navbar .navbar-brand .navbar-brand-full,
+.navbar .navbar-brand .navbar-brand-compact {
+  grid-area: 1 / 1;
+  display: inline-block;
+  white-space: nowrap;
+  transform-origin: left center;
+  transition:
+    opacity 0.28s ease,
+    transform 0.34s cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 0.28s ease,
+    letter-spacing 0.28s ease;
+}
+
+.navbar .navbar-brand .navbar-brand-compact {
+  opacity: 0;
+  filter: blur(6px);
+  letter-spacing: -0.02em;
+  transform: translateY(0.26rem) scale(0.97);
+}
+
+.navbar.navbar-condensed .navbar-brand .navbar-brand-full {
+  opacity: 0;
+  filter: blur(6px);
+  transform: translateY(-0.26rem) scale(0.97);
+}
+
+.navbar.navbar-condensed .navbar-brand .navbar-brand-compact {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0) scale(1);
 }
 
 .navbar .nav-link,
@@ -986,6 +1051,11 @@ html[data-theme="dark"] .contact-icons a {
   .capability-card,
   .experience-card,
   .contact-icons a,
+  .navbar,
+  .navbar .container,
+  .navbar .navbar-brand,
+  .navbar .navbar-brand .navbar-brand-full,
+  .navbar .navbar-brand .navbar-brand-compact,
   .navbar .nav-link::after,
   #search-toggle .nav-link::after,
   .navbar .dropdown-menu,

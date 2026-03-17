@@ -56,6 +56,66 @@ $(document).ready(function () {
   window.requestAnimationFrame(showPageContent);
   window.addEventListener("pageshow", showPageContent);
 
+  const navbar = document.getElementById("navbar");
+  const dynamicBrand = document.querySelector(".navbar-brand-dynamic");
+  const dynamicBrandFull = dynamicBrand?.querySelector(".navbar-brand-full");
+  const dynamicBrandCompact = dynamicBrand?.querySelector(".navbar-brand-compact");
+  const condensedNavbarThreshold = 72;
+
+  const syncNavbarCondensedState = () => {
+    if (!navbar) {
+      return;
+    }
+
+    navbar.classList.toggle("navbar-condensed", window.scrollY > condensedNavbarThreshold);
+  };
+
+  const syncNavbarBrandWidths = () => {
+    if (!dynamicBrand || !dynamicBrandFull || !dynamicBrandCompact) {
+      return;
+    }
+
+    const fullWidth = Math.ceil(dynamicBrandFull.getBoundingClientRect().width);
+    const compactWidth = Math.ceil(dynamicBrandCompact.getBoundingClientRect().width);
+
+    if (fullWidth > 0) {
+      dynamicBrand.style.setProperty("--brand-full-width", `${fullWidth}px`);
+    }
+
+    if (compactWidth > 0) {
+      dynamicBrand.style.setProperty("--brand-compact-width", `${compactWidth}px`);
+    }
+  };
+
+  let navbarScrollTicking = false;
+
+  const handleNavbarScroll = () => {
+    if (navbarScrollTicking) {
+      return;
+    }
+
+    navbarScrollTicking = true;
+    window.requestAnimationFrame(() => {
+      syncNavbarCondensedState();
+      navbarScrollTicking = false;
+    });
+  };
+
+  syncNavbarCondensedState();
+  syncNavbarBrandWidths();
+
+  if (navbar) {
+    window.addEventListener("scroll", handleNavbarScroll, { passive: true });
+  }
+
+  if (dynamicBrand) {
+    window.addEventListener("resize", syncNavbarBrandWidths);
+
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(syncNavbarBrandWidths).catch(() => {});
+    }
+  }
+
   document.addEventListener("click", (event) => {
     if (prefersReducedMotion || event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) {
       return;
