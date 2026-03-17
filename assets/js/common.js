@@ -58,8 +58,8 @@ $(document).ready(function () {
 
   const navbar = document.getElementById("navbar");
   const dynamicBrand = document.querySelector(".navbar-brand-dynamic");
-  const dynamicBrandFull = dynamicBrand?.querySelector(".navbar-brand-full");
-  const dynamicBrandCompact = dynamicBrand?.querySelector(".navbar-brand-compact");
+  const dynamicBrandFull = dynamicBrand ? dynamicBrand.querySelector(".navbar-brand-full") : null;
+  const dynamicBrandCompact = dynamicBrand ? dynamicBrand.querySelector(".navbar-brand-compact") : null;
   const condensedNavbarThreshold = 72;
 
   const syncNavbarCondensedState = () => {
@@ -111,7 +111,7 @@ $(document).ready(function () {
   if (dynamicBrand) {
     window.addEventListener("resize", syncNavbarBrandWidths);
 
-    if (document.fonts?.ready) {
+    if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(syncNavbarBrandWidths).catch(() => {});
     }
   }
