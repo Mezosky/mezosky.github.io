@@ -7,9 +7,29 @@ tags: [mlops, airflow, teaching, machine-learning]
 categories: [machine learning, teaching]
 author: Ignacio Meza
 slug: mlops-pipelines-productivos
+thumbnail: /assets/img/blog/mlops-pipelines/hero.svg
 toc:
   beginning: true
 ---
+
+<section class="blog-note-hero">
+  <div class="blog-note-hero-copy">
+    <span class="blog-note-kicker">Notion Note</span>
+    <p class="blog-note-summary">
+      Este post mantiene el mismo espiritu del apunte original: una introduccion a pipelines productivos, DAGs, branching,
+      triggers, XCom, variables y buenas practicas para definir tareas en Airflow.
+    </p>
+    <ul class="blog-note-points">
+      <li>Que es un pipeline en machine learning y por que importa en produccion.</li>
+      <li>Como pensar un DAG, la ejecucion de dependencias y la paralelizacion.</li>
+      <li>Ejemplos concretos con branching, <code>trigger_rule</code>, <code>XCom</code> y idempotencia.</li>
+    </ul>
+    <a class="blog-note-source" href="https://www.notion.so/92c01b81cb97405288394947dcfdfeb6">Open original note</a>
+  </div>
+  <div class="blog-note-hero-media">
+    <img src="{{ '/assets/img/blog/mlops-pipelines/hero.svg' | relative_url }}" alt="Illustration of an ML pipeline with orchestrated steps">
+  </div>
+</section>
 
 > Todos los archivos relacionados de codigo a este documento se encuentran en el documento original de Notion.
 
@@ -28,6 +48,11 @@ En general, un simil que podemos hacer con los pipelines productivos es con un d
 ## Representacion de los Pipelines
 
 Debido a que vamos a tener que dirigir un gran numero de procesos, es ideal buscar una representacion que nos permita visualizar la estructura de nuestros pipelines. Una forma simple de exponer cada paso es a traves de una representacion de grafos. La representacion tipica para estos grafos es un DAG (`Directed Acyclic Graph`). En un DAG, cada tarea se representa como un nodo, mientras que las flechas indican las direcciones de las dependencias entre las tareas. Esta visualizacion facilita la comprension de la secuencia y las interdependencias de cada paso en el pipeline, asegurando una ejecucion ordenada y eficiente.
+
+<figure class="blog-note-figure">
+  <img src="{{ '/assets/img/blog/mlops-pipelines/dag.svg' | relative_url }}" alt="Diagram of a directed acyclic graph for a machine learning workflow">
+  <figcaption>Una misma idea del apunte original, pero guardada localmente para que el post mantenga sus imagenes dentro del repositorio.</figcaption>
+</figure>
 
 Es importante notar que el nombre DAG proviene de las siglas en ingles de `Directed Acyclic Graph`, lo cual indica que los grafos que vamos a utilizar son aciclicos, es decir, que no contienen ciclos ni loops. Esto es crucial porque asegura que no se generen bucles infinitos en los procesos. Por lo tanto, al definir esta secuencia de tareas, es fundamental asegurarnos de que no se creen loops en sus procesos, garantizando asi una ejecucion fluida y eficiente del pipeline.
 
@@ -56,6 +81,11 @@ Airflow tambien ofrece la capacidad de paralelizacion, permitiendo la ejecucion 
 Como se menciono al inicio de este documento, los pipelines productivos pueden ser representados mediante DAGs (`Directed Acyclic Graphs`). Lo interesante es que Airflow nos permite definir estos pipelines utilizando el mismo formato de manera muy **flexible**. Esto se logra mediante la definicion de nuestros pipelines en archivos de Python, donde se especifican las tareas que deseamos ejecutar a traves de un **calendarizador**. El calendarizador se encargara de ejecutar las tareas en el momento adecuado y gestionar las dependencias existentes entre los nodos que hemos definido.
 
 ## Branching
+
+<figure class="blog-note-figure">
+  <img src="{{ '/assets/img/blog/mlops-pipelines/branching.svg' | relative_url }}" alt="Branching DAG showing two paths and a trigger rule">
+  <figcaption>Branching y `trigger_rule` permiten manejar caminos condicionales sin perder claridad en el flujo.</figcaption>
+</figure>
 
 ```python
 start = DummyOperator(task_id='start', dag=dag)

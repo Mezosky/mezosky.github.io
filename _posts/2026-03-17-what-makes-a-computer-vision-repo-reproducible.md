@@ -7,9 +7,29 @@ tags: [computer-vision, reproducibility, yolo, ml-systems]
 categories: [computer vision, engineering]
 author: Ignacio Meza
 slug: naval-things-project-highlights
+thumbnail: /assets/img/blog/naval-things/hero.svg
 toc:
   beginning: true
 ---
+
+<section class="blog-note-hero">
+  <div class="blog-note-hero-copy">
+    <span class="blog-note-kicker">Notion Note</span>
+    <p class="blog-note-summary">
+      Este post sigue el resumen original del proyecto: un workflow reproducible para crack detection con foco en data hygiene,
+      validacion honesta, reportes, exportacion y una interfaz simple para inference.
+    </p>
+    <ul class="blog-note-points">
+      <li>Pipeline reproducible con configuraciones y scripts de entrada claros.</li>
+      <li>Auditoria de etiquetas y limpieza de dataset antes de entrenar.</li>
+      <li>Reporte visual, exportacion y una app de Gradio dentro del mismo repo.</li>
+    </ul>
+    <a class="blog-note-source" href="https://www.notion.so/3267606034428136b143f00d1c8d47ed">Open original note</a>
+  </div>
+  <div class="blog-note-hero-media">
+    <img src="{{ '/assets/img/blog/naval-things/hero.svg' | relative_url }}" alt="Illustration of a crack detection workflow from dataset preparation to demo">
+  </div>
+</section>
 
 ## Project Overview
 
@@ -51,6 +71,11 @@ Latest available `cracker_yolo26m_baseline` training log snapshot from `results.
 
 The original dataset is usable but noisy. Audit results showed the training data was heavily negative-biased and contained many tiny boxes plus some low-information positive tiles.
 
+<figure class="blog-note-figure">
+  <img src="{{ '/assets/img/blog/naval-things/dataset-audit.svg' | relative_url }}" alt="Visualization comparing the original and cleaned crack detection datasets">
+  <figcaption>The same audit story in a shared visual language: fewer negatives, fewer tiny boxes, and no tiny border fragments in the cleaned split.</figcaption>
+</figure>
+
 | Dataset      | Images | Positive Images | Negative Images | Boxes | Highlights                                                                    |
 | ------------ | -----: | --------------: | --------------: | ----: | ----------------------------------------------------------------------------- |
 | `data`       | 13,470 |           2,995 |          10,475 | 9,350 | Negative-heavy, 37.4% tiny boxes, 4.4% tiny border boxes                      |
@@ -70,6 +95,11 @@ The original dataset is usable but noisy. Audit results showed the training data
 - Hugging Face model upload script.
 - Hugging Face Space deployment helper.
 - W&B logging for metrics, plots, checkpoints, and artifacts.
+
+<figure class="blog-note-figure">
+  <img src="{{ '/assets/img/blog/naval-things/product-stack.svg' | relative_url }}" alt="Diagram showing the project flow from training to validation, export, and Gradio">
+  <figcaption>A single repo can cover more than training: validation, export, reporting, and an interactive demo make the workflow easier to inspect and share.</figcaption>
+</figure>
 
 ## Recommended Next Commands
 
