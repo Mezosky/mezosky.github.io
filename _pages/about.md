@@ -96,7 +96,7 @@ social: true # includes social icons at the bottom of the page
   <div class="section-heading">
     <span class="section-kicker">Featured Papers</span>
     <h2>Latest papers, fast to open and easy to cite</h2>
-    <p>These two papers are linked directly here with hosted PDFs, arXiv versions, and one-click BibTeX downloads.</p>
+    <p>These papers are linked directly here with hosted PDFs, arXiv versions, and one-click BibTeX downloads.</p>
   </div>
 
   <div class="paper-feature-grid">
@@ -138,6 +138,27 @@ social: true # includes social icons at the bottom of the page
           <a class="paper-action" href="https://arxiv.org/abs/2603.01326">arXiv</a>
           <a class="paper-action" href="{{ '/assets/bibliography/2026_ACL_Truth_as_a_Trajectory.bib' | relative_url }}" download>Cite</a>
           <a class="paper-action" href="{{ '/publications/#De_la_Jara_2026_ACL_Findings' | relative_url }}">Details</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="paper-feature-card">
+      <div class="paper-feature-media">
+        <img
+          src="{{ '/assets/img/publication_preview/2023_ICCV_De_la_Jara.png' | relative_url }}"
+          alt="Preview image for the ICCV Workshop paper on video encoders and temporal video grounding"
+        >
+      </div>
+
+      <div class="paper-feature-copy">
+        <span class="paper-pill">ICCV Workshop 2023</span>
+        <h3>An Empirical Study of Video Encoders</h3>
+        <p>Empirical analysis of how different video encoders affect temporal video grounding performance across major benchmarks, with attention to representation quality and feature complementarity.</p>
+        <div class="paper-feature-actions">
+          <a class="paper-action paper-action-primary" href="{{ '/assets/pdf/2023_ICCVW_Video_Encoders_on_Temporal_Video_Grounding.pdf' | relative_url }}">PDF</a>
+          <a class="paper-action" href="https://arxiv.org/abs/2510.17007">arXiv</a>
+          <a class="paper-action" href="{{ '/assets/bibliography/2023_ICCVW_Video_Encoders_on_Temporal_Video_Grounding.bib' | relative_url }}" download>Cite</a>
+          <a class="paper-action" href="{{ '/publications/#De_la_Jara_2023_ICCV' | relative_url }}">Details</a>
         </div>
       </div>
     </article>

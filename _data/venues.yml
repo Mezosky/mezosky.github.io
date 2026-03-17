@@ -8,6 +8,10 @@
 "Vision":
   color: "#009f36"
 
+"ICCVW":
+  url: https://openaccess.thecvf.com/ICCV2023_workshops/CLVL
+  color: "#b45309"
+
 "NeurIPS":
   url: https://neurips.cc/
   color: "#7c3aed"
