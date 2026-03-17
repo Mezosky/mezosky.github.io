@@ -39,9 +39,7 @@
 - `assets/js/common.js`
   UI behavior and reveal animations.
 - `assets/img/profile/ignacio-meza-portrait.jpg`
-  Published homepage portrait.
-- `assets/img/profile/ignacio-meza-original.jpg`
-  Original source photo kept for future cropping or edits.
+  Canonical homepage portrait stored in the dedicated profile image folder.
 
 ## Repo Docs And Workflow
 
