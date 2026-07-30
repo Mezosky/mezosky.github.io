@@ -56,6 +56,33 @@ python3 tools/ascii_art/build_field.py \
 `--preview` is the fast way to iterate: it renders the layers at the site's colours
 so you can look at the result before rebuilding Jekyll.
 
+## The fields this site ships
+
+| Data file                      | Shown on           | Source panel                     |
+| ------------------------------ | ------------------ | -------------------------------- |
+| `_data/ascii/bosch_field.yml`  | homepage, wide     | Bosch, right panel (Hell)        |
+| `_data/ascii/eden_field.yml`   | publications, wide | Bosch, left panel (Eden)         |
+| `_data/ascii/garden_field.yml` | notes, wide        | Bosch, central panel             |
+| `_data/ascii/goya_field.yml`   | every page, phones | Goya, _Saturn Devouring His Son_ |
+
+Landscape fields are chosen per page with `ascii_field:` in the page's front
+matter. The portrait field is chosen once for the whole site with
+`ascii_field_compact:` in `_config.yml`, because a portrait painting suits a
+portrait viewport; `_sass/_atelier-hero.scss` swaps the two by media query.
+
+## Bright paintings need `--invert`
+
+The default mapping inks the light end: on a dark painting the lit subjects
+become characters and the dark ground stays empty, which is what the page wants.
+
+A bright painting inverts that relationship, and rendering it unchanged fills the
+sky with glyphs while the forms vanish. `--invert` swaps which end becomes ink,
+so the sky empties and the shapes read. The Bosch wings use it; the Hell panel
+and the Goya do not.
+
+Watch for painted frames at a panel's edge: inverted, they become a solid bar of
+`@`. Crop inside them.
+
 ## Using a different painting
 
 Any image Pillow can read works. Only three knobs usually matter:

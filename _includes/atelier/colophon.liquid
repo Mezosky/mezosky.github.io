@@ -9,16 +9,30 @@
 {% endif %}
 {% assign source = site.data.ascii[field_key].source %}
 
+{% assign compact_key = include.compact %}
+{% assign compact_source = null %}
+{% if compact_key and compact_key != field_key %}
+  {% assign compact_source = site.data.ascii[compact_key].source %}
+{% endif %}
+
 {% if source.title %}
   <p class="atelier-colophon">
     <span class="atelier-colophon__label">Backdrop</span>
-    Original layered ASCII composition, generated from
+    Original layered ASCII compositions, generated from
     {% if source.url %}
       <a href="{{ source.url }}">{{ source.title }}</a>
     {% else %}
       {{ source.title }}
     {% endif %}
+    {%- if compact_source.title -%}
+      , and at phone sizes from
+      {% if compact_source.url %}
+        <a href="{{ compact_source.url }}">{{ compact_source.title }}</a>
+      {% else %}
+        {{ compact_source.title }}
+      {% endif %}
+    {%- endif -%}
     {%- if source.license %}. {{ source.license }}{% endif -%}
-    . No painting is reproduced on the page.
+    . No painting is reproduced at full strength on the page.
   </p>
 {% endif %}

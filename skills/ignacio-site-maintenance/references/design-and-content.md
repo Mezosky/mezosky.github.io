@@ -38,6 +38,10 @@ academic without looking like a university profile. It is not a corporate templa
 - Behind the characters sits a plate of the source painting at very low opacity,
   exported from the identical crop so the two stay in register. If you regenerate
   one, regenerate both, or the photograph and the text drift apart.
+- Each page picks its own landscape field via `ascii_field:` in the front matter;
+  phones get one portrait field site-wide via `ascii_field_compact:` in the config.
+  Reading pages run the backdrop quieter than the hero and clear the whole content
+  column, because their text runs much wider than the hero copy.
 - The pointer parts the rows nearest it (a derivative-of-Gaussian shear). Keep it
   small; it should read as the field breathing, not as an animation.
 - Use motion sparingly: reveal transitions, a few pixels of parallax, small hover

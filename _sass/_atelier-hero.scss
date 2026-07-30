@@ -123,6 +123,12 @@ body.atelier-home .container[role="main"] {
   opacity: calc(1 - var(--ascii-scrolled, 0) * 0.55);
 }
 
+/* A portrait painting for a portrait viewport. Only one variant is ever in play;
+ * the other is display:none, so nothing is painted twice. */
+.ascii-field--compact {
+  display: none;
+}
+
 /**
  * The plate and every character layer share one geometry: the same font-size
  * basis, the same box, the same anchor. That is what keeps the photograph and
@@ -252,14 +258,25 @@ body:not(.atelier-home) .ascii-field {
     max-width: none;
   }
 
-  /* Crop into the composition instead of shrinking it to illegible specks, and
-   * drop the faintest layer so the copy keeps its contrast. */
+  /* Swap the landscape composition for the portrait one. */
+  .ascii-field--wide {
+    display: none;
+  }
+
+  .ascii-field--compact {
+    display: block;
+  }
+
+  /* Centred and full-bleed rather than cropped: the portrait grid already
+   * matches the shape of the screen, so it needs no cropping to fit. */
   .ascii-field__plate,
   .ascii-field__layer {
-    --ascii-span: 210vw;
+    --ascii-span: 104vw;
 
-    right: -28vw;
+    right: 0;
+    left: 0;
     bottom: -1vh;
+    margin-inline: auto;
     will-change: auto;
   }
 
@@ -272,7 +289,7 @@ body:not(.atelier-home) .ascii-field {
   }
 
   .ascii-field__layer--atmosphere {
-    display: none;
+    opacity: 0.08;
   }
 
   .ascii-field__layer--architecture {
@@ -283,12 +300,12 @@ body:not(.atelier-home) .ascii-field {
     opacity: 0.3;
   }
 
-  /* Fades downwards instead of sideways, and only clears the lower third: on a
-   * narrow screen the copy runs the full width, so the artwork has to stay below
-   * it rather than beside it. */
-  .ascii-field {
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0 52%, rgba(0, 0, 0, 0.28) 66%, #000 84%);
-    mask-image: linear-gradient(to bottom, transparent 0 52%, rgba(0, 0, 0, 0.28) 66%, #000 84%);
+  /* Fades downwards instead of sideways: on a narrow screen the copy runs the
+   * full width, so the artwork has to sit under it rather than beside it. */
+  .ascii-field,
+  body:not(.atelier-home) .ascii-field {
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0 14%, rgba(0, 0, 0, 0.3) 34%, #000 64%);
+    mask-image: linear-gradient(to bottom, transparent 0 14%, rgba(0, 0, 0, 0.3) 34%, #000 64%);
   }
 }
 

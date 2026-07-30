@@ -1,11 +1,16 @@
 {% comment %}
-  The ASCII backdrop. Reads a generated field from _data/ascii/ and stacks its
+  One ASCII backdrop. Reads a generated field from _data/ascii/ and stacks its
   layers back to front over a faint plate of the source painting, so the reader
-  can make out what the characters are describing. Depth, panning and the pointer
-  ripple are handled in CSS/JS.
+  can make out what the characters are describing.
 
   Params:
-    field  key under site.data.ascii (default: bosch_field)
+    field    key under site.data.ascii (default: bosch_field)
+    variant  "wide" (default) or "compact"
+
+  Called once per variant: a landscape composition for wide viewports and a
+  portrait one for phones, swapped by media query in _sass/_atelier-hero.scss.
+  Only the wide variant carries data-ascii-field, because that is what the motion
+  script drives and the script is inert at phone sizes anyway.
 
   Each row is its own element rather than one run of text: the pointer effect
   displaces rows individually, and explicit row heights keep the layers in
@@ -27,10 +32,18 @@
   {% assign field_key = 'bosch_field' %}
 {% endif %}
 {% assign field = site.data.ascii[field_key] %}
+{% assign variant = include.variant | default: 'wide' %}
 
 {% if field %}
   {% capture ascii_metrics %}--ascii-columns: {{ field.columns }}; --ascii-rows: {{ field.rows }}{% endcapture %}
-  <div class="ascii-field" data-ascii-field aria-hidden="true" role="presentation">
+  <div
+    class="ascii-field ascii-field--{{ variant }}"
+    {% if variant == 'wide' %}
+      data-ascii-field
+    {% endif %}
+    aria-hidden="true"
+    role="presentation"
+  >
     {% if field.plate.url %}
       <img
         class="ascii-field__plate"

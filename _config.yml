@@ -4,6 +4,9 @@
 
 title: Ignacio M. De la Jara # the website title (if blank, full name will be used instead)
 brand_monogram: IMD # condensed wordmark shown in the navbar once the page is scrolled
+# Backdrop used at phone sizes on every page; the landscape fields are set per
+# page. A portrait painting suits a portrait viewport. Key in _data/ascii/.
+ascii_field_compact: goya_field
 first_name: Ignacio
 middle_name: Alejandro
 last_name: M. De la Jara
