@@ -30,11 +30,18 @@
           <img class="preview z-depth-1 rounded" src="{{ entry.preview }}">
         {% else %}
           {% assign entry_path = entry.preview | prepend: '/assets/img/publication_preview/' %}
+          {% comment %}
+            `sizes` mirrors the caps in .atelier-publications .preview -- 6.5rem, and
+            5rem below 47.9em. Declaring those rather than a round 200px lets the
+            browser pick the 480w variant instead of the 800w one on a dense phone:
+            still well above device resolution, at half the bytes. It has to sit
+            outside the include tag; Jekyll rejects a comment among its parameters.
+          {% endcomment %}
           {%
             include figure.liquid
             loading="eager"
             path=entry_path
-            sizes = "200px"
+            sizes = "(max-width: 47.9em) 80px, 104px"
             class="preview z-depth-1 rounded"
             zoomable=true
             alt=entry.preview
