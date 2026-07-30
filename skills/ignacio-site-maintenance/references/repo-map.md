@@ -12,6 +12,8 @@
   Global page wrapper and body classes.
 - `_pages/publications.md`
   Publications page.
+- `_pages/profile.md`
+  The About page at /about/, rendered by `_layouts/profile.liquid`.
 - `_pages/cv.md`
   CV page.
 - `_pages/blog.md`

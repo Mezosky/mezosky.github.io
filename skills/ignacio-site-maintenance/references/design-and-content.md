@@ -38,7 +38,10 @@ academic without looking like a university profile. It is not a corporate templa
 - Behind the characters sits a plate of the source painting at very low opacity,
   exported from the identical crop so the two stay in register. If you regenerate
   one, regenerate both, or the photograph and the text drift apart.
-- The homepage lists `ascii_field_alternatives:` and picks one at random per visit.
+- The homepage is hero, Research and Publications only. Notes and About are pages,
+  reached from the navigation, not sections to scroll past.
+- `ascii_field_alternatives:` on a page picks one backdrop at random per visit. It
+  is wired up but unused: the homepage is Bosch, the About page Gericault.
 - Each page picks its own landscape field via `ascii_field:` in the front matter;
   phones get one portrait field site-wide via `ascii_field_compact:` in the config.
   Reading pages run the backdrop quieter than the hero and clear the whole content
