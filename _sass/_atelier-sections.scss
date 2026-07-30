@@ -642,3 +642,223 @@ article > p,
     max-width: 5rem;
   }
 }
+
+/* --- Ornament ------------------------------------------------------------- */
+
+.atelier-ornament {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2rem);
+  margin: clamp(3rem, 8vh, 5rem) 0 0;
+}
+
+.atelier-ornament::before,
+.atelier-ornament::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--atelier-line);
+}
+
+.atelier-ornament__mark {
+  font-size: 0.875rem;
+  line-height: 1;
+  letter-spacing: 0.2em;
+  color: var(--atelier-bronze);
+}
+
+/* --- Publications page: gallery of cards ---------------------------------- */
+/**
+ * The publications page presents the full archive as a card grid, while the
+ * homepage keeps the same entries as a sparse index. Both render from the one
+ * bib template; only the presentation differs, so nothing is duplicated.
+ */
+
+body.publications-page .post-header {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+body.publications-page .post-title {
+  font-size: clamp(1.5rem, 3.4vw, 2.5rem);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+body.publications-page .post-title::after {
+  content: "";
+  display: block;
+  width: 3rem;
+  height: 1px;
+  margin-top: clamp(0.9rem, 2vw, 1.4rem);
+  background: var(--atelier-bronze);
+}
+
+/* The page description is already carried by the lede paragraph. */
+body.publications-page .post-description {
+  display: none;
+}
+
+body.publications-page .atelier-lede {
+  max-width: 42ch;
+}
+
+/* Year marker as a chip rather than a bare label. */
+body.publications-page .atelier-publications h2.bibliography {
+  display: inline-block;
+  margin: clamp(2.5rem, 6vh, 4rem) 0 clamp(1.25rem, 3vh, 2rem);
+  padding: 0.35rem 0.85rem;
+  border: 1px solid var(--atelier-line-strong);
+  border-radius: 2px;
+  color: var(--atelier-ash);
+  letter-spacing: 0.18em;
+}
+
+body.publications-page .atelier-publications h2.bibliography:first-child {
+  margin-top: clamp(1.5rem, 4vh, 2.5rem);
+}
+
+body.publications-page .atelier-publications ol.bibliography {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+  gap: clamp(1rem, 1.6vw, 1.5rem);
+  border-top: none;
+}
+
+body.publications-page .atelier-publications ol.bibliography > li {
+  position: relative;
+  display: flex;
+  /* Extra room at the top for the venue tag, so it sits on its own line above
+     the plate and the title rather than colliding with either. */
+  padding: clamp(2.6rem, 3.4vw, 3.1rem) clamp(1.25rem, 2vw, 1.75rem) clamp(1.25rem, 2vw, 1.75rem);
+  border: 1px solid var(--atelier-line);
+  border-radius: 2px;
+  background: rgba(236, 229, 216, 0.015);
+  transition: border-color 0.25s ease;
+}
+
+body.publications-page .atelier-publications ol.bibliography > li:hover {
+  border-color: var(--atelier-line-strong);
+}
+
+body.publications-page .atelier-publications ol.bibliography > li > .row {
+  flex: 1;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: clamp(0.7rem, 1vw, 0.95rem);
+  align-content: start;
+}
+
+/* The entry column becomes a flex column so the actions sink to the card floor
+ * and every card in a row ends on the same line. */
+body.publications-page .atelier-publications ol.bibliography > li > .row > [class*="col-sm-8"],
+body.publications-page .atelier-publications ol.bibliography > li > .row > [class*="col-sm-10"] {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Bootstrap makes every .col position:relative, which would anchor the tag to
+   the plate column instead of the card. */
+body.publications-page .atelier-publications ol.bibliography > li > .row > .abbr {
+  position: static;
+}
+
+/* Venue tag to the card's top corner, bracketed in the site's notation. */
+body.publications-page .atelier-publications .abbr abbr,
+body.publications-page .atelier-publications .abbr .badge {
+  position: absolute;
+  top: clamp(1.1rem, 1.8vw, 1.5rem);
+  right: clamp(1.25rem, 2vw, 1.75rem);
+  /* Bootstrap's w-100 would stretch the tag across the whole card and strand its
+     text at the left edge. */
+  width: auto !important;
+  margin: 0;
+  padding: 0;
+  border: none;
+  color: var(--atelier-dim);
+}
+
+/* A venue with a colour but no URL renders its label inside a <div>, which is
+   block-level and would stack the brackets above and below it. */
+body.publications-page .atelier-publications .abbr abbr {
+  white-space: nowrap;
+}
+
+body.publications-page .atelier-publications .abbr abbr div,
+body.publications-page .atelier-publications .abbr abbr a {
+  display: inline;
+}
+
+body.publications-page .atelier-publications .abbr abbr::before {
+  content: "[";
+}
+
+body.publications-page .atelier-publications .abbr abbr::after {
+  content: "]";
+}
+
+body.publications-page .atelier-publications .preview {
+  max-width: 4.25rem;
+}
+
+body.publications-page .atelier-publications ol.bibliography li .title {
+  font-weight: 400;
+  font-size: clamp(0.9375rem, 1.1vw, 1.0625rem);
+  line-height: 1.45;
+  margin-bottom: 0.6rem;
+}
+
+/* Mono throughout the card: at this width a serif line beside monospaced
+ * metadata reads as two competing voices. */
+body.publications-page .atelier-publications ol.bibliography li .summary {
+  font-family: var(--atelier-mono);
+  font-size: 0.8125rem;
+  line-height: 1.65;
+  margin-top: 0.8rem;
+}
+
+body.publications-page .atelier-publications ol.bibliography li .links {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--atelier-line);
+}
+
+body.publications-page .atelier-publications ol.bibliography li .links a.btn,
+html[data-theme="dark"] body.publications-page .atelier-publications ol.bibliography li .links a.btn {
+  padding: 0;
+  border: none;
+  border-bottom: 1px solid transparent;
+  color: var(--atelier-ash);
+}
+
+body.publications-page .atelier-publications ol.bibliography li .links a.btn:hover {
+  color: var(--atelier-ivory);
+  border-bottom-color: var(--atelier-bronze);
+}
+
+/* Separators hang off the preceding link, so a wrapped row never opens with a
+   stray rule. */
+body.publications-page .atelier-publications ol.bibliography li .links a.btn:not(:last-child)::after {
+  content: "|";
+  margin-left: 0.7rem;
+  color: var(--atelier-line-strong);
+}
+
+body.publications-page .atelier-publications ol.bibliography li .links {
+  gap: 0.35rem 0.7rem;
+}
+
+/* Panels open inside a narrow card, so they must not push it sideways. */
+body.publications-page .atelier-publications .bibtex.hidden,
+body.publications-page .atelier-publications .abstract.hidden {
+  overflow-x: auto;
+}
+
+@media (max-width: 47.9em) {
+  body.publications-page .atelier-publications ol.bibliography > li > .row {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  body.publications-page .atelier-publications .title {
+    padding-right: 3rem;
+  }
+}

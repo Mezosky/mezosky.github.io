@@ -1,0 +1,8 @@
+{% comment %}
+  A closing mark for a section: one glyph held between two hairlines. Decorative,
+  so it is hidden from assistive tech.
+{% endcomment %}
+
+<div class="atelier-ornament" aria-hidden="true">
+  <span class="atelier-ornament__mark">{{ include.mark | default: '*' }}</span>
+</div>
