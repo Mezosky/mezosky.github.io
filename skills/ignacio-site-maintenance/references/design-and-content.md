@@ -35,10 +35,9 @@ academic without looking like a university profile. It is not a corporate templa
 - The ASCII backdrop is generated from a public-domain painting by
   `tools/ascii_art/build_field.py` and committed to `_data/ascii/`. It must stay
   subtle enough that text contrast is never reduced.
-- The grid is taller than the viewport and pans as the reader scrolls, so each
-  section sits against a different part of the painting. Behind it sits a plate of
-  the source image at very low opacity, exported from the identical crop. If you
-  regenerate one, regenerate both, or the photograph and the text drift apart.
+- Behind the characters sits a plate of the source painting at very low opacity,
+  exported from the identical crop so the two stay in register. If you regenerate
+  one, regenerate both, or the photograph and the text drift apart.
 - The pointer parts the rows nearest it (a derivative-of-Gaussian shear). Keep it
   small; it should read as the field breathing, not as an animation.
 - Use motion sparingly: reveal transitions, a few pixels of parallax, small hover
