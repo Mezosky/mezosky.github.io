@@ -22,6 +22,17 @@ bundle exec jekyll build
 ```
 
 3. If Bundler is not available, say so clearly in the final report.
+4. After changing anything that touches navigation, `[data-page-shell]`, or the body
+   class, check that pages reached by clicking are **visible**, not merely present:
+
+   ```js
+   getComputedStyle(document.querySelector("[data-page-shell]")).opacity; // must be 1
+   ```
+
+   Asserting that an element exists, or that its text reads correctly, or that it can
+   be clicked, proves none of this — all three pass at `opacity: 0`. A soft navigation
+   once copied `page-preload` from the fetched document and left every page after the
+   first one invisible while all of those checks stayed green.
 
 ## Finish
 
