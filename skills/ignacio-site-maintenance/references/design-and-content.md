@@ -96,20 +96,22 @@ condense out of the same material.
 - Add it to headings and short paragraphs. Long blocks past ~900 characters are
   skipped on purpose; scrambling a wall of text reads as broken, not deliberate.
 
-## Entry Sound
+## Audio
 
-`entry_audio.video_id` in the config switches on an optional YouTube embed. It is
-blank by default and renders nothing when unset. Rules that must hold if it is
-turned on:
+Tracks live in `_data/playlist.yml`; the player sits in the top panel and renders
+only when that file has entries. Self-hosted files through a native `<audio>`
+element — no third-party embed, which is what the earlier YouTube version was:
+it served ads and painted outside its container.
 
-- Playback never starts without a click. Browsers block autoplay with sound, and
-  an academic site should not ambush a visitor with music either.
-- The invitation is offered once per session, can be declined with Escape or by
-  clicking outside it, and the control stays reachable afterwards either way.
-- It starts as inert `hidden` markup so a reader without JavaScript, and any
-  crawler, gets the page rather than a gate.
-- A full page load tears the player down, so audio does not survive navigation.
-  The script tries to resume; if the browser refuses, the control starts it again.
+- Playback never starts on its own. `audio.invite` offers a one-time, declinable
+  prompt; the panel control works whichever way that went.
+- Track and position are stashed in sessionStorage, so navigation resumes rather
+  than restarting. If a browser refuses to resume without a fresh gesture, the
+  control is right there.
+- `preload="none"`: nothing is fetched until someone presses play.
+- The invitation starts as inert `hidden` markup, so a reader without JavaScript,
+  and any crawler, gets the page rather than a gate.
+- Give each track a real `title`; it is what the control displays.
 
 ## Protected Content
 
