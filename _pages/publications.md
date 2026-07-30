@@ -13,7 +13,7 @@ nav_order: 2
 
 <!-- _pages/publications.md -->
 
-<p class="atelier-lede">
+<p class="atelier-lede" data-scramble>
   Research papers and academic work by Ignacio M. De la Jara. Grouped by year, newest first.
   <strong>Abs</strong> opens the abstract, <strong>Cite</strong> opens ready-to-copy BibTeX, and
   hosted PDF backups are linked where they exist.

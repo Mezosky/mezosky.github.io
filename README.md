@@ -111,6 +111,12 @@ Structure:
 - `assets/js/ascii-field.js`: pointer and scroll parallax for the backdrop
 - `assets/js/common.js`: small UI interactions and reveal animations
 
+### Resolving text
+
+`data-scramble` on an element makes its text settle out of random characters when
+it scrolls into view, and again on each re-entry. See `assets/js/text-scramble.js`.
+The copy itself stays plain HTML.
+
 ### Entry sound
 
 Optional. Set `entry_audio.video_id` in `_config.yml` to a YouTube video id and the

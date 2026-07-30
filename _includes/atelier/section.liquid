@@ -9,9 +9,9 @@
 {% endcomment %}
 
 <header class="atelier-section__head">
-  <p class="atelier-section__index" aria-hidden="true">{{ include.index }}</p>
-  <h2 class="atelier-section__title" id="{{ include.id }}-title">{{ include.title }}</h2>
+  <p class="atelier-section__index" aria-hidden="true" data-scramble>{{ include.index }}</p>
+  <h2 class="atelier-section__title" id="{{ include.id }}-title" data-scramble>{{ include.title }}</h2>
   {% if include.note %}
-    <p class="atelier-section__note">{{ include.note }}</p>
+    <p class="atelier-section__note" data-scramble>{{ include.note }}</p>
   {% endif %}
 </header>
