@@ -419,6 +419,72 @@ footer a:hover {
   border: 1px solid var(--atelier-line-strong);
 }
 
+/* --- Search palette (ctrl k) ---------------------------------------------- */
+
+/* ninja-keys renders in a shadow root and ships a light default palette, of which
+ * _base.scss set four values. The rest -- the selected row, the footer, the page
+ * scrim -- stayed white, so the panel arrived as a bright rectangle over a washed
+ * out page. Declarations on the host element from this tree beat the component's
+ * own `:host` rules, so the whole set can be re-pointed from here.
+ *
+ * Variables are documented at
+ * https://github.com/ssleptsov/ninja-keys#css-variables
+ */
+ninja-keys {
+  --ninja-font-family: var(--atelier-mono);
+  --ninja-font-size: 0.8125rem;
+  --ninja-width: min(560px, 92vw);
+  --ninja-top: 18vh;
+  --ninja-actions-height: min(320px, 42vh);
+
+  /* Same scrim as the invitation, so the two overlays read as one language. */
+  --ninja-overflow-background: rgba(11, 10, 9, 0.94);
+  --ninja-backdrop-filter: blur(2px);
+  --ninja-modal-background: var(--atelier-void);
+  /* A hairline rather than a shadow: the component has no border variable, and a
+   * spread-only shadow gives the panel the same edge as the cards and the player. */
+  --ninja-modal-shadow: 0 0 0 1px var(--atelier-line-strong);
+  --ninja-footer-background: var(--atelier-void);
+  --ninja-secondary-background-color: transparent;
+
+  --ninja-text-color: var(--atelier-ivory);
+  --ninja-secondary-text-color: var(--atelier-ash);
+  /* Ash, not dim: the placeholder and the group headers are the only text in
+   * their rows, and dim is a 3.4:1 decorative value. Ash reaches 5.9:1. */
+  --ninja-placeholder-color: var(--atelier-ash);
+  --ninja-group-text-color: var(--atelier-ash);
+  --ninja-keys-text-color: var(--atelier-ash);
+  --ninja-accent-color: var(--atelier-bronze);
+  --ninja-icon-color: var(--atelier-ash);
+  --ninja-icon-size: 0px;
+
+  /* The selection is a warm wash rather than a filled bar: the accent already
+   * marks the row, and a solid block would be the brightest thing on the site. */
+  --ninja-selected-background: rgba(192, 154, 99, 0.12);
+  --ninja-selected-text-color: var(--atelier-ivory);
+
+  --ninja-separate-border: 1px solid var(--atelier-line);
+  --ninja-key-border-radius: 0;
+
+  /* Over the navbar (1030) and the corner player (1041); under the invitation
+   * (1060), which must stay the only thing on screen while it is open. */
+  --ninja-z-index: 1050;
+}
+
+/* The panel is defined by a hairline, like every other framed element here. */
+ninja-keys::part(actions-list) {
+  padding-bottom: 0.25rem;
+}
+
+ninja-keys::part(ninja-input-wrapper) {
+  background: var(--atelier-void);
+}
+
+ninja-keys::part(ninja-input) {
+  font-family: var(--atelier-mono);
+  letter-spacing: 0.04em;
+}
+
 /* --- Reduced motion ------------------------------------------------------- */
 
 @media (prefers-reduced-motion: reduce) {
