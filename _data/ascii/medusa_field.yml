@@ -9,12 +9,12 @@ caption: >-
   survivors piled on a raft under a storm, one waving toward the horizon.
 columns: 230
 rows: 131
-hero_rows: 102
+hero_rows: 88
 source:
   title: Theodore Gericault, The Raft of the Medusa (1818-1819)
   url: "https://commons.wikimedia.org/wiki/File:JEAN_LOUIS_TH%C3%89ODORE_G%C3%89RICAULT_-_La_Balsa_de_la_Medusa_(Museo_del_Louvre,_1818-19).jpg"
   license: Public domain (PD-old-100-expired, PD-Art)
-  recipe: "--crop 0.1600,0.0050,0.8400,0.9950 --cols 230 --hero-rows 102 --ramp bosch --floor 0.18 --gamma 1.22 --edge-quantile 0.76 --bands atmosphere:0:0.40,architecture:0.40:0.66,figures:0.66:1.01"
+  recipe: "--crop 0.1600,0.0050,0.8400,0.9950 --cols 230 --hero-rows 88 --ramp bosch --floor 0.18 --gamma 1.22 --edge-quantile 0.76 --bands atmosphere:0:0.40,architecture:0.40:0.66,figures:0.66:1.01"
 plate:
   url: /assets/img/ascii/medusa_plate.webp
   width: 1100

@@ -153,7 +153,7 @@ body.atelier-home .container[role="main"] {
    * exactly where it would sit if the grid stopped there. Clamped at 0 so the top
    * of the composition is never cropped away on a wide screen: past that point the
    * artwork simply starts at the top edge and pans further. */
-  top: max(0px, calc(102% - var(--ascii-hero-rows, var(--ascii-rows, 84)) * 1.02em));
+  top: max(0px, calc(102% - var(--ascii-hero-rows, var(--ascii-rows, 102)) * 1.02em));
   margin: 0;
   padding: 0;
   border: 0;
@@ -163,13 +163,18 @@ body.atelier-home .container[role="main"] {
   font-weight: 400;
   line-height: 1.02;
   letter-spacing: 0;
-  /* Fallback assumes the shipped 190-column grid (190 x 0.6em per character). */
-  font-size: calc(var(--ascii-span) / 114);
-  font-size: calc(var(--ascii-span) / (var(--ascii-columns, 190) * 0.6));
+  /* Scaled to the viewport width, but never so large that the opening band is
+   * taller than the viewport. On a wide, short screen the width-based size would
+   * leave only the thin faded top of the composition on screen; taking the
+   * smaller of the two keeps the whole opening band visible and lets the artwork
+   * settle into the right-hand side, which is where it belongs anyway.
+   * Fallback assumes the shipped 230-column grid (230 x 0.6em per character). */
+  font-size: calc(var(--ascii-span) / 138);
+  font-size: min(calc(var(--ascii-span) / (var(--ascii-columns, 230) * 0.6)), calc(100svh / (var(--ascii-hero-rows, var(--ascii-rows, 102)) * 1.02)));
   /* Sized from the grid rather than left to shrink-to-fit: boxes of differing
    * intrinsic size would offset their contents from one another. */
-  width: calc(var(--ascii-columns, 190) * 0.6em);
-  height: calc(var(--ascii-rows, 84) * 1.02em);
+  width: calc(var(--ascii-columns, 230) * 0.6em);
+  height: calc(var(--ascii-rows, 156) * 1.02em);
   will-change: transform;
 }
 
@@ -232,6 +237,24 @@ body:not(.atelier-home) .ascii-field__layer--figures {
 body:not(.atelier-home) .ascii-field {
   -webkit-mask-image: linear-gradient(to right, transparent 0 30%, rgba(0, 0, 0, 0.25) 55%, #000 82%);
   mask-image: linear-gradient(to right, transparent 0 30%, rgba(0, 0, 0, 0.25) 55%, #000 82%);
+}
+
+/* The About page is short and its copy sits in one column, so its backdrop can
+ * carry more weight than the denser reading pages without crowding anything. */
+body.about-page .ascii-field__plate {
+  opacity: 0.1;
+}
+
+body.about-page .ascii-field__layer--atmosphere {
+  opacity: 0.12;
+}
+
+body.about-page .ascii-field__layer--architecture {
+  opacity: 0.24;
+}
+
+body.about-page .ascii-field__layer--figures {
+  opacity: 0.4;
 }
 
 /* The fade is a mask, not a stack of overlay gradients, so the page background

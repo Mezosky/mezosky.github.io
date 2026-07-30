@@ -1,0 +1,31 @@
+---
+layout: default
+---
+{% comment %}
+  The About page. Composed from the same atelier includes the homepage uses, so
+  the portrait, links and colophon stay in one place.
+{% endcomment %}
+
+<div class="post">
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title }}</h1>
+    {% if page.subtitle %}
+      <p class="post-description">{{ page.subtitle }}</p>
+    {% endif %}
+  </header>
+
+  <div class="atelier-about">
+    {% unless page.portrait == false %}
+      {% include atelier/portrait.liquid %}
+    {% endunless %}
+    <div class="atelier-prose">{{ content }}</div>
+  </div>
+
+  {% if page.social %}
+    {% include atelier/links.liquid %}
+  {% endif %}
+
+  {% assign ascii_compact = page.ascii_field_compact | default: site.ascii_field_compact %}
+  {% include atelier/colophon.liquid field=page.ascii_field compact=ascii_compact %}
+  {% include atelier/ornament.liquid %}
+</div>

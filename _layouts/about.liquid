@@ -35,39 +35,6 @@ layout: default
     </section>
   {% endif %}
 
-  <section class="atelier-section" id="notes" aria-labelledby="notes-title">
-    {%
-      include atelier/section.liquid
-      id="notes"
-      index="03"
-      title="Notes"
-      note="Working notes on machine learning, computer vision, and teaching."
-    %}
-    {% include atelier/notes.liquid limit=4 %}
-    <a class="atelier-more" href="{{ '/blog/' | relative_url }}">[ All notes ]</a>
-  </section>
-
-  <section class="atelier-section atelier-section--about" id="about" aria-labelledby="about-title">
-    {%
-      include atelier/section.liquid
-      id="about"
-      index="04"
-      title="About"
-      note=page.subtitle
-    %}
-    <div class="atelier-about">
-      {% unless page.portrait == false %}
-        {% include atelier/portrait.liquid %}
-      {% endunless %}
-      <div class="atelier-prose">{{ content }}</div>
-    </div>
-    {% if page.social %}
-      {% include atelier/links.liquid %}
-    {% endif %}
-    {% assign ascii_compact = page.ascii_field_compact | default: site.ascii_field_compact %}
-    {% include atelier/colophon.liquid field=page.ascii_field compact=ascii_compact %}
-  </section>
-
   {% if page.news and site.announcements.enabled %}
     <section class="atelier-section" id="news" aria-labelledby="news-title">
       {% include atelier/section.liquid id="news" index="05" title="News" %}

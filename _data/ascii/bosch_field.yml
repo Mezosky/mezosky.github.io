@@ -10,12 +10,12 @@ caption: >-
   vessels, ladders, boats, and the instruments below.
 columns: 230
 rows: 156
-hero_rows: 128
+hero_rows: 102
 source:
   title: Hieronymus Bosch, The Garden of Earthly Delights (c. 1490-1510), detail of the right panel
   url: "https://commons.wikimedia.org/wiki/File:The_Garden_of_Earthly_Delights_by_Bosch_High_Resolution_2.jpg"
   license: Public domain (PD-old-100-expired, PD-Art)
-  recipe: "--crop 0.7656,0.2642,0.9964,0.7500 --cols 230 --hero-rows 128 --ramp bosch --floor 0.17 --gamma 1.18 --edge-quantile 0.76 --bands atmosphere:0:0.40,architecture:0.40:0.66,figures:0.66:1.01"
+  recipe: "--crop 0.7656,0.2642,0.9964,0.7500 --cols 230 --hero-rows 102 --ramp bosch --floor 0.17 --gamma 1.18 --edge-quantile 0.76 --bands atmosphere:0:0.40,architecture:0.40:0.66,figures:0.66:1.01"
 plate:
   url: /assets/img/ascii/bosch_plate.webp
   width: 886
