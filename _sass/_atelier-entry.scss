@@ -1,0 +1,139 @@
+/*******************************************************************************
+ * Atelier — entry sound: the one-time invitation and the persistent control.
+ * Both are inert markup until assets/js/entry-audio.js reveals them.
+ ******************************************************************************/
+
+.atelier-entry {
+  position: fixed;
+  inset: 0;
+  z-index: 1060;
+  display: grid;
+  place-items: center;
+  padding: var(--atelier-gutter);
+  background: rgba(11, 10, 9, 0.94);
+}
+
+.atelier-entry[hidden] {
+  display: none;
+}
+
+/* Nothing behind the invitation should scroll while it is open. */
+html.has-entry-open,
+html.has-entry-open body {
+  overflow: hidden;
+}
+
+.atelier-entry__panel {
+  display: grid;
+  justify-items: center;
+  gap: 1.5rem;
+  max-width: 34ch;
+  text-align: center;
+}
+
+.atelier-entry__prompt {
+  margin: 0;
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
+  letter-spacing: 0.06em;
+  line-height: 1.5;
+  color: var(--atelier-ivory);
+}
+
+.atelier-entry__title {
+  margin: -0.75rem 0 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  color: var(--atelier-dim);
+}
+
+.atelier-entry__actions {
+  display: grid;
+  justify-items: center;
+  gap: 0.9rem;
+}
+
+.atelier-entry__accept {
+  font-size: 0.8125rem;
+  padding: 0.6rem 1.4rem;
+  background: none;
+  cursor: pointer;
+}
+
+.atelier-entry__decline {
+  background: none;
+  border: none;
+  padding: 0.2rem;
+  font-family: var(--atelier-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: var(--atelier-dim);
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
+}
+
+.atelier-entry__decline:hover,
+.atelier-entry__decline:focus-visible {
+  color: var(--atelier-ash);
+  border-bottom-color: var(--atelier-line-strong);
+}
+
+/* --- The persistent control ----------------------------------------------- */
+
+.atelier-sound {
+  position: fixed;
+  bottom: 1.1rem;
+  left: var(--atelier-gutter);
+  z-index: 1020;
+}
+
+.atelier-sound[hidden] {
+  display: none;
+}
+
+.atelier-sound__toggle {
+  background: none;
+  border: none;
+  padding: 0.3rem 0;
+  font-family: var(--atelier-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  color: var(--atelier-dim);
+  cursor: pointer;
+}
+
+.atelier-sound__toggle:hover,
+.atelier-sound__toggle:focus-visible {
+  color: var(--atelier-bronze-bright);
+}
+
+.atelier-sound__toggle[aria-pressed="true"] {
+  color: var(--atelier-bronze);
+}
+
+/**
+ * The player has to stay rendered for playback to continue, so it is faded out
+ * rather than hidden, parked in a corner and taken out of the pointer and tab
+ * order. display:none or visibility:hidden would stop the audio.
+ */
+.atelier-sound__player {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  width: 200px;
+  height: 113px;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.atelier-sound__player iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+@media (max-width: 47.9em) {
+  .atelier-sound {
+    bottom: 0.7rem;
+  }
+}

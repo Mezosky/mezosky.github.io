@@ -80,6 +80,21 @@ These are now part of the site's content and should stay reflected in edits:
 - Build from the includes in `_includes/atelier/`. Do not put page-sized markup in a
   layout, and do not duplicate publication data outside `_bibliography/papers.bib`.
 
+## Entry Sound
+
+`entry_audio.video_id` in the config switches on an optional YouTube embed. It is
+blank by default and renders nothing when unset. Rules that must hold if it is
+turned on:
+
+- Playback never starts without a click. Browsers block autoplay with sound, and
+  an academic site should not ambush a visitor with music either.
+- The invitation is offered once per session, can be declined with Escape or by
+  clicking outside it, and the control stays reachable afterwards either way.
+- It starts as inert `hidden` markup so a reader without JavaScript, and any
+  crawler, gets the page rather than a gate.
+- A full page load tears the player down, so audio does not survive navigation.
+  The script tries to resume; if the browser refuses, the control starts it again.
+
 ## Protected Content
 
 `mysteries-of-the-deep/` is a standalone paper site with its own styling and data. Its

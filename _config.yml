@@ -7,6 +7,16 @@ brand_monogram: IMD # condensed wordmark shown in the navbar once the page is sc
 # Backdrop used at phone sizes on every page; the landscape fields are set per
 # page. A portrait painting suits a portrait viewport. Key in _data/ascii/.
 ascii_field_compact: goya_field
+
+# Optional entry sound. Paste a YouTube video id to switch it on; leave it blank
+# and nothing is rendered. Playback always waits for a click -- browsers block
+# autoplay with sound, and music should not start unannounced. Offered once per
+# session, declinable, with a control that stays available either way.
+entry_audio:
+  video_id: 3yJznDl8hPE # the id after /watch?v= or youtu.be/
+  title: "Lana Del Rey \u2014 A&W" # shown on the invitation and next to the control
+  prompt: Press enter to descend
+  decline: Continue in silence
 first_name: Ignacio
 middle_name: Alejandro
 last_name: M. De la Jara

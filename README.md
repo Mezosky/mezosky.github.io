@@ -111,6 +111,13 @@ Structure:
 - `assets/js/ascii-field.js`: pointer and scroll parallax for the backdrop
 - `assets/js/common.js`: small UI interactions and reveal animations
 
+### Entry sound
+
+Optional. Set `entry_audio.video_id` in `_config.yml` to a YouTube video id and the
+site offers the reader a one-time invitation to play it; leave it blank and nothing
+is rendered. `_includes/atelier/entry.liquid` holds the markup and
+`assets/js/entry-audio.js` the behaviour. Playback always waits for a click.
+
 ### Homepage content sources
 
 - `_pages/about.md`: front matter carries the hero copy; the body is the About prose

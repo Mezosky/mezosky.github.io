@@ -148,12 +148,11 @@ body.atelier-home .container[role="main"] {
 
   position: absolute;
   right: -8vw;
-  /* Anchored on the hero band, not on the whole grid. A field may be taller than
-   * the viewport so the page can pan down it; this keeps the band it opens on
-   * exactly where it would sit if the grid stopped there. Clamped at 0 so the top
-   * of the composition is never cropped away on a wide screen: past that point the
-   * artwork simply starts at the top edge and pans further. */
-  top: max(0px, calc(102% - var(--ascii-hero-rows, var(--ascii-rows, 102)) * 1.02em));
+  /* Flush to the top. Offsetting by the hero band left a black band above the
+   * artwork whenever that band came out shorter than the viewport, and pushing the
+   * other way cropped its top edge. How much of the composition is on screen at
+   * rest is set by the font size below instead, which cannot strand either edge. */
+  top: 0;
   margin: 0;
   padding: 0;
   border: 0;
@@ -170,7 +169,11 @@ body.atelier-home .container[role="main"] {
    * settle into the right-hand side, which is where it belongs anyway.
    * Fallback assumes the shipped 230-column grid (230 x 0.6em per character). */
   font-size: calc(var(--ascii-span) / 138);
-  font-size: min(calc(var(--ascii-span) / (var(--ascii-columns, 230) * 0.6)), calc(100svh / (var(--ascii-hero-rows, var(--ascii-rows, 102)) * 1.02)));
+  font-size: clamp(
+    calc(100svh / (var(--ascii-rows, 156) * 1.02)),
+    calc(var(--ascii-span) / (var(--ascii-columns, 230) * 0.6)),
+    calc(100svh / (var(--ascii-hero-rows, var(--ascii-rows, 102)) * 1.02))
+  );
   /* Sized from the grid rather than left to shrink-to-fit: boxes of differing
    * intrinsic size would offset their contents from one another. */
   width: calc(var(--ascii-columns, 230) * 0.6em);
@@ -312,6 +315,11 @@ body.about-page .ascii-field__layer--figures {
     top: calc(101% - var(--ascii-hero-rows, var(--ascii-rows, 111)) * 1.02em);
     margin-inline: auto;
     will-change: auto;
+  }
+
+  .ascii-field__plate,
+  .ascii-field__layer {
+    font-size: calc(var(--ascii-span) / (var(--ascii-columns, 104) * 0.6));
   }
 
   .ascii-field__layer > span {
