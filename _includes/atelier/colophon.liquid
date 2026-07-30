@@ -3,7 +3,10 @@
   stays truthful if the artwork is rebuilt from a different source.
 {% endcomment %}
 
-{% assign field_key = include.field | default: 'bosch_field' %}
+{% assign field_key = include.field %}
+{% if field_key == blank or field_key == true %}
+  {% assign field_key = 'bosch_field' %}
+{% endif %}
 {% assign source = site.data.ascii[field_key].source %}
 
 {% if source.title %}

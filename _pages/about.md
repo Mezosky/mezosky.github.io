@@ -6,7 +6,7 @@ permalink: /
 subtitle: Machine learning research, computer vision, and teaching.
 
 # Renders the layered ASCII backdrop and loads its parallax script.
-ascii_field: true
+ascii_field: bosch_field
 
 # Hero copy. Edit here; _includes/atelier/hero.liquid holds only the markup.
 hero:

@@ -66,12 +66,20 @@ def _levels(tone, black, white, gamma):
     return tone
 
 
-def measure(image, cols, rows, black=0.0, white=1.0, gamma=1.0, autocontrast=True):
-    """Sample the image down to one tone and one edge reading per cell."""
+def measure(image, cols, rows, black=0.0, white=1.0, gamma=1.0, autocontrast=True, invert=False):
+    """Sample the image down to one tone and one edge reading per cell.
+
+    `invert` swaps which end of the range becomes ink. A dark painting reads
+    correctly as-is: light subjects become characters, the dark ground stays
+    empty. A bright painting is the other way round, and without inverting it the
+    sky fills with glyphs while the forms disappear.
+    """
     if autocontrast:
         image = ImageOps.autocontrast(image, cutoff=1)
 
     tone = np.asarray(image.resize((cols, rows), Image.LANCZOS), dtype=np.float32) / 255.0
+    if invert:
+        tone = 1.0 - tone
     tone = _levels(tone, black, white, gamma)
 
     fine = np.asarray(

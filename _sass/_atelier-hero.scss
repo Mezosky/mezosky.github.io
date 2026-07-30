@@ -189,6 +189,34 @@ body.atelier-home .container[role="main"] {
   opacity: 0.54;
 }
 
+/**
+ * Reading pages carry the same backdrop, from a different panel of the painting,
+ * but quieter: there is no hero to fill, the copy runs wider, and publication
+ * titles cross into the right-hand side where the field is densest.
+ */
+body:not(.atelier-home) .ascii-field__plate {
+  opacity: 0.07;
+}
+
+body:not(.atelier-home) .ascii-field__layer--atmosphere {
+  opacity: 0.09;
+}
+
+body:not(.atelier-home) .ascii-field__layer--architecture {
+  opacity: 0.16;
+}
+
+body:not(.atelier-home) .ascii-field__layer--figures {
+  opacity: 0.26;
+}
+
+/* Clears the whole content column rather than just the left margin: on these
+ * pages the text runs much wider than the hero copy does. */
+body:not(.atelier-home) .ascii-field {
+  -webkit-mask-image: linear-gradient(to right, transparent 0 30%, rgba(0, 0, 0, 0.25) 55%, #000 82%);
+  mask-image: linear-gradient(to right, transparent 0 30%, rgba(0, 0, 0, 0.25) 55%, #000 82%);
+}
+
 /* The fade is a mask, not a stack of overlay gradients, so the page background
  * shows through untouched and the text above stays at full contrast. */
 .ascii-field {

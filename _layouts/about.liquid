@@ -64,7 +64,7 @@ layout: default
     {% if page.social %}
       {% include atelier/links.liquid %}
     {% endif %}
-    {% include atelier/colophon.liquid %}
+    {% include atelier/colophon.liquid field=page.ascii_field %}
   </section>
 
   {% if page.news and site.announcements.enabled %}

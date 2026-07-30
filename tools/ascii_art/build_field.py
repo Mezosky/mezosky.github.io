@@ -49,6 +49,7 @@ def build(args):
         white=args.white,
         gamma=args.gamma,
         autocontrast=not args.no_autocontrast,
+        invert=args.invert,
     )
 
     weight = falloff.combine(
@@ -64,10 +65,11 @@ def build(args):
     )
     layers = depth.split(glyphs, ink, depth.parse_bands(args.bands))
 
-    recipe = "--crop %s --cols %d%s --ramp %s --floor %s --gamma %s --edge-quantile %s --bands %s" % (
+    recipe = "--crop %s --cols %d%s%s --ramp %s --floor %s --gamma %s --edge-quantile %s --bands %s" % (
         args.crop or "none",
         args.cols,
         " --flip" if args.flip else "",
+        " --invert" if args.invert else "",
         args.ramp,
         args.floor,
         args.gamma,
@@ -114,6 +116,7 @@ def main(argv=None):
     parser.add_argument("--white", type=float, default=1.0, help="input white point, 0..1")
     parser.add_argument("--gamma", type=float, default=1.0, help="tone curve; >1 darkens midtones")
     parser.add_argument("--no-autocontrast", action="store_true", help="skip the automatic level stretch")
+    parser.add_argument("--invert", action="store_true", help="ink the dark end instead of the light end; use for bright paintings")
     parser.add_argument("--floor", type=float, default=0.06, help="tone below which a cell stays blank")
     parser.add_argument("--edge-quantile", type=float, default=0.82, help="fraction of cells shaded rather than stroked")
 

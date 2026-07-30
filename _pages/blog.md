@@ -2,6 +2,9 @@
 layout: default
 permalink: /blog/
 title: Blog
+
+# Backdrop for this page; keys are files in _data/ascii/.
+ascii_field: garden_field
 nav: true
 nav_order: 1
 pagination:
