@@ -8,8 +8,10 @@ artwork's source of truth and can be hand edited afterwards in a monospaced edit
 
 ```
 image ──► source ──► shading ──► depth ──► emit ──► _data/ascii/<name>.yml
-                        │                             │
-                     falloff                       preview (PNG, for review)
+             │          │                    │
+           plate     falloff              preview (PNG, for review)
+             │
+             └──► assets/img/ascii/<name>.webp   (faint plate behind the text)
 ```
 
 | Module       | Responsibility                                                         |
@@ -20,6 +22,7 @@ image ──► source ──► shading ──► depth ──► emit ──�
 | `shading.py` | pick a character per cell: tonal ramp, overridden by edge strokes      |
 | `depth.py`   | split the field into stacked layers by tone band                       |
 | `emit.py`    | write `_data/ascii/<name>.yml` with provenance and the exact recipe    |
+| `plate.py`   | export the same crop as an image, for the faint plate behind the text  |
 | `preview.py` | render the layers to a PNG so a change can be judged without a browser |
 
 ## Install
@@ -40,14 +43,20 @@ curl -L -o /tmp/bosch.jpg \
 
 python3 tools/ascii_art/build_field.py \
   --image /tmp/bosch.jpg \
-  --crop 0.7656,0.2642,0.9964,0.5820 --cols 190 \
+  --crop 0.7656,0.1400,0.9964,0.8600 --cols 190 \
   --floor 0.13 --gamma 1.18 \
-  --left-fade 0.40 --top-fade 0.30 --top-floor 0.30 \
+  --left-fade 0.40 --top-fade 0.10 --top-floor 0.55 \
   --bands atmosphere:0:0.40,architecture:0.40:0.66,figures:0.66:1.01 \
   --edge-quantile 0.76 \
+  --plate assets/img/ascii/bosch_plate.webp --plate-width 1100 --plate-quality 70 \
   --out _data/ascii/bosch_field.yml \
   --preview /tmp/field.png
 ```
+
+The crop covers the whole height of the panel, not just one band. The grid is far
+taller than any viewport, and the page pans down it as the reader scrolls, so
+each section sits against a different part of the painting. `--ascii-start-row`
+in `_sass/_atelier-hero.scss` chooses where the hero opens.
 
 `--preview` is the fast way to iterate: it renders the layers at the site's colours
 so you can look at the result before rebuilding Jekyll.
@@ -62,9 +71,14 @@ Any image Pillow can read works. Only three knobs usually matter:
   space, lower it for a denser field. This is the main density control.
 - `--gamma` — above 1 pushes the midtones down, which suits dark paintings.
 
-Then check the glyph count printed at the end. The homepage field is around 5,000
-glyphs across three layers; much beyond that and the markup starts to weigh on
-mobile for no visual gain.
+Then check the glyph count printed at the end. The homepage field is around
+15,000 glyphs across three layers, which is roughly the ceiling before the markup
+starts to weigh on mobile for no visual gain.
+
+`--plate` writes the same crop as an image. The page shows it under the
+characters at very low opacity so the reader can see what is being described.
+Because it comes from the identical crop, photograph and text stay in register —
+regenerate both together or they will drift apart.
 
 `--flip` mirrors the source horizontally. It exists because the page wants its
 dense mass on the right and its quiet space on the left, and not every painting

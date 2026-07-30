@@ -1,18 +1,22 @@
 {% comment %}
   The ASCII backdrop. Reads a generated field from _data/ascii/ and stacks its
-  layers back to front; depth, opacity and parallax are handled in CSS/JS.
+  layers back to front over a faint plate of the source painting, so the reader
+  can make out what the characters are describing. Depth, panning and the pointer
+  ripple are handled in CSS/JS.
 
   Params:
     field  key under site.data.ascii (default: bosch_field)
 
+  Each row is its own element rather than one run of text: the pointer effect
+  displaces rows individually, and explicit row heights keep the layers in
+  register whatever their content. The container stays a <pre> because the HTML
+  minifier collapses runs of spaces everywhere else, which would scramble the
+  composition; the rows are emitted back to back so no stray whitespace between
+  them is rendered as a line.
+
   The artwork is decorative, so the whole field is hidden from assistive tech and
   from the pointer. It is real text, escaped at render time, so any character in
   the source data is safe to use.
-
-  Every layer is prefixed with a newline. An HTML parser drops exactly one
-  newline after <pre>, so this guarantees each layer's first row lands on the same
-  line whether or not its own top row happens to be blank — without which the
-  layers slide a row out of register.
 {% endcomment %}
 
 {% capture ascii_newline %}
@@ -22,14 +26,30 @@
 {% assign field = site.data.ascii[field_key] %}
 
 {% if field %}
+  {% capture ascii_metrics %}--ascii-columns: {{ field.columns }}; --ascii-rows: {{ field.rows }}{% endcapture %}
   <div class="ascii-field" data-ascii-field aria-hidden="true" role="presentation">
+    {% if field.plate.url %}
+      <img
+        class="ascii-field__plate"
+        data-ascii-plate
+        src="{{ field.plate.url | relative_url }}"
+        width="{{ field.plate.width }}"
+        height="{{ field.plate.height }}"
+        alt=""
+        loading="lazy"
+        decoding="async"
+        style="{{ ascii_metrics }}"
+      >
+    {% endif %}
+
     {% for layer in field.layers %}
+      {%- assign ascii_rows = layer.art | split: ascii_newline -%}
       <pre
         class="ascii-field__layer ascii-field__layer--{{ layer.id }}"
         data-ascii-layer="{{ layer.id }}"
         data-depth="{{ forloop.index }}"
-        style="--ascii-columns: {{ field.columns }}; --ascii-rows: {{ field.rows }}"
-      >{{ layer.art | escape | prepend: ascii_newline }}</pre>
+        style="{{ ascii_metrics }}"
+      >{% for row in ascii_rows %}<span>{{ row | escape }}</span>{% endfor %}</pre>
     {% endfor %}
   </div>
 {% endif %}

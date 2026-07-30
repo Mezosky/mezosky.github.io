@@ -5,6 +5,6 @@ a single step (a different ramp, another banding, a new painting) can be swapped
 without touching the rest.
 """
 
-from . import depth, emit, falloff, preview, ramps, shading, source
+from . import depth, emit, falloff, plate, preview, ramps, shading, source
 
-__all__ = ["depth", "emit", "falloff", "preview", "ramps", "shading", "source"]
+__all__ = ["depth", "emit", "falloff", "plate", "preview", "ramps", "shading", "source"]

@@ -114,19 +114,29 @@ body.atelier-home .container[role="main"] {
   opacity: calc(1 - var(--ascii-scrolled, 0) * 0.55);
 }
 
+/**
+ * The plate and every character layer share one geometry: the same font-size
+ * basis, the same box, the same anchor. That is what keeps the photograph and
+ * the text in register, so the characters read as a transcription of what is
+ * behind them rather than as a texture laid over it.
+ *
+ * The grid is far taller than the viewport; `--ascii-start-row` chooses which
+ * band the hero opens on, and the scroll pan travels down from there.
+ */
+.ascii-field__plate,
 .ascii-field__layer {
   /* How much viewport width the whole grid spans. */
   --ascii-span: 96vw;
+  --ascii-start-row: 26;
 
   position: absolute;
   right: -8vw;
-  bottom: -2vh;
+  top: calc(var(--ascii-start-row) * -1.02em);
   margin: 0;
   padding: 0;
   border: 0;
   background: none;
   border-radius: 0;
-  white-space: pre;
   font-family: var(--atelier-mono);
   font-weight: 400;
   line-height: 1.02;
@@ -134,12 +144,28 @@ body.atelier-home .container[role="main"] {
   /* Fallback assumes the shipped 190-column grid (190 x 0.6em per character). */
   font-size: calc(var(--ascii-span) / 114);
   font-size: calc(var(--ascii-span) / (var(--ascii-columns, 190) * 0.6));
-  /* Sized from the grid rather than left to shrink-to-fit: the layers are
-   * anchored bottom-right, so boxes of differing intrinsic size would offset
-   * their contents from one another and break the composition. */
+  /* Sized from the grid rather than left to shrink-to-fit: boxes of differing
+   * intrinsic size would offset their contents from one another. */
   width: calc(var(--ascii-columns, 190) * 0.6em);
-  height: calc(var(--ascii-rows, 84) * 1.02em);
+  height: calc(var(--ascii-rows, 191) * 1.02em);
   will-change: transform;
+}
+
+/* Rows are individually positioned so the pointer can displace them; the
+ * explicit height keeps blank rows occupying their line. */
+.ascii-field__layer > span {
+  display: block;
+  height: 1.02em;
+  white-space: pre;
+  will-change: transform;
+}
+
+/* The painting itself, barely there: enough to give the characters context
+ * without competing with them or with the copy. */
+.ascii-field__plate {
+  object-fit: fill;
+  opacity: 0.14;
+  filter: grayscale(0.55) sepia(0.35) contrast(0.9) brightness(0.85);
 }
 
 /* Depth by tone: the darkest band sits furthest back and moves least. */
@@ -170,7 +196,9 @@ body.atelier-home .container[role="main"] {
     opacity: 1;
   }
 
-  .ascii-field__layer {
+  .ascii-field__plate,
+  .ascii-field__layer,
+  .ascii-field__layer > span {
     transform: none !important;
     will-change: auto;
   }
@@ -193,12 +221,21 @@ body.atelier-home .container[role="main"] {
 
   /* Crop into the composition instead of shrinking it to illegible specks, and
    * drop the faintest layer so the copy keeps its contrast. */
+  .ascii-field__plate,
   .ascii-field__layer {
     --ascii-span: 210vw;
+    --ascii-start-row: 30;
 
     right: -28vw;
-    bottom: -1vh;
     will-change: auto;
+  }
+
+  .ascii-field__layer > span {
+    will-change: auto;
+  }
+
+  .ascii-field__plate {
+    opacity: 0.1;
   }
 
   .ascii-field__layer--atmosphere {

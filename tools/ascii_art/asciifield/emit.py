@@ -37,8 +37,15 @@ def render(layers, meta):
         "  url: %s" % _scalar(meta["source_url"]),
         "  license: %s" % _scalar(meta["source_license"]),
         "  recipe: %s" % _scalar(meta["recipe"]),
-        "layers:",
     ]
+    if meta.get("plate_url"):
+        lines += [
+            "plate:",
+            "  url: %s" % _scalar(meta["plate_url"]),
+            "  width: %d" % meta["plate_width"],
+            "  height: %d" % meta["plate_height"],
+        ]
+    lines.append("layers:")
     for name, rows in layers:
         lines.append("  - id: %s" % name)
         lines.append("    art: |2")

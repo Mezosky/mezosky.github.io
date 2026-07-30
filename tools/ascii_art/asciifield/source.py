@@ -29,6 +29,11 @@ def load(path):
     return Image.open(path).convert("L")
 
 
+def load_rgb(path):
+    """The colour original, used only for the faint plate behind the text."""
+    return Image.open(path).convert("RGB")
+
+
 def crop_fraction(image, box):
     """Crop with fractional coordinates so a crop survives a change of scan."""
     if box is None:

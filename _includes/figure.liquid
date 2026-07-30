@@ -62,6 +62,12 @@
       {% endif %}
       {% if include.zoomable %}
         data-zoomable
+        {% comment %}
+          Without this, medium-zoom enlarges whichever responsive variant the
+          browser picked for the thumbnail slot, which is far too small to read.
+          Point it at the original instead; it is only fetched on zoom.
+        {% endcomment %}
+        data-zoom-src="{{ include.path | relative_url }}"
       {% endif %}
       {% if include.loading %}
         loading="{{ include.loading }}"

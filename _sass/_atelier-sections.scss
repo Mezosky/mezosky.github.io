@@ -357,11 +357,20 @@
   color: var(--atelier-bronze);
 }
 
-/* Existing preview plates are kept but pushed back into the palette. */
+/**
+ * Preview plates. A fixed portrait box with object-fit keeps the column even
+ * whatever each entry's artwork happens to be — first-page renders, a wide
+ * figure strip, a square thumbnail — without touching any of the source images.
+ * The full-resolution original is still what opens on zoom.
+ */
 .atelier-publications .preview {
   width: 100%;
   max-width: 6.5rem;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: top center;
   border-radius: 1px;
+  border: 1px solid var(--atelier-line);
   box-shadow: none !important;
   filter: grayscale(1) sepia(0.3) contrast(0.92);
   opacity: 0.5;
@@ -373,6 +382,19 @@
 .atelier-publications ol.bibliography > li:hover .preview {
   opacity: 0.85;
   filter: grayscale(0.4) sepia(0.12) contrast(1);
+}
+
+/* Zoomed by medium-zoom: show the page as it really is rather than through the
+ * plate treatment, and lift it over the fixed navbar (Bootstrap z-index 1030)
+ * so the enlarged page is not overprinted by the navigation. */
+.medium-zoom-image--opened {
+  filter: none !important;
+  opacity: 1 !important;
+  z-index: 1041;
+}
+
+.medium-zoom-overlay {
+  z-index: 1040;
 }
 
 .atelier-publications .title {

@@ -14,7 +14,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from asciifield import depth, emit, falloff, preview, ramps, shading, source  # noqa: E402
+from asciifield import depth, emit, falloff, plate, preview, ramps, shading, source  # noqa: E402
 
 DEFAULT_CAPTION = (
     "Layered ASCII rendering of a public-domain Hieronymus Bosch panel: hybrid\ncreatures, impossible architecture and miniature figures."
@@ -31,9 +31,16 @@ def parse_crop(value):
 
 
 def build(args):
+    original = source.crop_fraction(source.load_rgb(args.image), parse_crop(args.crop))
+    original = source.mirror(original, horizontal=args.flip, vertical=args.flip_vertical)
+
     image = source.crop_fraction(source.load(args.image), parse_crop(args.crop))
     image = source.mirror(image, horizontal=args.flip, vertical=args.flip_vertical)
     rows = args.rows or source.derive_rows(image, args.cols, args.cell_aspect)
+
+    plate_size = None
+    if args.plate:
+        plate_size = plate.write(original, args.plate, width=args.plate_width, quality=args.plate_quality)
     field = source.measure(
         image,
         args.cols,
@@ -68,6 +75,9 @@ def build(args):
         args.bands or "default",
     )
     meta = {
+        "plate_url": args.plate_url or (("/" + args.plate.lstrip("./")) if args.plate else ""),
+        "plate_width": plate_size[0] if plate_size else 0,
+        "plate_height": plate_size[1] if plate_size else 0,
         "columns": args.cols,
         "rows": rows,
         "caption": args.caption,
@@ -114,6 +124,10 @@ def main(argv=None):
     parser.add_argument("--bands", help="depth bands as name:low:high,... over tone")
 
     parser.add_argument("--out", help="data file to write, e.g. _data/ascii/bosch_field.yml")
+    parser.add_argument("--plate", help="also write the cropped source image here, for the faint backdrop")
+    parser.add_argument("--plate-width", type=int, default=plate.DEFAULT_WIDTH, help="width of the exported plate")
+    parser.add_argument("--plate-quality", type=int, default=plate.DEFAULT_QUALITY, help="plate compression quality")
+    parser.add_argument("--plate-url", help="site-root URL for the plate (default: derived from --plate)")
     parser.add_argument("--preview", help="also render a PNG here for review")
     parser.add_argument("--preview-size", type=int, default=11, help="preview font size in px")
 

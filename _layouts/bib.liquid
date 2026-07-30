@@ -160,6 +160,14 @@
     {% else %}
       {% capture entrytype %}{% endcapture %}
     {% endif %}
+    {% comment %}
+      Reset before the guards below. Liquid keeps captures alive across entries,
+      so without this an entry that has no month inherits the previous entry's —
+      which showed the July arXiv preprints as "Oct 2026" on any page whose
+      ordering put a month-bearing entry first.
+    {% endcomment %}
+    {% assign entrymonth = '' %}
+    {% assign entryyear = '' %}
     {% if entry.month %}
       {% capture entrymonth %}{{ " " }}{{ entry.month | capitalize }}{% endcapture %}
     {% endif %}
