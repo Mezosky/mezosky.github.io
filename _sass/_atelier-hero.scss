@@ -150,8 +150,10 @@ body.atelier-home .container[role="main"] {
   right: -8vw;
   /* Anchored on the hero band, not on the whole grid. A field may be taller than
    * the viewport so the page can pan down it; this keeps the band it opens on
-   * exactly where it would sit if the grid stopped there. */
-  top: calc(102% - var(--ascii-hero-rows, var(--ascii-rows, 84)) * 1.02em);
+   * exactly where it would sit if the grid stopped there. Clamped at 0 so the top
+   * of the composition is never cropped away on a wide screen: past that point the
+   * artwork simply starts at the top edge and pans further. */
+  top: max(0px, calc(102% - var(--ascii-hero-rows, var(--ascii-rows, 84)) * 1.02em));
   margin: 0;
   padding: 0;
   border: 0;
@@ -161,12 +163,9 @@ body.atelier-home .container[role="main"] {
   font-weight: 400;
   line-height: 1.02;
   letter-spacing: 0;
-  /* Scaled to the viewport width, but never so large that the opening band is
-   * taller than the viewport — otherwise the top of the composition is cropped
-   * away before the reader has scrolled at all.
-   * Fallback assumes the shipped 190-column grid (190 x 0.6em per character). */
+  /* Fallback assumes the shipped 190-column grid (190 x 0.6em per character). */
   font-size: calc(var(--ascii-span) / 114);
-  font-size: min(calc(var(--ascii-span) / (var(--ascii-columns, 190) * 0.6)), calc(100svh / (var(--ascii-hero-rows, var(--ascii-rows, 84)) * 1.02)));
+  font-size: calc(var(--ascii-span) / (var(--ascii-columns, 190) * 0.6));
   /* Sized from the grid rather than left to shrink-to-fit: boxes of differing
    * intrinsic size would offset their contents from one another. */
   width: calc(var(--ascii-columns, 190) * 0.6em);
@@ -194,17 +193,17 @@ body.atelier-home .container[role="main"] {
 /* Depth by tone: the darkest band sits furthest back and moves least. */
 .ascii-field__layer--atmosphere {
   color: var(--atelier-art-far);
-  opacity: 0.2;
+  opacity: 0.15;
 }
 
 .ascii-field__layer--architecture {
   color: var(--atelier-art-mid);
-  opacity: 0.36;
+  opacity: 0.34;
 }
 
 .ascii-field__layer--figures {
   color: var(--atelier-art-near);
-  opacity: 0.54;
+  opacity: 0.62;
 }
 
 /**
@@ -238,8 +237,8 @@ body:not(.atelier-home) .ascii-field {
 /* The fade is a mask, not a stack of overlay gradients, so the page background
  * shows through untouched and the text above stays at full contrast. */
 .ascii-field {
-  -webkit-mask-image: linear-gradient(to right, transparent 0, rgba(0, 0, 0, 0.3) 16%, #000 48%);
-  mask-image: linear-gradient(to right, transparent 0, rgba(0, 0, 0, 0.3) 16%, #000 48%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0 6%, rgba(0, 0, 0, 0.26) 26%, #000 56%);
+  mask-image: linear-gradient(to right, transparent 0 6%, rgba(0, 0, 0, 0.26) 26%, #000 56%);
 }
 
 @media (prefers-reduced-motion: reduce) {
