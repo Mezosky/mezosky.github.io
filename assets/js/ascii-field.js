@@ -27,7 +27,7 @@
   var RIPPLE_RADIUS = 96; // px above/below the pointer that the push reaches
   var RIPPLE_SPAN = 2.6; // how many radii out still get touched
 
-  var field = document.querySelector("[data-ascii-field]");
+  var field = document.querySelector("[data-ascii-field]:not([hidden])");
   if (!field) {
     return;
   }

@@ -129,6 +129,12 @@ body.atelier-home .container[role="main"] {
   display: none;
 }
 
+/* An alternate the picker did not choose. Stated explicitly because the variant
+ * rules below set `display` and would otherwise out-rank the hidden attribute. */
+.ascii-field[hidden] {
+  display: none !important;
+}
+
 /**
  * The plate and every character layer share one geometry: the same font-size
  * basis, the same box, the same anchor. That is what keeps the photograph and
@@ -155,9 +161,12 @@ body.atelier-home .container[role="main"] {
   font-weight: 400;
   line-height: 1.02;
   letter-spacing: 0;
-  /* Fallback assumes the shipped 190-column grid (190 x 0.6em per character). */
+  /* Scaled to the viewport width, but never so large that the opening band is
+   * taller than the viewport — otherwise the top of the composition is cropped
+   * away before the reader has scrolled at all.
+   * Fallback assumes the shipped 190-column grid (190 x 0.6em per character). */
   font-size: calc(var(--ascii-span) / 114);
-  font-size: calc(var(--ascii-span) / (var(--ascii-columns, 190) * 0.6));
+  font-size: min(calc(var(--ascii-span) / (var(--ascii-columns, 190) * 0.6)), calc(100svh / (var(--ascii-hero-rows, var(--ascii-rows, 84)) * 1.02)));
   /* Sized from the grid rather than left to shrink-to-fit: boxes of differing
    * intrinsic size would offset their contents from one another. */
   width: calc(var(--ascii-columns, 190) * 0.6em);
@@ -296,19 +305,21 @@ body:not(.atelier-home) .ascii-field {
   }
 
   .ascii-field__layer--architecture {
-    opacity: 0.16;
+    opacity: 0.2;
   }
 
   .ascii-field__layer--figures {
-    opacity: 0.3;
+    opacity: 0.36;
   }
 
   /* Fades downwards instead of sideways: on a narrow screen the copy runs the
-   * full width, so the artwork has to sit under it rather than beside it. */
+   * full width, so the artwork sits under it rather than beside it. The fade
+   * clears the navbar and then comes in quickly, so the head of a portrait
+   * subject is not masked away along with it. */
   .ascii-field,
   body:not(.atelier-home) .ascii-field {
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0 14%, rgba(0, 0, 0, 0.3) 34%, #000 64%);
-    mask-image: linear-gradient(to bottom, transparent 0 14%, rgba(0, 0, 0, 0.3) 34%, #000 64%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0 6%, rgba(0, 0, 0, 0.55) 16%, #000 34%);
+    mask-image: linear-gradient(to bottom, transparent 0 6%, rgba(0, 0, 0, 0.55) 16%, #000 34%);
   }
 }
 

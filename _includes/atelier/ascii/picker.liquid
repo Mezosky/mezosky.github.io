@@ -1,0 +1,19 @@
+{% comment %}
+  Picks one of the homepage backdrops at random per visit.
+
+  Inline and placed straight after the fields so it runs during parse, before
+  first paint: deferring it would show the first backdrop and then swap, which
+  reads as a flicker. Without JavaScript the first alternate simply stays.
+{% endcomment %}
+
+<script>
+  (function () {
+    var fields = document.querySelectorAll('[data-ascii-alt]');
+    if (fields.length < 2) return;
+    var pick = Math.floor(Math.random() * fields.length);
+    for (var i = 0; i < fields.length; i++) {
+      if (i === pick) fields[i].removeAttribute('hidden');
+      else fields[i].setAttribute('hidden', '');
+    }
+  })();
+</script>

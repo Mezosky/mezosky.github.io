@@ -31,7 +31,18 @@
       containing block for this fixed-position field and trap it in the container.
     -->
     {% if page.ascii_field %}
-      {% include atelier/ascii/field.liquid field=page.ascii_field variant="wide" %}
+      {% if page.ascii_field_alternatives %}
+        {% for key in page.ascii_field_alternatives %}
+          {% assign ascii_hidden = true %}
+          {% if forloop.first %}
+            {% assign ascii_hidden = false %}
+          {% endif %}
+          {% include atelier/ascii/field.liquid field=key variant="wide" alternate=true hidden=ascii_hidden %}
+        {% endfor %}
+        {% include atelier/ascii/picker.liquid %}
+      {% else %}
+        {% include atelier/ascii/field.liquid field=page.ascii_field variant="wide" %}
+      {% endif %}
       {% assign ascii_compact = page.ascii_field_compact | default: site.ascii_field_compact %}
       {% if ascii_compact %}
         {% include atelier/ascii/field.liquid field=ascii_compact variant="compact" %}

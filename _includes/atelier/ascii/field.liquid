@@ -6,6 +6,7 @@
   Params:
     field    key under site.data.ascii (default: bosch_field)
     variant  "wide" (default) or "compact"
+    hidden   render it hidden, for an alternate the picker may reveal instead
 
   Called once per variant: a landscape composition for wide viewports and a
   portrait one for phones, swapped by media query in _sass/_atelier-hero.scss.
@@ -41,6 +42,12 @@
     class="ascii-field ascii-field--{{ variant }}"
     {% if variant == 'wide' %}
       data-ascii-field
+    {% endif %}
+    {% if include.alternate %}
+      data-ascii-alt
+    {% endif %}
+    {% if include.hidden %}
+      hidden
     {% endif %}
     aria-hidden="true"
     role="presentation"

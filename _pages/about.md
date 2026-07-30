@@ -6,7 +6,12 @@ permalink: /
 subtitle: Machine learning research, computer vision, and teaching.
 
 # Renders the layered ASCII backdrop and loads its parallax script.
+# With alternatives set, one is chosen at random per visit; the first is what a
+# reader without JavaScript sees. Keys are files in _data/ascii/.
 ascii_field: bosch_field
+ascii_field_alternatives:
+  - bosch_field
+  - medusa_field
 
 # Hero copy. Edit here; _includes/atelier/hero.liquid holds only the markup.
 hero:
