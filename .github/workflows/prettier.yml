@@ -20,7 +20,11 @@ jobs:
       - name: Setup Node.js ⚙️
         uses: actions/setup-node@v4
       - name: Install Prettier 💾
-        run: npm install --save-dev --save-exact prettier @shopify/prettier-plugin-liquid
+        # Install from the lockfile rather than resolving latest. Prettier and the
+        # Liquid plugin change formatting between minor releases, so a floating
+        # install makes this job fail on unrelated pushes and disagree with what
+        # contributors get from `npm install` locally.
+        run: npm ci
       - name: Prettier Check 🔎
         id: prettier
         run: npx prettier . --check
