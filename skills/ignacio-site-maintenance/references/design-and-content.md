@@ -105,9 +105,12 @@ it served ads and painted outside its container.
 
 - Playback never starts on its own. `audio.invite` offers a one-time, declinable
   prompt; the panel control works whichever way that went.
-- Track and position are stashed in sessionStorage, so navigation resumes rather
-  than restarting. If a browser refuses to resume without a fresh gesture, the
-  control is right there.
+- Changing page does not interrupt it: internal links swap the page in place
+  (`assets/js/navigate.js`), so the same `<audio>` element plays straight through.
+  Pause is the reader's decision alone — nothing else stops playback.
+- Track, position and paused state are stashed in sessionStorage, so a full reload
+  resumes rather than restarting. If a browser refuses to resume without a fresh
+  gesture, the control is right there.
 - `preload="none"`: nothing is fetched until someone presses play.
 - The invitation starts as inert `hidden` markup, so a reader without JavaScript,
   and any crawler, gets the page rather than a gate.
