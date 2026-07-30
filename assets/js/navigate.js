@@ -18,6 +18,11 @@
   "use strict";
 
   var SHELL = "[data-page-shell]";
+  // Body classes that belong to the running page rather than to the markup. The
+  // fetched document is always in its pre-JavaScript state, so it carries
+  // `page-preload` — the class that holds the shell at opacity 0 until the page is
+  // revealed. Copying it verbatim leaves every page after the first one invisible.
+  var RUNTIME_CLASSES = ["page-preload", "page-ready", "is-page-leaving"];
   var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   var parser = new DOMParser();
   var token = 0;
@@ -79,7 +84,19 @@
     }
 
     document.title = doc.title;
+
+    // Take the new page's classes, but keep the ones that describe where this
+    // document is in its own lifecycle.
+    var carried = RUNTIME_CLASSES.filter(function (name) {
+      return document.body.classList.contains(name);
+    });
     document.body.className = doc.body.className;
+    RUNTIME_CLASSES.forEach(function (name) {
+      document.body.classList.remove(name);
+    });
+    carried.forEach(function (name) {
+      document.body.classList.add(name);
+    });
 
     // The backdrop differs per page and sits outside the shell, so replace it too.
     var incomingFields = doc.querySelectorAll(".ascii-field");
