@@ -83,11 +83,33 @@ jobs:
           valueFile: "_config.yml"
           propertyPath: "giscus.repo"
           value: ${{ github.repository }}
+      # jekyll-imagemagick shells out to `convert`, which ubuntu-latest stopped
+      # shipping at 24.04. Without it every responsive variant silently fails to
+      # generate -- the build still succeeds, the srcset still points at the
+      # variants, and every browser quietly falls back to the full-size original.
+      # The verify step fails the build rather than letting that happen again.
+      - name: Install ImageMagick 🖼️
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y imagemagick libmagickcore-6.q16-6-extra
+          convert -version
+          convert -list format | grep -i 'WEBP.*rw'
       - name: Install and Build 🔧
         run: |
           pip3 install --upgrade jupyter
           export JEKYLL_ENV=production
           bundle exec jekyll build
+      - name: Verify responsive images 🔍
+        run: |
+          missing=0
+          while read -r src; do
+            [ -f "_site/$src" ] || { echo "missing: $src"; missing=$((missing+1)); }
+          done < <(grep -rhoE '/assets/[^" ]+-(480|800|1400)\.webp' _site --include='*.html' | sed 's|^/||' | sort -u)
+          if [ "$missing" -gt 0 ]; then
+            echo "$missing responsive variants referenced but not generated"
+            exit 1
+          fi
+          echo "every referenced responsive variant exists"
       - name: Purge unused CSS 🧹
         run: |
           npm install -g purgecss
