@@ -1,0 +1,24 @@
+{% comment %}
+  Contact and profile links as plain typographic tokens rather than icons, built
+  from the same _config.yml fields the icon-based social include uses.
+{% endcomment %}
+
+<ul class="atelier-links">
+  {% if page.cv_link != false %}
+    <li><a class="atelier-token" href="{{ '/cv/' | relative_url }}">Curriculum vitae</a></li>
+  {% endif %}
+  {% if site.email %}
+    <li><a class="atelier-token" href="mailto:{{ site.email | encode_email }}">Email</a></li>
+  {% endif %}
+  {% if site.scholar_userid %}
+    <li>
+      <a class="atelier-token" href="https://scholar.google.com/citations?user={{ site.scholar_userid }}">Google Scholar</a>
+    </li>
+  {% endif %}
+  {% if site.github_username %}
+    <li><a class="atelier-token" href="https://github.com/{{ site.github_username }}">GitHub</a></li>
+  {% endif %}
+  {% if site.linkedin_username %}
+    <li><a class="atelier-token" href="https://www.linkedin.com/in/{{ site.linkedin_username }}">LinkedIn</a></li>
+  {% endif %}
+</ul>

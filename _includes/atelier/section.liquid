@@ -1,0 +1,17 @@
+{% comment %}
+  Shared heading for a homepage section, so every section shares one rhythm.
+
+  Params:
+    index  the two-digit number shown before the title
+    title  section title
+    note   optional single line under the title
+    id     anchor id, also used to label the section
+{% endcomment %}
+
+<header class="atelier-section__head">
+  <p class="atelier-section__index" aria-hidden="true">{{ include.index }}</p>
+  <h2 class="atelier-section__title" id="{{ include.id }}-title">{{ include.title }}</h2>
+  {% if include.note %}
+    <p class="atelier-section__note">{{ include.note }}</p>
+  {% endif %}
+</header>

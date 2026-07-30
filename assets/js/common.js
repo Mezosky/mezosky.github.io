@@ -57,9 +57,6 @@ $(document).ready(function () {
   window.addEventListener("pageshow", showPageContent);
 
   const navbar = document.getElementById("navbar");
-  const dynamicBrand = document.querySelector(".navbar-brand-dynamic");
-  const dynamicBrandFull = dynamicBrand ? dynamicBrand.querySelector(".navbar-brand-full") : null;
-  const dynamicBrandCompact = dynamicBrand ? dynamicBrand.querySelector(".navbar-brand-compact") : null;
   const condensedNavbarThreshold = 72;
 
   const syncNavbarCondensedState = () => {
@@ -68,23 +65,6 @@ $(document).ready(function () {
     }
 
     navbar.classList.toggle("navbar-condensed", window.scrollY > condensedNavbarThreshold);
-  };
-
-  const syncNavbarBrandWidths = () => {
-    if (!dynamicBrand || !dynamicBrandFull || !dynamicBrandCompact) {
-      return;
-    }
-
-    const fullWidth = Math.ceil(dynamicBrandFull.getBoundingClientRect().width);
-    const compactWidth = Math.ceil(dynamicBrandCompact.getBoundingClientRect().width);
-
-    if (fullWidth > 0) {
-      dynamicBrand.style.setProperty("--brand-full-width", `${fullWidth}px`);
-    }
-
-    if (compactWidth > 0) {
-      dynamicBrand.style.setProperty("--brand-compact-width", `${compactWidth}px`);
-    }
   };
 
   let navbarScrollTicking = false;
@@ -102,18 +82,9 @@ $(document).ready(function () {
   };
 
   syncNavbarCondensedState();
-  syncNavbarBrandWidths();
 
   if (navbar) {
     window.addEventListener("scroll", handleNavbarScroll, { passive: true });
-  }
-
-  if (dynamicBrand) {
-    window.addEventListener("resize", syncNavbarBrandWidths);
-
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(syncNavbarBrandWidths).catch(() => {});
-    }
   }
 
   document.addEventListener("click", (event) => {

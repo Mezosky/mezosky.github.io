@@ -33,13 +33,40 @@
 ## Design System
 
 - `assets/css/main.scss`
-  Sass entry point.
+  Sass entry point. The `atelier-*` partials are imported last.
+- `_sass/_atelier-tokens.scss`
+  Palette, type and layout tokens; also re-points the inherited `--global-*` and
+  `--brand-*` theme variables. Start here for any colour or font change.
+- `_sass/_atelier-shell.scss`
+  Base typography, page frame, navbar, footer, focus states.
+- `_sass/_atelier-hero.scss`
+  Hero and the ASCII backdrop, including the responsive crop and fades.
+- `_sass/_atelier-sections.scss`
+  Index lists, publication list, prose, portrait plate, inner pages.
 - `_sass/_custom.scss`
-  Current custom design system, homepage styling, and professional polish.
+  Blog-note components, reveal-on-scroll, page transitions. Nothing else.
 - `assets/js/common.js`
   UI behavior and reveal animations.
+- `assets/js/ascii-field.js`
+  Pointer and scroll parallax for the backdrop. Enhancement only.
 - `assets/img/profile/ignacio-meza-portrait.jpg`
-  Canonical homepage portrait stored in the dedicated profile image folder.
+  Canonical portrait, shown in the About section and used as the Open Graph image.
+
+## Homepage Components
+
+- `_layouts/about.liquid`
+  Section order only; every block is an include.
+- `_includes/atelier/`
+  hero, nav, section heading, research index, notes, links, portrait, colophon.
+- `_includes/atelier/ascii/field.liquid`
+  Renders the backdrop from data. The only place that knows the markup.
+- `_data/navigation.yml`, `_data/research.yml`
+  Navigation entries and research themes.
+- `_data/ascii/bosch_field.yml`
+  The generated artwork: plain text on a fixed grid, hand-editable.
+- `tools/ascii_art/`
+  Offline generator that builds the artwork from a source painting. Excluded from
+  the Jekyll build; see its README.
 
 ## Repo Docs And Workflow
 

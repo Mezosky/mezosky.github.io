@@ -61,9 +61,9 @@ max_width: 1120px
 # -----------------------------------------------------------------------------
 # Display links to the page with a preview object on social media.
 # see https://schema.org/docs/faq.html for more information
-serve_og_meta: false # Include Open Graph meta tags in the HTML head
-serve_schema_org: false # Include Schema.org in the HTML head
-og_image: # The site-wide (default for all links) Open Graph preview image
+serve_og_meta: true # Include Open Graph meta tags in the HTML head
+serve_schema_org: true # Include Schema.org in the HTML head
+og_image: https://mezosky.github.io/assets/img/profile/ignacio-meza-portrait.jpg # The site-wide (default for all links) Open Graph preview image
 
 # -----------------------------------------------------------------------------
 # Social integration
@@ -206,6 +206,7 @@ kramdown:
 include: ["_pages"]
 exclude:
   - bin/
+  - tools/
   - CONTRIBUTING.md
   - CUSTOMIZE.md
   - Dockerfile
@@ -262,6 +263,11 @@ sass:
 
 jekyll-minifier:
   exclude: ["robots.txt", "assets/js/search/*.js"]
+  # The CSS pass reads the leading "--" of a custom property as minus-minus
+  # arithmetic and rewrites calc(var(--x)/2) into calc(var( - - x)/2), which
+  # silently voids the declaration. Sass already emits compressed CSS
+  # (sass.style: compressed above), so this pass only adds the bug.
+  compress_css: false
   uglifier_args:
     harmony: true
 
@@ -289,7 +295,7 @@ display_categories: [] # these categories will be displayed on the front page of
 
 scholar:
   last_name: ["De la Jara"]
-  first_name: [Ignacio, "Ignacio M.", I., "I. M."]
+  first_name: [Ignacio, "Ignacio M.", "Ignacio Meza", I., "I. M."]
 
   style: apa
   locale: en
@@ -314,8 +320,8 @@ scholar:
 
 # Display different badges withs stats for your publications
 enable_publication_badges:
-  altmetric: true # Altmetric badge (https://www.altmetric.com/products/altmetric-badges/)
-  dimensions: true # Dimensions badge (https://badge.dimensions.ai/)
+  altmetric: false # Altmetric badge (https://www.altmetric.com/products/altmetric-badges/)
+  dimensions: false # Dimensions badge (https://badge.dimensions.ai/)
   google_scholar: true # Google Scholar badge (https://scholar.google.com/intl/en/scholar/citations.html)
 
 # Filter out certain bibtex entry keywords used internally from the bib output
@@ -337,6 +343,7 @@ filtered_bibtex_keywords:
     preview,
     selected,
     slides,
+    summary,
     supp,
     video,
     website,
@@ -402,7 +409,7 @@ enable_bing_verification: false # enables bing site verification
 enable_masonry: true # enables automatic project cards arrangement
 enable_math: true # enables math typesetting (uses MathJax)
 enable_tooltips: false # enables automatic tooltip links generated for each section titles on pages and posts
-enable_darkmode: true # enables switching between light/dark modes
+enable_darkmode: false # single committed dark palette; see _sass/_atelier-tokens.scss
 enable_navbar_social: false # enables displaying social links in the navbar on the about page
 enable_project_categories: false # enables categorization of projects into multiple categories
 enable_medium_zoom: true # enables image zoom feature (as on medium.com)
@@ -458,7 +465,7 @@ third_party_libraries:
     version: "5.5.0"
   google_fonts:
     url:
-      fonts: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      fonts: "https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap"
   highlightjs:
     integrity:
       css:

@@ -22,5 +22,11 @@ $max-content-width: {{ site.max_width }};
   "tabler-icons/tabler-icons.scss",
   "tabler-icons/tabler-icons-filled.scss",
   "tabler-icons/tabler-icons-outline.scss",
-  "custom"
+  "custom",
+  // Atelier: the art-directed layer. Imported last so it settles the palette and
+  // typography over everything above it.
+  "atelier-tokens",
+  "atelier-shell",
+  "atelier-hero",
+  "atelier-sections"
 ;

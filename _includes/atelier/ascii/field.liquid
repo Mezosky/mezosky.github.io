@@ -1,0 +1,35 @@
+{% comment %}
+  The ASCII backdrop. Reads a generated field from _data/ascii/ and stacks its
+  layers back to front; depth, opacity and parallax are handled in CSS/JS.
+
+  Params:
+    field  key under site.data.ascii (default: bosch_field)
+
+  The artwork is decorative, so the whole field is hidden from assistive tech and
+  from the pointer. It is real text, escaped at render time, so any character in
+  the source data is safe to use.
+
+  Every layer is prefixed with a newline. An HTML parser drops exactly one
+  newline after <pre>, so this guarantees each layer's first row lands on the same
+  line whether or not its own top row happens to be blank — without which the
+  layers slide a row out of register.
+{% endcomment %}
+
+{% capture ascii_newline %}
+{% endcapture %}
+
+{% assign field_key = include.field | default: 'bosch_field' %}
+{% assign field = site.data.ascii[field_key] %}
+
+{% if field %}
+  <div class="ascii-field" data-ascii-field aria-hidden="true" role="presentation">
+    {% for layer in field.layers %}
+      <pre
+        class="ascii-field__layer ascii-field__layer--{{ layer.id }}"
+        data-ascii-layer="{{ layer.id }}"
+        data-depth="{{ forloop.index }}"
+        style="--ascii-columns: {{ field.columns }}; --ascii-rows: {{ field.rows }}"
+      >{{ layer.art | escape | prepend: ascii_newline }}</pre>
+    {% endfor %}
+  </div>
+{% endif %}

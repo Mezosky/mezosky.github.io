@@ -1,0 +1,4 @@
+{% if page.ascii_field %}
+  <!-- Parallax for the ASCII backdrop; the artwork itself needs no JavaScript -->
+  <script defer src="{{ '/assets/js/ascii-field.js' | relative_url | bust_file_cache }}"></script>
+{% endif %}

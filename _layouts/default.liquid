@@ -25,6 +25,15 @@
     <!-- Header -->
     {% include header.liquid %}
 
+    <!--
+      ASCII backdrop. Sits outside [data-page-shell] on purpose: that element
+      is transformed for the page transition, which would otherwise become the
+      containing block for this fixed-position field and trap it in the container.
+    -->
+    {% if page.ascii_field %}
+      {% include atelier/ascii/field.liquid %}
+    {% endif %}
+
     <!-- Content -->
     <div class="container mt-5" role="main" data-page-shell>
       {% if page.toc and page.toc.sidebar %}
@@ -68,6 +77,7 @@
     {% include scripts/tikzjax.liquid %}
     {% include scripts/typograms.liquid %}
     {% include scripts/misc.liquid %}
+    {% include scripts/ascii_field.liquid %}
     {% include scripts/badges.liquid %}
     {% include scripts/mathjax.liquid %}
     {% include scripts/pseudocode.liquid %}

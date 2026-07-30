@@ -1,0 +1,17 @@
+# Primary navigation, rendered by _includes/atelier/nav.liquid.
+#
+# An entry may point at a page or at an anchor on the homepage; homepage
+# sections carry matching ids. `index` is displayed, so keep it in step with the
+# order of the list.
+- index: "01"
+  label: Research
+  url: /#research
+- index: "02"
+  label: Publications
+  url: /publications/
+- index: "03"
+  label: Notes
+  url: /blog/
+- index: "04"
+  label: About
+  url: /#about

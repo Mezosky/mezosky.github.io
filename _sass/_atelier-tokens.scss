@@ -1,0 +1,87 @@
+/*******************************************************************************
+ * Atelier — design tokens.
+ *
+ * The site runs a single committed dark palette rather than a light/dark pair,
+ * so the values live on :root. The block also re-points the theme variables the
+ * inherited component library reads (--global-*) and the ones the earlier custom
+ * layer introduced (--brand-*), which is what lets navbar, footer, tables, cards
+ * and publication rows adopt this palette without being restyled one by one.
+ ******************************************************************************/
+
+:root {
+  /* Surfaces */
+  --atelier-void: #0b0a09;
+  --atelier-deep: #100e0c;
+  --atelier-raised: #15120f;
+
+  /* Ink. Contrast on --atelier-void: ivory 15.7:1, ash 5.9:1, bronze 7.6:1. */
+  --atelier-ivory: #ece5d8;
+  --atelier-ash: #948b7c;
+  --atelier-bronze: #c09a63;
+  --atelier-bronze-bright: #d9b784;
+
+  /* Dim is decorative only — indices, rules, dashes. Never body copy. */
+  --atelier-dim: #6b6458;
+
+  --atelier-line: rgba(236, 229, 216, 0.1);
+  --atelier-line-strong: rgba(236, 229, 216, 0.2);
+
+  /* The backdrop, back to front. */
+  --atelier-art-far: #8a8172;
+  --atelier-art-mid: #a4906e;
+  --atelier-art-near: #cbb68e;
+
+  --atelier-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+  --atelier-serif: "EB Garamond", Georgia, "Times New Roman", serif;
+
+  /* Layout frame, shared by the navbar and the page container. */
+  --atelier-frame: 1280px;
+  --atelier-gutter: clamp(1.25rem, 4vw, 3rem);
+  --atelier-navbar-height: 56px;
+
+  /* Inherited theme variables, re-pointed. */
+  --global-bg-color: var(--atelier-void);
+  --global-code-bg-color: rgba(236, 229, 216, 0.045);
+  --global-text-color: var(--atelier-ivory);
+  --global-text-color-light: var(--atelier-ash);
+  --global-theme-color: var(--atelier-bronze);
+  --global-hover-color: var(--atelier-bronze-bright);
+  --global-hover-text-color: var(--atelier-void);
+  --global-footer-bg-color: transparent;
+  --global-footer-text-color: var(--atelier-ash);
+  --global-footer-link-color: var(--atelier-ivory);
+  --global-distill-app-color: var(--atelier-ash);
+  --global-divider-color: var(--atelier-line);
+  --global-card-bg-color: var(--atelier-deep);
+  --global-highlight-color: var(--atelier-bronze);
+  --global-back-to-top-bg-color: rgba(236, 229, 216, 0.08);
+  --global-back-to-top-text-color: var(--atelier-ivory);
+
+  /* Earlier custom layer. */
+  --brand-ink: var(--atelier-ivory);
+  --brand-muted: var(--atelier-ash);
+  --brand-surface: var(--atelier-deep);
+  --brand-surface-strong: var(--atelier-raised);
+  --brand-accent: var(--atelier-bronze);
+  --brand-accent-strong: var(--atelier-bronze-bright);
+  --brand-accent-soft: rgba(192, 154, 99, 0.12);
+  --brand-border: var(--atelier-line);
+  --brand-border-strong: var(--atelier-line-strong);
+  --brand-shadow: none;
+}
+
+/* Kept in step so re-enabling the theme toggle cannot strand the page in a
+ * half-light state. */
+html[data-theme="dark"] {
+  --global-bg-color: var(--atelier-void);
+  --global-code-bg-color: rgba(236, 229, 216, 0.045);
+  --global-text-color: var(--atelier-ivory);
+  --global-text-color-light: var(--atelier-ash);
+  --global-theme-color: var(--atelier-bronze);
+  --global-hover-color: var(--atelier-bronze-bright);
+  --global-footer-bg-color: transparent;
+  --global-footer-text-color: var(--atelier-ash);
+  --global-footer-link-color: var(--atelier-ivory);
+  --global-divider-color: var(--atelier-line);
+  --global-card-bg-color: var(--atelier-deep);
+}

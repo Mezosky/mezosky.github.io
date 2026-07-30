@@ -1,0 +1,33 @@
+{% comment %}
+  Homepage hero. Copy comes from the page's `hero` front matter so it can be
+  edited without touching markup; the wordmark is site.title.
+{% endcomment %}
+
+{% assign hero = page.hero %}
+
+<section class="atelier-hero" aria-labelledby="atelier-hero-name">
+  <div class="atelier-hero__copy">
+    {% if hero.statement %}
+      <p class="atelier-hero__statement">
+        <span class="atelier-hero__prompt" aria-hidden="true">&gt;</span>
+        {% for line in hero.statement %}
+          <span class="atelier-hero__statement-line">{{ line }}</span>
+        {% endfor %}
+      </p>
+    {% endif %}
+
+    <span class="atelier-hero__rule" aria-hidden="true"></span>
+
+    <h1 class="atelier-hero__name" id="atelier-hero-name">{{ site.title }}</h1>
+
+    {% if hero.role %}
+      <p class="atelier-hero__role">{{ hero.role }}</p>
+    {% endif %}
+  </div>
+
+  {% assign first_section = site.data.navigation | first %}
+  <a class="atelier-hero__scroll" href="{{ first_section.url | relative_url }}">
+    <span class="atelier-hero__scroll-label">[ {{ hero.scroll_label | default: 'Scroll to explore' }} ]</span>
+    <span class="atelier-hero__scroll-arrow" aria-hidden="true">&darr;</span>
+  </a>
+</section>

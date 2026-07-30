@@ -1,0 +1,15 @@
+# Research themes, rendered as an indexed list by
+# _includes/atelier/research_index.liquid. Add or reorder entries here; nothing
+# else needs to change.
+- index: "01"
+  title: Representation Trajectories
+  summary: How internal representations evolve across model depth.
+- index: "02"
+  title: Out-of-Distribution Detection
+  summary: How models recognize unfamiliar inputs and deployment shifts.
+- index: "03"
+  title: Segmentation and Latent Selection
+  summary: How frozen models conceal useful predictions among their outputs.
+- index: "04"
+  title: Language Model Reasoning
+  summary: How truthfulness and behavior evolve across tokens and layers.

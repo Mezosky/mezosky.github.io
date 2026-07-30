@@ -1,0 +1,28 @@
+{% comment %}
+  Writing, as a sparse dated list. Reads site.posts directly so the blog stays
+  the single source; `limit` caps how many are shown.
+{% endcomment %}
+
+{% assign limit = include.limit | default: 5 %}
+
+{% if site.posts.size > 0 %}
+  <ol class="atelier-notes" aria-labelledby="notes-title">
+    {% for post in site.posts limit: limit %}
+      <li class="atelier-notes__row">
+        <a class="atelier-notes__link" href="{{ post.url | relative_url }}">
+          <time class="atelier-notes__date" datetime="{{ post.date | date_to_xmlschema }}">
+            {{- post.date | date: '%Y.%m.%d' -}}
+          </time>
+          <span class="atelier-notes__body">
+            <span class="atelier-notes__title">{{ post.title }}</span>
+            {% if post.description %}
+              <span class="atelier-notes__summary">{{ post.description | strip_html | truncate: 160 }}</span>
+            {% endif %}
+          </span>
+        </a>
+      </li>
+    {% endfor %}
+  </ol>
+{% else %}
+  <p class="atelier-empty">Nothing published yet.</p>
+{% endif %}

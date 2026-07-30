@@ -7,9 +7,12 @@ on:
       - main
     paths:
       - "assets/**"
+      - "_sass/**"
       - "**.html"
       - "**.js"
       - "**.liquid"
+      - "**.scss"
+      - "**.bib"
       - "**/*.md"
       - "**.yml"
       - "Gemfile"
@@ -33,9 +36,12 @@ on:
       - main
     paths:
       - "assets/**"
+      - "_sass/**"
       - "**.html"
       - "**.js"
       - "**.liquid"
+      - "**.scss"
+      - "**.bib"
       - "**/*.md"
       - "**.yml"
       - "Gemfile"

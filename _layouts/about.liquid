@@ -1,93 +1,76 @@
 ---
 layout: default
 ---
-<div class="post">
-  <header class="post-header about-intro reveal-on-scroll">
-    <h1 class="post-title">
-      {% if site.title == 'blank' %}
-        <span class="font-weight-bold">{{ site.first_name }}</span> {{ site.middle_name }}
-        {{ site.last_name }}
-      {% else %}
-        {{ site.title }}
-      {% endif %}
-    </h1>
-    <p class="desc">{{ page.subtitle }}</p>
-  </header>
+{% comment %}
+  Homepage. Every block is an include under _includes/atelier/; this file only
+  decides the order of the sections and which of them are switched on by the
+  page's front matter.
+{% endcomment %}
 
-  <article class="about-article">
-    {% if page.profile %}
-      <div class="profile float-{% if page.profile.align == 'left' %}left{% else %}right{% endif %} reveal-on-scroll">
-        {% if page.profile.image %}
-          {% assign profile_image_path = page.profile.image | prepend: 'assets/img/' %}
-          {% if page.profile.image_circular %}
-            {% assign profile_image_class = 'img-fluid z-depth-1 rounded-circle' %}
-          {% else %}
-            {% assign profile_image_class = 'img-fluid z-depth-1
-      rounded' %}
-          {% endif %}
-          {% capture sizes %}(min-width: {{site.max_width}}) {{ site.max_width | minus: 30 | times: 0.3}}px, (min-width: 576px)
-      30vw, 95vw"{% endcapture %}
-          {%
-            include figure.liquid loading="eager" path=profile_image_path class=profile_image_class sizes=sizes alt=page.profile.image
-            cache_bust=true
-          %}
-        {% endif %}
-        {% if page.profile.more_info %}
-          <div class="more-info">{{ page.profile.more_info }}</div>
-        {% endif %}
-      </div>
-    {% endif %}
+<div class="atelier-home">
+  {% include atelier/hero.liquid %}
 
-    <div class="about-body clearfix">{{ content }}</div>
+  <section class="atelier-section" id="research" aria-labelledby="research-title">
+    {%
+      include atelier/section.liquid
+      id="research"
+      index="01"
+      title="Research"
+      note="Four questions, one thread: what a model's internal states reveal that its output does not."
+    %}
+    {% include atelier/research_index.liquid %}
+  </section>
 
-    <!-- News -->
-    {% if page.news and site.announcements.enabled %}
-      <section class="about-panel reveal-on-scroll">
-        <div class="section-heading">
-          <span class="section-kicker">Updates</span>
-          <h2><a href="{{ '/news/' | relative_url }}" style="color: inherit">News</a></h2>
-        </div>
-        {% include news.liquid limit=true %}
-      </section>
-    {% endif %}
+  {% if page.selected_papers %}
+    <section class="atelier-section" id="publications" aria-labelledby="publications-title">
+      {%
+        include atelier/section.liquid
+        id="publications"
+        index="02"
+        title="Publications"
+        note="Selected work. Use Cite for ready-to-copy BibTeX."
+      %}
+      <div class="atelier-publications">{% include selected_papers.liquid %}</div>
+      <a class="atelier-more" href="{{ '/publications/' | relative_url }}">[ All publications ]</a>
+    </section>
+  {% endif %}
 
-    <!-- Latest posts -->
-    {% if site.latest_posts.enabled %}
-      <section class="about-panel reveal-on-scroll">
-        <div class="section-heading">
-          <span class="section-kicker">Writing</span>
-          <h2><a href="{{ '/blog/' | relative_url }}" style="color: inherit">Latest Posts</a></h2>
-        </div>
-        {% include latest_posts.liquid %}
-      </section>
-    {% endif %}
+  <section class="atelier-section" id="notes" aria-labelledby="notes-title">
+    {%
+      include atelier/section.liquid
+      id="notes"
+      index="03"
+      title="Notes"
+      note="Working notes on machine learning, computer vision, and teaching."
+    %}
+    {% include atelier/notes.liquid limit=4 %}
+    <a class="atelier-more" href="{{ '/blog/' | relative_url }}">[ All notes ]</a>
+  </section>
 
-    <!-- Selected papers -->
-    {% if page.selected_papers %}
-      <section class="about-panel about-panel-publications reveal-on-scroll">
-        <div class="section-heading">
-          <span class="section-kicker">Research</span>
-          <h2><a href="{{ '/publications/' | relative_url }}" style="color: inherit">Selected Publications</a></h2>
-          <p>Recent academic work with an emphasis on computer vision, machine learning, and careful empirical study.</p>
-        </div>
-        {% include selected_papers.liquid %}
-      </section>
-    {% endif %}
-
-    <!-- Social -->
+  <section class="atelier-section atelier-section--about" id="about" aria-labelledby="about-title">
+    {%
+      include atelier/section.liquid
+      id="about"
+      index="04"
+      title="About"
+      note=page.subtitle
+    %}
+    <div class="atelier-about">
+      {% unless page.portrait == false %}
+        {% include atelier/portrait.liquid %}
+      {% endunless %}
+      <div class="atelier-prose">{{ content }}</div>
+    </div>
     {% if page.social %}
-      <section class="about-panel about-panel-social reveal-on-scroll">
-        <div class="section-heading">
-          <span class="section-kicker">Connect</span>
-          <h2>Find Me Online</h2>
-          <p>Profiles, research links, and channels for collaboration.</p>
-        </div>
-        <div class="social">
-          <div class="contact-icons">{% include social.liquid %}</div>
-
-          <div class="contact-note">{{ site.contact_note }}</div>
-        </div>
-      </section>
+      {% include atelier/links.liquid %}
     {% endif %}
-  </article>
+    {% include atelier/colophon.liquid %}
+  </section>
+
+  {% if page.news and site.announcements.enabled %}
+    <section class="atelier-section" id="news" aria-labelledby="news-title">
+      {% include atelier/section.liquid id="news" index="05" title="News" %}
+      {% include news.liquid limit=true %}
+    </section>
+  {% endif %}
 </div>

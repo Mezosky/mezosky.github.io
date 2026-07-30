@@ -1,0 +1,242 @@
+/*******************************************************************************
+ * Atelier — hero and the ASCII backdrop.
+ ******************************************************************************/
+
+/* The shared page container carries a Bootstrap top margin; the hero needs the
+ * full viewport instead. */
+body.atelier-home .container[role="main"] {
+  margin-top: 0 !important;
+}
+
+.atelier-hero {
+  position: relative;
+  display: grid;
+  align-content: center;
+  min-height: calc(100svh - var(--atelier-navbar-height) - 2rem);
+  padding: clamp(3rem, 9vh, 7rem) 0 clamp(5rem, 12vh, 8rem);
+}
+
+.atelier-hero__copy {
+  position: relative;
+  z-index: 1;
+  max-width: 52ch;
+}
+
+.atelier-hero__statement {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.85em;
+  font-size: clamp(0.875rem, 1.15vw, 1rem);
+  line-height: 1.75;
+  color: var(--atelier-ivory);
+  margin: 0;
+}
+
+.atelier-hero__prompt {
+  grid-row: 1 / span 2;
+  color: var(--atelier-bronze);
+}
+
+.atelier-hero__statement-line {
+  grid-column: 2;
+  display: block;
+}
+
+.atelier-hero__rule {
+  display: block;
+  width: 1.25rem;
+  height: 1px;
+  margin: clamp(1.75rem, 4vh, 2.75rem) 0;
+  background: var(--atelier-dim);
+}
+
+/* Mono display type wants slightly open tracking, never the tight negative
+ * tracking a geometric sans would take. */
+.atelier-hero__name {
+  font-size: clamp(2.5rem, 8.5vw, 6.5rem);
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  margin: 0;
+  color: var(--atelier-ivory);
+}
+
+.atelier-hero__role {
+  margin: clamp(0.9rem, 2vh, 1.4rem) 0 0;
+  font-size: clamp(0.8125rem, 1.1vw, 0.9375rem);
+  letter-spacing: 0.06em;
+  color: var(--atelier-ash);
+}
+
+.atelier-hero__scroll {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  align-self: end;
+  justify-self: start;
+  margin-top: clamp(3rem, 10vh, 6rem);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--atelier-ash);
+}
+
+.atelier-hero__scroll:hover,
+.atelier-hero__scroll:focus-visible {
+  color: var(--atelier-ivory);
+}
+
+.atelier-hero__scroll-arrow {
+  font-size: 0.875rem;
+  color: var(--atelier-bronze);
+  transition: transform 0.25s ease;
+}
+
+.atelier-hero__scroll:hover .atelier-hero__scroll-arrow {
+  transform: translateY(3px);
+}
+
+/* --- The backdrop --------------------------------------------------------- */
+
+/**
+ * A fixed field rather than a boxed image: it is pinned to the viewport, bleeds
+ * off the bottom and right, and fades out across the left where the copy sits.
+ * Every layer is real text, so it costs no requests and scales with the page.
+ */
+.ascii-field {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  /* Set by assets/js/ascii-field.js as the reader leaves the hero. */
+  opacity: calc(1 - var(--ascii-scrolled, 0) * 0.55);
+}
+
+.ascii-field__layer {
+  /* How much viewport width the whole grid spans. */
+  --ascii-span: 96vw;
+
+  position: absolute;
+  right: -8vw;
+  bottom: -2vh;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  border-radius: 0;
+  white-space: pre;
+  font-family: var(--atelier-mono);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: 0;
+  /* Fallback assumes the shipped 190-column grid (190 x 0.6em per character). */
+  font-size: calc(var(--ascii-span) / 114);
+  font-size: calc(var(--ascii-span) / (var(--ascii-columns, 190) * 0.6));
+  /* Sized from the grid rather than left to shrink-to-fit: the layers are
+   * anchored bottom-right, so boxes of differing intrinsic size would offset
+   * their contents from one another and break the composition. */
+  width: calc(var(--ascii-columns, 190) * 0.6em);
+  height: calc(var(--ascii-rows, 84) * 1.02em);
+  will-change: transform;
+}
+
+/* Depth by tone: the darkest band sits furthest back and moves least. */
+.ascii-field__layer--atmosphere {
+  color: var(--atelier-art-far);
+  opacity: 0.2;
+}
+
+.ascii-field__layer--architecture {
+  color: var(--atelier-art-mid);
+  opacity: 0.36;
+}
+
+.ascii-field__layer--figures {
+  color: var(--atelier-art-near);
+  opacity: 0.54;
+}
+
+/* The fade is a mask, not a stack of overlay gradients, so the page background
+ * shows through untouched and the text above stays at full contrast. */
+.ascii-field {
+  -webkit-mask-image: linear-gradient(to right, transparent 0, rgba(0, 0, 0, 0.3) 16%, #000 48%);
+  mask-image: linear-gradient(to right, transparent 0, rgba(0, 0, 0, 0.3) 16%, #000 48%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ascii-field {
+    opacity: 1;
+  }
+
+  .ascii-field__layer {
+    transform: none !important;
+    will-change: auto;
+  }
+
+  .atelier-hero__scroll-arrow {
+    transition: none;
+  }
+}
+
+/* --- Narrow screens ------------------------------------------------------- */
+
+@media (max-width: 47.9em) {
+  .atelier-hero {
+    min-height: calc(100svh - var(--atelier-navbar-height));
+  }
+
+  .atelier-hero__copy {
+    max-width: none;
+  }
+
+  /* Crop into the composition instead of shrinking it to illegible specks, and
+   * drop the faintest layer so the copy keeps its contrast. */
+  .ascii-field__layer {
+    --ascii-span: 210vw;
+
+    right: -28vw;
+    bottom: -1vh;
+    will-change: auto;
+  }
+
+  .ascii-field__layer--atmosphere {
+    display: none;
+  }
+
+  .ascii-field__layer--architecture {
+    opacity: 0.16;
+  }
+
+  .ascii-field__layer--figures {
+    opacity: 0.3;
+  }
+
+  /* Fades downwards instead of sideways, and only clears the lower third: on a
+   * narrow screen the copy runs the full width, so the artwork has to stay below
+   * it rather than beside it. */
+  .ascii-field {
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0 52%, rgba(0, 0, 0, 0.28) 66%, #000 84%);
+    mask-image: linear-gradient(to bottom, transparent 0 52%, rgba(0, 0, 0, 0.28) 66%, #000 84%);
+  }
+}
+
+/* Tablet range: the hero copy takes a larger share of the width than on desktop,
+ * so the horizontal fade has to clear more of the left. */
+@media (min-width: 48em) and (max-width: 64em) {
+  .ascii-field {
+    -webkit-mask-image: linear-gradient(to right, transparent 0 20%, rgba(0, 0, 0, 0.25) 42%, #000 68%);
+    mask-image: linear-gradient(to right, transparent 0 20%, rgba(0, 0, 0, 0.25) 42%, #000 68%);
+  }
+}
+
+/* Short landscape viewports: let the hero breathe rather than forcing a
+ * full-height panel the reader has to scroll past twice. */
+@media (max-height: 34em) and (orientation: landscape) {
+  .atelier-hero {
+    min-height: 0;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+}

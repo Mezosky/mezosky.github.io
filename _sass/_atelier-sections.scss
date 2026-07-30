@@ -1,0 +1,622 @@
+/*******************************************************************************
+ * Atelier — content sections: the homepage index lists, the publication list,
+ * prose, and the inner pages that share the same language.
+ ******************************************************************************/
+
+/* --- Section shell -------------------------------------------------------- */
+
+.atelier-section {
+  padding-top: clamp(3.5rem, 10vh, 7rem);
+  padding-bottom: clamp(1rem, 3vh, 2rem);
+  border-top: 1px solid var(--atelier-line);
+  scroll-margin-top: calc(var(--atelier-navbar-height) + 1rem);
+}
+
+.atelier-section:first-of-type {
+  border-top: none;
+}
+
+.atelier-section__head {
+  display: grid;
+  gap: 0.5rem;
+  margin-bottom: clamp(2rem, 5vh, 3.25rem);
+}
+
+.atelier-section__index {
+  margin: 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  color: var(--atelier-dim);
+}
+
+.atelier-section__title {
+  margin: 0;
+  font-size: clamp(1.5rem, 3.2vw, 2.25rem);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+}
+
+.atelier-section__note {
+  margin: 0.35rem 0 0;
+  max-width: 60ch;
+  font-size: 0.875rem;
+  color: var(--atelier-ash);
+}
+
+/* --- Indexed list (research themes) --------------------------------------- */
+
+.atelier-index {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--atelier-line);
+}
+
+.atelier-index__row {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  align-items: baseline;
+  gap: 0 1rem;
+  padding: clamp(1.1rem, 2.6vh, 1.75rem) 0;
+  border-bottom: 1px solid var(--atelier-line);
+}
+
+.atelier-index__number {
+  font-size: 0.8125rem;
+  letter-spacing: 0.1em;
+  color: var(--atelier-bronze);
+}
+
+.atelier-index__dash {
+  color: var(--atelier-dim);
+}
+
+.atelier-index__body {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.atelier-index__title {
+  font-size: clamp(1rem, 1.6vw, 1.1875rem);
+  color: var(--atelier-ivory);
+  letter-spacing: 0.01em;
+}
+
+.atelier-index__summary {
+  font-family: var(--atelier-serif);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  color: var(--atelier-ash);
+  max-width: 64ch;
+}
+
+/* --- Notes list ----------------------------------------------------------- */
+
+.atelier-notes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--atelier-line);
+}
+
+.atelier-notes__row {
+  border-bottom: 1px solid var(--atelier-line);
+}
+
+.atelier-notes__link {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0 1.5rem;
+  align-items: baseline;
+  padding: clamp(1rem, 2.4vh, 1.5rem) 0;
+  color: var(--atelier-ivory);
+}
+
+.atelier-notes__date {
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: var(--atelier-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+.atelier-notes__body {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.atelier-notes__title {
+  font-size: clamp(0.9375rem, 1.5vw, 1.0625rem);
+  border-bottom: 1px solid transparent;
+  justify-self: start;
+  transition: border-color 0.18s ease;
+}
+
+.atelier-notes__link:hover .atelier-notes__title,
+.atelier-notes__link:focus-visible .atelier-notes__title {
+  border-bottom-color: var(--atelier-bronze);
+}
+
+.atelier-notes__link:hover .atelier-notes__date {
+  color: var(--atelier-bronze);
+}
+
+.atelier-notes__summary {
+  font-family: var(--atelier-serif);
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--atelier-ash);
+  max-width: 66ch;
+}
+
+.atelier-empty {
+  color: var(--atelier-ash);
+  font-size: 0.875rem;
+}
+
+/* --- "All publications" style trailing links ------------------------------ */
+
+.atelier-more {
+  display: inline-block;
+  margin-top: clamp(1.5rem, 4vh, 2.5rem);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--atelier-ash);
+}
+
+.atelier-more:hover,
+.atelier-more:focus-visible {
+  color: var(--atelier-bronze-bright);
+}
+
+/* --- Prose, links, colophon ---------------------------------------------- */
+
+.atelier-about {
+  display: grid;
+  grid-template-columns: 12rem minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: start;
+}
+
+/* Pushed back into the palette so a photograph reads as another plate in the
+ * composition rather than as the one full-colour object on the page. */
+.atelier-portrait {
+  margin: 0;
+}
+
+.atelier-portrait figure {
+  margin: 0;
+}
+
+.atelier-portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--atelier-line);
+  border-radius: 1px;
+  filter: grayscale(1) sepia(0.32) contrast(0.92);
+  opacity: 0.62;
+  transition:
+    opacity 0.3s ease,
+    filter 0.3s ease;
+}
+
+.atelier-portrait img:hover {
+  opacity: 0.95;
+  filter: grayscale(0.35) sepia(0.1) contrast(1);
+}
+
+.atelier-prose {
+  font-family: var(--atelier-serif);
+  font-size: clamp(1.0625rem, 1.5vw, 1.1875rem);
+  line-height: 1.68;
+  color: var(--atelier-ivory);
+  max-width: 66ch;
+}
+
+.atelier-prose p {
+  margin-bottom: 1.15em;
+}
+
+.atelier-prose a {
+  color: var(--atelier-ivory);
+  border-bottom: 1px solid var(--atelier-line-strong);
+}
+
+.atelier-prose a:hover {
+  color: var(--atelier-bronze-bright);
+  border-bottom-color: var(--atelier-bronze);
+}
+
+.atelier-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  list-style: none;
+  margin: clamp(2rem, 5vh, 3rem) 0 0;
+  padding: 0;
+}
+
+.atelier-token {
+  display: inline-block;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--atelier-line-strong);
+  border-radius: 1px;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: var(--atelier-ash);
+}
+
+.atelier-token:hover,
+.atelier-token:focus-visible {
+  color: var(--atelier-ivory);
+  border-color: var(--atelier-bronze);
+}
+
+.atelier-colophon {
+  margin: clamp(2.5rem, 6vh, 4rem) 0 0;
+  max-width: 70ch;
+  font-size: 0.75rem;
+  line-height: 1.7;
+  color: var(--atelier-dim);
+}
+
+.atelier-colophon__label {
+  display: block;
+  letter-spacing: 0.18em;
+  color: var(--atelier-ash);
+}
+
+.atelier-colophon a {
+  color: var(--atelier-ash);
+  border-bottom: 1px solid var(--atelier-line);
+}
+
+/* --- Publication list ----------------------------------------------------- */
+/**
+ * The bib entry template is shared with the publications page and is left
+ * untouched; this restyles it. The Bootstrap row becomes a two-column grid so a
+ * venue token and an optional plate sit beside the entry instead of above it.
+ */
+
+.atelier-publications {
+  margin-top: clamp(2rem, 5vh, 3rem);
+}
+
+/* On the homepage the section head already provides the spacing. */
+.atelier-section .atelier-publications {
+  margin-top: 0;
+}
+
+.atelier-publications ol.bibliography {
+  border-top: 1px solid var(--atelier-line);
+}
+
+.atelier-publications ol.bibliography > li {
+  margin-bottom: 0;
+  padding: clamp(1.5rem, 3.5vh, 2.25rem) 0;
+  border-bottom: 1px solid var(--atelier-line);
+}
+
+.atelier-publications ol.bibliography > li > .row {
+  display: grid;
+  grid-template-columns: minmax(0, 6.5rem) minmax(0, 1fr);
+  gap: clamp(0.75rem, 2.5vw, 2rem);
+  margin: 0;
+}
+
+.atelier-publications ol.bibliography > li > .row > [class*="col-"] {
+  flex: none;
+  width: auto;
+  max-width: none;
+  padding: 0;
+}
+
+.atelier-publications h2.bibliography {
+  margin: clamp(2.5rem, 6vh, 4rem) 0 1rem;
+  padding: 0;
+  border-top: none;
+  text-align: left;
+  color: var(--atelier-dim);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+}
+
+.atelier-publications h2.bibliography:first-child {
+  margin-top: 0;
+}
+
+.atelier-publications h2.bibliography span {
+  font-size: inherit;
+}
+
+/* Venue token. The inline background colour comes from _data/venues.yml, which
+ * is left as it is, so it has to be overridden here. */
+.atelier-publications .abbr {
+  margin-bottom: 0;
+}
+
+.atelier-publications .abbr abbr,
+.atelier-publications .abbr .badge {
+  display: inline-block;
+  width: auto !important;
+  background-color: transparent !important;
+  border: 1px solid var(--atelier-line-strong);
+  border-radius: 1px;
+  padding: 0.2rem 0.5rem;
+  margin: 0 0 0.75rem;
+  font-family: var(--atelier-mono);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--atelier-bronze);
+  text-decoration: none;
+}
+
+.atelier-publications .abbr abbr a {
+  color: var(--atelier-bronze);
+}
+
+/* Existing preview plates are kept but pushed back into the palette. */
+.atelier-publications .preview {
+  width: 100%;
+  max-width: 6.5rem;
+  border-radius: 1px;
+  box-shadow: none !important;
+  filter: grayscale(1) sepia(0.3) contrast(0.92);
+  opacity: 0.5;
+  transition:
+    opacity 0.25s ease,
+    filter 0.25s ease;
+}
+
+.atelier-publications ol.bibliography > li:hover .preview {
+  opacity: 0.85;
+  filter: grayscale(0.4) sepia(0.12) contrast(1);
+}
+
+.atelier-publications .title {
+  font-size: clamp(1rem, 1.6vw, 1.125rem);
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--atelier-ivory);
+  margin-bottom: 0.4rem;
+}
+
+.atelier-publications .author {
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--atelier-ash);
+}
+
+.atelier-publications .author > em {
+  font-style: normal;
+  color: var(--atelier-ivory);
+  border-bottom: 1px solid var(--atelier-bronze);
+}
+
+.atelier-publications .author a {
+  color: var(--atelier-ash);
+  border-bottom: 1px dashed var(--atelier-line-strong);
+}
+
+.atelier-publications .periodical {
+  font-size: 0.8125rem;
+  color: var(--atelier-dim);
+}
+
+.atelier-publications .periodical em {
+  font-style: normal;
+}
+
+.atelier-publications .summary {
+  margin-top: 0.65rem;
+  max-width: 68ch;
+  font-family: var(--atelier-serif);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  color: var(--atelier-ash);
+}
+
+.atelier-publications .links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.9rem;
+}
+
+.atelier-publications .links a.btn,
+html[data-theme="dark"] .atelier-publications .links a.btn {
+  background: none;
+  border: 1px solid var(--atelier-line-strong);
+  border-radius: 1px;
+  box-shadow: none;
+  padding: 0.28rem 0.7rem;
+  margin: 0;
+  font-family: var(--atelier-mono);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: none;
+  color: var(--atelier-ash);
+}
+
+.atelier-publications .links a.btn:hover {
+  color: var(--atelier-ivory);
+  border-color: var(--atelier-bronze);
+}
+
+/* Abstract and BibTeX panels open in place; a left rule reads calmer than the
+ * inherited dashed box. */
+.atelier-publications div.abstract.hidden,
+.atelier-publications div.award.hidden {
+  border: none;
+  border-left: 1px solid transparent;
+}
+
+.atelier-publications div.abstract.hidden.open,
+.atelier-publications div.award.hidden.open {
+  border-left-color: var(--atelier-line-strong);
+  margin-top: 0.9rem;
+}
+
+.atelier-publications .abstract.hidden p {
+  font-family: var(--atelier-serif);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--atelier-ash);
+  text-align: left;
+  margin: 0 0 0 1rem;
+}
+
+.atelier-publications .bibtex.hidden pre,
+.atelier-publications .bibtex.hidden figure {
+  margin-top: 0.9rem;
+  font-size: 0.75rem;
+}
+
+/* --- Inner pages ---------------------------------------------------------- */
+
+.post-content,
+article > p,
+.post > article p {
+  max-width: 72ch;
+}
+
+.header-bar {
+  border: none;
+  padding: 0;
+  margin-top: clamp(2.5rem, 7vw, 5rem);
+  text-align: left;
+}
+
+.header-bar h1 {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 300;
+  color: var(--atelier-ivory);
+}
+
+.header-bar h2 {
+  font-size: 0.9375rem;
+  color: var(--atelier-ash);
+  letter-spacing: 0.02em;
+}
+
+.post-list {
+  list-style: none;
+  padding: 0;
+  border-top: 1px solid var(--atelier-line);
+}
+
+.post-list > li {
+  padding: clamp(1.25rem, 3vh, 2rem) 0;
+  border-bottom: 1px solid var(--atelier-line);
+}
+
+.post-list .post-title,
+.post-list h3 {
+  font-size: clamp(1.0625rem, 1.8vw, 1.25rem);
+  font-weight: 400;
+  margin-bottom: 0.4rem;
+}
+
+/* Post thumbnails get the same treatment as the portrait and the publication
+ * plates, so existing colour artwork sits inside the palette instead of fighting
+ * it. Hover restores it. */
+.post-list .card-img,
+.card .card-img {
+  border-radius: 1px;
+  filter: grayscale(1) sepia(0.28) contrast(0.92);
+  opacity: 0.6;
+  transition:
+    opacity 0.3s ease,
+    filter 0.3s ease;
+}
+
+.post-list li:hover .card-img,
+.card:hover .card-img {
+  opacity: 0.95;
+  filter: grayscale(0.3) sepia(0.08) contrast(1);
+}
+
+.tag-category-list,
+.pagination {
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+}
+
+.pagination .page-item .page-link {
+  background: none;
+  border: 1px solid var(--atelier-line-strong);
+  border-radius: 1px;
+  color: var(--atelier-ash);
+}
+
+.pagination .page-item.active .page-link {
+  background: none;
+  border-color: var(--atelier-bronze);
+  color: var(--atelier-ivory);
+}
+
+/* CV cards inherit the dark card colour; these only quiet the chrome down. */
+.card {
+  background: var(--atelier-deep);
+  border: 1px solid var(--atelier-line);
+  border-radius: 2px;
+  box-shadow: none;
+}
+
+/* --- Narrow screens ------------------------------------------------------- */
+
+@media (max-width: 47.9em) {
+  .atelier-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    margin: 0.5rem 0 0.75rem;
+    width: 100%;
+  }
+
+  .atelier-nav__item {
+    width: 100%;
+    border-top: 1px solid var(--atelier-line);
+  }
+
+  .atelier-nav__link {
+    width: 100%;
+    padding: 0.7rem 0;
+    border-bottom: none;
+    font-size: 0.9375rem;
+  }
+
+  .navbar-utility {
+    margin-left: 0;
+  }
+
+  .atelier-index__row {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0 0.75rem;
+  }
+
+  .atelier-index__dash {
+    display: none;
+  }
+
+  .atelier-notes__link,
+  .atelier-publications ol.bibliography > li > .row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.5rem;
+  }
+
+  .atelier-about {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .atelier-portrait {
+    max-width: 9rem;
+  }
+
+  .atelier-publications .preview {
+    max-width: 5rem;
+  }
+}

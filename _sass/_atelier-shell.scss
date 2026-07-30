@@ -1,0 +1,393 @@
+/*******************************************************************************
+ * Atelier — page shell: base typography, frame, navbar, footer, focus states.
+ * Applies to every route so inner pages read as the same publication.
+ ******************************************************************************/
+
+body {
+  background: var(--atelier-void);
+  color: var(--atelier-ivory);
+  font-family: var(--atelier-mono);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html[data-theme="dark"] body {
+  background: var(--atelier-void);
+}
+
+/* The fixed backdrop sits at z-index 0; page content has to stack above it. */
+.container[role="main"] {
+  position: relative;
+  z-index: 1;
+}
+
+.container,
+.navbar .container {
+  max-width: var(--atelier-frame);
+  padding-left: var(--atelier-gutter);
+  padding-right: var(--atelier-gutter);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.post-title,
+.navbar-brand {
+  font-family: var(--atelier-mono);
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--atelier-ivory);
+}
+
+a {
+  color: var(--atelier-ivory);
+  text-decoration: none;
+  text-underline-offset: 0.25em;
+  transition:
+    color 0.18s ease,
+    border-color 0.18s ease;
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--atelier-bronze-bright);
+  text-decoration: none;
+}
+
+/* One visible focus treatment everywhere, including inside the backdrop-heavy
+ * hero where a browser default outline would disappear. */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible,
+summary:focus-visible {
+  outline: 1px solid var(--atelier-bronze);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+/**
+ * The inherited MDB stylesheet zeroes the outline via `.btn:focus` and
+ * `.nav-link:focus`, whose class-plus-pseudo specificity beats a bare
+ * `a:focus-visible`. These selectors are specific enough to win it back, so no
+ * control can end up focused with no visible ring.
+ */
+.atelier-publications .links a.btn:focus-visible,
+.publications .links a.btn:focus-visible,
+.navbar a.nav-link:focus-visible,
+.navbar button:focus-visible,
+.pagination .page-link:focus-visible,
+a.atelier-token:focus-visible,
+a.atelier-more:focus-visible {
+  outline: 1px solid var(--atelier-bronze);
+  outline-offset: 3px;
+  box-shadow: none;
+}
+
+::selection {
+  background: rgba(192, 154, 99, 0.28);
+  color: var(--atelier-ivory);
+}
+
+hr {
+  border-top: 1px solid var(--atelier-line);
+}
+
+strong,
+b {
+  font-weight: 500;
+  color: var(--atelier-ivory);
+}
+
+blockquote {
+  border-left: 1px solid var(--atelier-line-strong);
+  color: var(--atelier-ash);
+  font-family: var(--atelier-serif);
+  font-size: 1.0625rem;
+}
+
+code,
+pre code,
+pre {
+  font-family: var(--atelier-mono);
+}
+
+code {
+  color: var(--atelier-bronze);
+  background-color: var(--global-code-bg-color);
+}
+
+pre {
+  color: var(--atelier-ivory);
+  background-color: var(--atelier-deep);
+  border: 1px solid var(--atelier-line);
+  border-radius: 2px;
+}
+
+/* Wide content scrolls inside itself rather than pushing the page sideways. */
+.table-responsive,
+div.highlighter-rouge,
+figure.highlight {
+  overflow-x: auto;
+}
+
+table {
+  color: var(--atelier-ivory);
+}
+
+table.table a {
+  color: var(--atelier-bronze);
+}
+
+/* --- Navbar --------------------------------------------------------------- */
+
+.navbar {
+  background-color: rgba(11, 10, 9, 0.82);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid transparent;
+  box-shadow: none;
+  opacity: 1;
+  min-height: var(--atelier-navbar-height);
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+html[data-theme="dark"] .navbar {
+  background-color: rgba(11, 10, 9, 0.82);
+}
+
+.navbar.navbar-condensed,
+html[data-theme="dark"] .navbar.navbar-condensed {
+  background-color: rgba(11, 10, 9, 0.95);
+  border-bottom-color: var(--atelier-line);
+  box-shadow: none;
+}
+
+.navbar .container,
+.navbar.navbar-condensed .container {
+  display: flex;
+  align-items: center;
+  min-height: var(--atelier-navbar-height);
+}
+
+.navbar .navbar-brand,
+.navbar.navbar-condensed .navbar-brand {
+  font-family: var(--atelier-mono);
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.07em;
+  color: var(--atelier-ivory);
+  padding: 0;
+  margin: 0;
+  width: auto;
+  opacity: 1;
+  transform: none;
+}
+
+.navbar .navbar-brand:hover {
+  color: var(--atelier-bronze-bright);
+}
+
+.navbar-toggler {
+  border: 1px solid var(--atelier-line-strong);
+  border-radius: 1px;
+  padding: 0.4rem 0.5rem;
+}
+
+.navbar-toggler .icon-bar {
+  background: var(--atelier-ivory);
+}
+
+.navbar-utility {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin: 0 0 0 1.25rem;
+  padding: 0;
+  list-style: none;
+}
+
+#search-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+#search-toggle .nav-link,
+.navbar .nav-link {
+  font-family: var(--atelier-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--atelier-ash);
+  text-transform: lowercase;
+  padding: 0.25rem 0.4rem;
+}
+
+#search-toggle .nav-link:hover,
+html[data-theme="dark"] #search-toggle .nav-link:hover {
+  color: var(--atelier-bronze-bright);
+  background: none;
+}
+
+#search-toggle .nav-link::after {
+  display: none;
+}
+
+#light-toggle {
+  background: none;
+  border: none;
+  color: var(--atelier-ash);
+}
+
+/* --- Primary navigation --------------------------------------------------- */
+
+.atelier-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.4vw, 2.25rem);
+  margin: 0 0 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.atelier-nav__item {
+  margin: 0;
+}
+
+.atelier-nav__link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5em;
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  color: var(--atelier-ash);
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+}
+
+.atelier-nav__index {
+  color: var(--atelier-dim);
+  font-size: 0.75rem;
+  transition: color 0.18s ease;
+}
+
+/* Hover shifts the label a hair and draws a hairline: the restraint is the point. */
+.atelier-nav__label {
+  display: inline-block;
+  transition: transform 0.18s ease;
+}
+
+.atelier-nav__link:hover,
+.atelier-nav__link:focus-visible,
+.atelier-nav__link.is-current {
+  color: var(--atelier-ivory);
+  border-bottom-color: var(--atelier-bronze);
+}
+
+.atelier-nav__link:hover .atelier-nav__index,
+.atelier-nav__link.is-current .atelier-nav__index {
+  color: var(--atelier-bronze);
+}
+
+.atelier-nav__link:hover .atelier-nav__label {
+  transform: translateX(1px);
+}
+
+/* --- Page headers --------------------------------------------------------- */
+
+.post-header,
+.about-intro {
+  margin-top: clamp(2.5rem, 7vw, 5.5rem);
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--atelier-line);
+  text-align: left;
+}
+
+.post-title,
+.post-header h1 {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.post-description,
+.post-header .desc,
+.atelier-lede {
+  color: var(--atelier-ash);
+  font-size: 0.9375rem;
+  max-width: 62ch;
+  margin-top: 0.9rem;
+  margin-bottom: 0;
+}
+
+.post-meta,
+.post-tags {
+  color: var(--atelier-dim);
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+}
+
+/* --- Footer, progress bar, back to top ------------------------------------ */
+
+footer.sticky-bottom,
+footer.fixed-bottom {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--atelier-line);
+  background: transparent;
+  color: var(--atelier-ash);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+  margin-top: clamp(4rem, 10vw, 8rem);
+}
+
+footer .container {
+  text-align: left;
+  max-width: var(--atelier-frame);
+}
+
+footer a {
+  color: var(--atelier-ash);
+  border-bottom: 1px solid var(--atelier-line-strong);
+}
+
+footer a:hover {
+  color: var(--atelier-bronze-bright);
+}
+
+#progress {
+  background-color: transparent;
+}
+
+.progress-container {
+  background: transparent;
+}
+
+.progress-bar {
+  background: var(--atelier-bronze);
+}
+
+#back-to-top {
+  border-radius: 1px;
+  border: 1px solid var(--atelier-line-strong);
+}
+
+/* --- Reduced motion ------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  a,
+  .atelier-nav__label,
+  .navbar {
+    transition: none;
+  }
+}

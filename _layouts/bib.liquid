@@ -59,7 +59,17 @@
 
       {%- for author in entry.author_array limit: author_array_limit -%}
         {% assign author_is_self = false %}
-        {%- assign author_last_name = author.last | remove: '¶' | remove: '&' | remove: '*' | remove: '†' | remove: '^' -%}
+        {%- comment -%}
+          bibtex-ruby splits a surname like "De la Jara" into prefix ("De la") plus
+          last ("Jara"). The particle has to be put back before the name is shown
+          or compared, otherwise the surname renders as just "Jara".
+        {%- endcomment -%}
+        {%- if author.prefix != blank -%}
+          {%- assign author_surname = author.prefix | append: ' ' | append: author.last -%}
+        {%- else -%}
+          {%- assign author_surname = author.last -%}
+        {%- endif -%}
+        {%- assign author_last_name = author_surname | remove: '¶' | remove: '&' | remove: '*' | remove: '†' | remove: '^' -%}
         {% if site.scholar.last_name contains author_last_name %}
           {% if site.scholar.first_name contains author.first %}
             {% assign author_is_self = true %}
@@ -83,17 +93,17 @@
         {%- if author_is_self -%}
           <em>
             {{- author.first }}
-            {{ author.last -}}
+            {{ author_surname -}}
           </em>
         {%- else -%}
           {%- if coauthor_url -%}
             <a href="{{coauthor_url}}">
               {{- author.first }}
-              {{ author.last -}}
+              {{ author_surname -}}
             </a>
           {%- else -%}
             {{- author.first }}
-            {{ author.last -}}
+            {{ author_surname -}}
           {% endif %}
         {%- endif -%}
       {% endfor %}
@@ -106,7 +116,12 @@
         {%- endif -%}
         {% assign more_authors_show = '' %}
         {%- for author in entry.author_array offset: author_array_limit -%}
-          {% assign more_authors_show = more_authors_show | append: author.first | append: ' ' | append: author.last %}
+          {%- if author.prefix != blank -%}
+            {%- assign hidden_surname = author.prefix | append: ' ' | append: author.last -%}
+          {%- else -%}
+            {%- assign hidden_surname = author.last -%}
+          {%- endif -%}
+          {% assign more_authors_show = more_authors_show | append: author.first | append: ' ' | append: hidden_surname %}
           {% unless forloop.last %}
             {% assign more_authors_show = more_authors_show | append: ', ' %}
           {% endunless %}
@@ -169,6 +184,11 @@
     <div class="periodical">
       {{ entry.note | strip }}
     </div>
+
+    <!-- One-line description, when the bib entry provides a `summary` -->
+    {% if entry.summary %}
+      <div class="summary">{{ entry.summary }}</div>
+    {% endif %}
 
     <!-- Links/Buttons -->
     <div class="links">

@@ -1,0 +1,21 @@
+{% comment %}
+  Portrait plate for the About section. Given the same desaturated treatment as
+  the publication previews so a photograph can sit inside a typographic page
+  without breaking it. Set `portrait: false` in the page front matter to omit it.
+
+  Params:
+    path  image under assets/img/ (default: the canonical profile portrait)
+{% endcomment %}
+
+{% assign portrait_path = include.path | default: 'assets/img/profile/ignacio-meza-portrait.jpg' %}
+
+<figure class="atelier-portrait">
+  {%
+    include figure.liquid
+    loading="lazy"
+    path=portrait_path
+    sizes="(min-width: 48em) 12rem, 40vw"
+    class="atelier-portrait__image"
+    alt="Portrait of Ignacio Meza"
+  %}
+</figure>

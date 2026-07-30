@@ -1,0 +1,28 @@
+{% comment %}
+  Primary navigation, driven by _data/navigation.yml. Numbered so the index
+  itself is part of the typography.
+{% endcomment %}
+
+<ul class="atelier-nav">
+  {% for item in site.data.navigation %}
+    {% assign target = item.url | relative_url %}
+    {% assign is_current = false %}
+    {% unless item.url contains '#' %}
+      {% if page.url == item.url or page.url contains item.url %}
+        {% assign is_current = true %}
+      {% endif %}
+    {% endunless %}
+    <li class="atelier-nav__item">
+      <a
+        class="atelier-nav__link{% if is_current %} is-current{% endif %}"
+        href="{{ target }}"
+        {% if is_current %}
+          aria-current="page"
+        {% endif %}
+      >
+        <span class="atelier-nav__index" aria-hidden="true">[{{ item.index }}]</span>
+        <span class="atelier-nav__label">{{ item.label }}</span>
+      </a>
+    </li>
+  {% endfor %}
+</ul>

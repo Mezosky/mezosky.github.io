@@ -1,0 +1,16 @@
+{% comment %}
+  Research themes as a sparse indexed list, from _data/research.yml.
+{% endcomment %}
+
+<ol class="atelier-index" aria-labelledby="research-title">
+  {% for theme in site.data.research %}
+    <li class="atelier-index__row">
+      <span class="atelier-index__number" aria-hidden="true">{{ theme.index }}</span>
+      <span class="atelier-index__dash" aria-hidden="true">&mdash;</span>
+      <span class="atelier-index__body">
+        <span class="atelier-index__title">{{ theme.title }}</span>
+        <span class="atelier-index__summary">{{ theme.summary }}</span>
+      </span>
+    </li>
+  {% endfor %}
+</ol>

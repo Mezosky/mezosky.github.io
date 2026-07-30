@@ -1,4 +1,6 @@
 **/*.map
+# Generated ASCII artwork: column-aligned text, must not be reflowed.
+_data/ascii/**
 **/*.min.css
 **/*.min.js
 assets/css/main.scss

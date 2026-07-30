@@ -1,0 +1,21 @@
+{% comment %}
+  Credits the backdrop. Reads the provenance recorded by the generator, so it
+  stays truthful if the artwork is rebuilt from a different source.
+{% endcomment %}
+
+{% assign field_key = include.field | default: 'bosch_field' %}
+{% assign source = site.data.ascii[field_key].source %}
+
+{% if source.title %}
+  <p class="atelier-colophon">
+    <span class="atelier-colophon__label">Backdrop</span>
+    Original layered ASCII composition, generated from
+    {% if source.url %}
+      <a href="{{ source.url }}">{{ source.title }}</a>
+    {% else %}
+      {{ source.title }}
+    {% endif %}
+    {%- if source.license %}. {{ source.license }}{% endif -%}
+    . No painting is reproduced on the page.
+  </p>
+{% endif %}
