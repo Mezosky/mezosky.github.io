@@ -51,6 +51,12 @@
   UI behavior and reveal animations.
 - `assets/js/ascii-field.js`
   Pointer and scroll parallax for the backdrop. Enhancement only.
+- `assets/js/navigate.js`
+  Soft navigation: swaps `[data-page-shell]`, the backdrop and the nav in place so the
+  audio player is not destroyed on every click. Dispatches `atelier:navigated` after
+  each swap; anything that reads the DOM on load must rebind on that event, and click
+  handlers must be delegated from `document`. Falls back to a real navigation for PDFs,
+  `/mysteries-of-the-deep/`, cross-origin links, and any request that fails.
 - `assets/img/profile/ignacio-meza-portrait.jpg`
   Canonical portrait, shown in the About section and used as the Open Graph image.
 

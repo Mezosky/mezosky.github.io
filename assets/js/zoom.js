@@ -12,7 +12,21 @@ $(document).ready(function () {
 
   var overlay = /^rgb\(/.test(resolved) ? resolved.replace(/^rgb\(/, "rgba(").replace(/\)$/, ", 0.94)") : resolved;
 
-  medium_zoom = mediumZoom("[data-zoomable]", {
-    background: overlay,
-  });
+  // Re-attached after a soft navigation: medium-zoom binds to the elements it
+  // found at the time, so images that arrive with a swapped page are otherwise
+  // never zoomable.
+  // Read via window: `medium_zoom` is an implicit global that only exists once
+  // assigned, so testing the bare name throws a ReferenceError on first run.
+  var attach = function () {
+    var previous = window.medium_zoom;
+    if (previous && typeof previous.detach === "function") {
+      previous.detach();
+    }
+    window.medium_zoom = mediumZoom("[data-zoomable]", {
+      background: overlay,
+    });
+  };
+
+  attach();
+  document.addEventListener("atelier:navigated", attach);
 });

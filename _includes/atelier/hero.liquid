@@ -8,7 +8,7 @@
 <section class="atelier-hero" aria-labelledby="atelier-hero-name">
   <div class="atelier-hero__copy">
     {% if hero.statement %}
-      <p class="atelier-hero__statement">
+      <p class="atelier-hero__statement" data-scramble>
         <span class="atelier-hero__prompt" aria-hidden="true">&gt;</span>
         {% for line in hero.statement %}
           <span class="atelier-hero__statement-line">{{ line }}</span>
@@ -23,7 +23,7 @@
       would wrap the name wherever it happened to fit, which at this size is
       never where you want it. Falls back to the site title as one line.
     {% endcomment %}
-    <h1 class="atelier-hero__name" id="atelier-hero-name">
+    <h1 class="atelier-hero__name" id="atelier-hero-name" data-scramble>
       {% if hero.name %}
         {% for line in hero.name %}
           <span class="atelier-hero__name-line">{{ line }}</span>
@@ -34,7 +34,7 @@
     </h1>
 
     {% if hero.role %}
-      <p class="atelier-hero__role">{{ hero.role }}</p>
+      <p class="atelier-hero__role" data-scramble>{{ hero.role }}</p>
     {% endif %}
   </div>
 

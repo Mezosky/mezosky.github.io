@@ -77,6 +77,7 @@
     </div>
 
     {% include atelier/entry.liquid %}
+    {% include atelier/player.liquid %}
 
     <!-- Footer -->
     {% include footer.liquid %}
@@ -97,6 +98,8 @@
     {% include scripts/ascii_field.liquid %}
     {% include scripts/audio_player.liquid %}
     {% include scripts/text_scramble.liquid %}
+    <!-- Soft navigation, so the audio player survives moving between pages -->
+    <script defer src="{{ '/assets/js/navigate.js' | relative_url | bust_file_cache }}"></script>
     {% include scripts/badges.liquid %}
     {% include scripts/mathjax.liquid %}
     {% include scripts/pseudocode.liquid %}

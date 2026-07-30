@@ -109,7 +109,24 @@ Structure:
   portrait, colophon
 - `_includes/atelier/ascii/field.liquid`: renders the ASCII backdrop from data
 - `assets/js/ascii-field.js`: pointer and scroll parallax for the backdrop
+- `assets/js/navigate.js`: swaps pages in place so audio survives a page change
 - `assets/js/common.js`: small UI interactions and reveal animations
+
+### Navigating between pages
+
+Internal links replace the page contents instead of reloading the document, so the
+audio player keeps going when the reader moves around. Only `[data-page-shell]`, the
+backdrop and the navigation are swapped; the header, the player and the invitation sit
+outside that region and are never touched.
+
+Every link is a real `href`. Without JavaScript, on a failed request, or for anything
+that is not a page of this layout — PDFs, `/mysteries-of-the-deep/` — the browser does
+an ordinary navigation. Add `data-no-page-transition` to a link to force that.
+
+After each swap `assets/js/navigate.js` dispatches `atelier:navigated`. Anything that
+reads the DOM on load has to listen for it and rebind; `ascii-field.js`,
+`text-scramble.js` and `zoom.js` already do. Delegate new click handlers from
+`document` rather than binding to elements, or they will not survive a swap.
 
 ### Resolving text
 
@@ -124,6 +141,11 @@ leave the file empty and nothing renders. Files live in `assets/audio/` and are
 served with `preload="none"`. `_includes/atelier/player.liquid` holds the control,
 `_includes/atelier/entry.liquid` the one-time invitation, and
 `assets/js/audio-player.js` the behaviour. Playback always waits for a click.
+
+Track titles and order come from `_data/playlist.yml` — that file is the only place to
+edit them. Playback survives a page change (see above) and stops only when the reader
+presses pause; the track, its position and the paused state are kept in
+`sessionStorage`, so it also resumes across a full reload but not in a new tab.
 
 ### Homepage content sources
 

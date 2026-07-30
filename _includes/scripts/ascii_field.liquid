@@ -1,4 +1,6 @@
-{% if page.ascii_field %}
-  <!-- Parallax for the ASCII backdrop; the artwork itself needs no JavaScript -->
-  <script defer src="{{ '/assets/js/ascii-field.js' | relative_url | bust_file_cache }}"></script>
-{% endif %}
+<!--
+  Parallax for the ASCII backdrop; the artwork itself needs no JavaScript.
+  Loaded on every page rather than only where a field exists, so it can rebind
+  after a soft navigation.
+-->
+<script defer src="{{ '/assets/js/ascii-field.js' | relative_url | bust_file_cache }}"></script>

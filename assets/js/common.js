@@ -3,50 +3,6 @@ $(document).ready(function () {
   const pageTransitionDelay = 280;
   const body = document.body;
 
-  const isInternalNavigationLink = (link) => {
-    if (!link) {
-      return false;
-    }
-
-    const href = link.getAttribute("href");
-    if (!href || href.startsWith("#")) {
-      return false;
-    }
-
-    if (
-      link.hasAttribute("download") ||
-      link.getAttribute("target") === "_blank" ||
-      link.getAttribute("data-toggle") === "dropdown" ||
-      link.hasAttribute("data-no-page-transition")
-    ) {
-      return false;
-    }
-
-    if (/^(mailto:|tel:|javascript:)/i.test(href)) {
-      return false;
-    }
-
-    let targetUrl;
-    try {
-      targetUrl = new URL(link.href, window.location.href);
-    } catch (error) {
-      return false;
-    }
-
-    if (targetUrl.origin !== window.location.origin) {
-      return false;
-    }
-
-    const isSameDocumentAnchor =
-      targetUrl.pathname === window.location.pathname && targetUrl.search === window.location.search && Boolean(targetUrl.hash);
-
-    if (isSameDocumentAnchor) {
-      return false;
-    }
-
-    return targetUrl.href !== window.location.href;
-  };
-
   const showPageContent = () => {
     body.classList.add("page-ready");
     body.classList.remove("page-preload");
@@ -87,39 +43,19 @@ $(document).ready(function () {
     window.addEventListener("scroll", handleNavbarScroll, { passive: true });
   }
 
-  document.addEventListener("click", (event) => {
-    if (prefersReducedMotion || event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) {
-      return;
-    }
-
-    const link = event.target.closest("a[href]");
-    if (!isInternalNavigationLink(link)) {
-      return;
-    }
-
-    event.preventDefault();
-    body.classList.add("is-page-leaving");
-
-    window.setTimeout(() => {
-      window.location.assign(link.href);
-    }, pageTransitionDelay);
-  });
-
   // add toggle functionality to abstract, award and bibtex buttons
-  $("a.abstract").click(function () {
-    $(this).parent().parent().find(".abstract.hidden").toggleClass("open");
-    $(this).parent().parent().find(".award.hidden.open").toggleClass("open");
-    $(this).parent().parent().find(".bibtex.hidden.open").toggleClass("open");
-  });
-  $("a.award").click(function () {
-    $(this).parent().parent().find(".abstract.hidden.open").toggleClass("open");
-    $(this).parent().parent().find(".award.hidden").toggleClass("open");
-    $(this).parent().parent().find(".bibtex.hidden.open").toggleClass("open");
-  });
-  $("a.bibtex").click(function () {
-    $(this).parent().parent().find(".abstract.hidden.open").toggleClass("open");
-    $(this).parent().parent().find(".award.hidden.open").toggleClass("open");
-    $(this).parent().parent().find(".bibtex.hidden").toggleClass("open");
+  const panels = [".abstract", ".award", ".bibtex"];
+  panels.forEach((panel) => {
+    $(document).on("click", "a" + panel, function () {
+      const row = $(this).parent().parent();
+      panels.forEach((other) => {
+        if (other === panel) {
+          row.find(other + ".hidden").toggleClass("open");
+        } else {
+          row.find(other + ".hidden.open").toggleClass("open");
+        }
+      });
+    });
   });
   $("a").removeClass("waves-effect waves-light");
 

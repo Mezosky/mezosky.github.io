@@ -3,16 +3,17 @@
  *
  * Three effects, all enhancement — the artwork renders without this file:
  *
- *   pan     a field taller than the viewport travels down as the page scrolls,
- *           so later sections sit against later parts of the painting
- *   depth   layers drift against each other with the pointer
+ *   depth   layers drift against each other with the pointer and the scroll
  *   ripple  rows near the pointer are pushed aside, so the characters visibly
  *           move as the cursor passes through them
  *   fade    the field thins out as the reader leaves the hero
  *
- * The plate takes the pan but not the pointer drift: it sits furthest back, so it
- * should be the most stationary thing on screen, and holding it still keeps it in
- * register with the text.
+ * The plate takes the scroll shift but not the pointer drift: it sits furthest
+ * back, so it should be the most stationary thing on screen, and holding it still
+ * keeps it in register with the text.
+ *
+ * Rebinds on `atelier:navigated`, because a soft navigation replaces the field
+ * with the next page's artwork.
  *
  * Nothing runs when the reader prefers reduced motion, or on pointer-less and
  * small screens, where the cost is real and the effect is not.
@@ -22,39 +23,13 @@
 
   // Peak displacement in px.
   var POINTER_RANGE = 9; // whole-layer drift with the pointer
-  var SCROLL_RANGE = 26; // vertical drift for a field that has no room to pan
+  var SCROLL_RANGE = 26; // vertical drift as the page scrolls
   var RIPPLE_AMPLITUDE = 14; // sideways push of the rows nearest the pointer
   var RIPPLE_RADIUS = 96; // px above/below the pointer that the push reaches
   var RIPPLE_SPAN = 2.6; // how many radii out still get touched
 
-  var field = document.querySelector("[data-ascii-field]:not([hidden])");
-  if (!field) {
-    return;
-  }
-
   var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   var coarsePointer = window.matchMedia("(hover: none), (max-width: 47.9em)");
-
-  var plate = field.querySelector("[data-ascii-plate]");
-  var layers = Array.prototype.map.call(field.querySelectorAll("[data-ascii-layer]"), function (element) {
-    return {
-      element: element,
-      depth: parseFloat(element.getAttribute("data-depth")) || 1,
-      rows: element.children,
-      touched: [],
-    };
-  });
-  if (!layers.length) {
-    return;
-  }
-
-  var pointerX = 0;
-  var pointerY = 0;
-  var pointerClientY = -1e6;
-  var scrollShift = 0;
-  var pan = 0;
-  var frame = null;
-  var listening = false;
 
   // Derivative-of-Gaussian, normalised to a peak of 1 at t = ±1. Zero directly
   // under the pointer and falling away past it, so rows part around the cursor
@@ -64,6 +39,16 @@
     return t * Math.exp((-t * t) / 2) * PEAK;
   }
 
+  var field = null;
+  var plate = null;
+  var layers = [];
+  var pointerX = 0;
+  var pointerY = 0;
+  var pointerClientY = -1e6;
+  var scrollShift = 0;
+  var frame = null;
+  var listening = false;
+
   function metrics() {
     var first = layers[0].element;
     var height = first.offsetHeight;
@@ -72,11 +57,7 @@
       rowHeight: height / rows,
       rowCount: rows,
       height: height,
-      // getBoundingClientRect already includes the pan, so back it out to get
-      // the element's resting offset.
-      top: first.getBoundingClientRect().top - pan,
-      // How far the grid can travel before its last row reaches the viewport.
-      travel: Math.max(0, height + (first.offsetTop || 0) - window.innerHeight),
+      top: first.getBoundingClientRect().top,
     };
   }
 
@@ -89,20 +70,20 @@
 
   function apply() {
     frame = null;
+    if (!layers.length) {
+      return;
+    }
 
     var m = metrics();
     var reach = RIPPLE_RADIUS * RIPPLE_SPAN;
     // Row index under the pointer, in the layer's own coordinates.
-    var focus = (pointerClientY - m.top - pan) / m.rowHeight;
+    var focus = (pointerClientY - m.top) / m.rowHeight;
 
     for (var i = 0; i < layers.length; i += 1) {
       var layer = layers[i];
       var lead = layer.depth / layers.length;
       var x = pointerX * POINTER_RANGE * lead;
-      // Pan when the grid is tall enough to have somewhere to go; otherwise fall
-      // back to a few pixels of depth drift so scrolling still registers.
-      var travelY = m.travel > 0 ? pan : scrollShift * SCROLL_RANGE * lead;
-      var y = pointerY * POINTER_RANGE * lead + travelY;
+      var y = pointerY * POINTER_RANGE * lead + scrollShift * SCROLL_RANGE * lead;
       layer.element.style.transform = "translate3d(" + x.toFixed(2) + "px, " + y.toFixed(2) + "px, 0)";
 
       clearRipple(layer);
@@ -128,8 +109,7 @@
     }
 
     if (plate) {
-      var plateY = m.travel > 0 ? pan : scrollShift * SCROLL_RANGE * 0.35;
-      plate.style.transform = "translate3d(0, " + plateY.toFixed(2) + "px, 0)";
+      plate.style.transform = "translate3d(0, " + (scrollShift * SCROLL_RANGE * 0.35).toFixed(2) + "px, 0)";
     }
   }
 
@@ -144,7 +124,6 @@
     pointerY = 0;
     pointerClientY = -1e6;
     scrollShift = 0;
-    pan = 0;
     for (var i = 0; i < layers.length; i += 1) {
       clearRipple(layers[i]);
       layers[i].element.style.transform = "";
@@ -152,7 +131,9 @@
     if (plate) {
       plate.style.transform = "";
     }
-    field.style.removeProperty("--ascii-scrolled");
+    if (field) {
+      field.style.removeProperty("--ascii-scrolled");
+    }
   }
 
   function onPointerMove(event) {
@@ -169,18 +150,17 @@
   }
 
   function onScroll() {
-    // Panning is spread over the whole document; the density fade happens over
-    // the first viewport, while the reader is still leaving the hero.
-    var scrollable = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-    pan = -Math.min(Math.max(window.scrollY / scrollable, 0), 1) * metrics().travel;
-
-    scrollShift = Math.min(window.scrollY / Math.max(1, window.innerHeight), 1);
-    field.style.setProperty("--ascii-scrolled", scrollShift.toFixed(3));
+    var progress = Math.min(window.scrollY / Math.max(1, window.innerHeight), 1);
+    scrollShift = progress;
+    // Drives the density fade in CSS as the reader leaves the hero.
+    if (field) {
+      field.style.setProperty("--ascii-scrolled", progress.toFixed(3));
+    }
     schedule();
   }
 
   function start() {
-    if (listening) {
+    if (listening || !layers.length) {
       return;
     }
     listening = true;
@@ -208,11 +188,29 @@
   }
 
   function sync() {
-    if (reducedMotion.matches || coarsePointer.matches) {
+    if (!layers.length || reducedMotion.matches || coarsePointer.matches) {
       stop();
     } else {
       start();
     }
+  }
+
+  // Re-read the DOM: on load, and again after a soft navigation swaps the field.
+  function bind() {
+    stop();
+    field = document.querySelector("[data-ascii-field]:not([hidden])");
+    plate = field ? field.querySelector("[data-ascii-plate]") : null;
+    layers = field
+      ? Array.prototype.map.call(field.querySelectorAll("[data-ascii-layer]"), function (element) {
+          return {
+            element: element,
+            depth: parseFloat(element.getAttribute("data-depth")) || 1,
+            rows: element.children,
+            touched: [],
+          };
+        })
+      : [];
+    sync();
   }
 
   // Both older (addListener) and current (addEventListener) MediaQueryList APIs.
@@ -226,5 +224,6 @@
 
   watch(reducedMotion, sync);
   watch(coarsePointer, sync);
-  sync();
+  document.addEventListener("atelier:navigated", bind);
+  bind();
 })();

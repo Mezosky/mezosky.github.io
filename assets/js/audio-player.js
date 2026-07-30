@@ -38,8 +38,6 @@
   var audio = player.querySelector("[data-player-audio]");
   var toggle = player.querySelector("[data-player-toggle]");
   var stateLabel = player.querySelector("[data-player-state]");
-  var trackLabel = player.querySelector("[data-player-track]");
-  var next = player.querySelector("[data-player-next]");
   var entry = document.querySelector("[data-entry]");
   var index = 0;
   var lastFocus = null;
@@ -64,10 +62,9 @@
     // Purely `paused`: the play event fires while currentTime is still 0, so
     // testing the clock as well would leave the label a state behind.
     var on = !audio.paused;
-    stateLabel.textContent = on ? "[ pause ]" : "[ play ]";
+    stateLabel.textContent = on ? "[ " + tracks[index].title + " ]" : "[ play ]";
     toggle.setAttribute("aria-pressed", on ? "true" : "false");
     toggle.setAttribute("aria-label", (on ? "Pause" : "Play") + " " + tracks[index].title);
-    trackLabel.textContent = on ? tracks[index].title : "";
   }
 
   function load(at, time) {
@@ -101,6 +98,8 @@
     if (lastFocus && typeof lastFocus.focus === "function") {
       lastFocus.focus();
     }
+    // Lets the scramble script resolve whatever is now visible.
+    document.dispatchEvent(new CustomEvent("atelier:entered"));
   }
 
   function openEntry() {
@@ -158,14 +157,6 @@
       audio.pause();
     }
   });
-
-  if (next) {
-    next.addEventListener("click", function () {
-      store(CHOICE, "on");
-      load(index + 1, 0);
-      play();
-    });
-  }
 
   if (entry) {
     entry.querySelector("[data-entry-accept]").addEventListener("click", function () {

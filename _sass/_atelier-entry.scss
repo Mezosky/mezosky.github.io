@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Atelier — entry sound: the one-time invitation and the persistent control.
- * Both are inert markup until assets/js/entry-audio.js reveals them.
+ * Both are inert markup until assets/js/audio-player.js reveals them.
  ******************************************************************************/
 
 .atelier-entry {
@@ -27,16 +27,44 @@ html.has-entry-open body {
   display: grid;
   justify-items: center;
   gap: 1.5rem;
-  max-width: 34ch;
+  max-width: 40ch;
   text-align: center;
+}
+
+/* The epigraph sits above the invitation: a line of verse, its attribution, then
+ * the ask. Serif, because it is the one quoted voice on the site. */
+.atelier-entry__epigraph {
+  margin: 0;
+  padding: 0;
+  border: none;
+  display: grid;
+  gap: 0.7rem;
+  justify-items: center;
+}
+
+.atelier-entry__epigraph p {
+  margin: 0;
+  font-family: var(--atelier-serif);
+  font-size: clamp(1.0625rem, 2.4vw, 1.375rem);
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--atelier-ivory);
+}
+
+.atelier-entry__epigraph cite {
+  font-family: var(--atelier-mono);
+  font-size: 0.6875rem;
+  font-style: normal;
+  letter-spacing: 0.1em;
+  color: var(--atelier-dim);
 }
 
 .atelier-entry__prompt {
   margin: 0;
-  font-size: clamp(1rem, 2.2vw, 1.25rem);
-  letter-spacing: 0.06em;
+  font-size: 0.8125rem;
+  letter-spacing: 0.14em;
   line-height: 1.5;
-  color: var(--atelier-ivory);
+  color: var(--atelier-ash);
 }
 
 .atelier-entry__title {
@@ -77,13 +105,38 @@ html.has-entry-open body {
   border-bottom-color: var(--atelier-line-strong);
 }
 
-/* --- The control in the top panel ----------------------------------------- */
+/* --- The control in its own corner ---------------------------------------- */
 
+/* Fixed, bottom right. It used to live in the top panel, but the panel collapses
+ * behind the menu button on a phone, which put the control out of reach at exactly
+ * the size where it is hardest to find. Being outside the navigation also means a
+ * page change never touches it, which is what keeps the music playing.
+ *
+ * z-index 1041 clears the fixed navbar (Bootstrap 1030) and stays under the
+ * invitation (1060), so the overlay covers it while it is open. */
 .atelier-player {
+  position: fixed;
+  right: max(var(--atelier-gutter), env(safe-area-inset-right));
+  bottom: max(var(--atelier-gutter), env(safe-area-inset-bottom));
+  z-index: 1041;
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 0.5rem;
-  margin-right: 0.6rem;
+  padding: 0.3rem 0.7rem;
+  background: rgba(11, 10, 9, 0.82);
+  border: 1px solid var(--atelier-line);
+}
+
+@supports (backdrop-filter: blur(2px)) {
+  /* Just enough to keep the label legible over the artwork; no frosted panel. */
+  .atelier-player {
+    backdrop-filter: blur(2px);
+  }
+}
+
+.atelier-player:hover,
+.atelier-player:focus-within {
+  border-color: var(--atelier-line-strong);
 }
 
 .atelier-player__toggle,
@@ -129,11 +182,16 @@ html.has-entry-open body {
 }
 
 @media (max-width: 47.9em) {
+  /* Narrower screens have less room beside the text, so the corner tightens up
+   * rather than the title getting shorter — a track name is the only thing the
+   * control says. */
   .atelier-player {
-    margin: 0.4rem 0 0.6rem;
+    right: max(0.75rem, env(safe-area-inset-right));
+    bottom: max(0.75rem, env(safe-area-inset-bottom));
+    padding: 0.3rem 0.6rem;
   }
 
   .atelier-player__track {
-    max-width: 18ch;
+    max-width: 14ch;
   }
 }

@@ -15,8 +15,9 @@ ascii_field_compact: goya_field
 # to leave the player as the only way in.
 audio:
   invite: true
-  prompt: Press enter to descend
-  subtitle: # optional line under the prompt, e.g. what is playing
+  epigraph: "Through the Unknown, we'll find the New"
+  epigraph_source: Charles Baudelaire, Les Fleurs du Mal
+  prompt: Descend with me
   decline: Continue in silence
 
 first_name: Ignacio

@@ -16,10 +16,15 @@
 {% if tracks and tracks.size > 0 and audio.invite %}
   <div class="atelier-entry" data-entry hidden>
     <div class="atelier-entry__panel" role="dialog" aria-modal="true" aria-labelledby="atelier-entry-prompt">
-      <p class="atelier-entry__prompt" id="atelier-entry-prompt">{{ audio.prompt | default: 'Press enter to descend' }}</p>
-      {% if audio.subtitle %}
-        <p class="atelier-entry__title">{{ audio.subtitle | escape }}</p>
+      {% if audio.epigraph %}
+        <blockquote class="atelier-entry__epigraph">
+          <p>&ldquo;{{ audio.epigraph | escape }}&rdquo;</p>
+          {% if audio.epigraph_source %}
+            <cite>&mdash; {{ audio.epigraph_source | escape }}</cite>
+          {% endif %}
+        </blockquote>
       {% endif %}
+      <p class="atelier-entry__prompt" id="atelier-entry-prompt">{{ audio.prompt | default: 'Descend with me' }}</p>
       <div class="atelier-entry__actions">
         <button class="atelier-token atelier-entry__accept" type="button" data-entry-accept>[ Enter ]</button>
         <button class="atelier-entry__decline" type="button" data-entry-decline>

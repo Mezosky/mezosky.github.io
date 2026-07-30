@@ -22,8 +22,7 @@
   var SWAP_EVERY = 2; // frames a random character is held, to avoid flicker
   var LIMIT = 900; // characters per element; longer text settles instantly
 
-  var targets = document.querySelectorAll("[data-scramble]");
-  if (!targets.length || !("IntersectionObserver" in window)) {
+  if (!("IntersectionObserver" in window)) {
     return;
   }
 
@@ -31,6 +30,9 @@
   if (reducedMotion.matches) {
     return;
   }
+
+  var targets = [];
+  var observer = null;
 
   var active = [];
   var frame = null;
@@ -114,7 +116,18 @@
     }
   }
 
+  function gateOpen() {
+    return document.documentElement.classList.contains("has-entry-open");
+  }
+
   function start(element) {
+    // The invitation covers the page: scrambling behind it would be spent unseen,
+    // so leave the element eligible and let the entry event below run it.
+    if (gateOpen()) {
+      element.dataset.scrambleSeen = "0";
+      return;
+    }
+
     var collected = collect(element);
     if (!collected.length || collected.length > LIMIT) {
       return;
@@ -152,7 +165,7 @@
     }
   }
 
-  var observer = new IntersectionObserver(
+  observer = new IntersectionObserver(
     function (entries) {
       entries.forEach(function (entry) {
         var element = entry.target;
@@ -170,8 +183,31 @@
     { threshold: 0.35, rootMargin: "0px 0px -8% 0px" }
   );
 
-  Array.prototype.forEach.call(targets, function (element) {
-    observer.observe(element);
+  // Re-read the DOM on load and after every soft navigation.
+  function bind() {
+    while (active.length) {
+      restore(active.pop());
+    }
+    targets = document.querySelectorAll("[data-scramble]");
+    Array.prototype.forEach.call(targets, function (element) {
+      element.dataset.scrambleSeen = "0";
+      observer.observe(element);
+    });
+  }
+
+  bind();
+  document.addEventListener("atelier:navigated", bind);
+
+  // Dispatched when the invitation closes: whatever is on screen resolves then,
+  // which is what makes the name settle as the reader arrives.
+  document.addEventListener("atelier:entered", function () {
+    Array.prototype.forEach.call(targets, function (element) {
+      var box = element.getBoundingClientRect();
+      if (box.bottom > 0 && box.top < window.innerHeight) {
+        element.dataset.scrambleSeen = "1";
+        start(element);
+      }
+    });
   });
 
   // Turning reduced motion on mid-session should stop it and leave clean text.
