@@ -1,10 +1,11 @@
 {
   "basics": {
-    "name": "Ignacio Alejandro Meza De la Jara",
-    "label": "PhD Candidate and Machine Learning Researcher",
+    "name": "Ignacio Meza De la Jara",
+    "label": "PhD Candidate, Computer Science — Computer Vision & Machine Learning Research",
     "email": "imezadelajara@gmail.com",
+    "phone": "+61 452 224 418",
     "url": "https://mezosky.github.io/",
-    "summary": "Chilean computer scientist from the University of Chile and PhD candidate at the University of Adelaide, supported by a Naval Group 🇫🇷 scholarship, with interests in machine learning, computer vision, neural networks, and teaching.",
+    "summary": "PhD researcher at the Australian Institute for Machine Learning (University of Adelaide) working on the reliability of vision-language models, out-of-distribution detection, and mechanistic interpretability of large language models. Author of six papers submitted or published at NeurIPS, ACL, WACV, and an ICCV workshop, several with measurable double-digit accuracy gains over prior state of the art. Complements this research with hands-on experience shipping machine learning systems to production, including fraud-detection and credit-risk models deployed at a national bank, and with teaching graduate-level machine learning and MLOps as a part-time university lecturer.",
     "location": {
       "city": "Adelaide",
       "countryCode": "AU",
@@ -30,90 +31,206 @@
   },
   "work": [
     {
-      "name": "BCI",
-      "position": "Data Scientist",
-      "url": "https://www.bci.cl/",
-      "summary": "Worked on applied data science and machine learning problems."
+      "name": "Australian Institute for Machine Learning, University of Adelaide",
+      "position": "PhD Researcher",
+      "location": "Adelaide, Australia",
+      "url": "https://www.adelaide.edu.au/aiml/",
+      "startDate": "2024-08",
+      "highlights": [
+        "Lead independent research on out-of-distribution detection, vision-language model adaptation, and LLM interpretability, producing six papers submitted to NeurIPS, ACL, and WACV within the first two years of candidature."
+      ]
     },
     {
-      "name": "University of Chile",
-      "position": "Part-time Professor",
+      "name": "BCI",
+      "position": "Data Scientist / Machine Learning Engineer",
+      "url": "https://www.bci.cl/",
+      "startDate": "2021-09",
+      "endDate": "2024-04",
+      "highlights": [
+        "Built anomaly-detection models (isolation forests, k-means clustering) for production fraud detection.",
+        "Assessed client credit risk using gradient-boosting models as a financial risk analyst at Mach-BCI.",
+        "Designed and shipped an internal financial-risk Python library adopted by the data science team."
+      ]
+    },
+    {
+      "name": "MSc in Data Science, University of Chile",
+      "position": "Part-Time Lecturer",
       "url": "https://github.com/MDS7202/MDS7202",
-      "summary": "Part-time professor for MDS7202, teaching machine learning and related topics."
+      "startDate": "2023-01",
+      "endDate": "2025-06",
+      "highlights": [
+        "Taught advanced Python, machine learning, and MLOps to graduate students, after being promoted from teaching assistant to part-time professor in 2023 (course materials: github.com/MDS7202/MDS7202)."
+      ]
+    },
+    {
+      "name": "University of Waikato",
+      "position": "Research Assistant",
+      "url": "https://www.waikato.ac.nz/",
+      "startDate": "2021-01",
+      "endDate": "2021-03",
+      "highlights": ["Applied language models to study topic variation on a New Zealand donation platform."]
     }
   ],
   "volunteer": [],
   "education": [
     {
+      "institution": "University of Adelaide",
+      "location": "Adelaide, Australia",
+      "url": "https://www.adelaide.edu.au/aiml/",
+      "area": "Computer Science & Mathematics",
+      "studyType": "PhD",
+      "startDate": "2024-08",
+      "courses": [
+        "Australian Institute for Machine Learning (AIML). Naval Group-funded scholarship.",
+        "Focus: computer vision, out-of-distribution detection, VLM/LLM reliability."
+      ]
+    },
+    {
       "institution": "University of Chile",
       "url": "https://uchile.cl/",
       "area": "Computer Science",
-      "studyType": "Computer Scientist"
+      "studyType": "M.S.",
+      "startDate": "2023",
+      "endDate": "2024",
+      "courses": ["Graduated with highest honors; ranked top student in the Master's in Computer Science program."]
     },
     {
-      "institution": "University of Adelaide",
-      "location": "Adelaide, Australia",
-      "area": "Computer Vision and Mathematics",
-      "studyType": "PhD"
+      "institution": "University of Chile",
+      "url": "https://uchile.cl/",
+      "area": "Civil Electrical Engineering",
+      "studyType": "B.Eng.",
+      "startDate": "2016",
+      "endDate": "2022",
+      "courses": ["Graduated with maximum distinction."]
     }
   ],
   "awards": [
     {
-      "title": "Naval Group 🇫🇷 Scholarship",
-      "awarder": "Naval Group 🇫🇷",
-      "summary": "Scholarship support for PhD studies at the University of Adelaide."
+      "title": "Naval Group Scholarship",
+      "awarder": "Naval Group",
+      "summary": "Funds PhD studies at the Australian Institute for Machine Learning, University of Adelaide."
+    },
+    {
+      "title": "Graduated with maximum distinction",
+      "awarder": "University of Chile",
+      "summary": "B.Eng. Electrical Engineering."
+    },
+    {
+      "title": "Top student, M.S. Computer Science",
+      "awarder": "University of Chile",
+      "summary": "Graduated with highest honors."
+    },
+    {
+      "title": "Outstanding student, three consecutive years",
+      "awarder": "University of Chile"
     }
   ],
   "certificates": [],
   "publications": [
     {
+      "name": "FixMe: Geometrically Meaningful Text-Embedding Corrections in Frozen VLMs",
+      "publisher": "NeurIPS 2026 — under review",
+      "releaseDate": "2026",
+      "summary": "Bypassed the prompt-realizable embedding constraint by searching text-embedding space directly; delivered +7.75 mIoU average on SAM 3 (up to +16.18 under domain mismatch), with gains transferring to CLIP, Perception Encoder, and SigLIP."
+    },
+    {
+      "name": "HYDRA: Uncovering Latent Knowledge in Segmentation Models",
+      "publisher": "NeurIPS 2026 — under review",
+      "releaseDate": "2026",
+      "summary": "Trained a small selector on cached, frozen segmenter outputs to recover masks the deployed selection rule suppresses; improved Mask2Former, MaskDINO, and OneFormer by up to +7.41 mIoU on ADE20K/COCO and SAM 3 by +9.4 prompt-IoU points across eight domains, with no backbone changes or retraining."
+    },
+    {
+      "name": "Voyager: Learning to Select Layers for Reliable OOD Detection",
+      "publisher": "WACV 2027 — under review",
+      "releaseDate": "2026",
+      "summary": "Replaced fixed layer-fusion rules with a lightweight, per-input router over CLIP's layer depth; achieved 18.86 FPR@95 on ImageNet-1K, beating the strongest prompt-learning baseline by 8.8 points, while training ~20x faster (under 1 GB memory, ~2 minutes)."
+    },
+    {
+      "name": "Truth as a Trajectory: What Internal Representations Reveal About LLM Reasoning",
+      "publisher": "ACL 2026 — spotlight, main conference",
+      "releaseDate": "2026",
+      "url": "https://arxiv.org/abs/2603.01326",
+      "summary": "Modeled transformer inference as a geometric trajectory rather than a static activation, distinguishing valid from spurious reasoning purely from layer-wise displacement; outperformed conventional linear probing on dense and Mixture-of-Experts LLMs across commonsense reasoning, question answering, and toxicity-detection benchmarks."
+    },
+    {
+      "name": "Mysteries of the Deep: Role of Intermediate Representations in Out-of-Distribution Detection",
+      "publisher": "NeurIPS 2025",
+      "releaseDate": "2025",
+      "url": "https://mezosky.github.io/mysteries-of-the-deep/",
+      "summary": "Showed that intermediate transformer layers carry complementary out-of-distribution signal and introduced a training-free, entropy-based criterion to select them; improved detection accuracy by up to 10% (far-OOD) and 7% (near-OOD) over state-of-the-art training-free methods across seven backbones (CLIP, DINOv2, MAE, MoCo-v3, SigLIP-v2, Perception Encoder, supervised ViT)."
+    },
+    {
       "name": "An Empirical Study of the Effect of Video Encoders on Temporal Video Grounding",
-      "publisher": "Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV) Workshops",
-      "releaseDate": "2023-10-01"
+      "publisher": "ICCV 2023 Workshops",
+      "releaseDate": "2023-10",
+      "url": "https://arxiv.org/abs/2510.17007"
     }
   ],
   "skills": [
     {
-      "name": "Machine Learning",
+      "name": "Research",
       "level": "Advanced",
-      "keywords": ["Computer Vision", "Neural Networks", "Data Science"]
+      "keywords": ["Out-of-Distribution Detection", "Vision-Language Models", "LLM Interpretability", "Segmentation", "Computer Vision"]
     },
     {
-      "name": "Teaching",
+      "name": "Languages",
       "level": "Advanced",
-      "keywords": ["Course Design", "Technical Communication", "Mentoring"]
+      "keywords": ["Python", "R"]
     },
     {
-      "name": "Engineering Practices",
+      "name": "ML / DL",
+      "level": "Advanced",
+      "keywords": ["PyTorch", "TensorFlow", "Scikit-learn", "HuggingFace"]
+    },
+    {
+      "name": "Data & Analysis",
+      "level": "Advanced",
+      "keywords": ["Pandas", "NumPy", "SciPy", "Tableau", "Power BI"]
+    },
+    {
+      "name": "Cloud & DevOps",
       "level": "Strong",
-      "keywords": ["Reproducibility", "Documentation", "Code Review", "Testing", "Clear Communication", "Clean Workflows"]
+      "keywords": ["AWS", "GCP", "Docker", "Airflow", "MLflow"]
+    },
+    {
+      "name": "Other",
+      "level": "Strong",
+      "keywords": ["LangChain", "Selenium", "OpenCV"]
     }
   ],
   "languages": [
     {
       "language": "Spanish",
-      "fluency": "Native speaker"
+      "fluency": "Native"
     },
     {
       "language": "English",
-      "fluency": "Fluent"
+      "fluency": "Professional Working Proficiency"
     }
   ],
   "interests": [
     {
       "name": "Research",
-      "keywords": ["Computer Vision", "Machine Learning", "Temporal Video Grounding"]
+      "keywords": ["Out-of-distribution detection", "Vision-language model reliability", "Mechanistic interpretability"]
     },
     {
       "name": "Teaching",
-      "keywords": ["Scientific communication", "Open education"]
+      "keywords": ["Graduate machine learning", "MLOps", "Scientific communication"]
     }
   ],
   "references": [],
   "projects": [
     {
+      "name": "Wheat Seed Segmentation",
+      "summary": "University of Nottingham. Image segmentation of wheat seed components (aleurone, germ, endosperm)."
+    },
+    {
+      "name": "LLM Memorization & Data Extraction",
+      "summary": "University of Adelaide. Studied extraction of memorized training data from large language models and the resulting privacy risks."
+    },
+    {
       "name": "MDS7202",
-      "summary": "Teaching material and course work for MDS7202.",
+      "summary": "Teaching material and course work for the MSc in Data Science course at the University of Chile.",
       "url": "https://github.com/MDS7202/MDS7202"
     },
     {
