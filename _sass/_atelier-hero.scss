@@ -142,7 +142,10 @@ body.atelier-home .container[role="main"] {
 
   position: absolute;
   right: -8vw;
-  bottom: -2vh;
+  /* Anchored on the hero band, not on the whole grid. A field may be taller than
+   * the viewport so the page can pan down it; this keeps the band it opens on
+   * exactly where it would sit if the grid stopped there. */
+  top: calc(102% - var(--ascii-hero-rows, var(--ascii-rows, 84)) * 1.02em);
   margin: 0;
   padding: 0;
   border: 0;
@@ -275,7 +278,7 @@ body:not(.atelier-home) .ascii-field {
 
     right: 0;
     left: 0;
-    bottom: -1vh;
+    top: calc(101% - var(--ascii-hero-rows, var(--ascii-rows, 111)) * 1.02em);
     margin-inline: auto;
     will-change: auto;
   }

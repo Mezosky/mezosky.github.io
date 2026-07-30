@@ -65,9 +65,10 @@ def build(args):
     )
     layers = depth.split(glyphs, ink, depth.parse_bands(args.bands))
 
-    recipe = "--crop %s --cols %d%s%s --ramp %s --floor %s --gamma %s --edge-quantile %s --bands %s" % (
+    recipe = "--crop %s --cols %d%s%s%s --ramp %s --floor %s --gamma %s --edge-quantile %s --bands %s" % (
         args.crop or "none",
         args.cols,
+        (" --hero-rows %d" % args.hero_rows) if args.hero_rows else "",
         " --flip" if args.flip else "",
         " --invert" if args.invert else "",
         args.ramp,
@@ -82,6 +83,7 @@ def build(args):
         "plate_height": plate_size[1] if plate_size else 0,
         "columns": args.cols,
         "rows": rows,
+        "hero_rows": args.hero_rows or rows,
         "caption": args.caption,
         "source_title": args.source_title,
         "source_url": args.source_url,
@@ -107,6 +109,12 @@ def main(argv=None):
     parser.add_argument("--crop", help="left,top,right,bottom as fractions of the image, e.g. 0.76,0.26,1,0.54")
     parser.add_argument("--cols", type=int, default=190, help="width of the character grid (default: 190)")
     parser.add_argument("--rows", type=int, help="height of the grid (default: derived from the crop)")
+    parser.add_argument(
+        "--hero-rows",
+        type=int,
+        help="rows visible before any scrolling (default: all of them). Set this "
+        "lower than the grid height to leave room for the page to pan down.",
+    )
     parser.add_argument("--cell-aspect", type=float, default=source.DEFAULT_CELL_ASPECT, help="character height/width")
     parser.add_argument("--flip", action="store_true", help="mirror horizontally, to keep the dense mass on the right")
     parser.add_argument("--flip-vertical", action="store_true", help="mirror vertically")

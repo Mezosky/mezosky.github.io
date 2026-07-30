@@ -32,6 +32,7 @@ def render(layers, meta):
     lines += [
         "columns: %d" % meta["columns"],
         "rows: %d" % meta["rows"],
+        "hero_rows: %d" % meta["hero_rows"],
         "source:",
         "  title: %s" % _scalar(meta["source_title"]),
         "  url: %s" % _scalar(meta["source_url"]),

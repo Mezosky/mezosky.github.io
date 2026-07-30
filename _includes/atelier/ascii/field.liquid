@@ -35,7 +35,8 @@
 {% assign variant = include.variant | default: 'wide' %}
 
 {% if field %}
-  {% capture ascii_metrics %}--ascii-columns: {{ field.columns }}; --ascii-rows: {{ field.rows }}{% endcapture %}
+  {% assign hero_rows = field.hero_rows | default: field.rows %}
+  {% capture ascii_metrics %}--ascii-columns: {{ field.columns }}; --ascii-rows: {{ field.rows }}; --ascii-hero-rows: {{ hero_rows }}{% endcapture %}
   <div
     class="ascii-field ascii-field--{{ variant }}"
     {% if variant == 'wide' %}

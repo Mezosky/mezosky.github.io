@@ -70,6 +70,24 @@ matter. The portrait field is chosen once for the whole site with
 `ascii_field_compact:` in `_config.yml`, because a portrait painting suits a
 portrait viewport; `_sass/_atelier-hero.scss` swaps the two by media query.
 
+## Making the page pan down the artwork
+
+`--hero-rows` says how many rows are visible before any scrolling. Set it lower
+than the grid height and the extra rows sit below the fold; the page then travels
+down them as the reader scrolls, so later sections meet later parts of the
+painting. Leave it unset and the grid simply fills the viewport, with a few pixels
+of drift instead.
+
+The homepage field uses it: the crop was extended downwards only, keeping the same
+columns, the same left/right edges and the same top edge, so the band the hero
+opens on is framed exactly as it was before the extension. When you extend a crop
+this way, two things have to be held steady or the opening band shifts:
+
+- pin the tone mapping with `--no-autocontrast --black --white`, because
+  autocontrast is measured over the whole crop and a taller crop restretches it;
+- scale `--top-fade` so the same _number_ of rows is thinned as before
+  (0.30 of 84 rows is 25 rows, so 129 rows wants 25/129 = 0.195).
+
 ## Bright paintings need `--invert`
 
 The default mapping inks the light end: on a dark painting the lit subjects
