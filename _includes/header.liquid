@@ -12,7 +12,23 @@
         {% assign brand_full = site.title %}
       {% endif %}
       {% assign brand_full = brand_full | strip %}
-      <a class="navbar-brand title" href="{{ site.baseurl }}/">{{ brand_full }}</a>
+      {% comment %}
+        Captured separately: chaining `slice` after `default` would apply it to
+        the configured monogram too and cut it down to a single letter.
+      {% endcomment %}
+      {% capture brand_initial %}{{ brand_full | slice: 0, 1 }}{% endcapture %}
+      {% assign brand_mark = site.brand_monogram | default: brand_initial %}
+      {% comment %}
+        The wordmark condenses to a monogram once the page is scrolled. Both
+        forms are stacked in one grid cell and cross-faded, so the swap costs no
+        layout and needs no measurement; #navbar picks up .navbar-condensed from
+        assets/js/common.js. Marked aria-hidden with the full name on the link,
+        so it is announced once and does not change as the reader scrolls.
+      {% endcomment %}
+      <a class="navbar-brand title atelier-brand" href="{{ site.baseurl }}/" aria-label="{{ brand_full }}">
+        <span class="atelier-brand__full" aria-hidden="true">{{ brand_full }}</span>
+        <span class="atelier-brand__mark" aria-hidden="true">{{ brand_mark }}</span>
+      </a>
 
       <!-- Navbar Toggle -->
       <button

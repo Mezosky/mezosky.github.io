@@ -193,6 +193,43 @@ html[data-theme="dark"] .navbar.navbar-condensed {
   color: var(--atelier-bronze-bright);
 }
 
+/**
+ * Wordmark to monogram. Both forms occupy the same grid cell, so the swap is a
+ * cross-fade with no reflow and no width measurement; the box keeps the width of
+ * the full name, which is invisible here because nothing follows it on the left.
+ */
+.atelier-brand {
+  display: inline-grid;
+  align-items: center;
+  line-height: 1;
+}
+
+.atelier-brand__full,
+.atelier-brand__mark {
+  grid-area: 1 / 1;
+  justify-self: start;
+  white-space: nowrap;
+  transition:
+    opacity 0.26s ease,
+    transform 0.32s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.atelier-brand__mark {
+  opacity: 0;
+  transform: translateY(0.32em);
+  letter-spacing: 0.24em;
+}
+
+.navbar.navbar-condensed .atelier-brand__full {
+  opacity: 0;
+  transform: translateY(-0.32em);
+}
+
+.navbar.navbar-condensed .atelier-brand__mark {
+  opacity: 1;
+  transform: none;
+}
+
 .navbar-toggler {
   border: 1px solid var(--atelier-line-strong);
   border-radius: 1px;
@@ -387,7 +424,9 @@ footer a:hover {
 @media (prefers-reduced-motion: reduce) {
   a,
   .atelier-nav__label,
-  .navbar {
+  .navbar,
+  .atelier-brand__full,
+  .atelier-brand__mark {
     transition: none;
   }
 }

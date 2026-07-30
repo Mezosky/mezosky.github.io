@@ -10,6 +10,10 @@ ascii_field: true
 
 # Hero copy. Edit here; _includes/atelier/hero.liquid holds only the markup.
 hero:
+  # Each entry is one line of the display heading; this is where it breaks.
+  name:
+    - Ignacio M.
+    - De la Jara
   statement:
     - I study not only what models predict,
     - but how they arrive there.

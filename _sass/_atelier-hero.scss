@@ -53,12 +53,21 @@ body.atelier-home .container[role="main"] {
 /* Mono display type wants slightly open tracking, never the tight negative
  * tracking a geometric sans would take. */
 .atelier-hero__name {
-  font-size: clamp(2.5rem, 8.5vw, 6.5rem);
+  font-size: clamp(2rem, 7.4vw, 5.75rem);
   font-weight: 300;
   letter-spacing: 0.02em;
-  line-height: 1;
+  line-height: 1.04;
   margin: 0;
+  /* Wider than the copy column: the name sets its own measure. */
+  max-width: none;
   color: var(--atelier-ivory);
+}
+
+/* Each line is a block that never re-wraps, so the break stays where the front
+ * matter puts it at every size. */
+.atelier-hero__name-line {
+  display: block;
+  white-space: nowrap;
 }
 
 .atelier-hero__role {
@@ -119,19 +128,15 @@ body.atelier-home .container[role="main"] {
  * basis, the same box, the same anchor. That is what keeps the photograph and
  * the text in register, so the characters read as a transcription of what is
  * behind them rather than as a texture laid over it.
- *
- * The grid is far taller than the viewport; `--ascii-start-row` chooses which
- * band the hero opens on, and the scroll pan travels down from there.
  */
 .ascii-field__plate,
 .ascii-field__layer {
   /* How much viewport width the whole grid spans. */
   --ascii-span: 96vw;
-  --ascii-start-row: 26;
 
   position: absolute;
   right: -8vw;
-  top: calc(var(--ascii-start-row) * -1.02em);
+  bottom: -2vh;
   margin: 0;
   padding: 0;
   border: 0;
@@ -147,7 +152,7 @@ body.atelier-home .container[role="main"] {
   /* Sized from the grid rather than left to shrink-to-fit: boxes of differing
    * intrinsic size would offset their contents from one another. */
   width: calc(var(--ascii-columns, 190) * 0.6em);
-  height: calc(var(--ascii-rows, 191) * 1.02em);
+  height: calc(var(--ascii-rows, 84) * 1.02em);
   will-change: transform;
 }
 
@@ -224,9 +229,9 @@ body.atelier-home .container[role="main"] {
   .ascii-field__plate,
   .ascii-field__layer {
     --ascii-span: 210vw;
-    --ascii-start-row: 30;
 
     right: -28vw;
+    bottom: -1vh;
     will-change: auto;
   }
 

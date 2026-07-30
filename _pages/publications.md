@@ -2,7 +2,7 @@
 layout: page
 permalink: /publications/
 title: Publications
-description: Research papers and academic work by Ignacio Meza.
+description: Research papers and academic work by Ignacio M. De la Jara.
 nav: true
 nav_order: 2
 ---

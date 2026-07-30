@@ -3,11 +3,14 @@
  *
  * Three effects, all enhancement — the artwork renders without this file:
  *
- *   pan     scrolling the page travels down the composition, so different
- *           sections sit against different parts of the painting
- *   depth   layers drift against each other with the pointer
+ *   depth   layers drift against each other with the pointer and the scroll
  *   ripple  rows near the pointer are pushed aside, so the characters visibly
  *           move as the cursor passes through them
+ *   fade    the field thins out as the reader leaves the hero
+ *
+ * The plate behind the characters takes the scroll shift but not the pointer
+ * drift: it sits furthest back, so it should be the most stationary thing on
+ * screen, and holding it still keeps it in register with the text.
  *
  * Nothing runs when the reader prefers reduced motion, or on pointer-less and
  * small screens, where the cost is real and the effect is not.
@@ -17,6 +20,7 @@
 
   // Peak displacement in px.
   var POINTER_RANGE = 9; // whole-layer drift with the pointer
+  var SCROLL_RANGE = 26; // vertical drift as the page scrolls
   var RIPPLE_AMPLITUDE = 14; // sideways push of the rows nearest the pointer
   var RIPPLE_RADIUS = 96; // px above/below the pointer that the push reaches
   var RIPPLE_SPAN = 2.6; // how many radii out still get touched
@@ -45,7 +49,7 @@
   var pointerX = 0;
   var pointerY = 0;
   var pointerClientY = -1e6;
-  var pan = 0;
+  var scrollShift = 0;
   var frame = null;
   var listening = false;
 
@@ -65,9 +69,7 @@
       rowHeight: height / rows,
       rowCount: rows,
       height: height,
-      // top is set in CSS as a negative offset; getBoundingClientRect already
-      // includes the pan transform, so back it out.
-      top: first.getBoundingClientRect().top - pan,
+      top: first.getBoundingClientRect().top,
     };
   }
 
@@ -84,13 +86,13 @@
     var m = metrics();
     var reach = RIPPLE_RADIUS * RIPPLE_SPAN;
     // Row index under the pointer, in the layer's own coordinates.
-    var focus = (pointerClientY - m.top - pan) / m.rowHeight;
+    var focus = (pointerClientY - m.top) / m.rowHeight;
 
     for (var i = 0; i < layers.length; i += 1) {
       var layer = layers[i];
       var lead = layer.depth / layers.length;
       var x = pointerX * POINTER_RANGE * lead;
-      var y = pointerY * POINTER_RANGE * lead + pan;
+      var y = pointerY * POINTER_RANGE * lead + scrollShift * SCROLL_RANGE * lead;
       layer.element.style.transform = "translate3d(" + x.toFixed(2) + "px, " + y.toFixed(2) + "px, 0)";
 
       clearRipple(layer);
@@ -116,7 +118,7 @@
     }
 
     if (plate) {
-      plate.style.transform = "translate3d(0, " + pan.toFixed(2) + "px, 0)";
+      plate.style.transform = "translate3d(0, " + (scrollShift * SCROLL_RANGE * 0.35).toFixed(2) + "px, 0)";
     }
   }
 
@@ -130,7 +132,7 @@
     pointerX = 0;
     pointerY = 0;
     pointerClientY = -1e6;
-    pan = 0;
+    scrollShift = 0;
     for (var i = 0; i < layers.length; i += 1) {
       clearRipple(layers[i]);
       layers[i].element.style.transform = "";
@@ -155,19 +157,10 @@
   }
 
   function onScroll() {
-    var doc = document.documentElement;
-    var scrollable = Math.max(1, doc.scrollHeight - window.innerHeight);
-    var progress = Math.min(Math.max(window.scrollY / scrollable, 0), 1);
-
-    // Travel down the composition: from the band the hero opens on to the last
-    // row that still fills the viewport.
-    var m = metrics();
-    var travel = Math.max(0, m.height + m.top - window.innerHeight);
-    pan = -progress * travel;
-
+    var progress = Math.min(window.scrollY / Math.max(1, window.innerHeight), 1);
+    scrollShift = progress;
     // Drives the density fade in CSS as the reader leaves the hero.
-    var fade = Math.min(window.scrollY / Math.max(1, window.innerHeight), 1);
-    field.style.setProperty("--ascii-scrolled", fade.toFixed(3));
+    field.style.setProperty("--ascii-scrolled", progress.toFixed(3));
     schedule();
   }
 

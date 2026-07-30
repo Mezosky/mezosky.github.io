@@ -2,13 +2,14 @@
 # Site settings
 # -----------------------------------------------------------------------------
 
-title: Ignacio Meza # the website title (if blank, full name will be used instead)
+title: Ignacio M. De la Jara # the website title (if blank, full name will be used instead)
+brand_monogram: IMD # condensed wordmark shown in the navbar once the page is scrolled
 first_name: Ignacio
 middle_name: Alejandro
 last_name: M. De la Jara
 email: imezadelajara@gmail.com
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
-  Personal website of Ignacio Meza, with notes on machine learning, computer vision, research, and teaching.
+  Personal website of Ignacio M. De la Jara, with notes on machine learning, computer vision, research, and teaching.
 footer_text: >
   Built with <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> and hosted on
   <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
