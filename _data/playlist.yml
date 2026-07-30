@@ -1,0 +1,10 @@
+# Tracks for the player in the top panel, in order. Add, reorder or retitle here;
+# nothing else needs to change. `title` is what the control displays, so give each
+# one a real name -- the files carry no ID3 tags to read one from.
+#
+# Files live in assets/audio/ and are served with preload="none", so nothing is
+# downloaded until a visitor presses play.
+- title: Track 01
+  src: /assets/audio/song1.mp3
+- title: Track 02
+  src: /assets/audio/song2.mp3

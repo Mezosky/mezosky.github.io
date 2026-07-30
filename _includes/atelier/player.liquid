@@ -1,0 +1,32 @@
+{% comment %}
+  Audio player for the top panel, driven by _data/playlist.yml.
+
+  Renders nothing when the playlist is empty. The <audio> element carries
+  preload="none", so no audio is fetched until a visitor presses play, and it is
+  a plain native element — no third-party embed, no ads, nothing to leak out of
+  its container.
+
+  The track list is handed to the script as JSON rather than read back out of the
+  DOM, so titles and paths stay in the data file.
+{% endcomment %}
+
+{% assign tracks = site.data.playlist %}
+
+{% if tracks and tracks.size > 0 %}
+  {% assign sources = '' | split: '' %}
+  {% for track in tracks %}
+    {% capture entry %}{"title":{{ track.title | jsonify }},"src":{{ track.src | relative_url | jsonify }}}{% endcapture %}
+    {% assign sources = sources | push: entry %}
+  {% endfor %}
+
+  <li class="nav-item atelier-player" data-player data-player-tracks="[{{ sources | join: ',' | escape }}]">
+    <button class="atelier-player__toggle" type="button" data-player-toggle aria-pressed="false" aria-label="Play">
+      <span class="atelier-player__state" data-player-state>[ play ]</span>
+    </button>
+    <span class="atelier-player__track" data-player-track></span>
+    {% if tracks.size > 1 %}
+      <button class="atelier-player__next" type="button" data-player-next aria-label="Next track">[ &gt;&gt; ]</button>
+    {% endif %}
+    <audio data-player-audio preload="none"></audio>
+  </li>
+{% endif %}

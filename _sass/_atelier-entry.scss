@@ -77,63 +77,63 @@ html.has-entry-open body {
   border-bottom-color: var(--atelier-line-strong);
 }
 
-/* --- The persistent control ----------------------------------------------- */
+/* --- The control in the top panel ----------------------------------------- */
 
-.atelier-sound {
-  position: fixed;
-  bottom: 1.1rem;
-  left: var(--atelier-gutter);
-  z-index: 1020;
+.atelier-player {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-right: 0.6rem;
 }
 
-.atelier-sound[hidden] {
-  display: none;
-}
-
-.atelier-sound__toggle {
+.atelier-player__toggle,
+.atelier-player__next {
   background: none;
   border: none;
-  padding: 0.3rem 0;
+  padding: 0.25rem 0;
   font-family: var(--atelier-mono);
   font-size: 0.6875rem;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   color: var(--atelier-dim);
   cursor: pointer;
+  white-space: nowrap;
 }
 
-.atelier-sound__toggle:hover,
-.atelier-sound__toggle:focus-visible {
+.atelier-player__toggle:hover,
+.atelier-player__toggle:focus-visible,
+.atelier-player__next:hover,
+.atelier-player__next:focus-visible {
   color: var(--atelier-bronze-bright);
 }
 
-.atelier-sound__toggle[aria-pressed="true"] {
+.atelier-player__toggle[aria-pressed="true"] {
   color: var(--atelier-bronze);
 }
 
-/**
- * The player has to stay rendered for playback to continue, so it is faded out
- * rather than hidden, parked in a corner and taken out of the pointer and tab
- * order. display:none or visibility:hidden would stop the audio.
- */
-.atelier-sound__player {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  width: 200px;
-  height: 113px;
-  opacity: 0;
-  pointer-events: none;
+/* The title only appears while something is playing, so the panel stays quiet
+ * when it is not. Capped and clipped so a long title cannot push the navigation
+ * around. */
+.atelier-player__track {
+  max-width: 12ch;
   overflow: hidden;
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  color: var(--atelier-ash);
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
-.atelier-sound__player iframe {
-  width: 100%;
-  height: 100%;
-  border: 0;
+/* Native audio element, never shown: the control above drives it. */
+.atelier-player audio {
+  display: none;
 }
 
 @media (max-width: 47.9em) {
-  .atelier-sound {
-    bottom: 0.7rem;
+  .atelier-player {
+    margin: 0.4rem 0 0.6rem;
+  }
+
+  .atelier-player__track {
+    max-width: 18ch;
   }
 }

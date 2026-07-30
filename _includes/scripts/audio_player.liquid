@@ -1,0 +1,4 @@
+{% if site.data.playlist and site.data.playlist.size > 0 %}
+  <!-- Top-panel audio player; the page is silent until the reader chooses -->
+  <script defer src="{{ '/assets/js/audio-player.js' | relative_url | bust_file_cache }}"></script>
+{% endif %}

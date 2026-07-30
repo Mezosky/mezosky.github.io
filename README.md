@@ -117,12 +117,13 @@ Structure:
 it scrolls into view, and again on each re-entry. See `assets/js/text-scramble.js`.
 The copy itself stays plain HTML.
 
-### Entry sound
+### Audio
 
-Optional. Set `entry_audio.video_id` in `_config.yml` to a YouTube video id and the
-site offers the reader a one-time invitation to play it; leave it blank and nothing
-is rendered. `_includes/atelier/entry.liquid` holds the markup and
-`assets/js/entry-audio.js` the behaviour. Playback always waits for a click.
+Optional. Put tracks in `_data/playlist.yml` and a player appears in the top panel;
+leave the file empty and nothing renders. Files live in `assets/audio/` and are
+served with `preload="none"`. `_includes/atelier/player.liquid` holds the control,
+`_includes/atelier/entry.liquid` the one-time invitation, and
+`assets/js/audio-player.js` the behaviour. Playback always waits for a click.
 
 ### Homepage content sources
 

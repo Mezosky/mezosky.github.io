@@ -1,23 +1,24 @@
 {% comment %}
-  Optional entry sound.
+  The one-time invitation that can start the top-panel player.
 
-  Renders nothing unless site.entry_audio.video_id is set. Playback always waits
-  for a click: browsers block autoplay with sound, and an academic site should not
-  ambush a visitor with music either. The invitation is offered once per session
-  and can be declined; the control stays available afterwards either way.
+  Renders nothing unless the playlist has tracks and site.audio.invite is on.
+  Playback always waits for a click: browsers block autoplay with sound, and an
+  academic site should not ambush a visitor with music either. Offered once per
+  session and declinable; the control in the panel works either way.
 
-  Both blocks start `hidden` so a reader without JavaScript, and any crawler, sees
-  the page itself rather than a gate.
+  Starts `hidden` so a reader without JavaScript, and any crawler, sees the page
+  itself rather than a gate.
 {% endcomment %}
 
-{% assign audio = site.entry_audio %}
+{% assign audio = site.audio %}
+{% assign tracks = site.data.playlist %}
 
-{% if audio.video_id %}
+{% if tracks and tracks.size > 0 and audio.invite %}
   <div class="atelier-entry" data-entry hidden>
     <div class="atelier-entry__panel" role="dialog" aria-modal="true" aria-labelledby="atelier-entry-prompt">
       <p class="atelier-entry__prompt" id="atelier-entry-prompt">{{ audio.prompt | default: 'Press enter to descend' }}</p>
-      {% if audio.title %}
-        <p class="atelier-entry__title">{{ audio.title | escape }}</p>
+      {% if audio.subtitle %}
+        <p class="atelier-entry__title">{{ audio.subtitle | escape }}</p>
       {% endif %}
       <div class="atelier-entry__actions">
         <button class="atelier-token atelier-entry__accept" type="button" data-entry-accept>[ Enter ]</button>
@@ -26,18 +27,5 @@
         </button>
       </div>
     </div>
-  </div>
-
-  <div
-    class="atelier-sound"
-    data-sound
-    data-sound-video="{{ audio.video_id }}"
-    data-sound-label="{{ audio.title | default: 'sound' | escape }}"
-    hidden
-  >
-    <button class="atelier-sound__toggle" type="button" data-sound-toggle aria-pressed="false">
-      <span class="atelier-sound__state" data-sound-state>[ sound off ]</span>
-    </button>
-    <div class="atelier-sound__player" data-sound-player></div>
   </div>
 {% endif %}
