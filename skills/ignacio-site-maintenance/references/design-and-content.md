@@ -80,6 +80,22 @@ These are now part of the site's content and should stay reflected in edits:
 - Build from the includes in `_includes/atelier/`. Do not put page-sized markup in a
   layout, and do not duplicate publication data outside `_bibliography/papers.bib`.
 
+## Resolving Text
+
+Elements marked `data-scramble` start as random characters and settle into their
+real text when scrolled into view, re-firing each time they are re-entered. The
+alphabet is the same punctuation the backdrop is drawn from, so copy appears to
+condense out of the same material.
+
+- The real text is what is in the HTML. The script only rewrites text nodes and
+  restores them exactly, so no-JS readers and crawlers get the finished copy.
+- Whitespace is never scrambled, so string length holds and nothing reflows.
+- It walks text nodes rather than replacing `textContent`, so inline links and
+  emphasis inside a scrambled block survive.
+- Inert under `prefers-reduced-motion`, including if that is switched on mid-session.
+- Add it to headings and short paragraphs. Long blocks past ~900 characters are
+  skipped on purpose; scrambling a wall of text reads as broken, not deliberate.
+
 ## Entry Sound
 
 `entry_audio.video_id` in the config switches on an optional YouTube embed. It is
