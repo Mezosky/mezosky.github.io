@@ -24,6 +24,8 @@
     <script src="layer-lesson.js" defer></script>
     <link rel="stylesheet" href="webcontex.css" />
     <link rel="stylesheet" href="space-theme.css" />
+    <link rel="stylesheet" href="bird-finale.css" />
+    <script src="bird-finale.js" defer></script>
     <script src="webcontex.js" defer></script>
   </head>
   <body>
@@ -1934,6 +1936,78 @@
 }</code></pre>
           <p class="note">Camera-ready citation, updated 2 November 2026. Final proceedings metadata will be added when available.</p>
           <p id="copy-status" role="status"></p>
+        </div>
+      </section>
+
+      <section class="bird-finale" id="bird-finale" data-state="idle" aria-labelledby="bird-finale-title">
+        <div class="wrap">
+          <div class="bird-finale-heading">
+            <div>
+              <h2 id="bird-finale-title">Two birds. Different destinations.</h2>
+              <p>The penguin stays in familiar territory. The puffin heads beyond it.</p>
+            </div>
+            <button type="button" hidden>Play the send-off</button>
+          </div>
+          <svg
+            class="bird-finale-stage"
+            viewBox="0 0 1000 390"
+            role="img"
+            aria-label="Illustration: a penguin walks left to in-distribution territory while a puffin flies right to out-of-distribution territory."
+          >
+            <defs>
+              <path id="finale-walk-path" d="M440 270C370 270 300 270 230 270" />
+              <path id="finale-flight-path" d="M590 185C620 75 710 85 790 210" />
+            </defs>
+            <ellipse cx="500" cy="210" rx="370" ry="130" class="finale-orbit" />
+            <use href="#finale-walk-path" class="finale-trail" />
+            <use href="#finale-flight-path" class="finale-trail" />
+            <path d="M110 314L145 303H319L352 314L321 328H145Z" class="finale-ground" />
+            <path d="M690 254L724 241H858L900 254L867 271H719Z" class="finale-rock" />
+            <path d="M230 314H550" class="finale-orbit" />
+            <path d="M141 314H320M721 254H866" fill="none" stroke="#101e38" stroke-width="2" opacity=".3" />
+            <text x="230" y="364" class="finale-world-title">In-distribution</text>
+            <text x="790" y="307" class="finale-world-title">Out-of-distribution</text>
+            <text x="790" y="338" class="finale-world-note">Beyond the ID vocabulary</text>
+            <g class="finale-penguin-travel" transform="translate(230 270)">
+              <g class="finale-character">
+                <path d="M0 -67V-91" class="finale-tag-string" />
+                <rect x="-28" y="-119" width="56" height="30" rx="5" class="finale-id-tag" />
+                <text x="0" y="-97" class="finale-tag-text">ID</text>
+                <g transform="scale(-1 1)">
+                  <g class="finale-penguin-body">
+                    <ellipse cx="0" cy="0" rx="27" ry="39" class="finale-bird-dark" />
+                    <ellipse cx="5" cy="5" rx="19" ry="31" class="finale-bird-white" />
+                    <circle cx="0" cy="-34" r="24" class="finale-bird-dark" />
+                    <ellipse cx="10" cy="-30" rx="13" ry="18" class="finale-bird-white" />
+                    <path d="M22 -39L44 -30L23 -24Z" class="finale-beak" />
+                    <circle cx="15" cy="-39" r="3" class="finale-eye" />
+                    <path d="M-18 -10Q-43 3 -31 29Q-18 19 -12 1Z" class="finale-bird-dark" />
+                  </g>
+                  <path class="finale-feet finale-foot-back" d="M-12 32L-13 42H-29" />
+                  <path class="finale-feet finale-foot-front" d="M11 32L13 42H29" />
+                </g>
+              </g>
+            </g>
+            <g class="finale-puffin-travel" transform="translate(790 210)">
+              <g class="finale-character">
+                <path d="M-13 -23L-62 -64" class="finale-tag-string" />
+                <rect x="-127" y="-90" width="68" height="31" rx="5" class="finale-ood-tag" />
+                <text x="-93" y="-68" class="finale-tag-text">OOD</text>
+                <path d="M-20 4L-43 18L-22 23Z" class="finale-bird-dark" />
+                <ellipse cx="0" cy="4" rx="29" ry="31" class="finale-bird-dark" />
+                <ellipse cx="9" cy="10" rx="20" ry="25" class="finale-bird-white" />
+                <circle cx="9" cy="-29" r="25" class="finale-bird-dark" />
+                <ellipse cx="18" cy="-26" rx="19" ry="21" class="finale-bird-white" />
+                <path d="M31 -43L65 -27L31 -12Z" class="finale-beak" />
+                <path d="M45 -36L44 -18" fill="none" stroke="#bd6650" stroke-width="5" />
+                <circle cx="23" cy="-35" r="3" class="finale-eye" />
+                <path class="finale-puffin-wing finale-bird-dark" d="M-18 -12Q-53 -47 -78 -19Q-58 7 -18 20Z" />
+                <path d="M-10 31L-13 39H-28M13 32L17 39H32" class="finale-feet" />
+              </g>
+            </g>
+          </svg>
+          <p class="finale-status" role="status" aria-live="polite">Penguin at ID. Puffin at OOD.</p>
+          <p class="finale-caption">A playful illustration of the manuscript’s penguin/puffin example.</p>
         </div>
       </section>
     </main>
