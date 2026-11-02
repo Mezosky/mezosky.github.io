@@ -1,61 +1,106 @@
-/* The craft, trail and static route share one SVG path in viewBox coordinates. */
+/* Recorded image examples replace the looping rocket. No inference runs here. */
 (function () {
   "use strict";
-  var path = document.querySelector("#orbital-expert-route");
-  var craft = document.querySelector(".orbital-craft");
-  var trail = document.querySelector(".orbital-trail");
-  if (!path || !craft || !trail) return;
+  var root = document.querySelector(".hero-recorded");
+  if (!root) return;
+  var cases = JSON.parse(root.querySelector("#hero-example-data").textContent);
   var motion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  var length = path.getTotalLength();
-  var frame, start;
-  var travel = 8500,
-    turn = 1100,
-    cycle = 2 * (travel + turn);
-  var previousAngle;
-  trail.style.strokeDasharray = length + " " + length;
-  function place(distance, heading, elapsed) {
-    var point = path.getPointAtLength(distance);
-    var delta = 3;
-    var before = path.getPointAtLength(Math.max(0, distance - delta));
-    var after = path.getPointAtLength(Math.min(length, distance + delta));
-    var angle = (Math.atan2(after.y - before.y, after.x - before.x) * 180) / Math.PI + heading;
-    if (previousAngle !== undefined) {
-      while (angle - previousAngle > 180) angle -= 360;
-      while (angle - previousAngle < -180) angle += 360;
-      angle = previousAngle + (angle - previousAngle) * 0.12;
-    }
-    previousAngle = angle;
-    craft.setAttribute("transform", "translate(" + point.x + " " + point.y + ") rotate(" + angle + ")");
-    trail.style.strokeDashoffset = length - distance;
-    craft.querySelector(".craft-exhaust").setAttribute("transform", "scale(" + (1 + Math.sin(elapsed / 90) * 0.12) + " 1)");
+  var index = 0,
+    request = 0,
+    timer,
+    interacted = false;
+  var buttons = root.querySelectorAll("[data-hero-example]");
+  var image = root.querySelector("#hero-image");
+  var under = root.querySelector("#hero-image-under");
+  function $(selector) {
+    return root.querySelector(selector);
   }
-  function tick(now) {
-    if (start === undefined) start = now;
-    var elapsed = (now - start) % cycle;
-    var distance, heading;
-    if (elapsed < travel) {
-      distance = (elapsed / travel) * length;
-      heading = 0;
-    } else if (elapsed < travel + turn) {
-      distance = length;
-      heading = ((elapsed - travel) / turn) * 180;
-    } else if (elapsed < 2 * travel + turn) {
-      distance = (1 - (elapsed - travel - turn) / travel) * length;
-      heading = 180;
-    } else {
-      distance = 0;
-      heading = 180 + ((elapsed - 2 * travel - turn) / turn) * 180;
-    }
-    place(distance, heading, now);
-    frame = requestAnimationFrame(tick);
+  function stopAutomatic() {
+    interacted = true;
+    clearInterval(timer);
   }
-  function preference() {
-    cancelAnimationFrame(frame);
-    previousAngle = undefined;
-    start = undefined;
-    if (motion.matches) place(length, 0, 0);
-    else frame = requestAnimationFrame(tick);
+  function select(next, manual) {
+    var token = ++request;
+    var example = cases[next];
+    if (manual) stopAutomatic();
+    var preload = new Image();
+    preload.onload = function () {
+      if (token !== request) return;
+      index = next;
+      under.setAttribute("href", image.getAttribute("href"));
+      image.getAnimations().forEach(function (animation) {
+        animation.cancel();
+      });
+      image.setAttribute("href", example.image);
+      if (!motion.matches)
+        image.animate(
+          [
+            { opacity: 0, transform: "scale(1.025)" },
+            { opacity: 1, transform: "scale(1)" },
+          ],
+          { duration: 420, easing: "ease-out" }
+        );
+      $("#hero-image-name").textContent = example.label + " · " + example.source;
+      $("#hero-case-title").textContent = example.title;
+      $("#hero-reference").textContent = "Reference: " + example.reference;
+      $("#hero-route-readout").innerHTML =
+        "Router 1 of 5 selects " + (example.layers.length === 1 ? "layer " : "layers ") + "<b>" + example.layers.join(", ") + "</b>.";
+      $("#hero-ensemble").innerHTML = "Ensemble decision: <b>" + example.decision + "</b>";
+      $("#hero-visual-title").textContent = example.alt + " and selected CLIP layers";
+      $("#hero-visual-description").textContent =
+        "Router 1 of 5 selects layers " + example.layers.join(", ") + ". Positions follow layer order; all CLIP layers are computed.";
+      root.querySelectorAll("[data-hero-layer]").forEach(function (node) {
+        var selected = example.layers.indexOf(Number(node.dataset.heroLayer)) !== -1;
+        node.classList.toggle("is-selected", selected);
+        node.querySelector("circle").setAttribute("r", selected ? "10" : "6");
+        if (selected && !motion.matches) node.animate([{ opacity: 0.35 }, { opacity: 1 }], { duration: 500, easing: "ease-out" });
+      });
+      buttons.forEach(function (button) {
+        button.setAttribute("aria-pressed", String(button.dataset.heroExample === example.id));
+      });
+      if (manual)
+        $("#hero-example-announcement").textContent =
+          example.alt +
+          ". Router 1 selects layers " +
+          example.layers.join(", ") +
+          ". Ensemble decision " +
+          example.decision +
+          ". Reference " +
+          example.reference +
+          ".";
+    };
+    preload.onerror = function () {
+      if (token === request) clearInterval(timer);
+    };
+    preload.src = example.image;
   }
-  motion.addEventListener("change", preference);
-  preference();
+  buttons.forEach(function (button, i) {
+    button.disabled = false;
+    button.addEventListener("click", function () {
+      select(i, true);
+    });
+    button.addEventListener("focus", stopAutomatic);
+  });
+  $(".hero-example-picker").disabled = false;
+  function automatic() {
+    clearInterval(timer);
+    if (motion.matches || interacted) return;
+    timer = setInterval(function () {
+      if (!document.hidden) select((index + 1) % cases.length, false);
+    }, 7500);
+  }
+  motion.addEventListener("change", function () {
+    if (motion.matches)
+      root.querySelectorAll("svg *").forEach(function (node) {
+        node.getAnimations().forEach(function (animation) {
+          animation.cancel();
+        });
+      });
+    automatic();
+  });
+  cases.forEach(function (example) {
+    var preload = new Image();
+    preload.src = example.image;
+  });
+  automatic();
 })();
