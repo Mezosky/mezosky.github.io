@@ -17,19 +17,6 @@
   color: #bdcde0;
   font-size: 17px;
 }
-.bird-finale button {
-  flex-shrink: 0;
-  padding: 12px 18px;
-  min-height: 44px;
-  border: 0;
-  background: #b8e9d4;
-  color: #101e38;
-  font-size: 15px;
-  font-weight: 500;
-}
-.bird-finale button[hidden] {
-  display: none;
-}
 .bird-finale-stage {
   width: 100%;
   height: auto;
@@ -204,9 +191,6 @@
   }
   .bird-finale-heading p {
     font-size: 16px;
-  }
-  .bird-finale button {
-    margin-top: 20px;
   }
   .bird-finale-stage {
     margin-top: 24px;
