@@ -18,8 +18,12 @@
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="method-interactive.css" />
-    <script src="script.js" defer></script>
+    <script src="script.js?v=20261102-layers" defer></script>
     <script src="method-interactive.js" defer></script>
+    <link rel="stylesheet" href="layer-lesson.css" />
+    <script src="layer-lesson.js" defer></script>
+    <link rel="stylesheet" href="webcontex.css" />
+    <script src="webcontex.js" defer></script>
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
@@ -799,52 +803,801 @@
               curves and signals are conceptual illustrations, not measurements.<br /><a href="assets/method.webp">Open the original figure ↗</a>
             </figcaption>
           </figure>
-          <div class="explorer" data-ui>
-            <fieldset class="mode-picker">
-              <legend>Explore layer selection</legend>
-              <label><input type="radio" name="mode" value="final" />Final layer only</label
-              ><label><input type="radio" name="mode" value="fixed" />Fixed fusion</label
-              ><label><input type="radio" name="mode" value="dynamic" checked />Per-image routing</label>
-            </fieldset>
-            <div class="route-stage">
-              <div class="route-controls">
-                <p id="route-title">A sparse, input-conditioned expert</p>
-                <label id="example-control" for="example"
-                  >Illustrative input
-                  <select id="example">
-                    <option value="a">Input A</option>
-                    <option value="b">Input B</option>
-                    <option value="c">Input C</option>
+          <section class="layer-lesson" id="layer-lesson" data-view="dynamic" aria-labelledby="lesson-title">
+            <div class="lesson-heading">
+              <div>
+                <h3 id="lesson-title">Same backbone. Different wiring.</h3>
+                <p>Change the image. See which connections can change.</p>
+              </div>
+              <button type="button" id="lesson-replay" hidden>Trace the paths</button>
+            </div>
+            <div class="lesson-input-row">
+              <fieldset id="lesson-inputs" disabled>
+                <legend>Teaching example</legend>
+                <label
+                  ><input type="radio" name="lesson-input" value="penguin" checked /><svg
+                    viewBox="0 0 44 44"
+                    width="44"
+                    height="44"
+                    aria-hidden="true"
+                  >
+                    <svg x="0" y="0" width="44" height="44" viewBox="16 51 95 94">
+                      <image href="assets/method.webp" width="1137" height="385" />
+                    </svg></svg
+                  ><span>Penguin</span></label
+                ><label
+                  ><input type="radio" name="lesson-input" value="puffin" /><svg viewBox="0 0 44 44" width="44" height="44" aria-hidden="true">
+                    <svg x="0" y="0" width="44" height="44" viewBox="123 51 94 94">
+                      <image href="assets/method.webp" width="1137" height="385" />
+                    </svg></svg
+                  ><span>Puffin</span></label
+                >
+              </fieldset>
+              <p id="lesson-context">The penguin is the ID example in the manuscript illustration.</p>
+            </div>
+            <nav class="lesson-mobile-views" aria-label="Compare scoring structures">
+              <button type="button" data-lesson-view="final" aria-pressed="false">Final layer</button
+              ><button type="button" data-lesson-view="fixed" aria-pressed="false">Fixed fusion</button
+              ><button type="button" data-lesson-view="dynamic" aria-pressed="true">Voyager</button>
+            </nav>
+            <div class="lesson-comparison">
+              <article class="lesson-method" data-lesson-method="final" aria-labelledby="lesson-heading-final">
+                <h4 id="lesson-heading-final">Final layer only</h4>
+                <p class="lesson-method-subtitle">One terminal score</p>
+                <div id="lesson-final">
+                  <svg class="lesson-wiring" viewBox="0 0 360 414" role="img" aria-label="final structure for the penguin. Selected layers 12.">
+                    <defs>
+                      <marker id="lesson-final-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                        <path d="M0 0L10 5L0 10Z" fill="#5d8070" />
+                      </marker>
+                      <path id="lesson-final-image" d="M62 65V78H114V102H62V106" />
+                      <path id="lesson-final-depth-1" d="M62 125V129" />
+                      <path id="lesson-final-score-1" d="M104 116.5H128" />
+                      <path id="lesson-final-depth-2" d="M62 146V150" />
+                      <path id="lesson-final-score-2" d="M104 137.5H128" />
+                      <path id="lesson-final-depth-3" d="M62 167V171" />
+                      <path id="lesson-final-score-3" d="M104 158.5H128" />
+                      <path id="lesson-final-depth-4" d="M62 188V192" />
+                      <path id="lesson-final-score-4" d="M104 179.5H128" />
+                      <path id="lesson-final-depth-5" d="M62 209V213" />
+                      <path id="lesson-final-score-5" d="M104 200.5H128" />
+                      <path id="lesson-final-depth-6" d="M62 230V234" />
+                      <path id="lesson-final-score-6" d="M104 221.5H128" />
+                      <path id="lesson-final-depth-7" d="M62 251V255" />
+                      <path id="lesson-final-score-7" d="M104 242.5H128" />
+                      <path id="lesson-final-depth-8" d="M62 272V276" />
+                      <path id="lesson-final-score-8" d="M104 263.5H128" />
+                      <path id="lesson-final-depth-9" d="M62 293V297" />
+                      <path id="lesson-final-score-9" d="M104 284.5H128" />
+                      <path id="lesson-final-depth-10" d="M62 314V318" />
+                      <path id="lesson-final-score-10" d="M104 305.5H128" />
+                      <path id="lesson-final-depth-11" d="M62 335V339" />
+                      <path id="lesson-final-score-11" d="M104 326.5H128" />
+                      <path id="lesson-final-score-12" d="M104 347.5H128" />
+                      <path id="lesson-final-fuse-12" d="M164 347.5C187 347.5 188 261 214 261" />
+                      <path id="lesson-final-out" d="M275 289V325" />
+                    </defs>
+                    <svg x="35" y="10" width="54" height="54" viewBox="16 51 95 94">
+                      <image href="assets/method.webp" width="1137" height="385" />
+                    </svg>
+                    <text x="146" y="33" font-size="15" text-anchor="start">Penguin input</text>
+                    <text x="146" y="55" font-size="13" text-anchor="start">Same frozen CLIP</text>
+                    <text x="62" y="98" font-size="14" text-anchor="middle">Backbone</text>
+                    <text x="146" y="98" font-size="14" text-anchor="middle">Scores</text>
+                    <use href="#lesson-final-image" class="lesson-wire" marker-end="url(#lesson-final-arrow)" />
+                    <use href="#lesson-final-image" class="lesson-pulse" />
+                    <use href="#lesson-final-depth-1" class="lesson-wire depth" marker-end="url(#lesson-final-arrow)" />
+                    <use href="#lesson-final-score-1" class="lesson-wire unused" marker-end="url(#lesson-final-arrow)" />
+                    <use href="#lesson-final-depth-2" class="lesson-wire depth" marker-end="url(#lesson-final-arrow)" />
+                    <use href="#lesson-final-score-2" class="lesson-wire unused" marker-end="url(#lesson-final-arrow)" />
+                    <use href="#lesson-final-depth-3" class="lesson-wire depth" marker-end="url(#lesson-final-arrow)" />
+                    <use href="#lesson-final-score-3" class="lesson-wire unused" marker-end="url(#lesson-final-arrow)" />
+                    <use href="#lesson-final-depth-4" class="lesson-wire depth" marker-end="url(#lesson-final-arrow)" />
+                    <use href="#lesson-final-score-4" class="lesson-wire unused" marker-end="url(#lesson-final-arrow)" />
+                    <use href="#lesson-final-depth-5" class="lesson-wire depth" marker-end="url(#lesson-final-arrow)" />
+                    <use href="#lesson-final-score-5" class="lesson-wire unused" marker-end="url(#lesson-final-arrow)" />
+                    <use href="#lesson-final-depth-6" class="lesson-wire depth" marker-end="url(#lesson-final-arrow)" />
+                    <use href="#lesson-final-score-6" class="lesson-wire unused" marker-end="url(#lesson-final-arrow)" />
+                    <use href="#lesson-final-depth-7" class="lesson-wire depth" marker-end="url(#lesson-final-arrow)" />
+                    <use href="#lesson-final-score-7" class="lesson-wire unused" marker-end="url(#lesson-final-arrow)" />
+                    <use href="#lesson-final-depth-8" class="lesson-wire depth" marker-end="url(#lesson-final-arrow)" />
+                    <use href="#lesson-final-score-8" class="lesson-wire unused" marker-end="url(#lesson-final-arrow)" />
+                    <use href="#lesson-final-depth-9" class="lesson-wire depth" marker-end="url(#lesson-final-arrow)" />
+                    <use href="#lesson-final-score-9" class="lesson-wire unused" marker-end="url(#lesson-final-arrow)" />
+                    <use href="#lesson-final-depth-10" class="lesson-wire depth" marker-end="url(#lesson-final-arrow)" />
+                    <use href="#lesson-final-score-10" class="lesson-wire unused" marker-end="url(#lesson-final-arrow)" />
+                    <use href="#lesson-final-depth-11" class="lesson-wire depth" marker-end="url(#lesson-final-arrow)" />
+                    <use href="#lesson-final-score-11" class="lesson-wire unused" marker-end="url(#lesson-final-arrow)" />
+                    <use href="#lesson-final-score-12" class="lesson-wire selected" marker-end="url(#lesson-final-arrow)" />
+                    <use href="#lesson-final-score-12" class="lesson-pulse" />
+                    <use href="#lesson-final-fuse-12" class="lesson-wire selected" marker-end="url(#lesson-final-arrow)" />
+                    <use href="#lesson-final-fuse-12" class="lesson-pulse" />
+                    <use href="#lesson-final-out" class="lesson-wire selected" marker-end="url(#lesson-final-arrow)" />
+                    <use href="#lesson-final-out" class="lesson-pulse" />
+                    <rect x="20" y="108" width="84" height="17" rx="4" class="lesson-node" />
+                    <text x="62" y="121.5" font-size="13" text-anchor="middle">Layer 1</text>
+                    <rect x="129" y="108" width="35" height="17" rx="4" class="lesson-score" />
+                    <text x="146.5" y="121.5" font-size="13" text-anchor="middle">S1</text>
+                    <rect x="20" y="129" width="84" height="17" rx="4" class="lesson-node" />
+                    <text x="62" y="142.5" font-size="13" text-anchor="middle">Layer 2</text>
+                    <rect x="129" y="129" width="35" height="17" rx="4" class="lesson-score" />
+                    <text x="146.5" y="142.5" font-size="13" text-anchor="middle">S2</text>
+                    <rect x="20" y="150" width="84" height="17" rx="4" class="lesson-node" />
+                    <text x="62" y="163.5" font-size="13" text-anchor="middle">Layer 3</text>
+                    <rect x="129" y="150" width="35" height="17" rx="4" class="lesson-score" />
+                    <text x="146.5" y="163.5" font-size="13" text-anchor="middle">S3</text>
+                    <rect x="20" y="171" width="84" height="17" rx="4" class="lesson-node" />
+                    <text x="62" y="184.5" font-size="13" text-anchor="middle">Layer 4</text>
+                    <rect x="129" y="171" width="35" height="17" rx="4" class="lesson-score" />
+                    <text x="146.5" y="184.5" font-size="13" text-anchor="middle">S4</text>
+                    <rect x="20" y="192" width="84" height="17" rx="4" class="lesson-node" />
+                    <text x="62" y="205.5" font-size="13" text-anchor="middle">Layer 5</text>
+                    <rect x="129" y="192" width="35" height="17" rx="4" class="lesson-score" />
+                    <text x="146.5" y="205.5" font-size="13" text-anchor="middle">S5</text>
+                    <rect x="20" y="213" width="84" height="17" rx="4" class="lesson-node" />
+                    <text x="62" y="226.5" font-size="13" text-anchor="middle">Layer 6</text>
+                    <rect x="129" y="213" width="35" height="17" rx="4" class="lesson-score" />
+                    <text x="146.5" y="226.5" font-size="13" text-anchor="middle">S6</text>
+                    <rect x="20" y="234" width="84" height="17" rx="4" class="lesson-node" />
+                    <text x="62" y="247.5" font-size="13" text-anchor="middle">Layer 7</text>
+                    <rect x="129" y="234" width="35" height="17" rx="4" class="lesson-score" />
+                    <text x="146.5" y="247.5" font-size="13" text-anchor="middle">S7</text>
+                    <rect x="20" y="255" width="84" height="17" rx="4" class="lesson-node" />
+                    <text x="62" y="268.5" font-size="13" text-anchor="middle">Layer 8</text>
+                    <rect x="129" y="255" width="35" height="17" rx="4" class="lesson-score" />
+                    <text x="146.5" y="268.5" font-size="13" text-anchor="middle">S8</text>
+                    <rect x="20" y="276" width="84" height="17" rx="4" class="lesson-node" />
+                    <text x="62" y="289.5" font-size="13" text-anchor="middle">Layer 9</text>
+                    <rect x="129" y="276" width="35" height="17" rx="4" class="lesson-score" />
+                    <text x="146.5" y="289.5" font-size="13" text-anchor="middle">S9</text>
+                    <rect x="20" y="297" width="84" height="17" rx="4" class="lesson-node" />
+                    <text x="62" y="310.5" font-size="13" text-anchor="middle">Layer 10</text>
+                    <rect x="129" y="297" width="35" height="17" rx="4" class="lesson-score" />
+                    <text x="146.5" y="310.5" font-size="13" text-anchor="middle">S10</text>
+                    <rect x="20" y="318" width="84" height="17" rx="4" class="lesson-node" />
+                    <text x="62" y="331.5" font-size="13" text-anchor="middle">Layer 11</text>
+                    <rect x="129" y="318" width="35" height="17" rx="4" class="lesson-score" />
+                    <text x="146.5" y="331.5" font-size="13" text-anchor="middle">S11</text>
+                    <rect x="20" y="339" width="84" height="17" rx="4" class="lesson-node chosen" />
+                    <text x="62" y="352.5" font-size="13" text-anchor="middle">Layer 12</text>
+                    <rect x="129" y="339" width="35" height="17" rx="4" class="lesson-score chosen" />
+                    <text x="146.5" y="352.5" font-size="13" text-anchor="middle">S12</text>
+                    <text x="275" y="158" font-size="15" text-anchor="middle">No fusion</text>
+                    <text x="275" y="180" font-size="13" text-anchor="middle">One score is read</text>
+                    <rect x="214" y="233" width="122" height="56" rx="4" class="lesson-box fusion" />
+                    <text x="275" y="266" font-size="17" text-anchor="middle">Read S12</text>
+                    <rect x="214" y="326" width="122" height="31" rx="4" class="lesson-box" />
+                    <text x="275" y="346.5" font-size="16" text-anchor="middle">OOD score</text>
+                    <text x="180" y="396" font-size="16" text-anchor="middle">Layer 12 only</text>
+                  </svg>
+                </div>
+                <p class="lesson-method-copy">Read the final layer’s score directly. Intermediate layer scores do not enter the output.</p>
+                <p class="lesson-selected">Layer 12.</p>
+              </article>
+              <article class="lesson-method" data-lesson-method="fixed" aria-labelledby="lesson-heading-fixed">
+                <h4 id="lesson-heading-fixed">Fixed fusion</h4>
+                <p class="lesson-method-subtitle">One shared recipe</p>
+                <div id="lesson-fixed">
+                  <svg
+                    class="lesson-wiring"
+                    viewBox="0 0 360 414"
+                    role="img"
+                    aria-label="fixed structure for the penguin. Selected layers 3, 4, 6, 8, 12."
+                  >
+                    <defs>
+                      <marker id="lesson-fixed-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                        <path d="M0 0L10 5L0 10Z" fill="#5d8070" />
+                      </marker>
+                      <path id="lesson-fixed-image" d="M62 65V78H114V102H62V106" />
+                      <path id="lesson-fixed-depth-1" d="M62 125V129" />
+                      <path id="lesson-fixed-score-1" d="M104 116.5H128" />
+                      <path id="lesson-fixed-depth-2" d="M62 146V150" />
+                      <path id="lesson-fixed-score-2" d="M104 137.5H128" />
+                      <path id="lesson-fixed-depth-3" d="M62 167V171" />
+                      <path id="lesson-fixed-score-3" d="M104 158.5H128" />
+                      <path id="lesson-fixed-fuse-3" d="M164 158.5C187 158.5 188 261 214 261" />
+                      <path id="lesson-fixed-depth-4" d="M62 188V192" />
+                      <path id="lesson-fixed-score-4" d="M104 179.5H128" />
+                      <path id="lesson-fixed-fuse-4" d="M164 179.5C187 179.5 188 261 214 261" />
+                      <path id="lesson-fixed-depth-5" d="M62 209V213" />
+                      <path id="lesson-fixed-score-5" d="M104 200.5H128" />
+                      <path id="lesson-fixed-depth-6" d="M62 230V234" />
+                      <path id="lesson-fixed-score-6" d="M104 221.5H128" />
+                      <path id="lesson-fixed-fuse-6" d="M164 221.5C187 221.5 188 261 214 261" />
+                      <path id="lesson-fixed-depth-7" d="M62 251V255" />
+                      <path id="lesson-fixed-score-7" d="M104 242.5H128" />
+                      <path id="lesson-fixed-depth-8" d="M62 272V276" />
+                      <path id="lesson-fixed-score-8" d="M104 263.5H128" />
+                      <path id="lesson-fixed-fuse-8" d="M164 263.5C187 263.5 188 261 214 261" />
+                      <path id="lesson-fixed-depth-9" d="M62 293V297" />
+                      <path id="lesson-fixed-score-9" d="M104 284.5H128" />
+                      <path id="lesson-fixed-depth-10" d="M62 314V318" />
+                      <path id="lesson-fixed-score-10" d="M104 305.5H128" />
+                      <path id="lesson-fixed-depth-11" d="M62 335V339" />
+                      <path id="lesson-fixed-score-11" d="M104 326.5H128" />
+                      <path id="lesson-fixed-score-12" d="M104 347.5H128" />
+                      <path id="lesson-fixed-fuse-12" d="M164 347.5C187 347.5 188 261 214 261" />
+                      <path id="lesson-fixed-out" d="M275 289V325" />
+                    </defs>
+                    <svg x="35" y="10" width="54" height="54" viewBox="16 51 95 94">
+                      <image href="assets/method.webp" width="1137" height="385" />
+                    </svg>
+                    <text x="146" y="33" font-size="15" text-anchor="start">Penguin input</text>
+                    <text x="146" y="55" font-size="13" text-anchor="start">Same frozen CLIP</text>
+                    <text x="62" y="98" font-size="14" text-anchor="middle">Backbone</text>
+                    <text x="146" y="98" font-size="14" text-anchor="middle">Scores</text>
+                    <use href="#lesson-fixed-image" class="lesson-wire" marker-end="url(#lesson-fixed-arrow)" />
+                    <use href="#lesson-fixed-image" class="lesson-pulse" />
+                    <use href="#lesson-fixed-depth-1" class="lesson-wire depth" marker-end="url(#lesson-fixed-arrow)" />
+                    <use href="#lesson-fixed-score-1" class="lesson-wire unused" marker-end="url(#lesson-fixed-arrow)" />
+                    <use href="#lesson-fixed-depth-2" class="lesson-wire depth" marker-end="url(#lesson-fixed-arrow)" />
+                    <use href="#lesson-fixed-score-2" class="lesson-wire unused" marker-end="url(#lesson-fixed-arrow)" />
+                    <use href="#lesson-fixed-depth-3" class="lesson-wire depth" marker-end="url(#lesson-fixed-arrow)" />
+                    <use href="#lesson-fixed-score-3" class="lesson-wire selected" marker-end="url(#lesson-fixed-arrow)" />
+                    <use href="#lesson-fixed-score-3" class="lesson-pulse" />
+                    <use href="#lesson-fixed-fuse-3" class="lesson-wire selected" marker-end="url(#lesson-fixed-arrow)" />
+                    <use href="#lesson-fixed-fuse-3" class="lesson-pulse" />
+                    <use href="#lesson-fixed-depth-4" class="lesson-wire depth" marker-end="url(#lesson-fixed-arrow)" />
+                    <use href="#lesson-fixed-score-4" class="lesson-wire selected" marker-end="url(#lesson-fixed-arrow)" />
+                    <use href="#lesson-fixed-score-4" class="lesson-pulse" />
+                    <use href="#lesson-fixed-fuse-4" class="lesson-wire selected" marker-end="url(#lesson-fixed-arrow)" />
+                    <use href="#lesson-fixed-fuse-4" class="lesson-pulse" />
+                    <use href="#lesson-fixed-depth-5" class="lesson-wire depth" marker-end="url(#lesson-fixed-arrow)" />
+                    <use href="#lesson-fixed-score-5" class="lesson-wire unused" marker-end="url(#lesson-fixed-arrow)" />
+                    <use href="#lesson-fixed-depth-6" class="lesson-wire depth" marker-end="url(#lesson-fixed-arrow)" />
+                    <use href="#lesson-fixed-score-6" class="lesson-wire selected" marker-end="url(#lesson-fixed-arrow)" />
+                    <use href="#lesson-fixed-score-6" class="lesson-pulse" />
+                    <use href="#lesson-fixed-fuse-6" class="lesson-wire selected" marker-end="url(#lesson-fixed-arrow)" />
+                    <use href="#lesson-fixed-fuse-6" class="lesson-pulse" />
+                    <use href="#lesson-fixed-depth-7" class="lesson-wire depth" marker-end="url(#lesson-fixed-arrow)" />
+                    <use href="#lesson-fixed-score-7" class="lesson-wire unused" marker-end="url(#lesson-fixed-arrow)" />
+                    <use href="#lesson-fixed-depth-8" class="lesson-wire depth" marker-end="url(#lesson-fixed-arrow)" />
+                    <use href="#lesson-fixed-score-8" class="lesson-wire selected" marker-end="url(#lesson-fixed-arrow)" />
+                    <use href="#lesson-fixed-score-8" class="lesson-pulse" />
+                    <use href="#lesson-fixed-fuse-8" class="lesson-wire selected" marker-end="url(#lesson-fixed-arrow)" />
+                    <use href="#lesson-fixed-fuse-8" class="lesson-pulse" />
+                    <use href="#lesson-fixed-depth-9" class="lesson-wire depth" marker-end="url(#lesson-fixed-arrow)" />
+                    <use href="#lesson-fixed-score-9" class="lesson-wire unused" marker-end="url(#lesson-fixed-arrow)" />
+                    <use href="#lesson-fixed-depth-10" class="lesson-wire depth" marker-end="url(#lesson-fixed-arrow)" />
+                    <use href="#lesson-fixed-score-10" class="lesson-wire unused" marker-end="url(#lesson-fixed-arrow)" />
+                    <use href="#lesson-fixed-depth-11" class="lesson-wire depth" marker-end="url(#lesson-fixed-arrow)" />
+                    <use href="#lesson-fixed-score-11" class="lesson-wire unused" marker-end="url(#lesson-fixed-arrow)" />
+                    <use href="#lesson-fixed-score-12" class="lesson-wire selected" marker-end="url(#lesson-fixed-arrow)" />
+                    <use href="#lesson-fixed-score-12" class="lesson-pulse" />
+                    <use href="#lesson-fixed-fuse-12" class="lesson-wire selected" marker-end="url(#lesson-fixed-arrow)" />
+                    <use href="#lesson-fixed-fuse-12" class="lesson-pulse" />
+                    <use href="#lesson-fixed-out" class="lesson-wire selected" marker-end="url(#lesson-fixed-arrow)" />
+                    <use href="#lesson-fixed-out" class="lesson-pulse" />
+                    <rect x="20" y="108" width="84" height="17" rx="4" class="lesson-node" />
+                    <text x="62" y="121.5" font-size="13" text-anchor="middle">Layer 1</text>
+                    <rect x="129" y="108" width="35" height="17" rx="4" class="lesson-score" />
+                    <text x="146.5" y="121.5" font-size="13" text-anchor="middle">S1</text>
+                    <rect x="20" y="129" width="84" height="17" rx="4" class="lesson-node" />
+                    <text x="62" y="142.5" font-size="13" text-anchor="middle">Layer 2</text>
+                    <rect x="129" y="129" width="35" height="17" rx="4" class="lesson-score" />
+                    <text x="146.5" y="142.5" font-size="13" text-anchor="middle">S2</text>
+                    <rect x="20" y="150" width="84" height="17" rx="4" class="lesson-node chosen" />
+                    <text x="62" y="163.5" font-size="13" text-anchor="middle">Layer 3</text>
+                    <rect x="129" y="150" width="35" height="17" rx="4" class="lesson-score chosen" />
+                    <text x="146.5" y="163.5" font-size="13" text-anchor="middle">S3</text>
+                    <rect x="20" y="171" width="84" height="17" rx="4" class="lesson-node chosen" />
+                    <text x="62" y="184.5" font-size="13" text-anchor="middle">Layer 4</text>
+                    <rect x="129" y="171" width="35" height="17" rx="4" class="lesson-score chosen" />
+                    <text x="146.5" y="184.5" font-size="13" text-anchor="middle">S4</text>
+                    <rect x="20" y="192" width="84" height="17" rx="4" class="lesson-node" />
+                    <text x="62" y="205.5" font-size="13" text-anchor="middle">Layer 5</text>
+                    <rect x="129" y="192" width="35" height="17" rx="4" class="lesson-score" />
+                    <text x="146.5" y="205.5" font-size="13" text-anchor="middle">S5</text>
+                    <rect x="20" y="213" width="84" height="17" rx="4" class="lesson-node chosen" />
+                    <text x="62" y="226.5" font-size="13" text-anchor="middle">Layer 6</text>
+                    <rect x="129" y="213" width="35" height="17" rx="4" class="lesson-score chosen" />
+                    <text x="146.5" y="226.5" font-size="13" text-anchor="middle">S6</text>
+                    <rect x="20" y="234" width="84" height="17" rx="4" class="lesson-node" />
+                    <text x="62" y="247.5" font-size="13" text-anchor="middle">Layer 7</text>
+                    <rect x="129" y="234" width="35" height="17" rx="4" class="lesson-score" />
+                    <text x="146.5" y="247.5" font-size="13" text-anchor="middle">S7</text>
+                    <rect x="20" y="255" width="84" height="17" rx="4" class="lesson-node chosen" />
+                    <text x="62" y="268.5" font-size="13" text-anchor="middle">Layer 8</text>
+                    <rect x="129" y="255" width="35" height="17" rx="4" class="lesson-score chosen" />
+                    <text x="146.5" y="268.5" font-size="13" text-anchor="middle">S8</text>
+                    <rect x="20" y="276" width="84" height="17" rx="4" class="lesson-node" />
+                    <text x="62" y="289.5" font-size="13" text-anchor="middle">Layer 9</text>
+                    <rect x="129" y="276" width="35" height="17" rx="4" class="lesson-score" />
+                    <text x="146.5" y="289.5" font-size="13" text-anchor="middle">S9</text>
+                    <rect x="20" y="297" width="84" height="17" rx="4" class="lesson-node" />
+                    <text x="62" y="310.5" font-size="13" text-anchor="middle">Layer 10</text>
+                    <rect x="129" y="297" width="35" height="17" rx="4" class="lesson-score" />
+                    <text x="146.5" y="310.5" font-size="13" text-anchor="middle">S10</text>
+                    <rect x="20" y="318" width="84" height="17" rx="4" class="lesson-node" />
+                    <text x="62" y="331.5" font-size="13" text-anchor="middle">Layer 11</text>
+                    <rect x="129" y="318" width="35" height="17" rx="4" class="lesson-score" />
+                    <text x="146.5" y="331.5" font-size="13" text-anchor="middle">S11</text>
+                    <rect x="20" y="339" width="84" height="17" rx="4" class="lesson-node chosen" />
+                    <text x="62" y="352.5" font-size="13" text-anchor="middle">Layer 12</text>
+                    <rect x="129" y="339" width="35" height="17" rx="4" class="lesson-score chosen" />
+                    <text x="146.5" y="352.5" font-size="13" text-anchor="middle">S12</text>
+                    <text x="275" y="158" font-size="15" text-anchor="middle">One fixed subset</text>
+                    <text x="275" y="180" font-size="13" text-anchor="middle">Same for both birds</text>
+                    <rect x="214" y="233" width="122" height="56" rx="4" class="lesson-box fusion" />
+                    <text x="275" y="266" font-size="17" text-anchor="middle">Fixed mean</text>
+                    <rect x="214" y="326" width="122" height="31" rx="4" class="lesson-box" />
+                    <text x="275" y="346.5" font-size="16" text-anchor="middle">OOD score</text>
+                    <text x="180" y="396" font-size="16" text-anchor="middle">The same five layers</text>
+                  </svg>
+                </div>
+                <p class="lesson-method-copy">
+                  Average the same chosen subset for every image. Here the five-layer subset stays fixed when you change the bird.
+                </p>
+                <p class="lesson-selected">Layers 3, 4, 6, 8, 12.</p>
+              </article>
+              <article class="lesson-method" data-lesson-method="dynamic" aria-labelledby="lesson-heading-dynamic">
+                <h4 id="lesson-heading-dynamic">Voyager routing</h4>
+                <p class="lesson-method-subtitle">An image-conditioned recipe</p>
+                <div id="lesson-dynamic">
+                  <svg
+                    class="lesson-wiring"
+                    viewBox="0 0 360 414"
+                    role="img"
+                    aria-label="dynamic structure for the penguin. Selected layers 3, 5, 6, 9, 12."
+                  >
+                    <defs>
+                      <marker id="lesson-dynamic-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                        <path d="M0 0L10 5L0 10Z" fill="#5d8070" />
+                      </marker>
+                      <path id="lesson-dynamic-image" d="M62 65V78H114V102H62V106" />
+                      <path id="lesson-dynamic-depth-1" d="M62 125V129" />
+                      <path id="lesson-dynamic-score-1" d="M104 116.5H128" />
+                      <path id="lesson-dynamic-pool-tap-1" d="M20 116.5H10" />
+                      <path id="lesson-dynamic-depth-2" d="M62 146V150" />
+                      <path id="lesson-dynamic-score-2" d="M104 137.5H128" />
+                      <path id="lesson-dynamic-pool-tap-2" d="M20 137.5H10" />
+                      <path id="lesson-dynamic-depth-3" d="M62 167V171" />
+                      <path id="lesson-dynamic-score-3" d="M104 158.5H128" />
+                      <path id="lesson-dynamic-fuse-3" d="M164 158.5C187 158.5 188 261 214 261" />
+                      <path id="lesson-dynamic-pool-tap-3" d="M20 158.5H10" />
+                      <path id="lesson-dynamic-depth-4" d="M62 188V192" />
+                      <path id="lesson-dynamic-score-4" d="M104 179.5H128" />
+                      <path id="lesson-dynamic-pool-tap-4" d="M20 179.5H10" />
+                      <path id="lesson-dynamic-depth-5" d="M62 209V213" />
+                      <path id="lesson-dynamic-score-5" d="M104 200.5H128" />
+                      <path id="lesson-dynamic-fuse-5" d="M164 200.5C187 200.5 188 261 214 261" />
+                      <path id="lesson-dynamic-pool-tap-5" d="M20 200.5H10" />
+                      <path id="lesson-dynamic-depth-6" d="M62 230V234" />
+                      <path id="lesson-dynamic-score-6" d="M104 221.5H128" />
+                      <path id="lesson-dynamic-fuse-6" d="M164 221.5C187 221.5 188 261 214 261" />
+                      <path id="lesson-dynamic-pool-tap-6" d="M20 221.5H10" />
+                      <path id="lesson-dynamic-depth-7" d="M62 251V255" />
+                      <path id="lesson-dynamic-score-7" d="M104 242.5H128" />
+                      <path id="lesson-dynamic-pool-tap-7" d="M20 242.5H10" />
+                      <path id="lesson-dynamic-depth-8" d="M62 272V276" />
+                      <path id="lesson-dynamic-score-8" d="M104 263.5H128" />
+                      <path id="lesson-dynamic-pool-tap-8" d="M20 263.5H10" />
+                      <path id="lesson-dynamic-depth-9" d="M62 293V297" />
+                      <path id="lesson-dynamic-score-9" d="M104 284.5H128" />
+                      <path id="lesson-dynamic-fuse-9" d="M164 284.5C187 284.5 188 261 214 261" />
+                      <path id="lesson-dynamic-pool-tap-9" d="M20 284.5H10" />
+                      <path id="lesson-dynamic-depth-10" d="M62 314V318" />
+                      <path id="lesson-dynamic-score-10" d="M104 305.5H128" />
+                      <path id="lesson-dynamic-pool-tap-10" d="M20 305.5H10" />
+                      <path id="lesson-dynamic-depth-11" d="M62 335V339" />
+                      <path id="lesson-dynamic-score-11" d="M104 326.5H128" />
+                      <path id="lesson-dynamic-pool-tap-11" d="M20 326.5H10" />
+                      <path id="lesson-dynamic-score-12" d="M104 347.5H128" />
+                      <path id="lesson-dynamic-fuse-12" d="M164 347.5C187 347.5 188 261 214 261" />
+                      <path id="lesson-dynamic-pool-tap-12" d="M20 347.5H10" />
+                      <path id="lesson-dynamic-pool" d="M10 347.5V2H275V106" />
+                      <path id="lesson-dynamic-gate" d="M275 141V157" />
+                      <path id="lesson-dynamic-choice" d="M275 193V232" />
+                      <path id="lesson-dynamic-out" d="M275 289V325" />
+                    </defs>
+                    <svg x="35" y="10" width="54" height="54" viewBox="16 51 95 94">
+                      <image href="assets/method.webp" width="1137" height="385" />
+                    </svg>
+                    <text x="146" y="33" font-size="15" text-anchor="start">Penguin input</text>
+                    <text x="146" y="55" font-size="13" text-anchor="start">Same frozen CLIP</text>
+                    <text x="62" y="98" font-size="14" text-anchor="middle">Backbone</text>
+                    <text x="146" y="98" font-size="14" text-anchor="middle">Scores</text>
+                    <use href="#lesson-dynamic-image" class="lesson-wire" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-image" class="lesson-pulse" />
+                    <use href="#lesson-dynamic-depth-1" class="lesson-wire depth" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-score-1" class="lesson-wire unused" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-pool-tap-1" class="lesson-wire feature" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-depth-2" class="lesson-wire depth" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-score-2" class="lesson-wire unused" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-pool-tap-2" class="lesson-wire feature" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-depth-3" class="lesson-wire depth" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-score-3" class="lesson-wire selected" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-score-3" class="lesson-pulse" />
+                    <use href="#lesson-dynamic-fuse-3" class="lesson-wire selected" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-fuse-3" class="lesson-pulse" />
+                    <use href="#lesson-dynamic-pool-tap-3" class="lesson-wire feature" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-depth-4" class="lesson-wire depth" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-score-4" class="lesson-wire unused" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-pool-tap-4" class="lesson-wire feature" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-depth-5" class="lesson-wire depth" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-score-5" class="lesson-wire selected" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-score-5" class="lesson-pulse" />
+                    <use href="#lesson-dynamic-fuse-5" class="lesson-wire selected" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-fuse-5" class="lesson-pulse" />
+                    <use href="#lesson-dynamic-pool-tap-5" class="lesson-wire feature" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-depth-6" class="lesson-wire depth" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-score-6" class="lesson-wire selected" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-score-6" class="lesson-pulse" />
+                    <use href="#lesson-dynamic-fuse-6" class="lesson-wire selected" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-fuse-6" class="lesson-pulse" />
+                    <use href="#lesson-dynamic-pool-tap-6" class="lesson-wire feature" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-depth-7" class="lesson-wire depth" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-score-7" class="lesson-wire unused" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-pool-tap-7" class="lesson-wire feature" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-depth-8" class="lesson-wire depth" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-score-8" class="lesson-wire unused" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-pool-tap-8" class="lesson-wire feature" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-depth-9" class="lesson-wire depth" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-score-9" class="lesson-wire selected" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-score-9" class="lesson-pulse" />
+                    <use href="#lesson-dynamic-fuse-9" class="lesson-wire selected" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-fuse-9" class="lesson-pulse" />
+                    <use href="#lesson-dynamic-pool-tap-9" class="lesson-wire feature" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-depth-10" class="lesson-wire depth" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-score-10" class="lesson-wire unused" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-pool-tap-10" class="lesson-wire feature" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-depth-11" class="lesson-wire depth" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-score-11" class="lesson-wire unused" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-pool-tap-11" class="lesson-wire feature" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-score-12" class="lesson-wire selected" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-score-12" class="lesson-pulse" />
+                    <use href="#lesson-dynamic-fuse-12" class="lesson-wire selected" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-fuse-12" class="lesson-pulse" />
+                    <use href="#lesson-dynamic-pool-tap-12" class="lesson-wire feature" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-pool" class="lesson-wire feature" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-pool" class="lesson-pulse" />
+                    <use href="#lesson-dynamic-gate" class="lesson-wire feature" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-gate" class="lesson-pulse" />
+                    <use href="#lesson-dynamic-choice" class="lesson-wire choice" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-choice" class="lesson-pulse" />
+                    <use href="#lesson-dynamic-out" class="lesson-wire selected" marker-end="url(#lesson-dynamic-arrow)" />
+                    <use href="#lesson-dynamic-out" class="lesson-pulse" />
+                    <rect x="20" y="108" width="84" height="17" rx="4" class="lesson-node" />
+                    <text x="62" y="121.5" font-size="13" text-anchor="middle">Layer 1</text>
+                    <rect x="129" y="108" width="35" height="17" rx="4" class="lesson-score" />
+                    <text x="146.5" y="121.5" font-size="13" text-anchor="middle">S1</text>
+                    <rect x="20" y="129" width="84" height="17" rx="4" class="lesson-node" />
+                    <text x="62" y="142.5" font-size="13" text-anchor="middle">Layer 2</text>
+                    <rect x="129" y="129" width="35" height="17" rx="4" class="lesson-score" />
+                    <text x="146.5" y="142.5" font-size="13" text-anchor="middle">S2</text>
+                    <rect x="20" y="150" width="84" height="17" rx="4" class="lesson-node chosen" />
+                    <text x="62" y="163.5" font-size="13" text-anchor="middle">Layer 3</text>
+                    <rect x="129" y="150" width="35" height="17" rx="4" class="lesson-score chosen" />
+                    <text x="146.5" y="163.5" font-size="13" text-anchor="middle">S3</text>
+                    <rect x="20" y="171" width="84" height="17" rx="4" class="lesson-node" />
+                    <text x="62" y="184.5" font-size="13" text-anchor="middle">Layer 4</text>
+                    <rect x="129" y="171" width="35" height="17" rx="4" class="lesson-score" />
+                    <text x="146.5" y="184.5" font-size="13" text-anchor="middle">S4</text>
+                    <rect x="20" y="192" width="84" height="17" rx="4" class="lesson-node chosen" />
+                    <text x="62" y="205.5" font-size="13" text-anchor="middle">Layer 5</text>
+                    <rect x="129" y="192" width="35" height="17" rx="4" class="lesson-score chosen" />
+                    <text x="146.5" y="205.5" font-size="13" text-anchor="middle">S5</text>
+                    <rect x="20" y="213" width="84" height="17" rx="4" class="lesson-node chosen" />
+                    <text x="62" y="226.5" font-size="13" text-anchor="middle">Layer 6</text>
+                    <rect x="129" y="213" width="35" height="17" rx="4" class="lesson-score chosen" />
+                    <text x="146.5" y="226.5" font-size="13" text-anchor="middle">S6</text>
+                    <rect x="20" y="234" width="84" height="17" rx="4" class="lesson-node" />
+                    <text x="62" y="247.5" font-size="13" text-anchor="middle">Layer 7</text>
+                    <rect x="129" y="234" width="35" height="17" rx="4" class="lesson-score" />
+                    <text x="146.5" y="247.5" font-size="13" text-anchor="middle">S7</text>
+                    <rect x="20" y="255" width="84" height="17" rx="4" class="lesson-node" />
+                    <text x="62" y="268.5" font-size="13" text-anchor="middle">Layer 8</text>
+                    <rect x="129" y="255" width="35" height="17" rx="4" class="lesson-score" />
+                    <text x="146.5" y="268.5" font-size="13" text-anchor="middle">S8</text>
+                    <rect x="20" y="276" width="84" height="17" rx="4" class="lesson-node chosen" />
+                    <text x="62" y="289.5" font-size="13" text-anchor="middle">Layer 9</text>
+                    <rect x="129" y="276" width="35" height="17" rx="4" class="lesson-score chosen" />
+                    <text x="146.5" y="289.5" font-size="13" text-anchor="middle">S9</text>
+                    <rect x="20" y="297" width="84" height="17" rx="4" class="lesson-node" />
+                    <text x="62" y="310.5" font-size="13" text-anchor="middle">Layer 10</text>
+                    <rect x="129" y="297" width="35" height="17" rx="4" class="lesson-score" />
+                    <text x="146.5" y="310.5" font-size="13" text-anchor="middle">S10</text>
+                    <rect x="20" y="318" width="84" height="17" rx="4" class="lesson-node" />
+                    <text x="62" y="331.5" font-size="13" text-anchor="middle">Layer 11</text>
+                    <rect x="129" y="318" width="35" height="17" rx="4" class="lesson-score" />
+                    <text x="146.5" y="331.5" font-size="13" text-anchor="middle">S11</text>
+                    <rect x="20" y="339" width="84" height="17" rx="4" class="lesson-node chosen" />
+                    <text x="62" y="352.5" font-size="13" text-anchor="middle">Layer 12</text>
+                    <rect x="129" y="339" width="35" height="17" rx="4" class="lesson-score chosen" />
+                    <text x="146.5" y="352.5" font-size="13" text-anchor="middle">S12</text>
+                    <rect x="214" y="107" width="122" height="34" rx="4" class="lesson-box" />
+                    <text x="275" y="129" font-size="15" text-anchor="middle">Mean features</text>
+                    <rect x="214" y="158" width="122" height="35" rx="4" class="lesson-box router" />
+                    <text x="275" y="180.5" font-size="16" text-anchor="middle">Router Gθ</text>
+                    <text x="284" y="218" font-size="13" text-anchor="start">Choose</text>
+                    <rect x="214" y="233" width="122" height="56" rx="4" class="lesson-box fusion" />
+                    <text x="275" y="266" font-size="17" text-anchor="middle">Expert mean</text>
+                    <rect x="214" y="326" width="122" height="31" rx="4" class="lesson-box" />
+                    <text x="275" y="346.5" font-size="16" text-anchor="middle">OOD score</text>
+                    <text x="180" y="396" font-size="16" text-anchor="middle">A route for this image</text>
+                  </svg>
+                </div>
+                <p class="lesson-method-copy">
+                  Mean-pooled frozen features enter the router. It chooses the expert whose selected layer scores are averaged.
+                </p>
+                <p class="lesson-selected" id="lesson-dynamic-layers">Layers 3, 5, 6, 9, 12.</p>
+              </article>
+            </div>
+            <p id="lesson-finding" class="lesson-finding" aria-live="polite">
+              Penguin: final-layer scoring still reads layer 12, fixed fusion still combines 3, 4, 6, 8 and 12, and the illustrative Voyager route
+              uses 3, 5, 6, 9 and 12.
+            </p>
+            <p class="lesson-key">
+              Solid arrows carry features or scores. The dashed arrow is the router’s subset choice. One router is drawn; the deployed detector
+              averages five.
+            </p>
+            <div class="lesson-depth-heading">
+              <h4>From detail to whole object</h4>
+              <p>A visual analogy for complementary cues at different depths.</p>
+            </div>
+            <div class="lesson-cues">
+              <figure>
+                <div id="lesson-cue-detail">
+                  <svg viewBox="0 0 210 128" class="lesson-cue" role="img" aria-label="Conceptual detail view of a penguin, not a model activation">
+                    <rect x="23" y="20" width="64" height="64" rx="3" fill="#fff" stroke="#cbd7d0" />
+                    <path d="M23 30L87 76V84H65L23 54Z" fill="#243b38" />
+                    <rect x="112" y="20" width="64" height="64" rx="3" fill="#fff" stroke="#cbd7d0" />
+                    <path d="M112 50L176 30V70Z" fill="#ce893f" />
+                    <path d="M27 103H83M116 103H172" stroke="#788e82" />
+                  </svg>
+                </div>
+                <figcaption>
+                  <strong>Local detail</strong>
+                  <p>Contrast, edges and colour can look similar across different birds.</p>
+                </figcaption>
+              </figure>
+              <figure>
+                <div id="lesson-cue-parts">
+                  <svg viewBox="0 0 210 128" class="lesson-cue" role="img" aria-label="Conceptual parts view of a penguin, not a model activation">
+                    <path d="M48 101C32 76 42 36 73 24C104 15 129 37 124 63L139 91L108 113Z" fill="#243b38" />
+                    <ellipse cx="92" cy="58" rx="22" ry="28" fill="#fff" />
+                    <path d="M108 47L151 58L113 66Z" fill="#ce893f" />
+                    <circle cx="100" cy="46" r="3" fill="#203832" />
+                    <path d="M50 84L31 99M137 63H179" stroke="#789184" stroke-width="1.5" stroke-dasharray="4 4" />
+                  </svg>
+                </div>
+                <figcaption>
+                  <strong>Parts and arrangement</strong>
+                  <p>A beak, head and wing give more structure than an isolated patch.</p>
+                </figcaption>
+              </figure>
+              <figure>
+                <div id="lesson-cue-whole">
+                  <svg viewBox="0 0 210 128" class="lesson-cue" role="img" aria-label="Conceptual whole view of a penguin, not a model activation">
+                    <path d="M12 112H194" stroke="#afc3b9" />
+                    <path d="M74 109C48 75 59 34 87 24C115 17 137 33 132 57C151 78 145 104 124 112Z" fill="#243b38" />
+                    <ellipse cx="105" cy="82" rx="24" ry="31" fill="#fff" />
+                    <ellipse cx="113" cy="45" rx="16" ry="20" fill="#fff" />
+                    <path d="M126 37L150 44L128 50Z" fill="#ce893f" />
+                    <circle cx="117" cy="35" r="2.5" fill="#203832" />
+                    <path d="M83 112L69 117H94M119 112L112 117H139" fill="none" stroke="#ce893f" stroke-width="4" />
+                  </svg>
+                </div>
+                <figcaption>
+                  <strong>Whole-object view</strong>
+                  <p>The overall form distinguishes the bird beyond its shared local cues.</p>
+                </figcaption>
+              </figure>
+            </div>
+            <p class="lesson-disclosure">
+              Teaching illustration: the routes and drawings are illustrative, not CLIP activations or detector predictions. Cues can coexist across
+              depths; the drawings do not assign a fixed meaning to any layer. <a href="demo/">Inspect recorded layer evidence ↗</a>
+            </p>
+            <noscript
+              ><p>The three structures show the penguin example. Switching the example and tracing connections require JavaScript.</p></noscript
+            >
+          </section>
+          <section id="webcontex" class="ctx-section" aria-labelledby="ctx-title">
+            <div class="ctx-heading">
+              <div>
+                <h3 id="ctx-title">WebContEX: retrieval-based augmentation</h3>
+                <p>Add weak OOD context to router training using the ID vocabulary.</p>
+              </div>
+              <a href="assets/manuscript.pdf#page=13">Construction in the paper ↗</a>
+            </div>
+            <p class="ctx-intro">
+              The images are retrieved from Wikimedia Commons after semantic filtering. This expands the router’s training context; CLIP stays frozen
+              and the context is used only during training.
+            </p>
+            <div class="ctx-pipeline-scroll" role="region" tabindex="0" aria-label="WebContEX pipeline, horizontally scrollable">
+              <svg class="ctx-pipeline" viewBox="0 0 1080 180" role="group" aria-label="WebContEX construction pipeline">
+                <defs>
+                  <marker id="ctx-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M0 0L10 5L0 10Z" fill="#6d8778" />
+                  </marker>
+                  <path id="ctx-link-0" d="M190 85H220" />
+                  <path id="ctx-link-1" d="M410 85H440" />
+                  <path id="ctx-link-2" d="M630 85H660" />
+                  <path id="ctx-link-3" d="M850 85H880" />
+                </defs>
+                <g
+                  class="ctx-step"
+                  data-context-step="0"
+                  role="button"
+                  tabindex="0"
+                  aria-label="Explain id labels"
+                  aria-controls="ctx-explanation"
+                  transform="translate(0 0)"
+                >
+                  <rect class="ctx-step-frame" x="2" y="6" width="186" height="155" rx="8" />
+                  <rect x="38" y="45" width="114" height="30" rx="3" />
+                  <text x="95" y="65">penguin</text>
+                  <rect x="38" y="82" width="114" height="30" rx="3" />
+                  <text x="95" y="102">other ID names</text>
+                  <text class="ctx-node-title" x="95" y="148">ID labels</text>
+                </g>
+                <use href="#ctx-link-0" class="ctx-link" marker-end="url(#ctx-arrow)" />
+                <g
+                  class="ctx-step"
+                  data-context-step="1"
+                  role="button"
+                  tabindex="0"
+                  aria-label="Explain wordnet filter"
+                  aria-controls="ctx-explanation"
+                  transform="translate(220 0)"
+                >
+                  <rect class="ctx-step-frame" x="2" y="6" width="186" height="155" rx="8" />
+                  <path d="M95 48V75M55 98V75H135V98" />
+                  <circle cx="95" cy="45" r="12" />
+                  <text x="95" y="28">candidate nouns</text>
+                  <circle cx="55" cy="105" r="12" />
+                  <circle cx="135" cy="105" r="12" />
+                  <text class="ctx-node-title" x="95" y="148">WordNet filter</text>
+                </g>
+                <use href="#ctx-link-1" class="ctx-link" marker-end="url(#ctx-arrow)" />
+                <g
+                  class="ctx-step"
+                  data-context-step="2"
+                  role="button"
+                  tabindex="0"
+                  aria-label="Explain retrieve & clean"
+                  aria-controls="ctx-explanation"
+                  transform="translate(440 0)"
+                >
+                  <rect class="ctx-step-frame" x="2" y="6" width="186" height="155" rx="8" />
+                  <image href="assets/context-bell.png" x="36" y="42" width="55" height="70" preserveAspectRatio="xMidYMid slice" />
+                  <image href="assets/context-hut.png" x="99" y="42" width="55" height="70" preserveAspectRatio="xMidYMid slice" />
+                  <text class="ctx-node-title" x="95" y="148">Retrieve &amp; clean</text>
+                </g>
+                <use href="#ctx-link-2" class="ctx-link" marker-end="url(#ctx-arrow)" />
+                <g
+                  class="ctx-step"
+                  data-context-step="3"
+                  role="button"
+                  tabindex="0"
+                  aria-label="Explain freeze & cache"
+                  aria-controls="ctx-explanation"
+                  transform="translate(660 0)"
+                >
+                  <rect class="ctx-step-frame" x="2" y="6" width="186" height="155" rx="8" />
+                  <rect x="35" y="42" width="120" height="22" rx="3" />
+                  <rect x="35" y="73" width="120" height="22" rx="3" />
+                  <rect x="35" y="104" width="120" height="22" rx="3" />
+                  <text x="95" y="58">CLIP features</text>
+                  <text x="95" y="89">layer scores</text>
+                  <text x="95" y="120">fixed cache</text>
+                  <text class="ctx-node-title" x="95" y="148">Freeze &amp; cache</text>
+                </g>
+                <use href="#ctx-link-3" class="ctx-link" marker-end="url(#ctx-arrow)" />
+                <g
+                  class="ctx-step"
+                  data-context-step="4"
+                  role="button"
+                  tabindex="0"
+                  aria-label="Explain train router"
+                  aria-controls="ctx-explanation"
+                  transform="translate(880 0)"
+                >
+                  <rect class="ctx-step-frame" x="2" y="6" width="186" height="155" rx="8" />
+                  <rect x="35" y="43" width="120" height="28" rx="3" />
+                  <rect x="35" y="91" width="120" height="34" rx="3" class="ctx-router" />
+                  <text x="95" y="63">ID + context</text>
+                  <text x="95" y="113">Router Gθ</text>
+                  <path d="M95 71V90" />
+                  <text class="ctx-node-title" x="95" y="148">Train router</text>
+                </g>
+              </svg>
+            </div>
+            <label class="ctx-step-select"
+              >Explore a construction step<select id="ctx-step-select" disabled>
+                <option value="0">1. ID labels</option>
+                <option value="1">2. WordNet filter</option>
+                <option value="2">3. Retrieve & clean</option>
+                <option value="3">4. Freeze & cache</option>
+                <option value="4">5. Train router</option>
+              </select></label
+            >
+            <div class="ctx-explanation" id="ctx-explanation" aria-live="polite">
+              <div>
+                <p id="ctx-stage" class="ctx-stage">Step 1 of 5</p>
+                <h4 id="ctx-part-title">Start from the ID class names</h4>
+              </div>
+              <div>
+                <p id="ctx-part-copy">
+                  The ID label set defines which concepts belong to the task. WebContEX uses those names to establish a semantic exclusion set,
+                  without needing target-OOD examples.
+                </p>
+                <p id="ctx-part-note" class="ctx-note">Few-shot ID examples have domain label y = 0; retrieved context images later receive y = 1.</p>
+              </div>
+            </div>
+            <div class="ctx-filter-demo">
+              <div>
+                <h4>Try the semantic filter</h4>
+                <p>Toy ID vocabulary: <strong>penguin</strong>. Change a candidate to see why distance alone is not enough.</p>
+                <label
+                  >Candidate concept<select id="ctx-candidate" disabled>
+                    <option value="penguin">penguin · same concept</option>
+                    <option value="king">king penguin · descendant</option>
+                    <option value="bird">bird · ancestor</option>
+                    <option value="puffin" selected>puffin · separate branch</option>
                   </select></label
                 >
               </div>
-              <div class="layer-grid" role="img" aria-label="Selected layers 3, 5, 6, 9 and 12; final layer always included" id="layer-grid">
-                <div data-layer="1"><span>1</span><i></i></div>
-                <div data-layer="2"><span>2</span><i></i></div>
-                <div data-layer="3" class="active"><span>3</span><i></i></div>
-                <div data-layer="4"><span>4</span><i></i></div>
-                <div data-layer="5" class="active"><span>5</span><i></i></div>
-                <div data-layer="6" class="active"><span>6</span><i></i></div>
-                <div data-layer="7"><span>7</span><i></i></div>
-                <div data-layer="8"><span>8</span><i></i></div>
-                <div data-layer="9" class="active"><span>9</span><i></i></div>
-                <div data-layer="10"><span>10</span><i></i></div>
-                <div data-layer="11"><span>11</span><i></i></div>
-                <div data-layer="12" class="active final"><span>12</span><i></i></div>
+              <div>
+                <div id="ctx-relation" class="ctx-relation"></div>
+                <p id="ctx-filter-result" class="ctx-filter-result">Passes the relationship check.</p>
+                <p id="ctx-filter-detail" class="ctx-note">
+                  Puffin is three WordNet hops from penguin in this toy vocabulary. Passing this check does not establish inclusion in the deployed
+                  pool.
+                </p>
               </div>
-              <div class="route-key"><span>Earlier layers</span><span>Final-layer anchor</span></div>
-              <p id="route-summary" class="route-summary" aria-live="polite">
-                Input A uses layers 3, 5, 6, 9 and 12. Changing the input can change the route.
-              </p>
-              <p class="note">
-                Illustrative schematic, not model output. No inference runs in your browser. The selected expert averages its frozen layer scores;
-                these bars indicate selection, not attention or confidence.
-              </p>
             </div>
-          </div>
-          <noscript
-            ><p>The schematic shows an example expert selecting layers 3, 5, 6, 9 and 12. Interactive controls require JavaScript.</p></noscript
-          >
+            <p class="ctx-note">
+              The deployed filter checks the full ID vocabulary, excludes ID synsets and their ancestors/descendants, and requires at least two
+              WordNet hops. It also applies vocabulary depth, lexical-category and lemma-frequency rules. Semantic filtering does not guarantee
+              image-level disjointness from every evaluation dataset.
+            </p>
+            <div class="ctx-gallery-heading">
+              <h4>Retrieved context from the paper</h4>
+              <p>Examples from Figure C.1, used for router supervision.</p>
+            </div>
+            <div class="ctx-gallery">
+              <img
+                src="assets/context-floor.png"
+                alt="A floor-cleaning device in a WebContEX retrieval."
+                loading="lazy"
+                width="256"
+                height="200"
+              /><img src="assets/context-bell.png" alt="A bell in a WebContEX retrieval." loading="lazy" width="256" height="200" /><img
+                src="assets/context-shore.png"
+                alt="A rocky shoreline in a WebContEX retrieval."
+                loading="lazy"
+                width="256"
+                height="200"
+              /><img src="assets/context-hut.png" alt="A woven hut in a WebContEX retrieval." loading="lazy" width="256" height="200" />
+            </div>
+            <details class="ctx-details">
+              <summary>What the deployed construction checks</summary>
+              <div>
+                <p>
+                  <strong>Balanced retrieval.</strong> Up to five query variants per synset; target 20 images per synset, with per-query and
+                  aspect-ratio caps.
+                </p>
+                <p>
+                  <strong>Image quality.</strong> At least 256 × 256 pixels; valid decoding, orientation normalization and photographic-quality
+                  checks.
+                </p>
+                <p>
+                  <strong>Within-shard duplicates.</strong> URL/page-ID checks, exact JPEG SHA-256 checks and an 8 × 8 perceptual hash with a
+                  Hamming-distance cutoff of 8.
+                </p>
+                <p>
+                  <strong>Training-only cache.</strong> The deployed pool has 5,078 entries. Frozen features and layer scores supervise soft expert
+                  targets; query names are not classification targets, and context images are not required at inference.
+                </p>
+              </div>
+            </details>
+            <noscript
+              ><p>
+                The pipeline and examples remain visible. Exploring construction steps and candidate relationships requires JavaScript.
+              </p></noscript
+            >
+          </section>
           <div class="method-details">
             <details open>
               <summary>Frozen evidence</summary>

@@ -1,27 +1,6 @@
 (() => {
   "use strict";
   const $ = (s) => document.querySelector(s);
-  const illustration = { a: [3, 5, 6, 9, 12], b: [2, 7, 10, 12], c: [4, 8, 11, 12] };
-  function updateRoute() {
-    const mode = $('input[name="mode"]:checked').value;
-    const input = $("#example").value;
-    const selected = mode === "final" ? [12] : mode === "fixed" ? [3, 4, 6, 8, 12] : illustration[input];
-    const labels = { final: "Only the final-layer score", fixed: "One fixed expert for every image", dynamic: "A sparse, input-conditioned expert" };
-    $("#route-title").textContent = labels[mode];
-    $("#example").disabled = mode !== "dynamic";
-    const list = selected.join(", ");
-    const summary =
-      mode === "final"
-        ? "Only layer 12 supplies the score. Earlier evidence is not used."
-        : mode === "fixed"
-          ? "Layers 3, 4, 6, 8 and 12 supply the score for every input. This is an illustrative fixed subset."
-          : `Input ${input.toUpperCase()} uses layers ${list}. Changing the input can change the route.`;
-    $("#route-summary").textContent = summary;
-    $("#layer-grid").setAttribute("aria-label", summary);
-    document.querySelectorAll("[data-layer]").forEach((el) => el.classList.toggle("active", selected.includes(Number(el.dataset.layer))));
-  }
-  document.querySelectorAll('input[name="mode"]').forEach((el) => el.addEventListener("change", updateRoute));
-  $("#example").addEventListener("change", updateRoute);
   const names = ["MCM", "GL-MCM", "MoD", "CoOp", "LoCoOp", "ID-Like", "Local-Prompt", "Voyager"];
   const data = {
     4: [
