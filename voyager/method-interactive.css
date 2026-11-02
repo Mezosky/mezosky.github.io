@@ -403,3 +403,37 @@
 .method-walkthrough figcaption {
   margin-top: 20px;
 }
+
+/* A dashed magnification guide is structural, never an animated data-flow edge. */
+.method-zoom-guide {
+  fill: none;
+  stroke: #718078;
+  stroke-width: 1.5;
+  stroke-dasharray: 8 7;
+  pointer-events: none;
+}
+.method-choice {
+  stroke-dasharray: 8 7;
+}
+.method-svg-part[data-method-part="router"] > .method-region {
+  stroke: transparent;
+}
+.method-svg-part.is-selected > .method-router-block {
+  stroke: #087365;
+  stroke-width: 2.5;
+}
+.method-svg-part.is-selected > .method-router-detail-frame,
+.method-svg-part.is-selected > .method-zoom-guide {
+  stroke: #087365;
+}
+.method-inset-brand {
+  font-weight: 600;
+}
+.method-svg-part[data-method-part="router"]:focus-visible > .method-router-block,
+.method-svg-part[data-method-part="router"]:focus-visible > .method-router-detail-frame {
+  stroke: #ae4a16;
+  stroke-width: 3;
+}
+.method-vector .method-inset-brand {
+  fill: #1e7186;
+}

@@ -50,3 +50,5 @@ Nine clickable components explain input images, both frozen encoders, layer scor
 Moving distribution curves are conceptual illustrations, not measured densities or training dynamics. Snowflake motion is decorative; the weights stay frozen. A global motion toggle pauses signals, curves and icons. Reduced-motion preferences disable them initially. Walkthrough playback is opt-in, pauses while offscreen or hidden, and stops when a visitor chooses a part. On small screens the native part selector pans the same SVG to its component; the page itself does not scroll horizontally. The original paper figure remains linked.
 
 The architecture interaction was checked at 1440, 768 and 390 pixels, including all nine explanations, icon clicks, keyboard activation, next/previous controls, playback, pause controls and shared-path geometry.
+
+The router inset is an enlarged view of the narrow Voyager block, joined by a static dashed magnification guide. The inset has a dashed boundary and its own solid feature-input arrow; it is not an additional downstream module. Curved dashed routing choices stay separate from this structural guide.
