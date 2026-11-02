@@ -23,9 +23,9 @@
     <link rel="stylesheet" href="layer-lesson.css" />
     <script src="layer-lesson.js?v=20261103" defer></script>
     <link rel="stylesheet" href="webcontex.css?v=20261103-fixed" />
-    <link rel="stylesheet" href="space-theme.css?v=20261103-fixed" />
+    <link rel="stylesheet" href="space-theme.css?v=20261103-images" />
     <link rel="stylesheet" href="bird-finale.css?v=20261102-loop" />
-    <script src="hero-voyager.js?v=20261103" defer></script>
+    <script src="hero-voyager.js?v=20261103-images" defer></script>
     <script src="bird-finale.js?v=20261102-continuous" defer></script>
     <script src="webcontex.js?v=20261103-fixed" defer></script>
   </head>
@@ -58,110 +58,166 @@
           </div>
           <p class="affiliations"><sup>1</sup> Adelaide University · <sup>2</sup> Australian National University<br /><sup>3</sup> Crossing Lab</p>
         </div>
-        <figure class="hero-art" aria-label="Schematic of a sparse layer expert. Selected intermediate layers and the final layer are highlighted.">
-          <svg class="orbital-layers" viewBox="0 0 600 560" aria-hidden="true">
-            <defs><path id="orbital-expert-route" d="M85.0 265.0 L192.5 105.7 L300.0 81.0 L515.0 265.0 L300.0 449.0" /></defs>
-            <ellipse class="orbit-ring" cx="300" cy="265" rx="215" ry="184" />
-            <ellipse class="orbit-ring orbit-inner" cx="300" cy="265" rx="154" ry="126" transform="rotate(-28 300 265)" />
-            <ellipse class="orbit-ring orbit-inner" cx="300" cy="265" rx="110" ry="200" transform="rotate(42 300 265)" />
-            <use href="#orbital-expert-route" class="orbital-route" />
-            <use href="#orbital-expert-route" class="orbital-trail" />
-            <text x="300" y="255" class="orbital-center">Frozen CLIP</text>
-            <text x="300" y="282" class="orbital-subtitle">A route for each image</text>
-            <g class="orbital-layer">
-              <circle cx="192.5" cy="424.3" r="5" />
-              <text x="176.5" y="457.1" text-anchor="end">
-                <tspan class="orbital-label-prefix">Layer</tspan>
-                1
-              </text>
+        <figure class="hero-art hero-recorded" data-ui aria-labelledby="hero-case-title">
+          <svg class="orbital-layers" viewBox="0 0 600 480" role="img" aria-labelledby="hero-visual-title hero-visual-description">
+            <title id="hero-visual-title">Recorded flowers example and selected CLIP layers</title>
+            <desc id="hero-visual-description">
+              Router 1 of 5 selects layers 1, 2, 7, 8 and 12. Positions follow layer order; all CLIP layers are computed.
+            </desc>
+            <defs>
+              <clipPath id="hero-photo-clip"><rect x="180" y="134" width="240" height="240" rx="14" /></clipPath>
+            </defs>
+            <path class="orbit-ring hero-depth-arc" d="M145.85 404.15 A218 218 0 1 1 454.15 404.15" />
+            <g clip-path="url(#hero-photo-clip)">
+              <image
+                id="hero-image-under"
+                x="180"
+                y="134"
+                width="240"
+                height="240"
+                href="demo/examples/example-routing-win.webp"
+                preserveAspectRatio="xMidYMid slice"
+              />
+              <image
+                id="hero-image"
+                x="180"
+                y="134"
+                width="240"
+                height="240"
+                href="demo/examples/example-routing-win.webp"
+                preserveAspectRatio="xMidYMid slice"
+              />
             </g>
-            <g class="orbital-layer">
-              <circle cx="113.8" cy="357.0" r="5" />
-              <text x="86.1" y="378.0" text-anchor="end">
-                <tspan class="orbital-label-prefix">Layer</tspan>
-                2
-              </text>
+            <rect class="hero-photo-edge" x="180" y="134" width="240" height="240" rx="14" />
+            <text id="hero-image-name" x="300" y="409" class="hero-image-name">Flowers · iNaturalist</text>
+            <g class="orbital-layer is-selected" data-hero-layer="1">
+              <circle cx="145.85" cy="404.15" r="10" />
+              <text x="125.34" y="431.66" text-anchor="middle">1</text>
             </g>
-            <g class="orbital-layer is-selected">
-              <circle cx="85.0" cy="265.0" r="9" />
-              <text x="53.0" y="270.0" text-anchor="end">
-                <tspan class="orbital-label-prefix">Layer</tspan>
-                3
-              </text>
+            <g class="orbital-layer is-selected" data-hero-layer="2">
+              <circle cx="95.74" cy="326.18" r="10" />
+              <text x="68.57" y="343.32" text-anchor="middle">2</text>
             </g>
-            <g class="orbital-layer">
-              <circle cx="113.8" cy="173.0" r="5" />
-              <text x="86.1" y="162.0" text-anchor="end">
-                <tspan class="orbital-label-prefix">Layer</tspan>
-                4
-              </text>
+            <g class="orbital-layer" data-hero-layer="3">
+              <circle cx="82.56" cy="234.45" r="6" />
+              <text x="53.63" y="239.38" text-anchor="middle">3</text>
             </g>
-            <g class="orbital-layer is-selected">
-              <circle cx="192.5" cy="105.7" r="9" />
-              <text x="176.5" y="82.9" text-anchor="end">
-                <tspan class="orbital-label-prefix">Layer</tspan>
-                5
-              </text>
+            <g class="orbital-layer" data-hero-layer="4">
+              <circle cx="108.67" cy="145.52" r="6" />
+              <text x="83.21" y="138.63" text-anchor="middle">4</text>
             </g>
-            <g class="orbital-layer is-selected">
-              <circle cx="300.0" cy="81.0" r="9" />
-              <text x="300.0" y="54.0" text-anchor="middle">
-                <tspan class="orbital-label-prefix">Layer</tspan>
-                6
-              </text>
+            <g class="orbital-layer" data-hero-layer="5">
+              <circle cx="169.36" cy="75.48" r="6" />
+              <text x="151.98" y="59.27" text-anchor="middle">5</text>
             </g>
-            <g class="orbital-layer">
-              <circle cx="407.5" cy="105.7" r="5" />
-              <text x="423.5" y="82.9" text-anchor="start">
-                <tspan class="orbital-label-prefix">Layer</tspan>
-                7
-              </text>
+            <g class="orbital-layer" data-hero-layer="6">
+              <circle cx="253.66" cy="36.98" r="6" />
+              <text x="247.50" y="23.64" text-anchor="middle">6</text>
             </g>
-            <g class="orbital-layer">
-              <circle cx="486.2" cy="173.0" r="5" />
-              <text x="513.9" y="162.0" text-anchor="start">
-                <tspan class="orbital-label-prefix">Layer</tspan>
-                8
-              </text>
+            <g class="orbital-layer is-selected" data-hero-layer="7">
+              <circle cx="346.34" cy="36.98" r="10" />
+              <text x="352.50" y="23.64" text-anchor="middle">7</text>
             </g>
-            <g class="orbital-layer is-selected">
-              <circle cx="515.0" cy="265.0" r="9" />
-              <text x="547.0" y="270.0" text-anchor="start">
-                <tspan class="orbital-label-prefix">Layer</tspan>
-                9
-              </text>
+            <g class="orbital-layer is-selected" data-hero-layer="8">
+              <circle cx="430.64" cy="75.48" r="10" />
+              <text x="448.02" y="59.27" text-anchor="middle">8</text>
             </g>
-            <g class="orbital-layer">
-              <circle cx="486.2" cy="357.0" r="5" />
-              <text x="513.9" y="378.0" text-anchor="start">
-                <tspan class="orbital-label-prefix">Layer</tspan>
-                10
-              </text>
+            <g class="orbital-layer" data-hero-layer="9">
+              <circle cx="491.33" cy="145.52" r="6" />
+              <text x="516.79" y="138.63" text-anchor="middle">9</text>
             </g>
-            <g class="orbital-layer">
-              <circle cx="407.5" cy="424.3" r="5" />
-              <text x="423.5" y="457.1" text-anchor="start">
-                <tspan class="orbital-label-prefix">Layer</tspan>
-                11
-              </text>
+            <g class="orbital-layer" data-hero-layer="10">
+              <circle cx="517.44" cy="234.45" r="6" />
+              <text x="546.37" y="239.38" text-anchor="middle">10</text>
             </g>
-            <g class="orbital-layer is-selected is-anchor">
-              <circle cx="300.0" cy="449.0" r="9" />
-              <text x="300.0" y="486.0" text-anchor="middle">
-                <tspan class="orbital-label-prefix">Layer</tspan>
-                12
-              </text>
+            <g class="orbital-layer" data-hero-layer="11">
+              <circle cx="504.26" cy="326.18" r="6" />
+              <text x="531.43" y="343.32" text-anchor="middle">11</text>
             </g>
-            <g class="orbital-craft" transform="translate(300 449) rotate(139)">
-              <path class="craft-exhaust" d="M-15-4Q-31 0-15 4Z" fill="#9fe3c8" />
-              <path d="M-9-5L-17-12L-14-2V2L-17 12L-9 5Z" fill="#9fe3c8" />
-              <path d="M-15-6Q0-12 18 0Q0 12-15 6Z" fill="#f5f8fb" />
-              <circle cx="2" cy="0" r="4" fill="#1b2a48" stroke="#9fe3c8" stroke-width="1.5" />
-              <path d="M-13-5V5" stroke="#1b2a48" stroke-width="2" />
+            <g class="orbital-layer is-selected is-anchor" data-hero-layer="12">
+              <circle cx="454.15" cy="404.15" r="10" />
+              <text x="474.66" y="431.66" text-anchor="middle">12</text>
             </g>
-            <!-- taste-skill-ignore: author-requested rocket identity -->
+            <text x="300" y="464" class="hero-depth-label">Shallow to deep · layer 12 always included</text>
           </svg>
-          <figcaption>A sparse route through a frozen model.<br /><span>Illustrative layer selection.</span></figcaption>
+          <figcaption>
+            <div class="hero-case-heading">
+              <strong id="hero-case-title">Catch a missed shift</strong>
+            </div>
+            <p class="hero-route-readout" id="hero-route-readout">Router 1 of 5 selects layers <b>1, 2, 7, 8, 12</b>.</p>
+            <p class="hero-ensemble" id="hero-ensemble">Ensemble decision: <b>OOD-like</b></p>
+            <p class="hero-reference" id="hero-reference">Reference: OOD</p>
+            <fieldset class="hero-example-picker" disabled>
+              <legend>Choose a recorded example</legend>
+              <div>
+                <button type="button" data-hero-example="routing-win" aria-pressed="true" aria-label="Show recorded flowers example" disabled>
+                  <img src="demo/examples/example-routing-win.webp" alt="" width="64" height="64" /><span>Flowers</span>
+                </button>
+                <button type="button" data-hero-example="id-rescue" aria-pressed="false" aria-label="Show recorded chair example" disabled>
+                  <img src="demo/examples/example-id-rescue.webp" alt="" width="64" height="64" /><span>Chair</span>
+                </button>
+                <button type="button" data-hero-example="texture-win" aria-pressed="false" aria-label="Show recorded texture example" disabled>
+                  <img src="demo/examples/example-texture-win.webp" alt="" width="64" height="64" /><span>Texture</span>
+                </button>
+                <button type="button" data-hero-example="failure" aria-pressed="false" aria-label="Show recorded lionfish example" disabled>
+                  <img src="demo/examples/example-failure.webp" alt="" width="64" height="64" /><span>Lionfish</span>
+                </button>
+              </div>
+            </fieldset>
+            <p class="hero-recorded-note">
+              Recorded with frozen CLIP ViT-B/16. All layers run; highlighted scores form one expert. The ensemble averages five expert scores.
+              <a href="demo/">Inspect the full evidence ↗</a>
+            </p>
+          </figcaption>
+          <p id="hero-example-announcement" class="hero-sr-only" role="status"></p>
+          <script type="application/json" id="hero-example-data">
+            [
+              {
+                "id": "routing-win",
+                "label": "Flowers",
+                "alt": "Flowers from the iNaturalist benchmark",
+                "image": "demo/examples/example-routing-win.webp",
+                "title": "Catch a missed shift",
+                "source": "iNaturalist",
+                "reference": "OOD",
+                "decision": "OOD-like",
+                "layers": [1, 2, 7, 8, 12]
+              },
+              {
+                "id": "id-rescue",
+                "label": "Chair",
+                "alt": "Folding chair from ImageNet validation",
+                "image": "demo/examples/example-id-rescue.webp",
+                "title": "Recover an ID image",
+                "source": "ImageNet",
+                "reference": "ID",
+                "decision": "ID-like",
+                "layers": [2, 5, 7, 8, 9, 10, 11, 12]
+              },
+              {
+                "id": "texture-win",
+                "label": "Texture",
+                "alt": "Honeycomb texture from DTD",
+                "image": "demo/examples/example-texture-win.webp",
+                "title": "Catch a texture shift",
+                "source": "DTD",
+                "reference": "OOD",
+                "decision": "OOD-like",
+                "layers": [1, 6, 9, 10, 11, 12]
+              },
+              {
+                "id": "failure",
+                "label": "Lionfish",
+                "alt": "Lionfish scene from Places",
+                "image": "demo/examples/example-failure.webp",
+                "title": "Inspect an OOD failure",
+                "source": "Places",
+                "reference": "OOD",
+                "decision": "ID-like",
+                "layers": [12]
+              }
+            ]
+          </script>
         </figure>
       </section>
 
