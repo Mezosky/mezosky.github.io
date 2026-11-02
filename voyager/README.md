@@ -25,7 +25,7 @@ The published page is https://mezosky.github.io/voyager/. The original checkout 
 
 ## Interactions and access
 
-The explainer's A/B/C routes are intentionally **illustrative**, never recorded outputs. Each expert includes layer 12, selection is binary, and no confidence, attention, or prediction score is invented. The paper figures are separately labeled recorded evidence. Native radio buttons, labelled selects, live summaries, focus indicators, reduced-motion support, and a skip link are included.
+The layer lesson compares final-layer scoring, fixed fusion and one Voyager router using penguin/puffin teaching examples. It draws the actual structural difference: score selection, fixed averaging, and feature-conditioned expert selection. Routes and cue drawings are explicitly illustrative. Every subset includes the final layer. The local-detail / parts / whole-object analogy is not a claim about specific CLIP activations. Native input radios, method buttons on small screens and an optional path trace control provide access. Without JavaScript, all three default structural diagrams remain readable.
 
 The results default to four shots and the average column. On phones an OOD-shift select shows one metric column at a time while keeping every method visible. The accompanying prose retains the SUN and DTD baseline wins. The full four-shot table, method description, first research figure, and citation are present without JavaScript; extra figures have a no-script fallback. Copying BibTeX falls back to selecting the text if clipboard access fails.
 
@@ -52,3 +52,11 @@ Moving distribution curves are conceptual illustrations, not measured densities 
 The architecture interaction was checked at 1440, 768 and 390 pixels, including all nine explanations, icon clicks, keyboard activation, next/previous controls, playback, pause controls and shared-path geometry.
 
 The router inset is an enlarged view of the narrow Voyager block, joined by a static dashed magnification guide. The inset has a dashed boundary and its own solid feature-input arrow; it is not an additional downstream module. Curved dashed routing choices stay separate from this structural guide.
+
+## WebContEX walkthrough
+
+The training-context section follows manuscript Section 5 and Algorithm C.1, with five interactive stages: ID vocabulary, WordNet filtering, Wikimedia retrieval/cleaning, frozen caching, and router fitting. It presents WebContEX only; ID-only crop and feature-synthesis baselines are not part of this walkthrough.
+
+The relationship example uses a toy vocabulary containing only `penguin.n.01`. Distances were verified from WordNet in the project environment: penguin 0, king penguin 1 (descendant), bird 4 (ancestor), puffin 3 (separate branch). The ancestor case demonstrates why a distance threshold alone is insufficient. Passing the toy relationship check does not claim inclusion in the deployed pool, which uses the complete ID vocabulary and additional lexical filters.
+
+`context-floor.png`, `context-bell.png`, `context-shore.png` and `context-hut.png` are unmodified image objects extracted from Figure C.1 in the camera-ready manuscript. They illustrate the retrieved training context, not new retrievals or target-OOD inputs. Their original image rights remain with their respective owners. The construction settings and 5,078-entry pool count match the manuscript. Semantic and within-shard duplicate checks are not described as a cross-dataset image-disjointness guarantee.
