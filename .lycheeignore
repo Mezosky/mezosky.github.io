@@ -1,0 +1,4 @@
+# Canonical and social metadata refer to the not-yet-published project route.
+# Relative page, figure, PDF and font links are still checked from the checkout.
+^https://mezosky\.github\.io/voyager/$
+^https://mezosky\.github\.io/voyager/assets/social\.png$

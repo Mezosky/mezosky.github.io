@@ -10,7 +10,7 @@ The work is on branch `feat/voyager-project-page` in `/mnt/bkp2/Ignacio_projects
 
 ## Content and sources
 
-- Method name: **Voyager**. **DynAMO** is the implementation repository.
+- Method name: **Voyager**. **DynAMO** is the implementation repository. GitHub confirms it is currently private; the page labels the release as pending and avoids sending public visitors to a private 404 page. Repository visibility was not changed.
 - Full title and author affiliations match the camera-ready manuscript prepared on 2 November 2026.
 - `assets/manuscript.pdf` is that completed camera-ready PDF, not the anonymous Round 2 PDF.
 - The FPR@95 tables are transcribed from `tables/main_results.tex` in Round 2 v2; all 80 values across both shot settings were checked against the source. Numbers and figures were preserved by the camera-ready revision.

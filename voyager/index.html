@@ -1,92 +1,457 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Voyager learns to select sparse, final-layer-anchored CLIP experts for out-of-distribution detection. Project page, method, results, and research resources.">
-  <meta name="theme-color" content="#0b2832">
-  <meta property="og:title" content="Voyager — Not All Layers Are Created Equal">
-  <meta property="og:description" content="Learning to select layers for reliable out-of-distribution detection with frozen CLIP.">
-  <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta property="og:image" content="https://mezosky.github.io/voyager/assets/social.png">
-  <meta property="og:url" content="https://mezosky.github.io/voyager/">
-  <title>Voyager | Learning to Select Layers for OOD Detection</title>
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
-</head>
-<body>
-  <a class="skip" href="#main">Skip to content</a>
-  <header class="site-header wrap">
-    <a class="wordmark" href="#main" aria-label="Voyager, top of page"><svg viewBox="0 0 28 28" width="28" height="28" aria-hidden="true"><path d="M2 4h24v5H2zm4 8h20v5H6zm4 8h16v5H10z" fill="currentColor"/></svg>Voyager</a>
-    <nav aria-label="Main navigation"><a href="#method">Method</a><a href="#results">Results</a><a href="#resources">Resources</a></nav>
-    <a class="home-link" href="https://mezosky.github.io/">Ignacio’s research <span aria-hidden="true">↗</span></a>
-  </header>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Voyager learns to select sparse, final-layer-anchored CLIP experts for out-of-distribution detection. Project page, method, results, and research resources."
+    />
+    <meta name="theme-color" content="#0b2832" />
+    <meta property="og:title" content="Voyager — Not All Layers Are Created Equal" />
+    <meta property="og:description" content="Learning to select layers for reliable out-of-distribution detection with frozen CLIP." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:image" content="https://mezosky.github.io/voyager/assets/social.png" />
+    <meta property="og:url" content="https://mezosky.github.io/voyager/" />
+    <title>Voyager | Learning to Select Layers for OOD Detection</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header wrap">
+      <a class="wordmark" href="#main" aria-label="Voyager, top of page"
+        ><svg viewBox="0 0 28 28" width="28" height="28" aria-hidden="true">
+          <path d="M2 4h24v5H2zm4 8h20v5H6zm4 8h16v5H10z" fill="currentColor" /></svg
+        >Voyager</a
+      >
+      <nav aria-label="Main navigation"><a href="#method">Method</a><a href="#results">Results</a><a href="#resources">Resources</a></nav>
+      <a class="home-link" href="https://mezosky.github.io/">Ignacio’s research <span aria-hidden="true">↗</span></a>
+    </header>
 
-  <main id="main">
-    <section class="hero wrap" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <h1 id="hero-title">Not all layers<br>are equal.</h1>
-        <p class="lead">Learning to select layers for reliable out-of-distribution detection.</p>
-        <p>Voyager learns which frozen CLIP layers to trust for each image, instead of using one fixed fusion rule.</p>
-        <div class="hero-actions"><a class="button" href="assets/manuscript.pdf">Read the manuscript <span aria-hidden="true">↗</span></a><a class="text-link" href="https://github.com/Mezosky/DynAMO">View code <span aria-hidden="true">↗</span></a></div>
-        <div class="authors"><a href="https://mezosky.github.io/">Ignacio M. De la Jara<sup>1,3</sup></a><a href="https://openreview.net/profile?id=~Cristian_Rodriguez-Opazo1">Cristian Rodriguez-Opazo<sup>2</sup></a><a href="https://openreview.net/profile?id=~Damith_Ranasinghe1">Damith Ranasinghe<sup>1,3</sup></a></div>
-        <p class="affiliations"><sup>1</sup> Adelaide University · <sup>2</sup> Australian National University<br><sup>3</sup> Crossing Lab</p>
-      </div>
-      <figure class="hero-art" aria-label="Schematic of a sparse layer expert. Selected intermediate layers and the final layer are highlighted.">
-        <div class="depth-stack" aria-hidden="true">
-          <div class="depth-row" style="--i:0"><span>Layer 1</span><i></i></div><div class="depth-row" style="--i:1"><span>Layer 2</span><i></i></div><div class="depth-row selected" style="--i:2"><span>Layer 3</span><i></i></div><div class="depth-row" style="--i:3"><span>Layer 4</span><i></i></div><div class="depth-row selected" style="--i:4"><span>Layer 5</span><i></i></div><div class="depth-row selected" style="--i:5"><span>Layer 6</span><i></i></div><div class="depth-row" style="--i:6"><span>Layer 7</span><i></i></div><div class="depth-row" style="--i:7"><span>Layer 8</span><i></i></div><div class="depth-row selected" style="--i:8"><span>Layer 9</span><i></i></div><div class="depth-row" style="--i:9"><span>Layer 10</span><i></i></div><div class="depth-row" style="--i:10"><span>Layer 11</span><i></i></div><div class="depth-row anchor" style="--i:11"><span>Final layer</span><i></i></div>
+    <main id="main">
+      <section class="hero wrap" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <h1 id="hero-title">Not all layers<br />are equal.</h1>
+          <p class="lead">Learning to select layers for reliable out-of-distribution detection.</p>
+          <p>Voyager learns which frozen CLIP layers to trust for each image, instead of using one fixed fusion rule.</p>
+          <div class="hero-actions">
+            <a class="button" href="assets/manuscript.pdf">Read the manuscript <span aria-hidden="true">↗</span></a
+            ><span class="text-link">Code release pending</span>
+          </div>
+          <div class="authors">
+            <a href="https://mezosky.github.io/">Ignacio M. De la Jara<sup>1,3</sup></a
+            ><a href="https://openreview.net/profile?id=~Cristian_Rodriguez-Opazo1">Cristian Rodriguez-Opazo<sup>2</sup></a
+            ><a href="https://openreview.net/profile?id=~Damith_Ranasinghe1">Damith Ranasinghe<sup>1,3</sup></a>
+          </div>
+          <p class="affiliations"><sup>1</sup> Adelaide University · <sup>2</sup> Australian National University<br /><sup>3</sup> Crossing Lab</p>
         </div>
-        <figcaption>A sparse route through a frozen model.<br><span>Illustrative layer selection.</span></figcaption>
-      </figure>
-    </section>
+        <figure class="hero-art" aria-label="Schematic of a sparse layer expert. Selected intermediate layers and the final layer are highlighted.">
+          <div class="depth-stack" aria-hidden="true">
+            <div class="depth-row" style="--i: 0"><span>Layer 1</span><i></i></div>
+            <div class="depth-row" style="--i: 1"><span>Layer 2</span><i></i></div>
+            <div class="depth-row selected" style="--i: 2"><span>Layer 3</span><i></i></div>
+            <div class="depth-row" style="--i: 3"><span>Layer 4</span><i></i></div>
+            <div class="depth-row selected" style="--i: 4"><span>Layer 5</span><i></i></div>
+            <div class="depth-row selected" style="--i: 5"><span>Layer 6</span><i></i></div>
+            <div class="depth-row" style="--i: 6"><span>Layer 7</span><i></i></div>
+            <div class="depth-row" style="--i: 7"><span>Layer 8</span><i></i></div>
+            <div class="depth-row selected" style="--i: 8"><span>Layer 9</span><i></i></div>
+            <div class="depth-row" style="--i: 9"><span>Layer 10</span><i></i></div>
+            <div class="depth-row" style="--i: 10"><span>Layer 11</span><i></i></div>
+            <div class="depth-row anchor" style="--i: 11"><span>Final layer</span><i></i></div>
+          </div>
+          <figcaption>A sparse route through a frozen model.<br /><span>Illustrative layer selection.</span></figcaption>
+        </figure>
+      </section>
 
-    <section class="result-band" aria-label="Headline results, ImageNet-1K with CLIP ViT-B/16, four ID shots per class, and weak web context">
-      <div class="wrap band-inner"><p><strong>18.86<span>%</span></strong>Average FPR@95 <span class="metric-direction">↓ lower is better</span></p><p><strong>94.49<span>%</span></strong>Average AUROC <span class="metric-direction">↑ higher is better</span></p><p class="band-comparison"><strong>8.8 points</strong>lower average FPR@95<br>than four-shot Local-Prompt (ID-derived context)</p><p class="band-context">ImageNet-1K<br>CLIP ViT-B/16 · 4-shot ID + WebContEX</p></div>
-    </section>
-
-    <section class="section wrap motivation" aria-labelledby="question-title">
-      <div><h2 id="question-title">One fixed route<br>misses evidence.</h2><p class="lead">The final representation is only part of the story.</p></div>
-      <div class="reading"><p>Intermediate CLIP layers retain different visual cues. The useful combination changes with the input and the distribution shift, so averaging the same layers for every image can leave useful evidence untapped.</p><p>Voyager keeps the representations and confidence scores frozen. It learns a smaller decision: <strong>which sparse layer expert should supply this image’s score?</strong></p><p>It builds on <a href="https://mezosky.github.io/mysteries-of-the-deep/">Mysteries of the Deep</a>, moving from fixed intermediate-layer fusion to learned, input-conditioned selection.</p></div>
-      <div class="sample-strip"><figure><img src="assets/example-dtd.webp" alt="Textured leaves, a DTD example from the manuscript." width="300" height="300" loading="lazy"><figcaption>Textures · DTD</figcaption></figure><figure><img src="assets/example-inaturalist.webp" alt="A flowering plant, an iNaturalist example from the manuscript." width="300" height="300" loading="lazy"><figcaption>Nature · iNaturalist</figcaption></figure><figure><img src="assets/example-places.webp" alt="A coastal landscape, a Places example from the manuscript." width="300" height="300" loading="lazy"><figcaption>Places · Places365</figcaption></figure><figure><img src="assets/example-sun.webp" alt="A wooded lake, a SUN example from the manuscript." width="300" height="300" loading="lazy"><figcaption>Scenes · SUN</figcaption></figure><p class="note">Four OOD shifts from the study. Images are excerpts from the manuscript’s recorded routing examples.</p></div>
-    </section>
-
-    <section class="method-field" id="method" aria-labelledby="method-title"><div class="wrap section">
-      <div class="section-intro"><h2 id="method-title">Same model.<br>A different route.</h2><p>Each expert averages a subset of layer scores. Every candidate includes the final layer as a semantic anchor; the router selects one expert per image.</p></div>
-      <div class="explorer" data-ui>
-        <fieldset class="mode-picker"><legend>Explore layer selection</legend><label><input type="radio" name="mode" value="final">Final layer only</label><label><input type="radio" name="mode" value="fixed">Fixed fusion</label><label><input type="radio" name="mode" value="dynamic" checked>Per-image routing</label></fieldset>
-        <div class="route-stage"><div class="route-controls"><p id="route-title">A sparse, input-conditioned expert</p><label id="example-control" for="example">Illustrative input <select id="example"><option value="a">Input A</option><option value="b">Input B</option><option value="c">Input C</option></select></label></div>
-          <div class="layer-grid" role="img" aria-label="Selected layers 3, 5, 6, 9 and 12; final layer always included" id="layer-grid">
-            <div data-layer="1"><span>1</span><i></i></div><div data-layer="2"><span>2</span><i></i></div><div data-layer="3" class="active"><span>3</span><i></i></div><div data-layer="4"><span>4</span><i></i></div><div data-layer="5" class="active"><span>5</span><i></i></div><div data-layer="6" class="active"><span>6</span><i></i></div><div data-layer="7"><span>7</span><i></i></div><div data-layer="8"><span>8</span><i></i></div><div data-layer="9" class="active"><span>9</span><i></i></div><div data-layer="10"><span>10</span><i></i></div><div data-layer="11"><span>11</span><i></i></div><div data-layer="12" class="active final"><span>12</span><i></i></div>
-          </div><div class="route-key"><span>Earlier layers</span><span>Final-layer anchor</span></div>
-          <p id="route-summary" class="route-summary" aria-live="polite">Input A uses layers 3, 5, 6, 9 and 12. Changing the input can change the route.</p>
-          <p class="note">Illustrative schematic, not model output. No inference runs in your browser. The selected expert averages its frozen layer scores; these bars indicate selection, not attention or confidence.</p>
+      <section class="result-band" aria-label="Headline results, ImageNet-1K with CLIP ViT-B/16, four ID shots per class, and weak web context">
+        <div class="wrap band-inner">
+          <p>
+            <strong>18.86<span>%</span></strong
+            >Average FPR@95 <span class="metric-direction">↓ lower is better</span>
+          </p>
+          <p>
+            <strong>94.49<span>%</span></strong
+            >Average AUROC <span class="metric-direction">↑ higher is better</span>
+          </p>
+          <p class="band-comparison">
+            <strong>8.8 points</strong>lower average FPR@95<br />
+            than four-shot Local-Prompt (ID-derived context)
+          </p>
+          <p class="band-context">
+            ImageNet-1K<br />
+            CLIP ViT-B/16 · 4-shot ID + WebContEX
+          </p>
         </div>
-      </div>
-      <noscript><p>The schematic shows an example expert selecting layers 3, 5, 6, 9 and 12. Interactive controls require JavaScript.</p></noscript>
-      <div class="method-details"><details open><summary>Frozen evidence</summary><p>CLIP image features, text prototypes, and layer-wise OOD scores stay unchanged. An expert is an unweighted mean over a final-layer-anchored subset.</p></details><details><summary>Lightweight learning</summary><p>A small MLP router learns from few-shot in-distribution examples and WebContEX: weak web-retrieved context constructed from the ID label set. Training uses no target-OOD images or labels. The deployed context comes from Wikimedia Commons; concepts are filtered to be at least two WordNet hops from the ID taxonomy. This semantic filter is not a guarantee of complete image-level disjointness; the manuscript details the construction and deduplication scope.</p></details><details><summary>Simple inference</summary><p>Each router chooses one expert. The deployed five-router ensemble averages their outputs while sharing one frozen CLIP forward pass. WebContEX is needed only during training. The manuscript reports 4.18 ms per image for the deployed model versus 4.08 ms for fixed 12-layer GL-MCM and 3.21 ms for MCM on its measured single-GPU setup; these are hardware-specific timings.</p></details></div>
-      <figure class="paper-figure"><a href="assets/method.webp" aria-label="Open the full-resolution method diagram"><img src="assets/method.webp" alt="Manuscript method diagram: frozen CLIP supplies layer features and expert scores; few-shot ID and weak OOD context supervise a lightweight expert router." width="1137" height="385" loading="lazy"></a><figcaption>Architecture from the manuscript. The learnable component is the router; CLIP and the expert scores remain frozen. <a href="assets/method.webp">Open full size ↗</a></figcaption></figure>
-    </div></section>
+      </section>
 
-    <section class="section wrap results" id="results" aria-labelledby="results-title">
-      <div class="section-intro"><h2 id="results-title">Results, in context.</h2><p>ImageNet-1K as the in-distribution dataset, CLIP ViT-B/16, and four OOD shifts. FPR@95 measures the OOD fraction accepted when ID recall is 95%.</p></div>
-      <div class="results-toolbar"><label for="shots">Training examples per ID class <select id="shots"><option value="4">4 shots</option><option value="1">1 shot</option></select></label><label for="dataset" class="mobile-dataset">OOD shift <select id="dataset"><option value="5">Average</option><option value="1">iNaturalist</option><option value="2">SUN</option><option value="3">Places</option><option value="4">DTD</option></select></label><p>FPR@95 (%) ↓ · lower is better</p></div>
-      <div class="table-wrap" tabindex="0" role="region" aria-label="ImageNet-1K FPR at 95 percent recall results"><table><caption id="results-caption">Four-shot results; MCM, GL-MCM and MoD are training-free references.</caption><thead><tr><th scope="col">Method</th><th scope="col">iNaturalist</th><th scope="col">SUN</th><th scope="col">Places</th><th scope="col">DTD</th><th scope="col">Average</th></tr></thead><tbody id="results-body">
-        <tr><th scope="row">MCM <span>zero-shot</span></th><td>30.91</td><td>37.59</td><td>44.69</td><td>57.77</td><td>42.74</td></tr><tr><th scope="row">GL-MCM <span>zero-shot</span></th><td>17.42</td><td>30.75</td><td>37.62</td><td>55.20</td><td>35.25</td></tr><tr><th scope="row">MoD <span>fixed fusion</span></th><td>15.98</td><td>45.58</td><td>35.71</td><td>25.51</td><td>30.70</td></tr><tr><th scope="row">CoOp</th><td>14.60</td><td>28.48</td><td>36.49</td><td>43.13</td><td>30.67</td></tr><tr><th scope="row">LoCoOp</th><td>16.05</td><td>23.44</td><td>32.87</td><td>42.28</td><td>28.66</td></tr><tr><th scope="row">ID-Like</th><td>8.98</td><td>42.03</td><td>44.00</td><td><strong>25.27</strong></td><td>30.07</td></tr><tr><th scope="row">Local-Prompt</th><td>9.65</td><td><strong>20.40</strong></td><td>29.39</td><td>51.20</td><td>27.66</td></tr><tr class="ours"><th scope="row">Voyager</th><td><strong>3.93</strong></td><td>21.65</td><td><strong>21.88</strong></td><td>27.96</td><td><strong>18.86</strong></td></tr>
-      </tbody></table></div>
-      <p class="note" id="table-note" aria-live="polite">Bold marks the lowest FPR@95 among methods with the selected shot count. Training-free references are shown for context. Baselines follow the manuscript’s reported comparisons; one-shot Local-Prompt is the authors’ rerun. Voyager additionally uses WebContEX, while Local-Prompt uses ID-derived local context. Voyager has the lowest average here; Local-Prompt is lower on SUN and ID-Like on DTD.</p>
-      <div class="results-reading"><p class="lead">The gain comes from both the training context and the routing decision.</p><div><p>With the router recipe held fixed, replacing WebContEX with ID-derived context increases average FPR@95 from <strong>18.86 to 26.71</strong>. With WebContEX and expert scores fixed, learned routing improves on the strongest score-based selector by <strong>10.1 points</strong>.</p><p>These controls measure different contributions. The headline comparison is to a four-shot baseline; Voyager additionally uses weak web-retrieved context.</p></div></div>
-    </section>
+      <section class="section wrap motivation" aria-labelledby="question-title">
+        <div>
+          <h2 id="question-title">One fixed route<br />misses evidence.</h2>
+          <p class="lead">The final representation is only part of the story.</p>
+        </div>
+        <div class="reading">
+          <p>
+            Intermediate CLIP layers retain different visual cues. The useful combination changes with the input and the distribution shift, so
+            averaging the same layers for every image can leave useful evidence untapped.
+          </p>
+          <p>
+            Voyager keeps the representations and confidence scores frozen. It learns a smaller decision:
+            <strong>which sparse layer expert should supply this image’s score?</strong>
+          </p>
+          <p>
+            It builds on <a href="https://mezosky.github.io/mysteries-of-the-deep/">Mysteries of the Deep</a>, moving from fixed intermediate-layer
+            fusion to learned, input-conditioned selection.
+          </p>
+        </div>
+        <div class="sample-strip">
+          <figure>
+            <img src="assets/example-dtd.webp" alt="Textured leaves, a DTD example from the manuscript." width="300" height="300" loading="lazy" />
+            <figcaption>Textures · DTD</figcaption>
+          </figure>
+          <figure>
+            <img
+              src="assets/example-inaturalist.webp"
+              alt="A flowering plant, an iNaturalist example from the manuscript."
+              width="300"
+              height="300"
+              loading="lazy"
+            />
+            <figcaption>Nature · iNaturalist</figcaption>
+          </figure>
+          <figure>
+            <img
+              src="assets/example-places.webp"
+              alt="A coastal landscape, a Places example from the manuscript."
+              width="300"
+              height="300"
+              loading="lazy"
+            />
+            <figcaption>Places · Places365</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/example-sun.webp" alt="A wooded lake, a SUN example from the manuscript." width="300" height="300" loading="lazy" />
+            <figcaption>Scenes · SUN</figcaption>
+          </figure>
+          <p class="note">Four OOD shifts from the study. Images are excerpts from the manuscript’s recorded routing examples.</p>
+        </div>
+      </section>
 
-    <section class="evidence-field" aria-labelledby="evidence-title"><div class="wrap section">
-      <div class="section-intro"><h2 id="evidence-title">Look inside the routes.</h2><p>Explore the manuscript’s diagnostics. Layer use and routed examples help explain the mechanism; they do not certify that every OOD input is detected.</p></div>
-      <div class="evidence-layout"><div class="evidence-index" aria-label="Research figure selector"><button type="button" class="chosen" data-figure="routes" aria-pressed="true">Layer use<span>How the selected depths are distributed ↗</span></button><button type="button" data-figure="sparsity" aria-pressed="false">Sparse experts<span>The effect of allowing more layers ↗</span></button><button type="button" data-figure="evidence" aria-pressed="false">Routed examples<span>Recorded evidence from the manuscript ↗</span></button></div><figure class="evidence-frame"><a id="figure-link" href="assets/routes.webp" aria-label="Open the selected research figure at full resolution"><img id="evidence-image" src="assets/routes.webp" width="1900" height="1000" alt="Manuscript figure showing Voyager’s distribution of selected layers." loading="lazy"></a><figcaption id="evidence-caption" aria-live="polite">Layer-selection distributions from the manuscript. These summarize routed behavior; the schematic above uses illustrative selections.</figcaption></figure></div>
-      <noscript><div class="fallback-figures"><figure><img src="assets/sparsity.webp" width="1900" height="1000" alt="Manuscript sparsity analysis." loading="lazy"><figcaption>Sparse expert analysis.</figcaption></figure><figure><img src="assets/evidence.webp" width="1900" height="1000" alt="Recorded routing examples from the manuscript." loading="lazy"><figcaption>Recorded routing evidence.</figcaption></figure></div></noscript>
-      <div class="scope"><h3>Where the evidence stops.</h3><div><p>Voyager requires a few-shot ID set and a weak web-retrieved training context. Results vary across datasets and backbones; the lowest average does not mean the lowest FPR on every shift.</p><p>The wider study includes Pascal-VOC, ImageNet-100, near-OOD subsets, and additional backbones. See the manuscript for their protocols, full comparisons, training costs, and limitations.</p></div></div>
-    </div></section>
+      <section class="method-field" id="method" aria-labelledby="method-title">
+        <div class="wrap section">
+          <div class="section-intro">
+            <h2 id="method-title">Same model.<br />A different route.</h2>
+            <p>
+              Each expert averages a subset of layer scores. Every candidate includes the final layer as a semantic anchor; the router selects one
+              expert per image.
+            </p>
+          </div>
+          <div class="explorer" data-ui>
+            <fieldset class="mode-picker">
+              <legend>Explore layer selection</legend>
+              <label><input type="radio" name="mode" value="final" />Final layer only</label
+              ><label><input type="radio" name="mode" value="fixed" />Fixed fusion</label
+              ><label><input type="radio" name="mode" value="dynamic" checked />Per-image routing</label>
+            </fieldset>
+            <div class="route-stage">
+              <div class="route-controls">
+                <p id="route-title">A sparse, input-conditioned expert</p>
+                <label id="example-control" for="example"
+                  >Illustrative input
+                  <select id="example">
+                    <option value="a">Input A</option>
+                    <option value="b">Input B</option>
+                    <option value="c">Input C</option>
+                  </select></label
+                >
+              </div>
+              <div class="layer-grid" role="img" aria-label="Selected layers 3, 5, 6, 9 and 12; final layer always included" id="layer-grid">
+                <div data-layer="1"><span>1</span><i></i></div>
+                <div data-layer="2"><span>2</span><i></i></div>
+                <div data-layer="3" class="active"><span>3</span><i></i></div>
+                <div data-layer="4"><span>4</span><i></i></div>
+                <div data-layer="5" class="active"><span>5</span><i></i></div>
+                <div data-layer="6" class="active"><span>6</span><i></i></div>
+                <div data-layer="7"><span>7</span><i></i></div>
+                <div data-layer="8"><span>8</span><i></i></div>
+                <div data-layer="9" class="active"><span>9</span><i></i></div>
+                <div data-layer="10"><span>10</span><i></i></div>
+                <div data-layer="11"><span>11</span><i></i></div>
+                <div data-layer="12" class="active final"><span>12</span><i></i></div>
+              </div>
+              <div class="route-key"><span>Earlier layers</span><span>Final-layer anchor</span></div>
+              <p id="route-summary" class="route-summary" aria-live="polite">
+                Input A uses layers 3, 5, 6, 9 and 12. Changing the input can change the route.
+              </p>
+              <p class="note">
+                Illustrative schematic, not model output. No inference runs in your browser. The selected expert averages its frozen layer scores;
+                these bars indicate selection, not attention or confidence.
+              </p>
+            </div>
+          </div>
+          <noscript
+            ><p>The schematic shows an example expert selecting layers 3, 5, 6, 9 and 12. Interactive controls require JavaScript.</p></noscript
+          >
+          <div class="method-details">
+            <details open>
+              <summary>Frozen evidence</summary>
+              <p>
+                CLIP image features, text prototypes, and layer-wise OOD scores stay unchanged. An expert is an unweighted mean over a
+                final-layer-anchored subset.
+              </p>
+            </details>
+            <details>
+              <summary>Lightweight learning</summary>
+              <p>
+                A small MLP router learns from few-shot in-distribution examples and WebContEX: weak web-retrieved context constructed from the ID
+                label set. Training uses no target-OOD images or labels. The deployed context comes from Wikimedia Commons; concepts are filtered to
+                be at least two WordNet hops from the ID taxonomy. This semantic filter is not a guarantee of complete image-level disjointness; the
+                manuscript details the construction and deduplication scope.
+              </p>
+            </details>
+            <details>
+              <summary>Simple inference</summary>
+              <p>
+                Each router chooses one expert. The deployed five-router ensemble averages their outputs while sharing one frozen CLIP forward pass.
+                WebContEX is needed only during training. The manuscript reports 4.18 ms per image for the deployed model versus 4.08 ms for fixed
+                12-layer GL-MCM and 3.21 ms for MCM on its measured single-GPU setup; these are hardware-specific timings.
+              </p>
+            </details>
+          </div>
+          <figure class="paper-figure">
+            <a href="assets/method.webp" aria-label="Open the full-resolution method diagram"
+              ><img
+                src="assets/method.webp"
+                alt="Manuscript method diagram: frozen CLIP supplies layer features and expert scores; few-shot ID and weak OOD context supervise a lightweight expert router."
+                width="1137"
+                height="385"
+                loading="lazy"
+            /></a>
+            <figcaption>
+              Architecture from the manuscript. The learnable component is the router; CLIP and the expert scores remain frozen.
+              <a href="assets/method.webp">Open full size ↗</a>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
 
-    <section class="section wrap resources" id="resources" aria-labelledby="resources-title"><div class="resource-copy"><h2 id="resources-title">Take a closer look.</h2><p class="paper-title">Not All Layers Are Created Equal: Learning to Select Layers for Reliable Out-of-Distribution Detection</p><p>The manuscript, implementation, and the work that motivated input-conditioned layer selection.</p><div class="resource-links"><a href="assets/manuscript.pdf">Read the manuscript <span aria-hidden="true">↗</span></a><a href="https://github.com/Mezosky/DynAMO">Explore the DynAMO repository <span aria-hidden="true">↗</span></a><a href="https://mezosky.github.io/mysteries-of-the-deep/">Read Mysteries of the Deep <span aria-hidden="true">↗</span></a></div><p class="note">Camera-ready manuscript, updated 2 November 2026. Voyager is implemented in the DynAMO repository. <a href="https://github.com/Mezosky/DynAMO/blob/HEAD/LICENSE">MIT code licence</a> · <a href="mailto:ignacio.mezadelajara@adelaide.edu.au">Contact</a>.</p></div><div class="citation"><div class="citation-heading"><h3>Cite this work</h3><button type="button" id="copy-citation">Copy BibTeX</button></div><pre><code id="citation-text">@misc{delajara2027voyager,
+      <section class="section wrap results" id="results" aria-labelledby="results-title">
+        <div class="section-intro">
+          <h2 id="results-title">Results, in context.</h2>
+          <p>
+            ImageNet-1K as the in-distribution dataset, CLIP ViT-B/16, and four OOD shifts. FPR@95 measures the OOD fraction accepted when ID recall
+            is 95%.
+          </p>
+        </div>
+        <div class="results-toolbar">
+          <label for="shots"
+            >Training examples per ID class
+            <select id="shots">
+              <option value="4">4 shots</option>
+              <option value="1">1 shot</option>
+            </select></label
+          ><label for="dataset" class="mobile-dataset"
+            >OOD shift
+            <select id="dataset">
+              <option value="5">Average</option>
+              <option value="1">iNaturalist</option>
+              <option value="2">SUN</option>
+              <option value="3">Places</option>
+              <option value="4">DTD</option>
+            </select></label
+          >
+          <p>FPR@95 (%) ↓ · lower is better</p>
+        </div>
+        <div class="table-wrap" tabindex="0" role="region" aria-label="ImageNet-1K FPR at 95 percent recall results">
+          <table>
+            <caption id="results-caption">
+              Four-shot results; MCM, GL-MCM and MoD are training-free references.
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Method</th>
+                <th scope="col">iNaturalist</th>
+                <th scope="col">SUN</th>
+                <th scope="col">Places</th>
+                <th scope="col">DTD</th>
+                <th scope="col">Average</th>
+              </tr>
+            </thead>
+            <tbody id="results-body">
+              <tr>
+                <th scope="row">MCM <span>zero-shot</span></th>
+                <td>30.91</td>
+                <td>37.59</td>
+                <td>44.69</td>
+                <td>57.77</td>
+                <td>42.74</td>
+              </tr>
+              <tr>
+                <th scope="row">GL-MCM <span>zero-shot</span></th>
+                <td>17.42</td>
+                <td>30.75</td>
+                <td>37.62</td>
+                <td>55.20</td>
+                <td>35.25</td>
+              </tr>
+              <tr>
+                <th scope="row">MoD <span>fixed fusion</span></th>
+                <td>15.98</td>
+                <td>45.58</td>
+                <td>35.71</td>
+                <td>25.51</td>
+                <td>30.70</td>
+              </tr>
+              <tr>
+                <th scope="row">CoOp</th>
+                <td>14.60</td>
+                <td>28.48</td>
+                <td>36.49</td>
+                <td>43.13</td>
+                <td>30.67</td>
+              </tr>
+              <tr>
+                <th scope="row">LoCoOp</th>
+                <td>16.05</td>
+                <td>23.44</td>
+                <td>32.87</td>
+                <td>42.28</td>
+                <td>28.66</td>
+              </tr>
+              <tr>
+                <th scope="row">ID-Like</th>
+                <td>8.98</td>
+                <td>42.03</td>
+                <td>44.00</td>
+                <td><strong>25.27</strong></td>
+                <td>30.07</td>
+              </tr>
+              <tr>
+                <th scope="row">Local-Prompt</th>
+                <td>9.65</td>
+                <td><strong>20.40</strong></td>
+                <td>29.39</td>
+                <td>51.20</td>
+                <td>27.66</td>
+              </tr>
+              <tr class="ours">
+                <th scope="row">Voyager</th>
+                <td><strong>3.93</strong></td>
+                <td>21.65</td>
+                <td><strong>21.88</strong></td>
+                <td>27.96</td>
+                <td><strong>18.86</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note" id="table-note" aria-live="polite">
+          Bold marks the lowest FPR@95 among methods with the selected shot count. Training-free references are shown for context. Baselines follow
+          the manuscript’s reported comparisons; one-shot Local-Prompt is the authors’ rerun. Voyager additionally uses WebContEX, while Local-Prompt
+          uses ID-derived local context. Voyager has the lowest average here; Local-Prompt is lower on SUN and ID-Like on DTD.
+        </p>
+        <div class="results-reading">
+          <p class="lead">The gain comes from both the training context and the routing decision.</p>
+          <div>
+            <p>
+              With the router recipe held fixed, replacing WebContEX with ID-derived context increases average FPR@95 from
+              <strong>18.86 to 26.71</strong>. With WebContEX and expert scores fixed, learned routing improves on the strongest score-based selector
+              by <strong>10.1 points</strong>.
+            </p>
+            <p>
+              These controls measure different contributions. The headline comparison is to a four-shot baseline; Voyager additionally uses weak
+              web-retrieved context.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="evidence-field" aria-labelledby="evidence-title">
+        <div class="wrap section">
+          <div class="section-intro">
+            <h2 id="evidence-title">Look inside the routes.</h2>
+            <p>
+              Explore the manuscript’s diagnostics. Layer use and routed examples help explain the mechanism; they do not certify that every OOD input
+              is detected.
+            </p>
+          </div>
+          <div class="evidence-layout">
+            <div class="evidence-index" aria-label="Research figure selector">
+              <button type="button" class="chosen" data-figure="routes" aria-pressed="true">
+                Layer use<span>How the selected depths are distributed ↗</span></button
+              ><button type="button" data-figure="sparsity" aria-pressed="false">
+                Sparse experts<span>The effect of allowing more layers ↗</span></button
+              ><button type="button" data-figure="evidence" aria-pressed="false">
+                Routed examples<span>Recorded evidence from the manuscript ↗</span>
+              </button>
+            </div>
+            <figure class="evidence-frame">
+              <a id="figure-link" href="assets/routes.webp" aria-label="Open the selected research figure at full resolution"
+                ><img
+                  id="evidence-image"
+                  src="assets/routes.webp"
+                  width="1900"
+                  height="1000"
+                  alt="Manuscript figure showing Voyager’s distribution of selected layers."
+                  loading="lazy"
+              /></a>
+              <figcaption id="evidence-caption" aria-live="polite">
+                Layer-selection distributions from the manuscript. These summarize routed behavior; the schematic above uses illustrative selections.
+              </figcaption>
+            </figure>
+          </div>
+          <noscript
+            ><div class="fallback-figures">
+              <figure>
+                <img src="assets/sparsity.webp" width="1900" height="1000" alt="Manuscript sparsity analysis." loading="lazy" />
+                <figcaption>Sparse expert analysis.</figcaption>
+              </figure>
+              <figure>
+                <img src="assets/evidence.webp" width="1900" height="1000" alt="Recorded routing examples from the manuscript." loading="lazy" />
+                <figcaption>Recorded routing evidence.</figcaption>
+              </figure>
+            </div></noscript
+          >
+          <div class="scope">
+            <h3>Where the evidence stops.</h3>
+            <div>
+              <p>
+                Voyager requires a few-shot ID set and a weak web-retrieved training context. Results vary across datasets and backbones; the lowest
+                average does not mean the lowest FPR on every shift.
+              </p>
+              <p>
+                The wider study includes Pascal-VOC, ImageNet-100, near-OOD subsets, and additional backbones. See the manuscript for their protocols,
+                full comparisons, training costs, and limitations.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section wrap resources" id="resources" aria-labelledby="resources-title">
+        <div class="resource-copy">
+          <h2 id="resources-title">Take a closer look.</h2>
+          <p class="paper-title">Not All Layers Are Created Equal: Learning to Select Layers for Reliable Out-of-Distribution Detection</p>
+          <p>The manuscript, implementation, and the work that motivated input-conditioned layer selection.</p>
+          <div class="resource-links">
+            <a href="assets/manuscript.pdf">Read the manuscript <span aria-hidden="true">↗</span></a>
+            <p class="repository-status">Code: DynAMO repository · public release pending</p>
+            <a href="https://mezosky.github.io/mysteries-of-the-deep/">Read Mysteries of the Deep <span aria-hidden="true">↗</span></a>
+          </div>
+          <p class="note">
+            Camera-ready manuscript, updated 2 November 2026. Voyager is implemented in DynAMO. The repository is currently private; a public code
+            release is pending. MIT code licence · <a href="mailto:ignacio.mezadelajara@adelaide.edu.au">Contact</a>.
+          </p>
+        </div>
+        <div class="citation">
+          <div class="citation-heading">
+            <h3>Cite this work</h3>
+            <button type="button" id="copy-citation">Copy BibTeX</button>
+          </div>
+          <pre><code id="citation-text">@misc{delajara2027voyager,
   title = {Not All Layers Are Created Equal:
     Learning to Select Layers for Reliable
     Out-of-Distribution Detection},
@@ -96,8 +461,23 @@
   year = {2027},
   note = {WACV 2027, camera-ready manuscript},
   url = {https://mezosky.github.io/voyager/}
-}</code></pre><p class="note">Camera-ready citation, updated 2 November 2026. Final proceedings metadata will be added when available.</p><p id="copy-status" role="status"></p></div></section>
-  </main>
-  <footer class="footer"><div class="wrap"><a href="#main" class="footer-name">Voyager</a><div><p>Learn which layers to trust.</p><p class="note">Research by Ignacio M. De la Jara, Cristian Rodriguez-Opazo, and Damith Ranasinghe.<br>Figures reproduced from the authors’ manuscript.</p><a href="https://mezosky.github.io/">Back to Ignacio’s research ↗</a></div></div></footer>
-</body>
+}</code></pre>
+          <p class="note">Camera-ready citation, updated 2 November 2026. Final proceedings metadata will be added when available.</p>
+          <p id="copy-status" role="status"></p>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="wrap">
+        <a href="#main" class="footer-name">Voyager</a>
+        <div>
+          <p>Learn which layers to trust.</p>
+          <p class="note">
+            Research by Ignacio M. De la Jara, Cristian Rodriguez-Opazo, and Damith Ranasinghe.<br />Figures reproduced from the authors’ manuscript.
+          </p>
+          <a href="https://mezosky.github.io/">Back to Ignacio’s research ↗</a>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>
