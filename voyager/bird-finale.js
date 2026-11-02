@@ -21,7 +21,6 @@
     elapsed = 0,
     last = null,
     frame = null,
-    inView = !("IntersectionObserver" in window),
     duration = 5800;
   function place(bird, path, progress) {
     var p = path.getPointAtLength(path.getTotalLength() * progress);
@@ -59,7 +58,7 @@
     frame = requestAnimationFrame(tick);
   }
   function updatePlayback() {
-    var visible = inView && !document.hidden && !reduced.matches;
+    var visible = !reduced.matches;
     if (visible && !running) {
       running = true;
       last = null;
@@ -69,20 +68,10 @@
       running = false;
       cancelAnimationFrame(frame);
       frame = null;
-      root.setAttribute("data-state", reduced.matches ? "finished" : "paused");
+      root.setAttribute("data-state", "finished");
       if (reduced.matches) render(1, false);
     }
   }
-  if ("IntersectionObserver" in window) {
-    new IntersectionObserver(
-      function (entries) {
-        inView = entries[0].isIntersecting;
-        updatePlayback();
-      },
-      { threshold: 0 }
-    ).observe(root);
-  }
-  document.addEventListener("visibilitychange", updatePlayback);
   reduced.addEventListener("change", updatePlayback);
   updatePlayback();
 })();
