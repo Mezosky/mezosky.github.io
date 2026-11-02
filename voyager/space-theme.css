@@ -1,0 +1,198 @@
+/* Voyager's rocket and space motif are explicitly requested by the project author. */
+:root {
+  --space: #101e38;
+  --starlight: #f2f6ff;
+  --orbit: #8dbbae;
+  --flight: #b8e9d4;
+}
+.site-header,
+.hero {
+  background-color: var(--space);
+  color: var(--starlight);
+  max-width: none;
+  padding-inline: max(var(--frame), calc((100% - 1536px) / 2 + var(--frame)));
+}
+.hero {
+  background-image: url("assets/stars.svg");
+  background-size: 640px 480px;
+  gap: 3vw;
+  padding-bottom: 62px;
+}
+.hero-copy {
+  position: relative;
+  z-index: 1;
+}
+.hero-copy > p:not(.lead),
+.hero .affiliations {
+  color: #c4d4e7;
+}
+.hero .button {
+  background: var(--flight);
+  color: var(--space);
+}
+.hero .text-link {
+  color: var(--flight);
+}
+.hero-art {
+  padding: 0;
+  min-width: 0;
+}
+.orbital-layers {
+  display: block;
+  width: 100%;
+  max-width: 660px;
+  margin-inline: auto;
+  overflow: visible;
+}
+.orbit-ring {
+  fill: none;
+  stroke: #526b85;
+  stroke-width: 1;
+}
+.orbit-inner {
+  stroke: #304865;
+  stroke-dasharray: 4 8;
+}
+.orbital-route {
+  fill: none;
+  stroke: var(--flight);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-dasharray: 1200;
+  animation: route-launch 1.8s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+.orbital-layer circle {
+  fill: #647a94;
+  stroke: var(--space);
+  stroke-width: 4;
+}
+.orbital-layer text {
+  fill: #b4c5da;
+  font-size: 15px;
+}
+.orbital-layer.is-selected circle {
+  fill: var(--flight);
+}
+.orbital-layer.is-selected text {
+  fill: var(--starlight);
+  font-weight: 600;
+}
+.orbital-layer.is-anchor circle {
+  stroke: var(--flight);
+  fill: var(--space);
+  stroke-width: 3;
+}
+.orbital-center {
+  fill: var(--starlight);
+  font-size: 27px;
+  font-weight: 500;
+  text-anchor: middle;
+}
+.orbital-subtitle {
+  fill: #b4c5da;
+  font-size: 15px;
+  text-anchor: middle;
+}
+.orbital-rocket {
+  font-size: 32px; /* taste-skill-ignore: user-requested rocket identity */
+}
+.hero-art figcaption {
+  text-align: center;
+  padding: 0;
+  color: #e4edf8;
+  font-size: 17px;
+}
+.hero-art figcaption span {
+  color: #b4c5da;
+}
+.voyager-rocket {
+  display: inline-block;
+  font-size: 1em;
+  line-height: 1;
+}
+.wordmark:hover .voyager-rocket,
+.brand:hover .voyager-rocket {
+  transform: translate(2px, -2px);
+}
+.voyager-rocket {
+  transition: transform 0.2s;
+}
+.result-band {
+  background: #192d43;
+}
+.footer {
+  background: var(--space) url("assets/stars.svg") repeat;
+}
+.footer-name {
+  font-size: clamp(52px, 8vw, 120px);
+}
+.footer-name span {
+  font-size: 0.58em;
+  vertical-align: 0.12em;
+}
+.topbar {
+  color: var(--starlight);
+  background: var(--space) url("assets/stars.svg");
+}
+.topbar > p {
+  color: #c4d4e7;
+}
+@keyframes route-launch {
+  from {
+    stroke-dashoffset: 1200;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@media (max-width: 1000px) {
+  .hero {
+    gap: 24px;
+  }
+  .orbital-layer text {
+    font-size: 28px;
+  }
+  .orbital-label-prefix {
+    display: none;
+  }
+  .orbital-center {
+    font-size: 30px;
+  }
+  .orbital-subtitle {
+    font-size: 22px;
+  }
+}
+@media (max-width: 600px) {
+  .hero {
+    gap: 18px;
+    padding-bottom: 36px;
+  }
+  .orbital-layers {
+    max-width: 440px;
+  }
+  .orbital-layer text {
+    font-size: 26px;
+  }
+  .hero-art figcaption {
+    margin-top: 6px;
+    font-size: 16px;
+  }
+  .site-header nav {
+    gap: 13px;
+  }
+  .footer-name {
+    font-size: clamp(48px, 12vw, 72px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .orbital-route {
+    animation: none;
+  }
+  .voyager-rocket {
+    transition: none;
+  }
+  .wordmark:hover .voyager-rocket,
+  .brand:hover .voyager-rocket {
+    transform: none;
+  }
+}
