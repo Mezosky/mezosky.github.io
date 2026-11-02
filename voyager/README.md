@@ -6,7 +6,7 @@ Standalone, buildless project page for the existing `Mezosky/mezosky.github.io` 
 
 From the website repository root, run `python3 -m http.server 8765`, then open `http://localhost:8765/voyager/`. The page also uses relative asset URLs so it can be opened directly from `index.html`.
 
-The work is on branch `feat/voyager-project-page` in `/mnt/bkp2/Ignacio_projects/mezosky-voyager-site` on AIML-PC. The original checkout is `/mnt/bkp2/Ignacio_projects/mezosky.github.io`. Merging the branch into `master` invokes the repository's existing deployment workflow. The site is not published by this branch alone.
+The published page is https://mezosky.github.io/voyager/. The original checkout is `/mnt/bkp2/Ignacio_projects/mezosky.github.io` on AIML-PC. Merge updates into `master` to invoke the existing deployment workflow. Changes in a feature branch are not published until merged and deployed.
 
 ## Content and sources
 
@@ -40,3 +40,13 @@ Citation metadata is provisional camera-ready metadata, with no fabricated DOI o
 - No full Jekyll build was run on AIML-PC: its Ruby environment has Bundler but no Jekyll executable. This addition consists only of static files; the existing GitHub pull-request build remains the integration check.
 
 Design direction: **One motif**, seed **1931247166**. The sparse, final-layer-anchored expert supplies the recurring layer-stack shape. The proof layout was redrawn to a table because the content is quantitative evidence, not partner logos; the palette was mapped to the manuscript's scientific figures and the navy/teal consultation direction. The folder-stack hero geometry is expressed as actual CLIP layers, and a manually selected figure replaces automatic cycling so readers control scientific comparisons. The live element is the binary routing explainer. Motion is limited to layer entrances, section entrances, and control feedback; no unrelated footage was added.
+
+## Interactive architecture
+
+`#architecture` reproduces the three-panel method figure as an inline SVG, retaining the manuscript bird photographs through clipped SVG viewports. All other component shapes, labels, arrows, icons and distributions are vector elements. Each animated signal and its static wire reference the same `<defs><path>` through `<use>`, so motion cannot drift away from its arrow at another screen size.
+
+Nine clickable components explain input images, both frozen encoders, layer scores, anchored experts, the feature-conditioned router, detector output, training data and objective. Flames and snowflakes are separately clickable and keyboard accessible. The deployed objective is shown explicitly as soft top-32 target cross-entropy plus `0.01 Lbal`; fixed equal expert weights and the five-router inference ensemble are distinguished from router learning.
+
+Moving distribution curves are conceptual illustrations, not measured densities or training dynamics. Snowflake motion is decorative; the weights stay frozen. A global motion toggle pauses signals, curves and icons. Reduced-motion preferences disable them initially. Walkthrough playback is opt-in, pauses while offscreen or hidden, and stops when a visitor chooses a part. On small screens the native part selector pans the same SVG to its component; the page itself does not scroll horizontally. The original paper figure remains linked.
+
+The architecture interaction was checked at 1440, 768 and 390 pixels, including all nine explanations, icon clicks, keyboard activation, next/previous controls, playback, pause controls and shared-path geometry.

@@ -17,7 +17,9 @@
     <title>Voyager | Learning to Select Layers for OOD Detection</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="method-interactive.css" />
     <script src="script.js" defer></script>
+    <script src="method-interactive.js" defer></script>
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
@@ -151,6 +153,616 @@
               expert per image.
             </p>
           </div>
+          <figure class="method-walkthrough" id="architecture" data-motion="off" aria-labelledby="architecture-title">
+            <div class="method-walkthrough-heading">
+              <div>
+                <h3 id="architecture-title">Follow the computation</h3>
+                <p>Select a component, flame, snowflake or distribution to see what it does.</p>
+              </div>
+              <div class="method-playback" hidden>
+                <button type="button" id="method-play" aria-pressed="false">Play walkthrough</button
+                ><button type="button" id="method-motion" aria-pressed="false">Turn motion on</button>
+              </div>
+            </div>
+            <p class="method-pan-hint">Pan the diagram horizontally, or choose a part below.</p>
+            <div
+              class="method-diagram-scroll"
+              tabindex="0"
+              role="region"
+              aria-label="Interactive architecture diagram, scroll horizontally on smaller screens"
+            >
+              <div class="method-diagram">
+                <svg
+                  class="method-vector"
+                  viewBox="0 0 1440 600"
+                  role="group"
+                  aria-label="Interactive vector reproduction of the Voyager architecture"
+                >
+                  <defs>
+                    <marker id="method-arrow-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                      <path d="M0 0L10 5L0 10Z" fill="#52635e" />
+                    </marker>
+                    <marker
+                      id="method-arrow-green"
+                      viewBox="0 0 10 10"
+                      refX="9"
+                      refY="5"
+                      markerWidth="6"
+                      markerHeight="6"
+                      orient="auto-start-reverse"
+                    >
+                      <path d="M0 0L10 5L0 10Z" fill="#65975b" />
+                    </marker>
+                    <marker id="method-arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                      <path d="M0 0L10 5L0 10Z" fill="#bc6058" />
+                    </marker>
+                    <path id="method-wire-input-id" d="M74 191V230H85V258" />
+                    <path id="method-wire-input-ood" d="M198 191V230H190V258" />
+                    <path id="method-wire-prompt-text" d="M350 111V134" />
+                    <path id="method-wire-text-proto" d="M350 196V213H343V228" />
+                    <path id="method-wire-proto-score" d="M343 266V286H316V307" />
+                    <path id="method-wire-layer-1" d="M220 328H281" />
+                    <path id="method-wire-layer-2" d="M220 392H281" />
+                    <path id="method-wire-layer-n" d="M220 470H281" />
+                    <path id="method-wire-score-1" d="M350 328H369" />
+                    <path id="method-wire-score-2" d="M350 392H369" />
+                    <path id="method-wire-score-n" d="M350 470H369" />
+                    <path id="method-wire-read-1" d="M414 328H443" />
+                    <path id="method-wire-read-2" d="M414 392H443" />
+                    <path id="method-wire-read-n" d="M414 470H443" />
+                    <path id="method-wire-feature-skip" d="M137 490V548H467V492" />
+                    <path id="method-wire-router-input" d="M467 548H682V474" />
+                    <path id="method-wire-route-e1" d="M682 427V402H567V373" />
+                    <path id="method-wire-route-e2" d="M682 427V402H633V373" />
+                    <path id="method-wire-route-e3" d="M682 427V402H699V373" />
+                    <path id="method-wire-route-ek" d="M682 427V402H812V373" />
+                    <path id="method-wire-output-id" d="M567 328V276H605V242" />
+                    <path id="method-wire-output-ood" d="M699 328V276H765V242" />
+                    <path id="method-wire-bank-1" d="M944 105H973M993 105H1014" />
+                    <path id="method-wire-bank-2" d="M944 175H973M993 175H1014" />
+                    <path id="method-wire-bank-3" d="M944 245H973M993 245H1014" />
+                    <path id="method-wire-bank-n" d="M944 331H1014" />
+                    <path id="method-wire-train-ood" d="M1153 176V210H1208V241" />
+                    <path id="method-wire-train-id" d="M1350 176V210H1305V241" />
+                    <path id="method-wire-train-loss" d="M1166 259H1101V547H1122" />
+                    <path id="method-wire-loss-return" d="M1398 547H1413V307H1368" />
+                    <path id="method-wire-anchor-e1" d="M944 331C958 331 952 105 973 105" />
+                    <path id="method-wire-anchor-e2" d="M944 331C967 331 954 175 973 175" />
+                    <path id="method-wire-anchor-e3" d="M944 331C969 331 955 245 973 245" />
+                    <path id="method-wire-bank-23" d="M944 175C961 175 955 245 973 245" />
+                    <path id="method-wire-depth-1" d="M137 348V371" />
+                    <path id="method-wire-depth-2" d="M137 412V449" />
+                    <path id="method-wire-text-t1" d="M350 196V213H295V228" />
+                    <path id="method-wire-text-tn" d="M350 196V213H391V228" />
+                    <path id="method-wire-proto-1" d="M295 266V286H316V307" />
+                    <path id="method-wire-proto-n" d="M391 266V286H316V307" />
+                  </defs>
+                  <rect x="4" y="6" width="870" height="580" rx="22" fill="#fff" stroke="#52635e" stroke-width="1.5" />
+                  <rect x="884" y="6" width="186" height="580" rx="22" fill="#fff" stroke="#52635e" stroke-width="1.5" />
+                  <rect x="1080" y="6" width="354" height="580" rx="22" fill="#fff" stroke="#52635e" stroke-width="1.5" />
+                  <text x="439" y="37" font-size="20" text-anchor="middle" class="">Inference and layer selection with Voyager</text>
+                  <text x="977" y="37" font-size="19" text-anchor="middle" class="">Expert creation</text>
+                  <text x="1257" y="37" font-size="20" text-anchor="middle" class="">How Voyager learns</text>
+                  <g
+                    class="method-svg-part"
+                    data-method-part="inputs"
+                    role="button"
+                    tabindex="0"
+                    aria-label="Explain input images"
+                    aria-controls="method-explanation"
+                  >
+                    <rect class="method-region" x="14" y="53" width="244" height="146" rx="10" />
+                    <text x="74" y="72" font-size="16" text-anchor="middle" class="">Penguin · ID</text>
+                    <text x="198" y="72" font-size="16" text-anchor="middle" class="">Puffin · OOD</text>
+                    <svg x="22" y="81" width="104" height="104" viewBox="16 51 95 94">
+                      <image href="assets/method.webp" width="1137" height="385" /></svg
+                    ><svg x="146" y="81" width="104" height="104" viewBox="123 51 94 94">
+                      <image href="assets/method.webp" width="1137" height="385" />
+                    </svg>
+                    <rect x="20" y="79" width="108" height="108" rx="0" fill="none" stroke="#86b879" stroke-width="1.5" />
+                    <rect x="144" y="79" width="108" height="108" rx="0" fill="none" stroke="#c26f65" stroke-width="1.5" />
+                  </g>
+                  <g
+                    class="method-svg-part"
+                    data-method-part="text"
+                    role="button"
+                    tabindex="0"
+                    aria-label="Explain frozen text encoder"
+                    aria-controls="method-explanation"
+                  >
+                    <rect class="method-region" x="267" y="55" width="164" height="218" rx="10" />
+                    <rect x="278" y="65" width="144" height="46" rx="4" fill="#f4f5f4" stroke="#9aa9a2" stroke-width="1.5" />
+                    <text x="350.0" y="94.0" font-size="17" text-anchor="middle" class="">ID label prompts</text>
+                    <rect x="300" y="135" width="100" height="61" rx="4" fill="#f3f4f4" stroke="#9aa9a2" stroke-width="1.5" />
+                    <text x="350.0" y="171.5" font-size="16" text-anchor="middle" class="">Text encoder</text>
+                    <rect x="274" y="228" width="42" height="38" rx="4" fill="#f8faf9" stroke="#9aa9a2" stroke-width="1.5" />
+                    <text x="295.0" y="253.0" font-size="16" text-anchor="middle" class="">T(t₁)</text>
+                    <rect x="322" y="228" width="42" height="38" rx="4" fill="#f8faf9" stroke="#9aa9a2" stroke-width="1.5" />
+                    <text x="343.0" y="253.0" font-size="16" text-anchor="middle" class="">T(t₂)</text>
+                    <rect x="370" y="228" width="42" height="38" rx="4" fill="#f8faf9" stroke="#9aa9a2" stroke-width="1.5" />
+                    <text x="391.0" y="253.0" font-size="16" text-anchor="middle" class="">T(tₙ)</text>
+                  </g>
+                  <g
+                    class="method-svg-part"
+                    data-method-part="visual"
+                    role="button"
+                    tabindex="0"
+                    aria-label="Explain frozen visual encoder"
+                    aria-controls="method-explanation"
+                  >
+                    <rect class="method-region" x="12" y="249" width="250" height="270" rx="10" />
+                    <rect x="20" y="258" width="234" height="252" rx="18" fill="#fff4d4" stroke="#d3b25a" stroke-width="1.5" />
+                    <text x="135" y="284" font-size="19" text-anchor="middle" class="">Visual encoder</text>
+                    <rect x="54" y="308" width="166" height="40" rx="4" fill="#fff" stroke="#778781" stroke-width="1.5" />
+                    <text x="137.0" y="334.0" font-size="18" text-anchor="middle" class="">Layer 1</text>
+                    <rect x="54" y="372" width="166" height="40" rx="4" fill="#fff" stroke="#778781" stroke-width="1.5" />
+                    <text x="137.0" y="398.0" font-size="18" text-anchor="middle" class="">Layer 2</text>
+                    <rect x="54" y="450" width="166" height="40" rx="4" fill="#fff" stroke="#778781" stroke-width="1.5" />
+                    <text x="137.0" y="476.0" font-size="18" text-anchor="middle" class="">Layer N</text>
+                    <text x="157" y="437" font-size="22" text-anchor="middle" class="">⋮</text>
+                  </g>
+                  <g
+                    class="method-svg-part"
+                    data-method-part="scores"
+                    role="button"
+                    tabindex="0"
+                    aria-label="Explain layer-wise OOD scores"
+                    aria-controls="method-explanation"
+                  >
+                    <rect class="method-region" x="273" y="299" width="149" height="200" rx="10" />
+                    <rect x="282" y="308" width="68" height="182" rx="10" fill="#e9e1ee" stroke="#9d87a6" stroke-width="1.5" />
+                    <text x="316" y="382" font-size="17" text-anchor="middle" class="">OOD</text>
+                    <text x="316" y="405" font-size="17" text-anchor="middle" class="">scores</text>
+                    <rect x="370" y="308" width="44" height="40" rx="4" fill="#f8f9f8" stroke="#89978f" stroke-width="1.5" />
+                    <text x="392.0" y="334.0" font-size="19" text-anchor="middle" class="">S₁</text>
+                    <rect x="370" y="372" width="44" height="40" rx="4" fill="#f8f9f8" stroke="#89978f" stroke-width="1.5" />
+                    <text x="392.0" y="398.0" font-size="19" text-anchor="middle" class="">S₂</text>
+                    <rect x="370" y="450" width="44" height="40" rx="4" fill="#f8f9f8" stroke="#89978f" stroke-width="1.5" />
+                    <text x="392.0" y="476.0" font-size="19" text-anchor="middle" class="">Sₙ</text>
+                    <text x="392" y="440" font-size="22" text-anchor="middle" class="">⋮</text>
+                  </g>
+                  <g
+                    class="method-svg-part"
+                    data-method-part="router"
+                    role="button"
+                    tabindex="0"
+                    aria-label="Explain feature-conditioned router"
+                    aria-controls="method-explanation"
+                  >
+                    <rect class="method-region" x="438" y="283" width="421" height="269" rx="10" />
+                    <rect x="444" y="306" width="46" height="185" rx="5" fill="#dce9f6" stroke="#7299ba" stroke-width="1.5" />
+                    <text x="467" y="400" text-anchor="middle" font-size="18" transform="rotate(-90 467 400)">Voyager</text>
+                    <rect x="520" y="286" width="334" height="254" rx="16" fill="#f6f8f7" stroke="#9daa9f" stroke-width="1.5" />
+                    <text x="687" y="309" font-size="17" text-anchor="middle" class="">Input-conditioned selection</text>
+                    <rect x="542" y="328" width="50" height="44" rx="4" fill="#e1eedc" stroke="#8eae80" stroke-width="1.5" />
+                    <text x="567.0" y="356.0" font-size="20" text-anchor="middle" class="">E₁</text>
+                    <rect x="608" y="328" width="50" height="44" rx="4" fill="#fff" stroke="#9aa9a2" stroke-width="1.5" />
+                    <text x="633.0" y="356.0" font-size="20" text-anchor="middle" class="">E₂</text>
+                    <rect x="674" y="328" width="50" height="44" rx="4" fill="#f5dedc" stroke="#ba746c" stroke-width="1.5" />
+                    <text x="699.0" y="356.0" font-size="20" text-anchor="middle" class="">E₃</text>
+                    <rect x="790" y="328" width="44" height="44" rx="4" fill="#fff" stroke="#9aa9a2" stroke-width="1.5" />
+                    <text x="812.0" y="356.0" font-size="20" text-anchor="middle" class="">Eₖ</text>
+                    <text x="756" y="359" font-size="22" text-anchor="middle" class="">…</text>
+                    <rect x="610" y="427" width="144" height="46" rx="4" fill="#dce9f6" stroke="#7299ba" stroke-width="1.5" />
+                    <text x="682.0" y="456.0" font-size="19" text-anchor="middle" class="">Router Gθ</text>
+                    <rect x="775" y="444" width="8" height="29" rx="0" fill="#a3d5e3" stroke="#4d9bb2" stroke-width="1.5" />
+                    <rect x="787" y="461" width="8" height="12" rx="0" fill="#a3d5e3" stroke="#4d9bb2" stroke-width="1.5" />
+                    <rect x="799" y="466" width="8" height="7" rx="0" fill="#a3d5e3" stroke="#4d9bb2" stroke-width="1.5" />
+                    <rect x="811" y="469" width="8" height="4" rx="0" fill="#a3d5e3" stroke="#4d9bb2" stroke-width="1.5" />
+                    <rect x="823" y="451" width="8" height="22" rx="0" fill="#a3d5e3" stroke="#4d9bb2" stroke-width="1.5" />
+                    <text x="600" y="575" font-size="16" text-anchor="middle" class="">Mean layer features</text>
+                  </g>
+                  <g
+                    class="method-svg-part"
+                    data-method-part="output"
+                    role="button"
+                    tabindex="0"
+                    aria-label="Explain selected expert output"
+                    aria-controls="method-explanation"
+                  >
+                    <rect class="method-region" x="518" y="56" width="340" height="214" rx="10" />
+                    <rect x="526" y="65" width="324" height="196" rx="16" fill="#f8faf8" stroke="#9daa9f" stroke-width="1.5" />
+                    <text x="605" y="95" font-size="17" text-anchor="middle" class="">ID example</text>
+                    <text x="765" y="95" font-size="17" text-anchor="middle" class="">OOD example</text>
+                    <rect x="544" y="106" width="122" height="136" rx="13" fill="#f6faf3" stroke="#8eb27e" stroke-width="1.5" />
+                    <rect x="704" y="106" width="122" height="136" rx="13" fill="#fff6f4" stroke="#c47b72" stroke-width="1.5" />
+                    <rect x="557" y="118" width="96" height="32" rx="4" fill="#e1eedc" stroke="#8eae80" stroke-width="1.5" />
+                    <text x="605.0" y="140.0" font-size="19" text-anchor="middle" class="">S₁</text>
+                    <rect x="557" y="188" width="96" height="32" rx="4" fill="#e1eedc" stroke="#8eae80" stroke-width="1.5" />
+                    <text x="605.0" y="210.0" font-size="19" text-anchor="middle" class="">Sₙ</text>
+                    <rect x="717" y="116" width="96" height="32" rx="4" fill="#f2d7d3" stroke="#ba746c" stroke-width="1.5" />
+                    <text x="765.0" y="138.0" font-size="19" text-anchor="middle" class="">S₂</text>
+                    <rect x="717" y="156" width="96" height="32" rx="4" fill="#f2d7d3" stroke="#ba746c" stroke-width="1.5" />
+                    <text x="765.0" y="178.0" font-size="19" text-anchor="middle" class="">S₃</text>
+                    <rect x="717" y="196" width="96" height="32" rx="4" fill="#f2d7d3" stroke="#ba746c" stroke-width="1.5" />
+                    <text x="765.0" y="218.0" font-size="19" text-anchor="middle" class="">Sₙ</text>
+                    <text x="605" y="178" font-size="20" text-anchor="middle" class="">⋮</text>
+                  </g>
+                  <g
+                    class="method-svg-part"
+                    data-method-part="experts"
+                    role="button"
+                    tabindex="0"
+                    aria-label="Explain sparse expert bank"
+                    aria-controls="method-explanation"
+                  >
+                    <rect class="method-region" x="895" y="55" width="169" height="525" rx="10" />
+                    <text x="923" y="72" font-size="16" text-anchor="middle" class="">Scores</text>
+                    <text x="1037" y="72" font-size="16" text-anchor="middle" class="">Experts</text>
+                    <rect x="904" y="83" width="40" height="44" rx="4" fill="#f8f4f4" stroke="#b1857f" stroke-width="1.5" />
+                    <text x="924.0" y="111.0" font-size="20" text-anchor="middle" class="">S₁</text>
+                    <rect x="904" y="153" width="40" height="44" rx="4" fill="#f8f4f4" stroke="#b1857f" stroke-width="1.5" />
+                    <text x="924.0" y="181.0" font-size="20" text-anchor="middle" class="">S₂</text>
+                    <rect x="904" y="223" width="40" height="44" rx="4" fill="#f8f4f4" stroke="#b1857f" stroke-width="1.5" />
+                    <text x="924.0" y="251.0" font-size="20" text-anchor="middle" class="">S₃</text>
+                    <rect x="904" y="309" width="40" height="44" rx="4" fill="#f8f4f4" stroke="#b1857f" stroke-width="1.5" />
+                    <text x="924.0" y="337.0" font-size="20" text-anchor="middle" class="">Sₙ</text>
+                    <rect x="1016" y="83" width="45" height="44" rx="4" fill="#f1f5ef" stroke="#8c9d87" stroke-width="1.5" />
+                    <text x="1038.5" y="111.0" font-size="20" text-anchor="middle" class="">E₁</text>
+                    <rect x="1016" y="153" width="45" height="44" rx="4" fill="#f1f5ef" stroke="#8c9d87" stroke-width="1.5" />
+                    <text x="1038.5" y="181.0" font-size="20" text-anchor="middle" class="">E₂</text>
+                    <rect x="1016" y="223" width="45" height="44" rx="4" fill="#f1f5ef" stroke="#8c9d87" stroke-width="1.5" />
+                    <text x="1038.5" y="251.0" font-size="20" text-anchor="middle" class="">E₃</text>
+                    <rect x="1016" y="309" width="45" height="44" rx="4" fill="#f1f5ef" stroke="#8c9d87" stroke-width="1.5" />
+                    <text x="1038.5" y="337.0" font-size="20" text-anchor="middle" class="">Eₖ</text>
+                    <text x="924" y="294" font-size="20" text-anchor="middle" class="">⋮</text>
+                    <text x="1038" y="294" font-size="20" text-anchor="middle" class="">⋮</text>
+                    <circle cx="983" cy="105" r="10" fill="#fff" stroke="#83948b" stroke-width="1.5" />
+                    <text x="983" y="111" font-size="20" text-anchor="middle" class="">+</text>
+                    <circle cx="983" cy="175" r="10" fill="#fff" stroke="#83948b" stroke-width="1.5" />
+                    <text x="983" y="181" font-size="20" text-anchor="middle">+</text>
+                    <circle cx="983" cy="245" r="10" fill="#fff" stroke="#83948b" stroke-width="1.5" />
+                    <text x="983" y="251" font-size="20" text-anchor="middle" class="">+</text>
+                    <text x="977" y="388" font-size="16" text-anchor="middle" class="">Fixed subset means</text>
+                    <text x="977" y="414" font-size="16" text-anchor="middle" class="">Final layer included</text>
+                    <g class="method-density-bank">
+                      <path class="density-area red" d="M900 548C908 548 914 483 925 483S943 548 958 548Z" />
+                      <path class="density-area green" d="M936 548C954 548 963 477 980 477S1007 548 1031 548Z" />
+                      <path class="density-area neutral" d="M967 548C982 548 994 495 1005 495S1028 548 1053 548Z" />
+                    </g>
+                    <path d="M899 549H1055" stroke="#829289" fill="none" />
+                    <text x="977" y="455" font-size="16" text-anchor="middle" class="">Expert distributions</text>
+                    <text x="977" y="574" font-size="16" text-anchor="middle" class="">Schematic scores</text>
+                  </g>
+                  <g
+                    class="method-svg-part"
+                    data-method-part="training"
+                    role="button"
+                    tabindex="0"
+                    aria-label="Explain router training data"
+                    aria-controls="method-explanation"
+                  >
+                    <rect class="method-region" x="1094" y="55" width="324" height="296" rx="10" />
+                    <text x="1151" y="71" font-size="18" text-anchor="middle" class="">OOD context</text>
+                    <text x="1350" y="71" font-size="18" text-anchor="middle" class="">ID images</text>
+                    <rect x="1115" y="89" width="70" height="72" rx="1" fill="#f1d4d2" stroke="#bc7974" stroke-width="1.5" />
+                    <rect x="1304" y="89" width="70" height="72" rx="1" fill="#dfedd7" stroke="#8db27d" stroke-width="1.5" />
+                    <rect x="1122" y="96" width="70" height="72" rx="1" fill="#f1d4d2" stroke="#bc7974" stroke-width="1.5" />
+                    <rect x="1311" y="96" width="70" height="72" rx="1" fill="#dfedd7" stroke="#8db27d" stroke-width="1.5" />
+                    <rect x="1129" y="103" width="70" height="72" rx="1" fill="#f1d4d2" stroke="#bc7974" stroke-width="1.5" />
+                    <rect x="1318" y="103" width="70" height="72" rx="1" fill="#dfedd7" stroke="#8db27d" stroke-width="1.5" />
+                    <rect x="1150" y="227" width="218" height="115" rx="14" fill="#f7f9f8" stroke="#82958a" stroke-width="1.5" />
+                    <rect x="1166" y="242" width="185" height="34" rx="4" fill="#fff1cf" stroke="#c4a44d" stroke-width="1.5" />
+                    <text x="1258.5" y="265.0" font-size="17" text-anchor="middle" class="">CLIP OOD method</text>
+                    <rect x="1166" y="290" width="185" height="35" rx="4" fill="#dce9f6" stroke="#7299ba" stroke-width="1.5" />
+                    <text x="1258.5" y="313.5" font-size="18" text-anchor="middle" class="">Voyager</text>
+                  </g>
+                  <g
+                    class="method-svg-part"
+                    data-method-part="objective"
+                    role="button"
+                    tabindex="0"
+                    aria-label="Explain router learning objective"
+                    aria-controls="method-explanation"
+                  >
+                    <rect class="method-region" x="1094" y="359" width="324" height="222" rx="10" />
+                    <text x="1258" y="377" font-size="17" text-anchor="middle" class="">ID / OOD score distributions</text>
+                    <g class="method-density-ood">
+                      <path class="density-area red" d="M1118 516C1145 516 1152 420 1184 420S1230 516 1262 516Z" />
+                      <text x="1184" y="443" font-size="17" text-anchor="middle" class="">OOD</text>
+                    </g>
+                    <g class="method-density-id">
+                      <path class="density-area green" d="M1256 516C1282 516 1299 420 1331 420S1380 516 1398 516Z" />
+                      <text x="1331" y="443" font-size="17" text-anchor="middle" class="">ID</text>
+                    </g>
+                    <path d="M1118 517H1398M1259 409V521" class="method-density-axis" />
+                    <text x="1259" y="400" font-size="16" text-anchor="middle" class="">ID boundary</text>
+                    <rect x="1123" y="532" width="274" height="31" rx="4" fill="#fff" />
+                    <text x="1258" y="553" font-size="18" text-anchor="middle" class="">L = CE(q, Gθ) + 0.01 Lbal</text>
+                    <text x="1258" y="576" font-size="16" text-anchor="middle" class="">Soft top-32 expert targets</text>
+                  </g>
+                  <g class="method-flow" data-for="inputs visual">
+                    <use href="#method-wire-input-id" class="method-wire green" marker-end="url(#method-arrow-green)" />
+                    <use href="#method-wire-input-id" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="inputs visual">
+                    <use href="#method-wire-input-ood" class="method-wire red" marker-end="url(#method-arrow-red)" />
+                    <use href="#method-wire-input-ood" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="text">
+                    <use href="#method-wire-prompt-text" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-prompt-text" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="text">
+                    <use href="#method-wire-text-proto" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-text-proto" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="text scores">
+                    <use href="#method-wire-proto-score" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-proto-score" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="visual scores">
+                    <use href="#method-wire-layer-1" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-layer-1" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="visual scores">
+                    <use href="#method-wire-layer-2" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-layer-2" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="visual scores">
+                    <use href="#method-wire-layer-n" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-layer-n" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="scores">
+                    <use href="#method-wire-score-1" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-score-1" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="scores">
+                    <use href="#method-wire-score-2" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-score-2" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="scores">
+                    <use href="#method-wire-score-n" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-score-n" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="scores output">
+                    <use href="#method-wire-read-1" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-read-1" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="scores output">
+                    <use href="#method-wire-read-2" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-read-2" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="scores output">
+                    <use href="#method-wire-read-n" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-read-n" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="visual router">
+                    <use href="#method-wire-feature-skip" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-feature-skip" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="router">
+                    <use href="#method-wire-router-input" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-router-input" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="router output">
+                    <use href="#method-wire-route-e1" class="method-wire green" marker-end="url(#method-arrow-green)" />
+                    <use href="#method-wire-route-e1" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="router output">
+                    <use href="#method-wire-route-e2" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-route-e2" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="router output">
+                    <use href="#method-wire-route-e3" class="method-wire red" marker-end="url(#method-arrow-red)" />
+                    <use href="#method-wire-route-e3" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="router output">
+                    <use href="#method-wire-route-ek" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-route-ek" class="method-signal" />
+                  </g>
+
+                  <g class="method-flow" data-for="experts">
+                    <use href="#method-wire-bank-1" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-bank-1" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="experts">
+                    <use href="#method-wire-bank-2" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-bank-2" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="experts">
+                    <use href="#method-wire-bank-3" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-bank-3" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="experts">
+                    <use href="#method-wire-bank-n" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-bank-n" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="training objective">
+                    <use href="#method-wire-train-ood" class="method-wire red" marker-end="url(#method-arrow-red)" />
+                    <use href="#method-wire-train-ood" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="training objective">
+                    <use href="#method-wire-train-id" class="method-wire green" marker-end="url(#method-arrow-green)" />
+                    <use href="#method-wire-train-id" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="training objective">
+                    <use href="#method-wire-train-loss" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-train-loss" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="objective">
+                    <use href="#method-wire-loss-return" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-loss-return" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="experts">
+                    <use href="#method-wire-anchor-e1" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-anchor-e1" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="experts">
+                    <use href="#method-wire-anchor-e2" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-anchor-e2" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="experts">
+                    <use href="#method-wire-anchor-e3" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-anchor-e3" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="experts">
+                    <use href="#method-wire-bank-23" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-bank-23" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="visual">
+                    <use href="#method-wire-depth-1" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-depth-1" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="visual">
+                    <use href="#method-wire-depth-2" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-depth-2" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="text">
+                    <use href="#method-wire-text-t1" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-text-t1" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="text">
+                    <use href="#method-wire-text-tn" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-text-tn" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="text scores">
+                    <use href="#method-wire-proto-1" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-proto-1" class="method-signal" />
+                  </g>
+                  <g class="method-flow" data-for="text scores">
+                    <use href="#method-wire-proto-n" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-proto-n" class="method-signal" />
+                  </g>
+                  <g
+                    class="method-svg-icon"
+                    data-method-part="text"
+                    role="button"
+                    tabindex="0"
+                    aria-label="Explain frozen text encoder snowflake"
+                    transform="translate(406 146)"
+                  >
+                    <circle r="20" fill="#fff" fill-opacity=".9" />
+                    <g class="method-snowflake" stroke="#62a9bc" stroke-width="1.8" fill="none">
+                      <path d="M0 -13V13M-4 -9L0 -5L4 -9M-4 9L0 5L4 9" transform="rotate(0)" />
+                      <path d="M0 -13V13M-4 -9L0 -5L4 -9M-4 9L0 5L4 9" transform="rotate(60)" />
+                      <path d="M0 -13V13M-4 -9L0 -5L4 -9M-4 9L0 5L4 9" transform="rotate(120)" />
+                    </g>
+                  </g>
+                  <g
+                    class="method-svg-icon"
+                    data-method-part="visual"
+                    role="button"
+                    tabindex="0"
+                    aria-label="Explain frozen visual encoder snowflake"
+                    transform="translate(234 274)"
+                  >
+                    <circle r="20" fill="#fff" fill-opacity=".9" />
+                    <g class="method-snowflake" stroke="#62a9bc" stroke-width="1.8" fill="none">
+                      <path d="M0 -13V13M-4 -9L0 -5L4 -9M-4 9L0 5L4 9" transform="rotate(0)" />
+                      <path d="M0 -13V13M-4 -9L0 -5L4 -9M-4 9L0 5L4 9" transform="rotate(60)" />
+                      <path d="M0 -13V13M-4 -9L0 -5L4 -9M-4 9L0 5L4 9" transform="rotate(120)" />
+                    </g>
+                  </g>
+                  <g
+                    class="method-svg-icon"
+                    data-method-part="router"
+                    role="button"
+                    tabindex="0"
+                    aria-label="Explain trainable router flame"
+                    transform="translate(474 295)"
+                  >
+                    <circle r="22" fill="transparent" />
+                    <svg x="-15" y="-22" width="30" height="40" viewBox="0 0 30 40">
+                      <g class="method-fire">
+                        <path fill="#e56622" d="M16 1C18 10 28 12 28 24A13 13 0 0 1 2 24C2 17 7 12 10 9C8 18 14 19 14 13C14 9 17 7 16 1Z" />
+                        <path
+                          class="method-fire-inner"
+                          fill="#ffc64c"
+                          d="M16 16C17 22 23 22 22 29A7 7 0 0 1 8 29C8 25 11 23 12 20C13 25 17 24 16 16Z"
+                        />
+                      </g>
+                    </svg>
+                  </g>
+                  <g
+                    class="method-svg-icon"
+                    data-method-part="scores"
+                    role="button"
+                    tabindex="0"
+                    aria-label="Explain frozen score method snowflake"
+                    transform="translate(1352 243)"
+                  >
+                    <circle r="20" fill="#fff" fill-opacity=".9" />
+                    <g class="method-snowflake" stroke="#62a9bc" stroke-width="1.8" fill="none">
+                      <path d="M0 -13V13M-4 -9L0 -5L4 -9M-4 9L0 5L4 9" transform="rotate(0)" />
+                      <path d="M0 -13V13M-4 -9L0 -5L4 -9M-4 9L0 5L4 9" transform="rotate(60)" />
+                      <path d="M0 -13V13M-4 -9L0 -5L4 -9M-4 9L0 5L4 9" transform="rotate(120)" />
+                    </g>
+                  </g>
+                  <g
+                    class="method-svg-icon"
+                    data-method-part="training"
+                    role="button"
+                    tabindex="0"
+                    aria-label="Explain router training flame"
+                    transform="translate(1354 294)"
+                  >
+                    <circle r="22" fill="transparent" />
+                    <svg x="-15" y="-22" width="30" height="40" viewBox="0 0 30 40">
+                      <g class="method-fire">
+                        <path fill="#e56622" d="M16 1C18 10 28 12 28 24A13 13 0 0 1 2 24C2 17 7 12 10 9C8 18 14 19 14 13C14 9 17 7 16 1Z" />
+                        <path
+                          class="method-fire-inner"
+                          fill="#ffc64c"
+                          d="M16 16C17 22 23 22 22 29A7 7 0 0 1 8 29C8 25 11 23 12 20C13 25 17 24 16 16Z"
+                        />
+                      </g>
+                    </svg>
+                  </g>
+                </svg>
+              </div>
+            </div>
+            <nav class="method-part-buttons" aria-label="Architecture parts" hidden>
+              <button type="button" data-method-part="inputs" aria-pressed="true" aria-controls="method-explanation">Input images</button>
+              <button type="button" data-method-part="text" aria-pressed="false" aria-controls="method-explanation">Text encoder</button>
+              <button type="button" data-method-part="visual" aria-pressed="false" aria-controls="method-explanation">Visual encoder</button>
+              <button type="button" data-method-part="scores" aria-pressed="false" aria-controls="method-explanation">Layer scores</button>
+              <button type="button" data-method-part="experts" aria-pressed="false" aria-controls="method-explanation">Expert bank</button>
+              <button type="button" data-method-part="router" aria-pressed="false" aria-controls="method-explanation">Router</button>
+              <button type="button" data-method-part="output" aria-pressed="false" aria-controls="method-explanation">Detector output</button>
+              <button type="button" data-method-part="training" aria-pressed="false" aria-controls="method-explanation">Training data</button>
+              <button type="button" data-method-part="objective" aria-pressed="false" aria-controls="method-explanation">Learning objective</button>
+            </nav>
+            <label class="method-part-select" hidden
+              >Choose a part<select id="method-part">
+                <option value="inputs">Input images</option>
+                <option value="text">Text encoder</option>
+                <option value="visual">Visual encoder</option>
+                <option value="scores">Layer scores</option>
+                <option value="experts">Expert bank</option>
+                <option value="router">Router</option>
+                <option value="output">Detector output</option>
+                <option value="training">Training data</option>
+                <option value="objective">Learning objective</option>
+              </select></label
+            >
+            <div id="method-explanation" class="method-explanation" aria-live="polite" aria-atomic="true">
+              <div>
+                <p class="method-part-count" id="method-part-count">Part 1 of 9 · Inference</p>
+                <h4 id="method-part-title">An image enters a fixed detector</h4>
+              </div>
+              <div>
+                <p id="method-part-copy">
+                  Penguin and puffin illustrate ID and OOD inputs in the figure. At inference, Voyager receives an image without an ID/OOD label. Its
+                  route is predicted from frozen visual features.
+                </p>
+                <p id="method-part-equation" class="method-part-equation">Input image → frozen CLIP features</p>
+                <p id="method-part-note" class="method-part-note">The birds and flows are a schematic, not an inference result.</p>
+                <a id="method-trace-link" href="demo/">Inspect real model traces ↗</a>
+              </div>
+            </div>
+            <div class="method-walkthrough-footer">
+              <div class="method-step-controls" hidden>
+                <button type="button" id="method-previous" aria-label="Previous architecture part">Previous part</button
+                ><button type="button" id="method-next" aria-label="Next architecture part">Next part</button>
+              </div>
+            </div>
+            <noscript><p>The interactive tour requires JavaScript. The original architecture and method descriptions remain available.</p></noscript>
+            <figcaption>
+              Interactive reproduction of the manuscript architecture. Snowflakes indicate frozen weights; flames identify router learning. Moving
+              curves and signals are conceptual illustrations, not measurements.<br /><a href="assets/method.webp">Open the original figure ↗</a>
+            </figcaption>
+          </figure>
           <div class="explorer" data-ui>
             <fieldset class="mode-picker">
               <legend>Explore layer selection</legend>
@@ -223,20 +835,6 @@
               </p>
             </details>
           </div>
-          <figure class="paper-figure">
-            <a href="assets/method.webp" aria-label="Open the full-resolution method diagram"
-              ><img
-                src="assets/method.webp"
-                alt="Manuscript method diagram: frozen CLIP supplies layer features and expert scores; few-shot ID and weak OOD context supervise a lightweight expert router."
-                width="1137"
-                height="385"
-                loading="lazy"
-            /></a>
-            <figcaption>
-              Architecture from the manuscript. The learnable component is the router; CLIP and the expert scores remain frozen.
-              <a href="assets/method.webp">Open full size ↗</a>
-            </figcaption>
-          </figure>
         </div>
       </section>
 
