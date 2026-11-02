@@ -60,3 +60,7 @@ The training-context section follows manuscript Section 5 and Algorithm C.1, wit
 The relationship example uses a toy vocabulary containing only `penguin.n.01`. Distances were verified from WordNet in the project environment: penguin 0, king penguin 1 (descendant), bird 4 (ancestor), puffin 3 (separate branch). The ancestor case demonstrates why a distance threshold alone is insufficient. Passing the toy relationship check does not claim inclusion in the deployed pool, which uses the complete ID vocabulary and additional lexical filters.
 
 `context-floor.png`, `context-bell.png`, `context-shore.png` and `context-hut.png` are unmodified image objects extracted from Figure C.1 in the camera-ready manuscript. They illustrate the retrieved training context, not new retrievals or target-OOD inputs. Their original image rights remain with their respective owners. The construction settings and 5,078-entry pool count match the manuscript. Semantic and within-shard duplicate checks are not described as a cross-dataset image-disjointness guarantee.
+
+## Space identity
+
+The author-requested rocket emoji is Voyager’s brand symbol in the project page, demo header, router inset and favicon. A midnight-blue hero and footer use a small local SVG star field. The orbital hero uses the same illustrative layer subset (3, 5, 6, 9, 12); orbit positions have no model-space meaning. Its route draws once and respects reduced-motion preferences. Scientific method panels retain their light surfaces and the original frozen/trainable icon meanings.
