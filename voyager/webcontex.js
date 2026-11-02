@@ -14,7 +14,7 @@
     [
       "Keep semantically separated candidate concepts",
       "Map ID names and candidate web concepts into WordNet. Reject direct overlaps, ID ancestors and ID descendants. Remaining candidates must be at least two hops from the nearest ID synset.",
-      "The deployed builder also filters WordNet depth, allowed lexical categories and simple, mid-frequency lemmas. Try the relationship example below.",
+      "The deployed builder also filters WordNet depth, allowed lexical categories and simple, mid-frequency lemmas.",
     ],
     [
       "Retrieve diverse images, then clean the pool",
@@ -62,58 +62,6 @@
   $("#ctx-step-select").addEventListener("change", function () {
     select(Number(this.value), true);
   });
-  var cases = {
-    penguin: { name: "penguin", hops: 0, relation: "Same synset", pass: false, detail: "Exact ID overlap is discarded before retrieval." },
-    king: {
-      name: "king penguin",
-      hops: 1,
-      relation: "ID descendant",
-      pass: false,
-      detail: "An ID descendant is excluded, and this example is also closer than the two-hop threshold.",
-    },
-    bird: {
-      name: "bird",
-      hops: 4,
-      relation: "ID ancestor",
-      pass: false,
-      detail: "Four hops does not make an ID ancestor eligible. Ancestor/descendant exclusions apply before the distance threshold.",
-    },
-    puffin: {
-      name: "puffin",
-      hops: 3,
-      relation: "Separate branch",
-      pass: true,
-      detail:
-        "This candidate passes the overlap/relationship/distance check for the toy vocabulary. The full deployed vocabulary and additional builder filters can change eligibility.",
-    },
-  };
-  function filter() {
-    var d = cases[$("#ctx-candidate").value],
-      dots = "";
-    for (var i = 1; i < d.hops; i++) dots += '<circle cx="' + (140 + (i * 120) / d.hops) + '" cy="45" r="5" fill="#80988b"/>';
-    $("#ctx-relation").innerHTML =
-      '<svg viewBox="0 0 400 110" role="img" aria-label="Penguin to ' +
-      d.name +
-      ": " +
-      d.hops +
-      " WordNet hops, " +
-      d.relation +
-      '"><path d="M140 45H260" stroke="#80988b"/>' +
-      dots +
-      '<rect x="5" y="22" width="135" height="46" rx="5" fill="#e0ece3" stroke="#7a9f88"/><rect x="260" y="22" width="135" height="46" rx="5" fill="#f4f7f3" stroke="#8ca392"/><text x="72" y="50">penguin · ID</text><text x="327" y="50">' +
-      d.name +
-      '</text><text x="200" y="95">' +
-      d.relation +
-      " · " +
-      d.hops +
-      " hops</text></svg>";
-    $("#ctx-filter-result").textContent = d.pass ? "Passes the relationship check." : "Excluded from retrieval.";
-    $("#ctx-filter-result").classList.toggle("passes", d.pass);
-    $("#ctx-filter-detail").textContent = d.detail;
-  }
-  $("#ctx-candidate").addEventListener("change", filter);
-  $("#ctx-candidate").disabled = false;
   $("#ctx-step-select").disabled = false;
   select(0, false);
-  filter();
 })();

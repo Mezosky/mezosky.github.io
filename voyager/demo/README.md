@@ -1,6 +1,6 @@
 # Voyager evidence explorer
 
-The default experience loads four precomputed, real model traces. It works on GitHub Pages without a running GPU service. Choose a case, select a layer, compare weighted scores or signed margin contributions, and download the full trace.
+The explorer loads four precomputed, real model traces. It runs entirely from the static files on GitHub Pages. Choose a case, select a layer, compare weighted scores or signed margin contributions, and download the full trace.
 
 | Case           | Source                             | Voyager  | Final-layer GL-MCM |
 | -------------- | ---------------------------------- | -------- | ------------------ |
@@ -21,16 +21,12 @@ For selected subset `E_r`, layer weight is `w_l = (1/5) sum_r 1[l in E_r]/|E_r|`
 
 Images are small benchmark crops used to document the corresponding experiment outputs. Their dataset and original rights remain with their respective owners; the repository's code license does not grant a separate image license.
 
-## Optional live service
-
-`config.json` points to a temporary inference service on AIML-PC. The UI checks availability independently of the recorded examples. If the share URL changes, update `api_base`; if unavailable, all four saved traces remain explorable.
-
-Uploads are optional, limited to JPEG/PNG/WebP, 5 MB and 20 megapixels. The inference application processes them in memory without saving them; its public relay transports the requests. The app allows one inference at a time and at most 20 requests per minute across visitors. Do not put server files, checkpoints or calibration caches in this static directory.
+There is no live inference or image upload. The browser only loads the four recorded traces and their matching images; no inference service, health check or API configuration is used.
 
 ## Validation
 
 - Raw feature and score extraction matched the experiment's original GL-MCM helper.
 - Cached routing, fixed calibration and score/margin arithmetic checks passed.
 - All four published crops confirmed their stated decision pairs in real inference.
-- Browser checks covered case selection, chart modes, layer selection, opacity, JSON export and live rerun.
+- Browser checks covered case selection, chart modes, layer selection, opacity and JSON export.
 - Responsive review covered 1440, 768 and 390 pixel widths.

@@ -5,18 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Explore selected real Voyager examples: inspect twelve CLIP layer scores, five expert routes, and local ID-match maps. Optional live image upload."
+      content="Explore selected real Voyager examples: inspect twelve CLIP layer scores, five expert routes, and local ID-match maps. Four precomputed model traces."
     />
     <title>Voyager | Explore the layer evidence</title>
     <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="demo.css" />
+    <link rel="stylesheet" href="demo.css?v=20261103-fixed" />
     <link rel="stylesheet" href="../space-theme.css" />
-    <script src="demo.js" defer></script>
+    <script src="demo.js?v=20261103-fixed" defer></script>
   </head>
   <body>
     <a class="skip" href="#analysis">Skip to analysis</a>
     <header class="topbar">
-      <a class="brand" href="https://mezosky.github.io/voyager/"><span class="voyager-rocket" aria-hidden="true">🚀</span>Voyager</a
+      <a class="brand" href="https://mezosky.github.io/voyager/"
+        ><span class="voyager-rocket" aria-hidden="true">🚀<!-- taste-skill-ignore: brand --></span>Voyager</a
       ><!-- taste-skill-ignore: author-requested rocket identity -->
       <p>ImageNet-1K <span>· CLIP ViT-B/16 · five trained routers</span></p>
       <a href="https://mezosky.github.io/voyager/">Project page ↗</a>
@@ -33,26 +34,9 @@
           <button type="button" data-example="texture-win" aria-pressed="false">Texture shift</button>
           <button type="button" data-example="failure" aria-pressed="false">OOD failure</button>
         </fieldset>
-        <p class="small selection-note">Real model runs, selected for their decision contrasts. These four cases are not a performance estimate.</p>
-        <details class="live-tools">
-          <summary>Try live inference (optional)</summary>
-          <label class="file-label" for="image-file"
-            >Or choose your own image<input id="image-file" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="upload-help"
-          /></label>
-          <p id="upload-help" class="small">Optional live inference · JPEG, PNG or WebP · up to 5 MB</p>
-          <section class="connection" aria-labelledby="connection-title">
-            <h3 id="connection-title">Optional live service</h3>
-            <p id="connection-status" role="status">Checking availability…</p>
-            <button type="button" id="retry-service">Check again</button>
-          </section>
-          <details class="privacy">
-            <summary>How uploads are handled</summary>
-            <p class="small">
-              Uploading sends the image to the demo’s GPU server. Images are processed in memory and are not saved by the inference app. The public
-              relay handles network traffic. Recorded study examples remain explorable if the temporary service is offline.
-            </p>
-          </details>
-        </details>
+        <p class="small selection-note">
+          Precomputed model runs, selected for their decision contrasts. These four cases are not a performance estimate.
+        </p>
       </aside>
 
       <main class="sheet" id="analysis">
@@ -61,16 +45,10 @@
             <h1 id="case-title">Explore the layer evidence</h1>
             <p id="result-origin">Loading a recorded model run…</p>
           </div>
-          <button type="button" id="analyze" class="primary" disabled>Run live</button>
         </div>
         <p class="case-context" id="case-context"></p>
         <p class="error" id="error" role="alert" hidden></p>
-        <div id="busy" class="busy" role="status" hidden>Computing twelve layer scores and five expert routes…</div>
-        <div id="empty" class="empty" hidden>
-          <h2>Image ready</h2>
-          <p>Run the model to see its decision and the intermediate-layer evidence.</p>
-        </div>
-
+        <div id="busy" class="busy" role="status" hidden>Loading recorded layer scores and expert routes…</div>
         <div id="result" hidden>
           <section class="decision-strip" aria-labelledby="decision-title">
             <div class="decision-main">
@@ -205,7 +183,7 @@
               <p>
                 <strong>Decision scope.</strong> “ID-like” means above a fixed threshold relative to ImageNet-1K, not that the image is known, safe,
                 or correctly classified. “OOD-like” means below it. The threshold is the fifth percentile of 50,000 cached ImageNet validation ID
-                scores; 95% retention applies to that reference set, not arbitrary uploads.
+                scores; 95% retention applies to that reference set, not every new image.
               </p>
               <p>
                 <strong>Selected examples.</strong> ID/OOD reference labels describe membership in the ImageNet-ID versus OOD benchmark datasets. OOD
@@ -230,7 +208,7 @@
     </div>
     <noscript
       ><p class="no-script">
-        Image inference and the evidence explorer require JavaScript.
+        The recorded evidence explorer requires JavaScript.
         <a href="https://mezosky.github.io/voyager/">Read the method and results on the project page.</a>
       </p></noscript
     >
