@@ -1,0 +1,411 @@
+.layer-lesson {
+  background: #f8faf8;
+  padding: 28px;
+  margin: 0 0 40px;
+  color: #0b2832;
+}
+.layer-lesson [hidden] {
+  display: none !important;
+}
+.lesson-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: start;
+}
+.lesson-heading h3 {
+  font-size: 28px;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  margin: 0 0 10px;
+}
+.lesson-heading p {
+  font-size: 16px;
+  margin: 0;
+}
+.layer-lesson button {
+  min-height: 44px;
+  border: 1px solid #c4d3ca;
+  border-radius: 4px;
+  background: #fff;
+  color: inherit;
+  padding: 8px 14px;
+  font: inherit;
+  font-size: 14px;
+}
+.layer-lesson button:hover {
+  border-color: #568574;
+}
+.lesson-input-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 28px;
+  align-items: center;
+  margin-top: 24px;
+}
+#lesson-inputs {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 8px;
+}
+#lesson-inputs legend {
+  font-size: 13px;
+  color: #526b60;
+  margin-bottom: 8px;
+  padding: 0;
+}
+#lesson-inputs label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 10px;
+  border: 1px solid #cad8ce;
+  background: #fff;
+  cursor: pointer;
+  font-size: 15px;
+}
+#lesson-inputs label:has(input:checked) {
+  background: #e4eee6;
+  border-color: #749a86;
+}
+#lesson-inputs input {
+  width: 17px;
+  height: 17px;
+  margin: 0;
+  accent-color: #08685f;
+  flex-shrink: 0;
+}
+#lesson-inputs svg {
+  display: block;
+  flex-shrink: 0;
+}
+#lesson-context {
+  font-size: 14px;
+  line-height: 1.5;
+  max-width: 64ch;
+  margin: 0;
+}
+.lesson-comparison {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 26px;
+  gap: 0;
+}
+.lesson-method {
+  min-width: 0;
+  padding: 0 16px;
+}
+.lesson-method:first-child {
+  padding-left: 16px;
+}
+.lesson-method:last-child {
+  padding-right: 16px;
+}
+.lesson-method + .lesson-method {
+  border-left: 1px solid #d7e2da;
+}
+.lesson-method h4 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 4px;
+  letter-spacing: -0.02em;
+}
+.lesson-method-subtitle {
+  margin: 0 0 16px;
+  font-size: 13px;
+  color: #526b60;
+}
+.lesson-wiring {
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  margin-inline: auto;
+  height: auto;
+  overflow: visible;
+}
+.lesson-wiring text {
+  fill: #203a32;
+  font-family: "Albert Sans", Arial, sans-serif;
+}
+.lesson-wire {
+  fill: none;
+  stroke: #83998c;
+  stroke-width: 1.2;
+}
+.lesson-wire.depth {
+  stroke-width: 1;
+}
+.lesson-wire.unused {
+  stroke: #c9d6cd;
+  opacity: 0.6;
+}
+.lesson-wire.selected {
+  stroke: #08685f;
+  stroke-width: 1.8;
+}
+.lesson-wire.feature {
+  stroke: #81958a;
+  stroke-width: 1;
+}
+.lesson-wire.choice {
+  stroke: #08685f;
+  stroke-width: 1.8;
+  stroke-dasharray: 5 4;
+}
+.lesson-pulse {
+  fill: none;
+  stroke: #0b2832;
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  stroke-dasharray: 1 11;
+  opacity: 0;
+}
+.layer-lesson.is-tracing .lesson-pulse {
+  opacity: 1;
+  animation: lesson-flow 1s linear infinite;
+}
+.lesson-node {
+  fill: #f1f5f1;
+  stroke: #bccfc0;
+  stroke-width: 1;
+}
+.lesson-score {
+  fill: #f1f5f1;
+  stroke: #bccfc0;
+  stroke-width: 1;
+}
+.lesson-node.chosen,
+.lesson-score.chosen {
+  fill: #dfede2;
+  stroke: #5f907a;
+  stroke-width: 1.4;
+}
+.lesson-box {
+  fill: #fff;
+  stroke: #93ad9a;
+  stroke-width: 1.3;
+}
+.lesson-box.router {
+  fill: #dceae2;
+  stroke: #08685f;
+}
+.lesson-box.fusion {
+  fill: #e8f0ea;
+  stroke: #08685f;
+  stroke-width: 1.8;
+}
+.lesson-method-copy {
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 10px 0 8px;
+}
+.lesson-selected {
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0;
+  font-weight: 600;
+}
+.lesson-finding {
+  font-size: 15px;
+  font-weight: 500;
+  margin: 24px 0 10px;
+  padding-top: 20px;
+  border-top: 1px solid #d7e2da;
+}
+.lesson-key {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #526b60;
+  margin: 0;
+}
+.lesson-depth-heading {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 36px;
+  align-items: start;
+}
+.lesson-depth-heading h4 {
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.025em;
+}
+.lesson-depth-heading p {
+  margin: 0;
+  font-size: 14px;
+}
+.lesson-cues {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  margin-top: 20px;
+}
+.lesson-cue {
+  width: 100%;
+  height: 140px;
+  display: block;
+}
+.lesson-cues figcaption {
+  margin-top: 8px;
+}
+.lesson-cues strong {
+  font-size: 16px;
+  font-weight: 600;
+}
+.lesson-cues p {
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 8px 0 0;
+  max-width: 40ch;
+}
+.lesson-disclosure {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #526b60;
+  margin: 24px 0 0;
+  max-width: 110ch;
+}
+.lesson-disclosure a {
+  white-space: nowrap;
+}
+.lesson-mobile-views {
+  display: none;
+}
+@keyframes lesson-flow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+@media (max-width: 1100px) {
+  .layer-lesson {
+    padding: 24px 20px;
+  }
+  .lesson-method {
+    padding-inline: 12px;
+  }
+  .lesson-method h4 {
+    font-size: 18px;
+  }
+  .lesson-input-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+@media (max-width: 1200px) {
+  .layer-lesson.has-lesson-js .lesson-mobile-views {
+    display: flex;
+    gap: 6px;
+    margin-top: 24px;
+  }
+  .lesson-mobile-views button {
+    flex: 1;
+    padding-inline: 6px;
+  }
+  .lesson-mobile-views button[aria-pressed="true"] {
+    background: #e2ece4;
+    border-color: #70927c;
+  }
+  .lesson-comparison {
+    display: block;
+    margin-top: 24px;
+  }
+  .lesson-method,
+  .lesson-method:first-child,
+  .lesson-method:last-child {
+    display: block;
+    padding: 0;
+    max-width: 480px;
+    margin: auto;
+  }
+  .lesson-method + .lesson-method {
+    border: 0;
+  }
+  .layer-lesson.has-lesson-js .lesson-method {
+    display: none;
+  }
+  .layer-lesson:not(.has-lesson-js) .lesson-method + .lesson-method {
+    margin-top: 32px;
+  }
+  .layer-lesson.has-lesson-js[data-view="final"] [data-lesson-method="final"],
+  .layer-lesson.has-lesson-js[data-view="fixed"] [data-lesson-method="fixed"],
+  .layer-lesson.has-lesson-js[data-view="dynamic"] [data-lesson-method="dynamic"] {
+    display: block;
+  }
+  .lesson-method h4 {
+    font-size: 22px;
+  }
+  .lesson-method-subtitle {
+    font-size: 14px;
+  }
+  .lesson-cues {
+    gap: 16px;
+  }
+  .lesson-depth-heading {
+    display: block;
+  }
+  .lesson-depth-heading p {
+    margin-top: 12px;
+  }
+}
+@media (max-width: 600px) {
+  .layer-lesson {
+    padding: 22px 16px;
+    margin-inline: -16px;
+  }
+  .lesson-heading {
+    display: block;
+  }
+  .lesson-heading h3 {
+    font-size: 24px;
+  }
+  .lesson-heading button {
+    margin-top: 16px;
+  }
+  #lesson-inputs {
+    width: 100%;
+  }
+  #lesson-inputs label {
+    flex: 1;
+    gap: 6px;
+    padding: 6px;
+    font-size: 14px;
+  }
+  .lesson-method-copy {
+    font-size: 15px;
+  }
+  .lesson-finding {
+    font-size: 14px;
+  }
+  .lesson-cues {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .lesson-cues figure {
+    display: grid;
+    grid-template-columns: 112px minmax(0, 1fr);
+    gap: 16px;
+    align-items: center;
+  }
+  .lesson-cue {
+    height: auto;
+  }
+  .lesson-cues figcaption {
+    margin: 0;
+  }
+  .lesson-cues p {
+    font-size: 14px;
+  }
+  .lesson-disclosure a {
+    white-space: normal;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .layer-lesson.is-tracing .lesson-pulse {
+    animation: none;
+    opacity: 0;
+  }
+}
