@@ -19,3 +19,7 @@
 "ACL":
   url: https://www.aclweb.org/
   color: "#0f766e"
+
+"WACV":
+  url: https://wacv.thecvf.com/Conferences/2027/index.html
+  color: "#1b2a48"

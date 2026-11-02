@@ -1,6 +1,22 @@
 ---
 ---
 
+@InProceedings{De_la_Jara_2027_WACV_Voyager,
+    author    = {De la Jara, Ignacio M. and Rodriguez-Opazo, Cristian and Ranasinghe, Damith},
+    title     = {Not All Layers Are Created Equal: Learning to Select Layers for Reliable Out-of-Distribution Detection},
+    booktitle = {Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
+    year      = {2027},
+    abbr      = {WACV},
+    note      = {Camera-ready manuscript},
+    pdf       = {https://mezosky.github.io/voyager/assets/manuscript.pdf},
+    website   = {https://mezosky.github.io/voyager/},
+    preview   = {2027_WACV_Voyager.png},
+    summary   = {Voyager learns an image-conditioned route through frozen CLIP layers, selecting sparse layer experts for reliable out-of-distribution detection.},
+    abstract  = {Intermediate CLIP representations can improve out-of-distribution (OOD) detection, but existing methods apply the same fixed intermediate-layer fusion rule to every input. We instead study whether layer selection can be learned. Voyager keeps CLIP and its scores frozen and trains a lightweight router to select, for each image, one sparse expert defined by a final-layer-anchored subset of depths. The router uses few-shot ID examples and WebContEX, a web-retrieved weak OOD context built from the ID label set without target-OOD images. On ImageNet-1K, Voyager obtains 18.86 average FPR@95 and 94.49 AUROC, improving over Local-Prompt by 8.8 FPR points and fixed intermediate-layer fusion by 11.8 points. Controlled comparisons separate the roles of context and routing: under the same router recipe, replacing WebContEX with ID-derived context increases FPR from 18.86 to 26.71; with WebContEX and expert scores fixed, learned routing lowers FPR by 10.1 points relative to the strongest score-based selector. Across Pascal-VOC, ImageNet-100, near-OOD subsets, and additional CLIP backbones, Voyager consistently reduces aggregate FPR relative to matched fixed-layer or static-fusion baselines, demonstrating transfer across ID domains, near-OOD shifts, and backbones. Importantly, the deployed five-router ensemble trains in under three minutes with less than 1 GB of GPU memory, making Voyager lightweight and practical.},
+    bibtex_show = {true},
+    selected  = {true},
+}
+
 @InProceedings{De_la_Jara_2023_ICCV,
     author    = {De la Jara, Ignacio M. and Rodriguez-Opazo, Cristian and Marrese-Taylor, Edison and Bravo-Marquez, Felipe},
     title     = {An Empirical Study of the Effect of Video Encoders on Temporal Video Grounding},
