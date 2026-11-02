@@ -1,9 +1,9 @@
 /* Voyager's rocket and space motif are explicitly requested by the project author. */
 :root {
-  --space: #101e38;
-  --starlight: #f2f6ff;
+  --space: #0e1a31;
+  --starlight: #f5f8fb;
   --orbit: #8dbbae;
-  --flight: #b8e9d4;
+  --flight: #9fe3c8;
 }
 .site-header,
 .hero {
@@ -195,4 +195,331 @@
   .brand:hover .voyager-rocket {
     transform: none;
   }
+}
+
+/* Shared surfaces carry the opening's identity through the scientific content. */
+.voyager-page {
+  --ink: #13203a;
+  --teal: #1d6b5a;
+  --ground: #0e1a31;
+  --mint: #1b2a48;
+  --light: #1b2a48;
+  --muted: #5a6a82;
+  --panel: #f5f8fb;
+}
+body.voyager-page {
+  color: var(--starlight);
+}
+:where(.voyager-page) .section {
+  padding-block: 96px;
+}
+:where(.voyager-page) .section-intro {
+  margin-bottom: 40px;
+}
+:where(.voyager-page) .section-intro > p,
+:where(.voyager-page) .reading,
+:where(.voyager-page) .resource-copy > p:not(.paper-title),
+:where(.voyager-page) .scope > p,
+:where(.voyager-page) .results-reading > div,
+:where(.voyager-page) .band-context {
+  color: #c4d1e2;
+}
+:where(.voyager-page) .hero .text-link {
+  border: 1px solid #9fe3c8;
+  padding: 15px 20px;
+}
+:where(.voyager-page) .hero-actions {
+  gap: 16px;
+}
+:where(.voyager-page) .orbital-route {
+  stroke: #526b85;
+  stroke-width: 1.5;
+  stroke-dasharray: none;
+  animation: none;
+}
+:where(.voyager-page) .orbital-trail {
+  fill: none;
+  stroke: var(--flight);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+:where(.voyager-page) .orbital-craft {
+  pointer-events: none;
+}
+:where(.voyager-page) .craft-exhaust {
+  transform-origin: -15px 0;
+}
+:where(.voyager-page) .result-band {
+  background: #1b2a48;
+}
+:where(.voyager-page) .metric-direction {
+  color: var(--flight);
+}
+:where(.voyager-page) .method-walkthrough,
+:where(.voyager-page) .layer-lesson,
+:where(.voyager-page) .ctx-section,
+:where(.voyager-page) .paper-figure,
+:where(.voyager-page) .evidence-frame,
+:where(.voyager-page) .citation {
+  background: var(--panel);
+  color: var(--ink);
+}
+:where(.voyager-page) .method-walkthrough,
+:where(.voyager-page) .layer-lesson,
+:where(.voyager-page) .ctx-section {
+  padding: 32px;
+  margin-bottom: 32px;
+}
+:where(.voyager-page) .method-walkthrough-heading,
+:where(.voyager-page) .lesson-heading,
+:where(.voyager-page) .ctx-heading {
+  gap: 24px;
+}
+:where(.voyager-page) .method-walkthrough-heading p,
+:where(.voyager-page) .lesson-heading p,
+:where(.voyager-page) .ctx-heading p {
+  font-size: 16px;
+  color: var(--muted);
+}
+:where(.voyager-page) .method-part-buttons button,
+:where(.voyager-page) .layer-lesson button,
+:where(.voyager-page) .method-walkthrough button,
+:where(.voyager-page) .method-walkthrough select,
+:where(.voyager-page) .ctx-step-select select,
+:where(.voyager-page) .ctx-filter-demo select {
+  border-color: #b6c4d4;
+  border-radius: 4px;
+  background: var(--panel);
+  color: var(--ink);
+}
+:where(.voyager-page) .method-part-buttons button.is-selected,
+:where(.voyager-page) .method-playback #method-play,
+:where(.voyager-page) .lesson-mobile-views button[aria-pressed="true"] {
+  background: #1b2a48;
+  color: var(--flight);
+  border-color: #1b2a48;
+}
+:where(.voyager-page) .method-part-buttons {
+  gap: 8px;
+}
+:where(.voyager-page) .method-walkthrough a,
+:where(.voyager-page) .layer-lesson a,
+:where(.voyager-page) .ctx-section a,
+:where(.voyager-page) .paper-figure a,
+:where(.voyager-page) .evidence-frame a {
+  color: var(--teal);
+}
+:where(.voyager-page) .lesson-method-subtitle,
+:where(.voyager-page) .lesson-key,
+:where(.voyager-page) .lesson-disclosure,
+:where(.voyager-page) #lesson-inputs legend,
+:where(.voyager-page) .ctx-stage,
+:where(.voyager-page) .ctx-note {
+  color: var(--muted);
+  font-size: 14px;
+}
+:where(.voyager-page) .lesson-wiring text,
+:where(.voyager-page) .ctx-pipeline text,
+:where(.voyager-page) .ctx-relation text {
+  fill: var(--ink);
+}
+:where(.voyager-page) .lesson-node,
+:where(.voyager-page) .lesson-score {
+  fill: #eaf0f6;
+  stroke: #b6c4d4;
+}
+:where(.voyager-page) .lesson-node.chosen,
+:where(.voyager-page) .lesson-score.chosen {
+  fill: #dce8f2;
+  stroke: #6c87a4;
+}
+:where(.voyager-page) .lesson-box {
+  fill: var(--panel);
+  stroke: #91a6be;
+}
+:where(.voyager-page) .lesson-box.router,
+:where(.voyager-page) .lesson-box.fusion {
+  fill: #dce8f2;
+  stroke: #426486;
+}
+:where(.voyager-page) .lesson-wire.selected,
+:where(.voyager-page) .lesson-wire.choice {
+  stroke: #426486;
+}
+:where(.voyager-page) .lesson-pulse {
+  stroke: #13203a;
+}
+:where(.voyager-page) #lesson-inputs label {
+  background: var(--panel);
+  border-color: #b6c4d4;
+}
+:where(.voyager-page) #lesson-inputs label:has(input:checked) {
+  background: #dce8f2;
+  border-color: #426486;
+}
+:where(.voyager-page) #lesson-inputs input {
+  accent-color: #1b2a48;
+}
+:where(.voyager-page) .ctx-filter-demo {
+  background: #e8eff6;
+}
+:where(.voyager-page) .ctx-step .ctx-step-frame {
+  fill: var(--panel);
+  stroke: #c3cfde;
+}
+:where(.voyager-page) .ctx-step.is-selected .ctx-step-frame {
+  stroke: #426486;
+}
+:where(.voyager-page) .ctx-step rect {
+  fill: #e8eff6;
+  stroke: #91a6be;
+}
+:where(.voyager-page) .ctx-step .ctx-router {
+  fill: #dce8f2;
+  stroke: #426486;
+}
+:where(.voyager-page) .ctx-step circle {
+  fill: #e8eff6;
+  stroke: #91a6be;
+}
+:where(.voyager-page) .method-details details {
+  background: #233552;
+}
+:where(.voyager-page) .method-details details p {
+  color: #c4d1e2;
+}
+:where(.voyager-page) .results-toolbar {
+  margin-bottom: 24px;
+}
+:where(.voyager-page) select {
+  border: 1px solid #b6c4d4;
+  border-radius: 4px;
+  background: var(--panel);
+  color: var(--ink);
+  min-height: 44px;
+}
+:where(.voyager-page) .table-wrap {
+  color: var(--ink);
+  background: var(--panel);
+  padding: 16px 24px 24px;
+}
+:where(.voyager-page) thead {
+  background: var(--panel);
+}
+:where(.voyager-page) td,
+:where(.voyager-page) th {
+  padding: 16px;
+  border-bottom: 1px solid #d5deea;
+}
+:where(.voyager-page) tbody tr:nth-child(even) {
+  background: transparent;
+}
+:where(.voyager-page) tbody tr.ours {
+  background: #1b2a48;
+  color: var(--flight);
+}
+:where(.voyager-page) tbody tr.ours td,
+:where(.voyager-page) tbody tr.ours th {
+  border-color: #1b2a48;
+}
+:where(.voyager-page) .results > .note {
+  color: #b6c6dc;
+  font-size: 15px;
+}
+:where(.voyager-page) .results-reading {
+  margin-top: 48px;
+}
+:where(.voyager-page) .evidence-index button {
+  background: #263855;
+  color: var(--starlight);
+}
+:where(.voyager-page) .evidence-index button.chosen {
+  background: var(--flight);
+  color: var(--ink);
+}
+:where(.voyager-page) .citation-heading button {
+  background: #1b2a48;
+  color: var(--flight);
+  min-height: 44px;
+  border-radius: 4px;
+}
+:where(.voyager-page) .resource-links a {
+  color: var(--flight);
+}
+:where(.voyager-page) .footer .note {
+  color: #b6c6dc;
+}
+:where(.voyager-page) .skip {
+  color: var(--ink);
+}
+:where(.voyager-page) button:focus-visible,
+:where(.voyager-page) a:focus-visible,
+:where(.voyager-page) input:focus-visible,
+:where(.voyager-page) select:focus-visible,
+:where(.voyager-page) summary:focus-visible,
+:where(.voyager-page) .table-wrap:focus-visible {
+  outline-color: #9fe3c8;
+}
+:where(.voyager-page) .method-walkthrough :focus-visible,
+:where(.voyager-page) .layer-lesson :focus-visible,
+:where(.voyager-page) .ctx-section :focus-visible,
+:where(.voyager-page) .evidence-frame :focus-visible,
+:where(.voyager-page) .citation :focus-visible {
+  outline-color: #1d6b5a;
+}
+@media (max-width: 1000px) {
+  :where(.voyager-page) .section {
+    padding-block: 72px;
+  }
+  :where(.voyager-page) .method-walkthrough,
+  :where(.voyager-page) .layer-lesson,
+  :where(.voyager-page) .ctx-section {
+    padding: 24px;
+  }
+}
+@media (max-width: 600px) {
+  :where(.voyager-page) .section {
+    padding-block: 64px;
+  }
+  :where(.voyager-page) .method-walkthrough,
+  :where(.voyager-page) .layer-lesson,
+  :where(.voyager-page) .ctx-section {
+    padding: 22px 16px;
+  }
+  :where(.voyager-page) .table-wrap {
+    padding: 8px 12px 20px;
+  }
+  :where(.voyager-page) td,
+  :where(.voyager-page) th {
+    padding: 14px 10px;
+  }
+  :where(.voyager-page) .hero .text-link {
+    padding: 13px 16px;
+  }
+}
+:where(.voyager-page) .sample-strip figcaption {
+  color: var(--starlight);
+}
+:where(.voyager-page) .sample-strip > .note {
+  color: #b6c6dc;
+}
+:where(.voyager-page) .method-details {
+  background: transparent;
+}
+:where(.voyager-page) .evidence-index button:not(.chosen):hover {
+  background: #263855;
+}
+:where(.voyager-page) .evidence-index button.chosen:hover {
+  background: var(--flight);
+  color: var(--ink);
+}
+:where(.voyager-page) .method-part-count,
+:where(.voyager-page) .method-explanation .method-part-note,
+:where(.voyager-page) .method-walkthrough figcaption,
+:where(.voyager-page) .method-pan-hint {
+  color: var(--muted);
+  font-size: 14px;
+}
+:where(.voyager-page) .method-explanation {
+  min-height: 190px;
 }
