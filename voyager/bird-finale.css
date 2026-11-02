@@ -1,0 +1,225 @@
+.bird-finale {
+  background: var(--space, #101e38) url("assets/stars.svg");
+  color: #f2f6ff;
+  padding-block: 60px 36px;
+}
+.bird-finale-heading {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 24px;
+}
+.bird-finale h2 {
+  font-size: clamp(30px, 3vw, 44px);
+}
+.bird-finale-heading p {
+  margin-top: 16px;
+  color: #bdcde0;
+  font-size: 17px;
+}
+.bird-finale button {
+  flex-shrink: 0;
+  padding: 12px 18px;
+  min-height: 44px;
+  border: 0;
+  background: #b8e9d4;
+  color: #101e38;
+  font-size: 15px;
+  font-weight: 500;
+}
+.bird-finale button[hidden] {
+  display: none;
+}
+.bird-finale-stage {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-width: 1100px;
+  margin: 16px auto 0;
+  overflow: visible;
+}
+.bird-finale-stage text {
+  font-family: "Albert Sans", Arial, sans-serif;
+  text-anchor: middle;
+  fill: #f2f6ff;
+}
+.bird-finale-stage .finale-world-title {
+  font-size: 25px;
+  font-weight: 500;
+}
+.bird-finale-stage .finale-world-note {
+  font-size: 17px;
+  fill: #bdcde0;
+}
+.finale-ground {
+  fill: #b8e9d4;
+}
+.finale-rock {
+  fill: #bf8276;
+}
+.finale-orbit {
+  fill: none;
+  stroke: #38516e;
+  stroke-width: 1;
+}
+.finale-trail {
+  fill: none;
+  stroke: #7692af;
+  stroke-width: 1.5;
+  stroke-dasharray: 3 9;
+  opacity: 0.5;
+}
+.finale-id-tag {
+  fill: #b8e9d4;
+}
+.finale-ood-tag {
+  fill: #f2c1b3;
+}
+.bird-finale-stage .finale-tag-text {
+  fill: #101e38;
+  font-size: 21px;
+  font-weight: 600;
+}
+.finale-tag-string {
+  fill: none;
+  stroke: #c6d5e6;
+  stroke-width: 1.5;
+}
+.finale-bird-dark {
+  fill: #1e2d43;
+  stroke: #9fb1c6;
+  stroke-width: 1;
+}
+.finale-bird-white {
+  fill: #f2f6ff;
+}
+.finale-beak {
+  fill: #ecaa59;
+}
+.finale-feet {
+  fill: none;
+  stroke: #ecaa59;
+  stroke-width: 7;
+  stroke-linecap: round;
+}
+.finale-eye {
+  fill: #101e38;
+}
+.finale-puffin-wing {
+  transform: rotate(-56deg) scale(0.65);
+  transform-origin: -18px 3px;
+}
+.bird-finale[data-state="playing"] .finale-puffin-wing,
+.bird-finale[data-state="paused"] .finale-puffin-wing {
+  animation: finale-flap 0.44s ease-in-out infinite alternate;
+}
+.bird-finale[data-state="playing"] .finale-penguin-body,
+.bird-finale[data-state="paused"] .finale-penguin-body {
+  animation: finale-waddle 0.48s ease-in-out infinite alternate;
+}
+.bird-finale[data-state="playing"] .finale-foot-front,
+.bird-finale[data-state="paused"] .finale-foot-front {
+  animation: finale-step 0.48s ease-in-out infinite alternate;
+  transform-origin: 10px 31px;
+}
+.bird-finale[data-state="playing"] .finale-foot-back,
+.bird-finale[data-state="paused"] .finale-foot-back {
+  animation: finale-step 0.48s ease-in-out infinite alternate-reverse;
+  transform-origin: -10px 31px;
+}
+.bird-finale[data-state="paused"] .finale-puffin-wing,
+.bird-finale[data-state="paused"] .finale-penguin-body,
+.bird-finale[data-state="paused"] .finale-foot-front,
+.bird-finale[data-state="paused"] .finale-foot-back {
+  animation-play-state: paused;
+}
+.bird-finale .finale-caption {
+  text-align: center;
+  max-width: none;
+  color: #bdcde0;
+  font-size: 14px;
+  margin-top: 12px;
+}
+.finale-status {
+  min-height: 1.5em;
+  text-align: center;
+  font-size: 16px;
+  margin-top: 12px;
+  max-width: none;
+}
+@keyframes finale-flap {
+  from {
+    transform: rotate(-22deg) scaleY(0.65);
+  }
+  to {
+    transform: rotate(38deg) scaleY(1);
+  }
+}
+@keyframes finale-waddle {
+  from {
+    transform: translateY(-2px) rotate(-3deg);
+  }
+  to {
+    transform: translateY(1px) rotate(3deg);
+  }
+}
+@keyframes finale-step {
+  from {
+    transform: rotate(-24deg);
+  }
+  to {
+    transform: rotate(24deg);
+  }
+}
+@media (max-width: 600px) {
+  .bird-finale {
+    padding-top: 42px;
+  }
+  .bird-finale-heading {
+    display: block;
+  }
+  .bird-finale-heading p {
+    font-size: 16px;
+  }
+  .bird-finale button {
+    margin-top: 20px;
+  }
+  .bird-finale-stage {
+    margin-top: 24px;
+  }
+  .finale-character {
+    transform: scale(1.3);
+    transform-origin: 0px 40px;
+  }
+  .bird-finale-stage .finale-tag-text {
+    font-size: 32px;
+  }
+  .finale-id-tag {
+    x: -40px;
+    y: -130px;
+    width: 80px;
+    height: 44px;
+  }
+  .finale-ood-tag {
+    x: -143px;
+    y: -104px;
+    width: 100px;
+    height: 44px;
+  }
+  .bird-finale-stage .finale-world-title {
+    font-size: 34px;
+  }
+  .bird-finale-stage .finale-world-note {
+    display: none;
+  }
+  .bird-finale .finale-caption {
+    font-size: 13px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bird-finale *,
+  .bird-finale *::before,
+  .bird-finale *::after {
+    animation: none !important;
+  }
+}
