@@ -86,12 +86,10 @@
   }
   function updateMotion() {
     root.setAttribute("data-motion", motion ? "on" : "off");
-    $("#method-motion").textContent = motion ? "Pause motion" : "Turn motion on";
-    $("#method-motion").setAttribute("aria-pressed", String(motion));
   }
   function setPlaying(value) {
     playing = value;
-    $("#method-play").textContent = value ? "Pause walkthrough" : "Play walkthrough";
+    $("#method-play").textContent = value ? "Stop walkthrough" : "Play walkthrough";
     $("#method-play").setAttribute("aria-pressed", String(value));
   }
   function selectPart(index, pan) {
@@ -178,15 +176,6 @@
   });
   $("#method-play").addEventListener("click", function () {
     setPlaying(!playing);
-    if (playing) {
-      motion = true;
-      updateMotion();
-    }
-  });
-  $("#method-motion").addEventListener("click", function () {
-    motion = !motion;
-    if (!motion) setPlaying(false);
-    updateMotion();
   });
   setInterval(function () {
     if (playing && inView && !document.hidden) selectPart(current + 1, true);

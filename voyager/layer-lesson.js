@@ -117,35 +117,8 @@
       "</svg>"
     );
   }
-  function cue(kind, bird) {
-    var puffin = bird === "puffin",
-      body = "";
-    if (kind === "detail") {
-      body =
-        '<rect x="23" y="20" width="64" height="64" rx="3" fill="#fff" stroke="#cbd7d0"/><path d="M23 30L87 76V84H65L23 54Z" fill="#243b38"/><rect x="112" y="20" width="64" height="64" rx="3" fill="#fff" stroke="#cbd7d0"/><path d="M112 50L176 30V70Z" fill="#ce893f"/><path d="M27 103H83M116 103H172" stroke="#788e82"/>';
-    } else if (kind === "parts") {
-      body =
-        '<path d="M48 101C32 76 42 36 73 24C104 15 129 37 124 63L139 91L108 113Z" fill="#243b38"/><ellipse cx="92" cy="58" rx="22" ry="28" fill="#fff"/><path d="' +
-        (puffin ? "M108 47L169 62L112 78Z" : "M108 47L151 58L113 66Z") +
-        '" fill="#ce893f"/><circle cx="100" cy="46" r="3" fill="#203832"/><path d="M50 84L31 99M137 63H179" stroke="#789184" stroke-width="1.5" stroke-dasharray="4 4"/>';
-    } else {
-      body =
-        '<path d="M12 112H194" stroke="#afc3b9"/><path d="M74 109C48 75 59 34 87 24C115 17 137 33 132 57C151 78 145 104 124 112Z" fill="#243b38"/><ellipse cx="105" cy="82" rx="24" ry="31" fill="#fff"/><ellipse cx="113" cy="45" rx="16" ry="20" fill="#fff"/><path d="' +
-        (puffin ? "M126 35L168 51L128 64Z" : "M126 37L150 44L128 50Z") +
-        '" fill="#ce893f"/><circle cx="117" cy="35" r="2.5" fill="#203832"/><path d="M83 112L69 117H94M119 112L112 117H139" fill="none" stroke="#ce893f" stroke-width="4"/>';
-    }
-    return (
-      '<svg viewBox="0 0 210 128" class="lesson-cue" role="img" aria-label="Conceptual ' +
-      kind +
-      " view of a " +
-      bird +
-      ', not a model activation">' +
-      body +
-      "</svg>"
-    );
-  }
   if (typeof module !== "undefined" && module.exports) {
-    module.exports = { diagram: diagram, cue: cue, photo: photo };
+    module.exports = { diagram: diagram, photo: photo };
     return;
   }
   var root = document.querySelector("#layer-lesson");
@@ -161,9 +134,6 @@
     ["final", "fixed", "dynamic"].forEach(function (mode) {
       $("#lesson-" + mode).innerHTML = diagram(mode, bird);
     });
-    ["detail", "parts", "whole"].forEach(function (kind) {
-      $("#lesson-cue-" + kind).innerHTML = cue(kind, bird);
-    });
     $("#lesson-dynamic-layers").textContent = "Layers " + routes[bird].join(", ") + ".";
     $("#lesson-finding").textContent =
       names[bird] +
@@ -173,7 +143,7 @@
     $("#lesson-context").textContent =
       bird === "penguin"
         ? "The penguin is the ID example in the manuscript illustration."
-        : "The puffin is the OOD example in the manuscript illustration. A similar bird can share local cues while differing in its whole-object identity.";
+        : "The puffin is the OOD example in the manuscript illustration.";
     root.classList.remove("is-tracing");
     clearTimeout(timer);
     $("#lesson-replay").textContent = "Trace the paths";
