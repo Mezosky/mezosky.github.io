@@ -19,19 +19,21 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="method-interactive.css" />
     <script src="script.js?v=20261102-layers" defer></script>
-    <script src="method-interactive.js" defer></script>
+    <script src="method-interactive.js?v=20261103" defer></script>
     <link rel="stylesheet" href="layer-lesson.css" />
-    <script src="layer-lesson.js" defer></script>
+    <script src="layer-lesson.js?v=20261103" defer></script>
     <link rel="stylesheet" href="webcontex.css" />
-    <link rel="stylesheet" href="space-theme.css" />
+    <link rel="stylesheet" href="space-theme.css?v=20261103-polish" />
     <link rel="stylesheet" href="bird-finale.css?v=20261102-loop" />
+    <script src="hero-voyager.js?v=20261103" defer></script>
     <script src="bird-finale.js?v=20261102-continuous" defer></script>
     <script src="webcontex.js" defer></script>
   </head>
-  <body>
+  <body class="voyager-page">
     <a class="skip" href="#main">Skip to content</a>
     <header class="site-header wrap">
-      <a class="wordmark" href="#main" aria-label="Voyager, top of page"><span class="voyager-rocket" aria-hidden="true">🚀</span>Voyager</a
+      <a class="wordmark" href="#main" aria-label="Voyager, top of page"
+        ><span class="voyager-rocket" aria-hidden="true">🚀<!-- taste-skill-ignore: brand --></span>Voyager</a
       ><!-- taste-skill-ignore: author-requested rocket identity -->
       <nav aria-label="Main navigation">
         <a href="#method">Method</a><a href="#results">Results</a> <a href="demo/">Demo</a><a href="#resources">Resources</a>
@@ -63,6 +65,7 @@
             <ellipse class="orbit-ring orbit-inner" cx="300" cy="265" rx="154" ry="126" transform="rotate(-28 300 265)" />
             <ellipse class="orbit-ring orbit-inner" cx="300" cy="265" rx="110" ry="200" transform="rotate(42 300 265)" />
             <use href="#orbital-expert-route" class="orbital-route" />
+            <use href="#orbital-expert-route" class="orbital-trail" />
             <text x="300" y="255" class="orbital-center">Frozen CLIP</text>
             <text x="300" y="282" class="orbital-subtitle">A route for each image</text>
             <g class="orbital-layer">
@@ -149,7 +152,13 @@
                 12
               </text>
             </g>
-            <text x="327" y="444" class="orbital-rocket">🚀</text>
+            <g class="orbital-craft" transform="translate(300 449) rotate(139)">
+              <path class="craft-exhaust" d="M-15-4Q-31 0-15 4Z" fill="#9fe3c8" />
+              <path d="M-9-5L-17-12L-14-2V2L-17 12L-9 5Z" fill="#9fe3c8" />
+              <path d="M-15-6Q0-12 18 0Q0 12-15 6Z" fill="#f5f8fb" />
+              <circle cx="2" cy="0" r="4" fill="#1b2a48" stroke="#9fe3c8" stroke-width="1.5" />
+              <path d="M-13-5V5" stroke="#1b2a48" stroke-width="2" />
+            </g>
             <!-- taste-skill-ignore: author-requested rocket identity -->
           </svg>
           <figcaption>A sparse route through a frozen model.<br /><span>Illustrative layer selection.</span></figcaption>
@@ -238,15 +247,14 @@
               expert per image.
             </p>
           </div>
-          <figure class="method-walkthrough" id="architecture" data-motion="off" aria-labelledby="architecture-title">
+          <figure class="method-walkthrough" data-ui id="architecture" data-motion="off" aria-labelledby="architecture-title">
             <div class="method-walkthrough-heading">
               <div>
                 <h3 id="architecture-title">Follow the computation</h3>
                 <p>Select a component, flame, snowflake or distribution to see what it does.</p>
               </div>
               <div class="method-playback" hidden>
-                <button type="button" id="method-play" aria-pressed="false">Play walkthrough</button
-                ><button type="button" id="method-motion" aria-pressed="false">Turn motion on</button>
+                <button type="button" id="method-play" aria-pressed="false">Play walkthrough</button>
               </div>
             </div>
             <p class="method-pan-hint">Pan the diagram horizontally, or choose a part below.</p>
@@ -461,7 +469,9 @@
                     <rect x="811" y="469" width="8" height="4" rx="0" fill="#a3d5e3" stroke="#4d9bb2" stroke-width="1.5" />
                     <rect x="823" y="451" width="8" height="22" rx="0" fill="#a3d5e3" stroke="#4d9bb2" stroke-width="1.5" />
                     <text x="600" y="528" font-size="15" text-anchor="middle">Mean layer features</text>
-                    <text x="838" y="528" font-size="16" text-anchor="end" class="method-inset-brand">🚀 Voyager</text>
+                    <text x="838" y="528" font-size="16" text-anchor="end" class="method-inset-brand">
+                      🚀 Voyager<!-- taste-skill-ignore: brand -->
+                    </text>
                     <!-- taste-skill-ignore: author-requested rocket identity -->
                   </g>
                   <g
@@ -885,7 +895,7 @@
               curves and signals are conceptual illustrations, not measurements.<br /><a href="assets/method.webp">Open the original figure ↗</a>
             </figcaption>
           </figure>
-          <section class="layer-lesson" id="layer-lesson" data-view="dynamic" aria-labelledby="lesson-title">
+          <section class="layer-lesson" data-ui id="layer-lesson" data-view="dynamic" aria-labelledby="lesson-title">
             <div class="lesson-heading">
               <div>
                 <h3 id="lesson-title">Same backbone. Different wiring.</h3>
@@ -1413,68 +1423,14 @@
               Solid arrows carry features or scores. The dashed arrow is the router’s subset choice. One router is drawn; the deployed detector
               averages five.
             </p>
-            <div class="lesson-depth-heading">
-              <h4>From detail to whole object</h4>
-              <p>A visual analogy for complementary cues at different depths.</p>
-            </div>
-            <div class="lesson-cues">
-              <figure>
-                <div id="lesson-cue-detail">
-                  <svg viewBox="0 0 210 128" class="lesson-cue" role="img" aria-label="Conceptual detail view of a penguin, not a model activation">
-                    <rect x="23" y="20" width="64" height="64" rx="3" fill="#fff" stroke="#cbd7d0" />
-                    <path d="M23 30L87 76V84H65L23 54Z" fill="#243b38" />
-                    <rect x="112" y="20" width="64" height="64" rx="3" fill="#fff" stroke="#cbd7d0" />
-                    <path d="M112 50L176 30V70Z" fill="#ce893f" />
-                    <path d="M27 103H83M116 103H172" stroke="#788e82" />
-                  </svg>
-                </div>
-                <figcaption>
-                  <strong>Local detail</strong>
-                  <p>Contrast, edges and colour can look similar across different birds.</p>
-                </figcaption>
-              </figure>
-              <figure>
-                <div id="lesson-cue-parts">
-                  <svg viewBox="0 0 210 128" class="lesson-cue" role="img" aria-label="Conceptual parts view of a penguin, not a model activation">
-                    <path d="M48 101C32 76 42 36 73 24C104 15 129 37 124 63L139 91L108 113Z" fill="#243b38" />
-                    <ellipse cx="92" cy="58" rx="22" ry="28" fill="#fff" />
-                    <path d="M108 47L151 58L113 66Z" fill="#ce893f" />
-                    <circle cx="100" cy="46" r="3" fill="#203832" />
-                    <path d="M50 84L31 99M137 63H179" stroke="#789184" stroke-width="1.5" stroke-dasharray="4 4" />
-                  </svg>
-                </div>
-                <figcaption>
-                  <strong>Parts and arrangement</strong>
-                  <p>A beak, head and wing give more structure than an isolated patch.</p>
-                </figcaption>
-              </figure>
-              <figure>
-                <div id="lesson-cue-whole">
-                  <svg viewBox="0 0 210 128" class="lesson-cue" role="img" aria-label="Conceptual whole view of a penguin, not a model activation">
-                    <path d="M12 112H194" stroke="#afc3b9" />
-                    <path d="M74 109C48 75 59 34 87 24C115 17 137 33 132 57C151 78 145 104 124 112Z" fill="#243b38" />
-                    <ellipse cx="105" cy="82" rx="24" ry="31" fill="#fff" />
-                    <ellipse cx="113" cy="45" rx="16" ry="20" fill="#fff" />
-                    <path d="M126 37L150 44L128 50Z" fill="#ce893f" />
-                    <circle cx="117" cy="35" r="2.5" fill="#203832" />
-                    <path d="M83 112L69 117H94M119 112L112 117H139" fill="none" stroke="#ce893f" stroke-width="4" />
-                  </svg>
-                </div>
-                <figcaption>
-                  <strong>Whole-object view</strong>
-                  <p>The overall form distinguishes the bird beyond its shared local cues.</p>
-                </figcaption>
-              </figure>
-            </div>
             <p class="lesson-disclosure">
-              Teaching illustration: the routes and drawings are illustrative, not CLIP activations or detector predictions. Cues can coexist across
-              depths; the drawings do not assign a fixed meaning to any layer. <a href="demo/">Inspect recorded layer evidence ↗</a>
+              These routes illustrate the three structures; they are not model predictions. <a href="demo/">Inspect recorded layer evidence ↗</a>
             </p>
             <noscript
               ><p>The three structures show the penguin example. Switching the example and tracing connections require JavaScript.</p></noscript
             >
           </section>
-          <section id="webcontex" class="ctx-section" aria-labelledby="ctx-title">
+          <section data-ui id="webcontex" class="ctx-section" aria-labelledby="ctx-title">
             <div class="ctx-heading">
               <div>
                 <h3 id="ctx-title">WebContEX: retrieval-based augmentation</h3>
@@ -1736,7 +1692,7 @@
           >
           <p>FPR@95 (%) ↓ · lower is better</p>
         </div>
-        <div class="table-wrap" tabindex="0" role="region" aria-label="ImageNet-1K FPR at 95 percent recall results">
+        <div class="table-wrap" data-ui tabindex="0" role="region" aria-label="ImageNet-1K FPR at 95 percent recall results">
           <table>
             <caption id="results-caption">
               Four-shot results; MCM, GL-MCM and MoD are training-free references.
@@ -2096,7 +2052,8 @@
     </main>
     <footer class="footer">
       <div class="wrap">
-        <a href="#main" class="footer-name"><span aria-hidden="true">🚀</span> Voyager</a
+        <a href="#main" class="footer-name"
+          ><span aria-hidden="true">🚀<!-- taste-skill-ignore: brand --></span> Voyager</a
         ><!-- taste-skill-ignore: author-requested rocket identity -->
         <div>
           <p>Learn which layers to trust.</p>

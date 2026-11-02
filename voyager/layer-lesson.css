@@ -220,48 +220,7 @@
   color: #526b60;
   margin: 0;
 }
-.lesson-depth-heading {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  margin-top: 36px;
-  align-items: start;
-}
-.lesson-depth-heading h4 {
-  font-size: 22px;
-  line-height: 1.2;
-  font-weight: 600;
-  margin: 0;
-  letter-spacing: -0.025em;
-}
-.lesson-depth-heading p {
-  margin: 0;
-  font-size: 14px;
-}
-.lesson-cues {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px;
-  margin-top: 20px;
-}
-.lesson-cue {
-  width: 100%;
-  height: 140px;
-  display: block;
-}
-.lesson-cues figcaption {
-  margin-top: 8px;
-}
-.lesson-cues strong {
-  font-size: 16px;
-  font-weight: 600;
-}
-.lesson-cues p {
-  font-size: 14px;
-  line-height: 1.5;
-  margin: 8px 0 0;
-  max-width: 40ch;
-}
+
 .lesson-disclosure {
   font-size: 13px;
   line-height: 1.5;
@@ -341,15 +300,6 @@
   .lesson-method-subtitle {
     font-size: 14px;
   }
-  .lesson-cues {
-    gap: 16px;
-  }
-  .lesson-depth-heading {
-    display: block;
-  }
-  .lesson-depth-heading p {
-    margin-top: 12px;
-  }
 }
 @media (max-width: 600px) {
   .layer-lesson {
@@ -380,25 +330,7 @@
   .lesson-finding {
     font-size: 14px;
   }
-  .lesson-cues {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  .lesson-cues figure {
-    display: grid;
-    grid-template-columns: 112px minmax(0, 1fr);
-    gap: 16px;
-    align-items: center;
-  }
-  .lesson-cue {
-    height: auto;
-  }
-  .lesson-cues figcaption {
-    margin: 0;
-  }
-  .lesson-cues p {
-    font-size: 14px;
-  }
+
   .lesson-disclosure a {
     white-space: normal;
   }
