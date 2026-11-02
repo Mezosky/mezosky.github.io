@@ -67,6 +67,10 @@
   function loadExample(name) {
     var request = ++generation;
     showError("");
+    $("#image-title").textContent = "Selected example";
+    $("#result").hidden = true;
+    $("#empty").hidden = true;
+    setSource("Loading a recorded model run…");
     imageData = null;
     refreshButton();
     $("#busy").hidden = true;
@@ -302,6 +306,7 @@
     $("#analysis").setAttribute("aria-busy", "false");
     showError("");
     data = null;
+    $("#image-title").textContent = "Input image";
     $("#case-title").textContent = "Analyze your image";
     $("#case-context").hidden = true;
     $("#analyze").textContent = "Analyze upload";
