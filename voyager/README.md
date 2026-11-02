@@ -61,7 +61,7 @@ The training-context section follows manuscript Section 5 and Algorithm C.1, wit
 
 ## Space identity
 
-The author-requested rocket emoji is Voyager’s brand symbol in the project page, demo header, router inset and favicon. A midnight-blue hero and footer use a small local SVG star field. The orbital hero uses the same illustrative layer subset (3, 5, 6, 9, 12); orbit positions have no model-space meaning. A local SVG craft follows that exact route continuously, with a trail driven by the same path distance and a smooth turn at both endpoints. OS reduced-motion preferences and no-JavaScript views show the final-layer anchor. Scientific method panels retain their light surfaces and the original frozen/trainable icon meanings.
+The author-requested rocket emoji is Voyager’s brand symbol in the project page, demo header, router inset and favicon. A midnight-blue hero and footer use a small local SVG star field. The opening now centres four genuine recorded benchmark images inside an open arc ordered from layer 1 to layer 12. Highlighting shows router 1's actual selected subset; its equal treatment of selected nodes encodes membership, not score magnitude or confidence. The ensemble decision is labelled separately because the deployed model uses five routers. Image transitions replace the travelling rocket; the emoji remains the brand mark. Scientific method panels retain their light surfaces and original frozen/trainable icon meanings.
 
 ## Bird send-off
 
@@ -73,8 +73,12 @@ The continuous loop is explicitly requested by the author. The scene and charact
 
 ## November visual polish
 
-Claude Desktop reviewed screenshots of the opening, method and results. The page now shares a midnight navy / cool-white / mint palette. Scientific panels keep dark ink on light surfaces; the Voyager results row uses navy and mint, preserving ID/OOD colours inside the method figure. The redundant local-detail analogy was removed while the structural comparison and its illustrative disclosure remain. The hero keeps the author-requested emoji in the brand and uses a precise SVG craft for its continuous shared-path animation. Native controls, original figure geometry, scientific data and the continuously looping birds are preserved.
+Claude Desktop reviewed screenshots of the opening, method and results. The page now shares a midnight navy / cool-white / mint palette. Scientific panels keep dark ink on light surfaces; the Voyager results row uses navy and mint, preserving ID/OOD colours inside the method figure. The redundant local-detail analogy was removed while the structural comparison and its illustrative disclosure remain. The hero keeps the author-requested emoji in the brand; its image-led revision replaces the craft with recorded selections. Native controls, original figure geometry, scientific data and the continuously looping birds are preserved.
 
 ## Fixed evidence explorer
 
 The public demo serves only four precomputed model traces. Upload controls, live API requests, availability checks and endpoint configuration were removed. The WebContEX walkthrough retains the retrieval pipeline, construction details and paper examples; its toy semantic-filter widget was removed.
+
+## Image-led opening
+
+Refined with Claude Desktop visual critique. The hero uses metadata transcribed from `demo/examples/{routing-win,id-rescue,texture-win,failure}.json` and their existing benchmark crops. This includes the lionfish failure, where router 1 selects only layer 12. The arc is a depth-order layout, not a model-space trajectory or a claim that unselected layers are skipped. Images crossfade every 7.5 seconds until a visitor focuses or chooses a case. Native buttons are keyboard accessible, manual selection has a polite status message, and reduced-motion disables automatic changes and transitions. There is no live inference or service connection.
