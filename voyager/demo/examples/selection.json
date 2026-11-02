@@ -1,0 +1,34 @@
+[
+  {
+    "name": "routing-win",
+    "dataset": "iNaturalist",
+    "reference_label": "OOD",
+    "decision": "OOD-like",
+    "baseline_decision": "ID-like",
+    "selection_note": "Selected to illustrate a fixed-threshold decision contrast; not an unbiased sample or aggregate performance estimate."
+  },
+  {
+    "name": "id-rescue",
+    "dataset": "ImageNet validation",
+    "reference_label": "ID",
+    "decision": "ID-like",
+    "baseline_decision": "OOD-like",
+    "selection_note": "Selected to illustrate a fixed-threshold decision contrast; not an unbiased sample or aggregate performance estimate."
+  },
+  {
+    "name": "texture-win",
+    "dataset": "dtd",
+    "reference_label": "OOD",
+    "decision": "OOD-like",
+    "baseline_decision": "ID-like",
+    "selection_note": "Selected to illustrate a fixed-threshold decision contrast; not an unbiased sample or aggregate performance estimate."
+  },
+  {
+    "name": "failure",
+    "dataset": "places",
+    "reference_label": "OOD",
+    "decision": "ID-like",
+    "baseline_decision": "ID-like",
+    "selection_note": "Selected to illustrate a fixed-threshold decision contrast; not an unbiased sample or aggregate performance estimate."
+  }
+]
