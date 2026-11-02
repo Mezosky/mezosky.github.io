@@ -57,8 +57,6 @@ The router inset is an enlarged view of the narrow Voyager block, joined by a st
 
 The training-context section follows manuscript Section 5 and Algorithm C.1, with five interactive stages: ID vocabulary, WordNet filtering, Wikimedia retrieval/cleaning, frozen caching, and router fitting. It presents WebContEX only; ID-only crop and feature-synthesis baselines are not part of this walkthrough.
 
-The relationship example uses a toy vocabulary containing only `penguin.n.01`. Distances were verified from WordNet in the project environment: penguin 0, king penguin 1 (descendant), bird 4 (ancestor), puffin 3 (separate branch). The ancestor case demonstrates why a distance threshold alone is insufficient. Passing the toy relationship check does not claim inclusion in the deployed pool, which uses the complete ID vocabulary and additional lexical filters.
-
 `context-floor.png`, `context-bell.png`, `context-shore.png` and `context-hut.png` are unmodified image objects extracted from Figure C.1 in the camera-ready manuscript. They illustrate the retrieved training context, not new retrievals or target-OOD inputs. Their original image rights remain with their respective owners. The construction settings and 5,078-entry pool count match the manuscript. Semantic and within-shard duplicate checks are not described as a cross-dataset image-disjointness guarantee.
 
 ## Space identity
@@ -76,3 +74,7 @@ The continuous loop is explicitly requested by the author. The scene and charact
 ## November visual polish
 
 Claude Desktop reviewed screenshots of the opening, method and results. The page now shares a midnight navy / cool-white / mint palette. Scientific panels keep dark ink on light surfaces; the Voyager results row uses navy and mint, preserving ID/OOD colours inside the method figure. The redundant local-detail analogy was removed while the structural comparison and its illustrative disclosure remain. The hero keeps the author-requested emoji in the brand and uses a precise SVG craft for its continuous shared-path animation. Native controls, original figure geometry, scientific data and the continuously looping birds are preserved.
+
+## Fixed evidence explorer
+
+The public demo serves only four precomputed model traces. Upload controls, live API requests, availability checks and endpoint configuration were removed. The WebContEX walkthrough retains the retrieval pipeline, construction details and paper examples; its toy semantic-filter widget was removed.

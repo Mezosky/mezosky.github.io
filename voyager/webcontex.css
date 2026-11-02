@@ -103,8 +103,7 @@
   margin-top: 12px;
   max-width: 640px;
 }
-.ctx-step-select select,
-.ctx-filter-demo select {
+.ctx-step-select select {
   min-height: 44px;
   width: 100%;
   border: 1px solid #bdcfc3;
@@ -142,48 +141,6 @@
   color: #526b60;
   margin: 12px 0 0;
   max-width: 110ch;
-}
-.ctx-filter-demo {
-  display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: 40px;
-  background: #f2f6f1;
-  padding: 24px;
-  align-items: start;
-}
-.ctx-filter-demo p {
-  font-size: 15px;
-  line-height: 1.5;
-  margin: 12px 0;
-}
-.ctx-filter-demo label {
-  display: grid;
-  gap: 8px;
-  font-size: 14px;
-  margin-top: 18px;
-}
-.ctx-relation svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-.ctx-relation text {
-  fill: #243d32;
-  font:
-    15px "Albert Sans",
-    Arial,
-    sans-serif;
-  text-anchor: middle;
-}
-.ctx-filter-demo .ctx-filter-result {
-  font-weight: 600;
-  font-size: 17px;
-}
-.ctx-filter-result.passes {
-  color: #08685f;
-}
-.ctx-filter-demo .ctx-note {
-  font-size: 14px;
 }
 .ctx-gallery-heading {
   display: flex;
@@ -243,13 +200,6 @@
   .ctx-explanation {
     grid-template-columns: 1fr 1.3fr;
     gap: 24px;
-  }
-  .ctx-filter-demo {
-    display: block;
-    padding: 20px;
-  }
-  .ctx-relation {
-    margin-top: 12px;
   }
   .ctx-gallery-heading p {
     margin-top: 10px;
