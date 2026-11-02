@@ -64,3 +64,7 @@ The relationship example uses a toy vocabulary containing only `penguin.n.01`. D
 ## Space identity
 
 The author-requested rocket emoji is Voyager’s brand symbol in the project page, demo header, router inset and favicon. A midnight-blue hero and footer use a small local SVG star field. The orbital hero uses the same illustrative layer subset (3, 5, 6, 9, 12); orbit positions have no model-space meaning. Its route draws once and respects reduced-motion preferences. Scientific method panels retain their light surfaces and the original frozen/trainable icon meanings.
+
+## Bird send-off
+
+The closing scene illustrates the manuscript penguin/ID and puffin/OOD pairing with original SVG characters. A flying puffin carries an OOD tag to the right outpost; a waddling penguin carries an ID tag left. Both travellers sample the exact SVG paths used by their visible trails. The scene plays once on entry, pauses offscreen or in a hidden tab, and offers pause/resume/replay. Reduced-motion and no-JavaScript modes show the completed destinations without movement. This is a teaching illustration, not model inference.
