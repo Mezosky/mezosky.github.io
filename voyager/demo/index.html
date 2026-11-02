@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Explore selected real Voyager examples: inspect twelve CLIP layer scores, five expert routes, and local ID-match maps. Optional live image upload."
+    />
+    <title>Voyager | Explore the layer evidence</title>
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="demo.css" />
+    <script src="demo.js" defer></script>
+  </head>
+  <body>
+    <a class="skip" href="#analysis">Skip to analysis</a>
+    <header class="topbar">
+      <a class="brand" href="https://mezosky.github.io/voyager/"
+        ><svg viewBox="0 0 28 28" width="24" height="24" aria-hidden="true">
+          <path d="M2 4h24v5H2zm4 8h20v5H6zm4 8h16v5H10z" fill="currentColor" /></svg
+        >Voyager</a
+      >
+      <p>ImageNet-1K <span>· CLIP ViT-B/16 · five trained routers</span></p>
+      <a href="https://mezosky.github.io/voyager/">Project page ↗</a>
+    </header>
+    <div class="workspace">
+      <aside class="image-panel" aria-labelledby="image-title">
+        <h2 id="image-title">Selected example</h2>
+        <img id="input-preview" src="examples/example-routing-win.webp" alt="Flowers from the iNaturalist benchmark" width="300" height="300" />
+        <p id="image-name" class="image-name">iNaturalist · flowers</p>
+        <fieldset class="examples">
+          <legend>Explore four selected cases</legend>
+          <button type="button" data-example="routing-win" class="selected" aria-pressed="true">OOD correction</button>
+          <button type="button" data-example="id-rescue" aria-pressed="false">ID recovery</button>
+          <button type="button" data-example="texture-win" aria-pressed="false">Texture shift</button>
+          <button type="button" data-example="failure" aria-pressed="false">OOD failure</button>
+        </fieldset>
+        <p class="small selection-note">Real model runs, selected for their decision contrasts. These four cases are not a performance estimate.</p>
+        <details class="live-tools">
+          <summary>Try live inference (optional)</summary>
+          <label class="file-label" for="image-file"
+            >Or choose your own image<input id="image-file" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="upload-help"
+          /></label>
+          <p id="upload-help" class="small">Optional live inference · JPEG, PNG or WebP · up to 5 MB</p>
+          <section class="connection" aria-labelledby="connection-title">
+            <h3 id="connection-title">Optional live service</h3>
+            <p id="connection-status" role="status">Checking availability…</p>
+            <button type="button" id="retry-service">Check again</button>
+          </section>
+          <details class="privacy">
+            <summary>How uploads are handled</summary>
+            <p class="small">
+              Uploading sends the image to the demo’s GPU server. Images are processed in memory and are not saved by the inference app. The public
+              relay handles network traffic. Recorded study examples remain explorable if the temporary service is offline.
+            </p>
+          </details>
+        </details>
+      </aside>
+
+      <main class="sheet" id="analysis">
+        <div class="title-row">
+          <div>
+            <h1 id="case-title">Explore the layer evidence</h1>
+            <p id="result-origin">Loading a recorded model run…</p>
+          </div>
+          <button type="button" id="analyze" class="primary" disabled>Run live</button>
+        </div>
+        <p class="case-context" id="case-context"></p>
+        <p class="error" id="error" role="alert" hidden></p>
+        <div id="busy" class="busy" role="status" hidden>Computing twelve layer scores and five expert routes…</div>
+        <div id="empty" class="empty" hidden>
+          <h2>Image ready</h2>
+          <p>Run the model to see its decision and the intermediate-layer evidence.</p>
+        </div>
+
+        <div id="result" hidden>
+          <section class="decision-strip" aria-labelledby="decision-title">
+            <div class="decision-main">
+              <h2 id="decision-title">Voyager decision</h2>
+              <p id="decision" class="decision">—</p>
+              <p id="decision-description" class="small"></p>
+            </div>
+            <dl class="score-values">
+              <div>
+                <dt>Routed score</dt>
+                <dd id="score">—</dd>
+              </div>
+              <div>
+                <dt>Fixed ID threshold</dt>
+                <dd id="threshold">—</dd>
+              </div>
+              <div>
+                <dt>Margin</dt>
+                <dd id="margin">—</dd>
+              </div>
+            </dl>
+            <div class="baseline">
+              <h3>Final-layer GL-MCM</h3>
+              <p id="baseline-decision"></p>
+              <p id="baseline-detail" class="small"></p>
+            </div>
+          </section>
+          <p class="scale-note">
+            Scores and margins are shown ×1,000 for readability. Higher scores are more ID-like. These are not OOD probabilities.
+          </p>
+
+          <div class="evidence-grid">
+            <section class="layer-panel" aria-labelledby="layers-title">
+              <div class="panel-heading">
+                <h2 id="layers-title">Which layers support the score?</h2>
+                <label for="chart-mode" class="compact-label"
+                  >View<select id="chart-mode">
+                    <option value="margin">Share of score margin</option>
+                    <option value="score">Weighted score</option>
+                  </select></label
+                >
+              </div>
+              <p id="chart-explanation" class="small">Each contribution is the layer’s ensemble weight × (its score − the fixed threshold).</p>
+              <div class="chart-key" id="chart-key"><span>← OOD-like contribution</span><span>ID-like contribution →</span></div>
+              <div class="layer-columns" aria-hidden="true"><span>Layer</span><span>Contribution</span><span>Routers</span><span>Value</span></div>
+              <div id="layer-chart" class="layer-chart" aria-label="Layer score contributions"></div>
+              <p class="small" id="sum-check"></p>
+            </section>
+
+            <section class="patch-panel" aria-labelledby="patch-title">
+              <div class="panel-heading">
+                <h2 id="patch-title">Local ID matches</h2>
+                <label class="compact-label" for="layer-select"
+                  >Layer<select id="layer-select" aria-label="Layer to inspect">
+                    <option value="12">12 · final</option>
+                  </select></label
+                >
+              </div>
+              <div class="crop-frame">
+                <canvas id="patch-canvas" width="448" height="448" aria-label="Model crop and local patch ID-match map"></canvas>
+              </div>
+              <div class="overlay-control">
+                <label for="overlay">Map opacity</label><input id="overlay" type="range" min="0" max="90" value="55" /><output
+                  id="overlay-value"
+                  for="overlay"
+                  >55%</output
+                >
+              </div>
+              <div class="map-scale">
+                <span id="patch-min"></span><span class="scale-track" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span
+                ><span id="patch-max"></span>
+              </div>
+              <p id="patch-detail" class="small"></p>
+              <p class="small">
+                Actual 224 × 224 CLIP crop. Colour is local maximum ID-class match within this layer, not attention or causal importance. Map scales
+                vary across layers.
+              </p>
+            </section>
+          </div>
+
+          <div class="details-grid">
+            <section class="router-panel" aria-labelledby="routers-title">
+              <div class="panel-heading">
+                <h2 id="routers-title">Five hard expert routes</h2>
+                <button type="button" id="download">Download trace</button>
+              </div>
+              <p class="small">Each router selects one subset. The final layer is always included; selected scores are averaged across routers.</p>
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Router</th>
+                    <th scope="col">Selected layers</th>
+                    <th scope="col" class="number">Score ×1,000</th>
+                  </tr>
+                </thead>
+                <tbody id="router-rows"></tbody>
+              </table>
+            </section>
+            <section class="concept-panel" aria-labelledby="concepts-title">
+              <h2 id="concepts-title">Closest ID concepts</h2>
+              <p id="concept-layer" class="small"></p>
+              <ol id="concepts"></ol>
+              <dl class="layer-values">
+                <div>
+                  <dt>Global MCM ×1,000</dt>
+                  <dd id="global-value"></dd>
+                </div>
+                <div>
+                  <dt>Local MCM ×1,000</dt>
+                  <dd id="local-value"></dd>
+                </div>
+                <div>
+                  <dt>Global + 0.5 × local</dt>
+                  <dd id="layer-value"></dd>
+                </div>
+                <div>
+                  <dt>Layer’s ensemble weight</dt>
+                  <dd id="weight-value"></dd>
+                </div>
+                <div>
+                  <dt>ID-reference percentile</dt>
+                  <dd id="layer-percentile"></dd>
+                </div>
+              </dl>
+              <p class="small">Cosine similarities describe matches to the ImageNet label set. A plausible match can also occur for an OOD image.</p>
+            </section>
+          </div>
+
+          <details class="interpretation">
+            <summary>How to read this explanation</summary>
+            <div>
+              <p>
+                <strong>Decision scope.</strong> “ID-like” means above a fixed threshold relative to ImageNet-1K, not that the image is known, safe,
+                or correctly classified. “OOD-like” means below it. The threshold is the fifth percentile of 50,000 cached ImageNet validation ID
+                scores; 95% retention applies to that reference set, not arbitrary uploads.
+              </p>
+              <p>
+                <strong>Selected examples.</strong> ID/OOD reference labels describe membership in the ImageNet-ID versus OOD benchmark datasets. OOD
+                datasets can contain familiar ImageNet objects. Cases were chosen at fixed thresholds to show contrasting outcomes, including a
+                failure; they do not estimate aggregate performance. Every published crop was rerun through the trained model.
+              </p>
+              <p>
+                <strong>Exact arithmetic.</strong> A layer’s weight is its membership in the five selected experts, divided by each expert’s subset
+                size and by five. Weights sum to one. Weighted layer scores sum to the final score; centering each term on the same threshold sums to
+                the final margin. The signs describe this decomposition, not independently calibrated layer decisions.
+              </p>
+              <p>
+                <strong>Interpretation limits.</strong> This trace shows the computation the method actually used. The local map is built from
+                attention value-token ID matches, without attention weights. It is not a causal explanation and does not prove which pixels caused the
+                model’s route. Unselected layer features still enter the router’s mean-pooled input.
+              </p>
+              <p id="model-details" class="small"></p>
+            </div>
+          </details>
+        </div>
+      </main>
+    </div>
+    <noscript
+      ><p class="no-script">
+        Image inference and the evidence explorer require JavaScript.
+        <a href="https://mezosky.github.io/voyager/">Read the method and results on the project page.</a>
+      </p></noscript
+    >
+  </body>
+</html>
