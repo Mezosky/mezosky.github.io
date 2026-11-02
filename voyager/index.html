@@ -22,12 +22,12 @@
     <script src="method-interactive.js?v=20261103" defer></script>
     <link rel="stylesheet" href="layer-lesson.css" />
     <script src="layer-lesson.js?v=20261103" defer></script>
-    <link rel="stylesheet" href="webcontex.css" />
-    <link rel="stylesheet" href="space-theme.css?v=20261103-polish" />
+    <link rel="stylesheet" href="webcontex.css?v=20261103-fixed" />
+    <link rel="stylesheet" href="space-theme.css?v=20261103-fixed" />
     <link rel="stylesheet" href="bird-finale.css?v=20261102-loop" />
     <script src="hero-voyager.js?v=20261103" defer></script>
     <script src="bird-finale.js?v=20261102-continuous" defer></script>
-    <script src="webcontex.js" defer></script>
+    <script src="webcontex.js?v=20261103-fixed" defer></script>
   </head>
   <body class="voyager-page">
     <a class="skip" href="#main">Skip to content</a>
@@ -49,7 +49,7 @@
           <p>Voyager learns which frozen CLIP layers to trust for each image, instead of using one fixed fusion rule.</p>
           <div class="hero-actions">
             <a class="button" href="assets/manuscript.pdf">Read the manuscript <span aria-hidden="true">↗</span></a
-            ><a class="text-link" href="demo/">Try the demo <span aria-hidden="true">↗</span></a>
+            ><a class="text-link" href="demo/">Explore examples <span aria-hidden="true">↗</span></a>
           </div>
           <div class="authors">
             <a href="https://mezosky.github.io/">Ignacio M. De la Jara<sup>1,3</sup></a
@@ -1563,28 +1563,6 @@
                 <p id="ctx-part-note" class="ctx-note">Few-shot ID examples have domain label y = 0; retrieved context images later receive y = 1.</p>
               </div>
             </div>
-            <div class="ctx-filter-demo">
-              <div>
-                <h4>Try the semantic filter</h4>
-                <p>Toy ID vocabulary: <strong>penguin</strong>. Change a candidate to see why distance alone is not enough.</p>
-                <label
-                  >Candidate concept<select id="ctx-candidate" disabled>
-                    <option value="penguin">penguin · same concept</option>
-                    <option value="king">king penguin · descendant</option>
-                    <option value="bird">bird · ancestor</option>
-                    <option value="puffin" selected>puffin · separate branch</option>
-                  </select></label
-                >
-              </div>
-              <div>
-                <div id="ctx-relation" class="ctx-relation"></div>
-                <p id="ctx-filter-result" class="ctx-filter-result">Passes the relationship check.</p>
-                <p id="ctx-filter-detail" class="ctx-note">
-                  Puffin is three WordNet hops from penguin in this toy vocabulary. Passing this check does not establish inclusion in the deployed
-                  pool.
-                </p>
-              </div>
-            </div>
             <p class="ctx-note">
               The deployed filter checks the full ID vocabulary, excludes ID synsets and their ancestors/descendants, and requires at least two
               WordNet hops. It also applies vocabulary depth, lexical-category and lemma-frequency rules. Semantic filtering does not guarantee
@@ -1630,11 +1608,7 @@
                 </p>
               </div>
             </details>
-            <noscript
-              ><p>
-                The pipeline and examples remain visible. Exploring construction steps and candidate relationships requires JavaScript.
-              </p></noscript
-            >
+            <noscript><p>The pipeline and examples remain visible. Exploring construction steps requires JavaScript.</p></noscript>
           </section>
           <div class="method-details">
             <details open>
@@ -1865,7 +1839,7 @@
           <p>The manuscript, implementation, and the work that motivated input-conditioned layer selection.</p>
           <div class="resource-links">
             <a href="assets/manuscript.pdf">Read the manuscript <span aria-hidden="true">↗</span></a>
-            <a href="demo/">Analyze an image with Voyager <span aria-hidden="true">↗</span></a>
+            <a href="demo/">Explore recorded Voyager examples <span aria-hidden="true">↗</span></a>
             <p class="repository-status">Code: DynAMO repository · public release pending</p>
             <a href="https://mezosky.github.io/mysteries-of-the-deep/">Read Mysteries of the Deep <span aria-hidden="true">↗</span></a>
           </div>

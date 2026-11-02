@@ -285,8 +285,7 @@ body.voyager-page {
 :where(.voyager-page) .layer-lesson button,
 :where(.voyager-page) .method-walkthrough button,
 :where(.voyager-page) .method-walkthrough select,
-:where(.voyager-page) .ctx-step-select select,
-:where(.voyager-page) .ctx-filter-demo select {
+:where(.voyager-page) .ctx-step-select select {
   border-color: #b6c4d4;
   border-radius: 4px;
   background: var(--panel);
@@ -319,8 +318,7 @@ body.voyager-page {
   font-size: 14px;
 }
 :where(.voyager-page) .lesson-wiring text,
-:where(.voyager-page) .ctx-pipeline text,
-:where(.voyager-page) .ctx-relation text {
+:where(.voyager-page) .ctx-pipeline text {
   fill: var(--ink);
 }
 :where(.voyager-page) .lesson-node,
@@ -359,9 +357,6 @@ body.voyager-page {
 }
 :where(.voyager-page) #lesson-inputs input {
   accent-color: #1b2a48;
-}
-:where(.voyager-page) .ctx-filter-demo {
-  background: #e8eff6;
 }
 :where(.voyager-page) .ctx-step .ctx-step-frame {
   fill: var(--panel);

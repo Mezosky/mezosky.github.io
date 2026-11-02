@@ -1,9 +1,6 @@
 (function () {
   "use strict";
   var data = null,
-    imageData = null,
-    apiBase = "",
-    online = false,
     currentLayer = 12,
     cropImage = new Image(),
     generation = 0;
@@ -36,94 +33,45 @@
   function setSource(text) {
     $("#result-origin").textContent = text;
   }
-  function refreshButton() {
-    $("#analyze").disabled = !online || !imageData;
-  }
-  function checkService() {
-    $("#connection-status").textContent = "Checking availability…";
-    var controller = new AbortController(),
-      timer = setTimeout(function () {
-        controller.abort();
-      }, 8000);
-    return fetch(apiBase + "/api/health", { signal: controller.signal, cache: "no-store" })
-      .then(function (r) {
-        if (!r.ok) throw new Error("offline");
-        return r.json();
-      })
-      .then(function (info) {
-        if (!info.ready || info.routers !== 5) throw new Error("unavailable");
-        online = true;
-        $("#connection-status").textContent = "Online · GPU inference · temporary service";
-      })
-      .catch(function () {
-        online = false;
-        $("#connection-status").textContent = "Live service offline · recorded examples available";
-      })
-      .finally(function () {
-        clearTimeout(timer);
-        refreshButton();
-      });
-  }
   function loadExample(name) {
     var request = ++generation;
     showError("");
-    $("#image-title").textContent = "Selected example";
     $("#result").hidden = true;
-    $("#empty").hidden = true;
     setSource("Loading a recorded model run…");
-    imageData = null;
-    refreshButton();
-    $("#busy").hidden = true;
-    $("#analysis").setAttribute("aria-busy", "false");
+    $("#busy").hidden = false;
+    $("#analysis").setAttribute("aria-busy", "true");
     document.querySelectorAll("[data-example]").forEach(function (b) {
       b.classList.toggle("selected", b.dataset.example === name);
       b.setAttribute("aria-pressed", String(b.dataset.example === name));
     });
-    var imagePath = "examples/example-" + name + ".webp";
-    $("#input-preview").src = imagePath;
+    $("#input-preview").src = "examples/example-" + name + ".webp";
     $("#input-preview").alt = exampleNames[name] + " — selected benchmark example";
     $("#image-name").textContent = exampleNames[name];
-    return Promise.all([
-      fetch("examples/" + name + ".json").then(function (r) {
-        if (!r.ok) throw new Error("Could not load this recorded model run.");
+    return fetch("examples/" + name + ".json")
+      .then(function (r) {
+        if (!r.ok) throw new Error("Could not load this recorded model run. Please try another example.");
         return r.json();
-      }),
-      fetch(imagePath)
-        .then(function (r) {
-          return r.blob();
-        })
-        .then(readImage),
-    ])
-      .then(function (results) {
+      })
+      .then(function (result) {
         if (request !== generation) return;
-        imageData = results[1];
-        currentLayer = results[0].default_layer || 12;
-        $("#case-title").textContent = results[0].case_title;
-        $("#case-context").textContent = results[0].case_explanation;
-        $("#case-context").hidden = false;
-        $("#analyze").textContent = "Run live";
-        render(results[0]);
-        setSource("Recorded " + results[0].recorded_at + " · " + results[0].source_dataset + " · reference: " + results[0].reference_label);
-        refreshButton();
+        currentLayer = result.default_layer || 12;
+        $("#case-title").textContent = result.case_title;
+        $("#case-context").textContent = result.case_explanation;
+        render(result);
+        setSource("Recorded " + result.recorded_at + " · " + result.source_dataset + " · reference: " + result.reference_label);
       })
       .catch(function (e) {
         if (request === generation) showError(e.message);
+      })
+      .finally(function () {
+        if (request !== generation) return;
+        $("#busy").hidden = true;
+        $("#analysis").setAttribute("aria-busy", "false");
       });
-  }
-  function readImage(blob) {
-    return new Promise(function (resolve, reject) {
-      var reader = new FileReader();
-      reader.onload = function () {
-        resolve(reader.result);
-      };
-      reader.onerror = reject;
-      reader.readAsDataURL(blob);
-    });
   }
   function render(result) {
     data = result;
     $("#result").hidden = false;
-    $("#empty").hidden = true;
     $("#decision").textContent = result.decision;
     $("#decision").className = "decision " + (result.decision === "ID-like" ? "id" : "ood");
     $("#decision-description").textContent = "ID reference rank: " + fmt(result.id_reference_percentile, 1) + "%";
@@ -163,9 +111,9 @@
       result.model.calibration_count.toLocaleString() +
       " ID reference images; observed retention " +
       fmt(result.model.reference_id_retention * 100, 1) +
-      "%. Server inference time " +
+      "%. Recorded inference time " +
       fmt(result.inference_ms, 0) +
-      " ms, excluding network transfer. No training or threshold fitting uses this input.";
+      " ms. No training or threshold fitting uses this input.";
     cropImage = new Image();
     cropImage.onload = drawMap;
     cropImage.src = result.crop;
@@ -288,90 +236,11 @@
       "Layer " + currentLayer + " local ID-match map on the actual model crop. Strongest patch matches " + r.patch_classes[best] + "."
     );
   }
-  $("#image-file").addEventListener("change", function (event) {
-    var file = event.target.files[0];
-    if (!file) return;
-    if (file.size > 5 * 1024 * 1024) {
-      showError("Choose an image smaller than 5 MB.");
-      return;
-    }
-    if (["image/jpeg", "image/png", "image/webp"].indexOf(file.type) < 0) {
-      showError("Choose a JPEG, PNG or WebP image.");
-      return;
-    }
-    var request = ++generation;
-    imageData = null;
-    refreshButton();
-    $("#busy").hidden = true;
-    $("#analysis").setAttribute("aria-busy", "false");
-    showError("");
-    data = null;
-    $("#image-title").textContent = "Input image";
-    $("#case-title").textContent = "Analyze your image";
-    $("#case-context").hidden = true;
-    $("#analyze").textContent = "Analyze upload";
-    $("#result").hidden = true;
-    $("#empty").hidden = false;
-    $("#image-name").textContent = file.name;
-    setSource("New upload · awaiting analysis");
-    document.querySelectorAll("[data-example]").forEach(function (b) {
-      b.classList.remove("selected");
-      b.setAttribute("aria-pressed", "false");
-    });
-    readImage(file).then(function (value) {
-      if (request !== generation) return;
-      imageData = value;
-      $("#input-preview").src = value;
-      $("#input-preview").alt = "Your selected image";
-      refreshButton();
-    });
-  });
-  $("#analyze").addEventListener("click", function () {
-    if (!online || !imageData) return;
-    showError("");
-    $("#busy").hidden = false;
-    $("#analyze").disabled = true;
-    $("#analysis").setAttribute("aria-busy", "true");
-    var request = ++generation,
-      controller = new AbortController(),
-      timer = setTimeout(function () {
-        controller.abort();
-      }, 45000);
-    fetch(apiBase + "/api/analyze", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ image: imageData }),
-      signal: controller.signal,
-    })
-      .then(function (r) {
-        return r.json().then(function (body) {
-          if (!r.ok) throw new Error(body.detail || "Inference failed. Please try again.");
-          return body;
-        });
-      })
-      .then(function (result) {
-        if (request !== generation) return;
-        render(result);
-        setSource("Live inference · " + new Date().toLocaleTimeString() + " · " + fmt(result.inference_ms, 0) + " ms on server");
-      })
-      .catch(function (error) {
-        if (request !== generation) return;
-        showError(error.name === "AbortError" ? "The inference request timed out. Please try again." : error.message);
-      })
-      .finally(function () {
-        clearTimeout(timer);
-        if (request !== generation) return;
-        $("#busy").hidden = true;
-        $("#analysis").setAttribute("aria-busy", "false");
-        refreshButton();
-      });
-  });
   $("#chart-mode").addEventListener("change", drawChart);
   $("#layer-select").addEventListener("change", function () {
     selectLayer(Number(this.value));
   });
   $("#overlay").addEventListener("input", drawMap);
-  $("#retry-service").addEventListener("click", checkService);
   document.querySelectorAll("[data-example]").forEach(function (button) {
     button.addEventListener("click", function () {
       loadExample(button.dataset.example);
@@ -389,16 +258,5 @@
       URL.revokeObjectURL(url);
     }, 1000);
   });
-  fetch("config.json", { cache: "no-store" })
-    .then(function (r) {
-      return r.json();
-    })
-    .then(function (config) {
-      apiBase = config.api_base || "";
-      return checkService();
-    })
-    .catch(function () {
-      $("#connection-status").textContent = "Live service unavailable · recorded examples available";
-    });
   loadExample("routing-win");
 })();

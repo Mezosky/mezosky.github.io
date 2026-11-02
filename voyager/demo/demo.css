@@ -175,32 +175,6 @@ dd,
   margin: 10px 0 16px;
   overflow-wrap: anywhere;
 }
-.file-label {
-  position: relative;
-  display: block;
-  min-height: 40px;
-  padding: 8px 12px;
-  text-align: center;
-  background: #fff;
-  border: 1px solid var(--control);
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 500;
-}
-.file-label input {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  width: 100%;
-  cursor: pointer;
-}
-.file-label:focus-within {
-  outline: 3px solid #a64a16;
-  outline-offset: 3px;
-}
-#upload-help {
-  margin-top: 8px;
-}
 .examples {
   border: 0;
   padding: 0;
@@ -221,23 +195,6 @@ dd,
 .examples button.selected {
   background: #e1e9e3;
   border-color: #a8b9ad;
-}
-.connection {
-  margin-top: 28px;
-}
-.connection p {
-  font-size: 12px;
-  margin-top: 6px;
-}
-.connection button {
-  font-size: 12px;
-  margin-top: 9px;
-  padding: 5px 10px;
-  min-height: 30px;
-  background: transparent;
-}
-.privacy {
-  margin-top: 24px;
 }
 .sheet {
   margin: 0 8px 8px 0;
@@ -260,17 +217,6 @@ dd,
   color: var(--muted);
   margin-top: 5px;
 }
-.primary {
-  background: #152927;
-  color: white;
-  border-color: #152927;
-  min-height: 40px;
-  font-weight: 500;
-  padding-inline: 18px;
-}
-.primary:disabled {
-  border-color: var(--border);
-}
 .error {
   color: #872f21;
   background: #fff2ed;
@@ -283,17 +229,6 @@ dd,
   padding: 14px;
   background: var(--active);
   margin-bottom: 20px;
-}
-.empty {
-  padding: 40px 20px;
-  min-height: 260px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.empty p {
-  margin-top: 12px;
-  max-width: 50ch;
 }
 .decision-strip {
   display: grid;
@@ -828,16 +763,6 @@ td:first-child {
     margin: 0;
     font-size: 12px;
   }
-  .file-label {
-    grid-column: 2;
-    min-height: 40px;
-    font-size: 13px;
-  }
-  .image-panel > #upload-help {
-    grid-column: 2;
-    font-size: 11px;
-    margin: 0;
-  }
   .examples {
     grid-column: 1/-1;
     grid-template-columns: repeat(4, 1fr);
@@ -852,31 +777,6 @@ td:first-child {
     padding: 8px 6px;
     min-height: 40px;
     font-size: 12px;
-  }
-  .connection {
-    grid-column: 1/-1;
-    margin-top: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px 12px;
-    align-items: center;
-  }
-  .connection h3 {
-    font-size: 12px;
-  }
-  .connection p {
-    margin: 0;
-    font-size: 12px;
-  }
-  .connection button {
-    margin: 0;
-    min-height: 28px;
-    padding: 3px 8px;
-  }
-  .privacy {
-    grid-column: 1/-1;
-    margin-top: 8px;
-    font-size: 11px;
   }
   .sheet {
     border: 0;
@@ -899,12 +799,6 @@ td:first-child {
   .title-row p {
     font-size: 11px;
     max-width: 28ch;
-  }
-  .primary {
-    padding: 8px 12px;
-    font-size: 13px;
-    white-space: nowrap;
-    min-height: 42px;
   }
   .decision-strip {
     gap: 18px 16px;
@@ -1071,10 +965,6 @@ td:first-child {
   .error {
     font-size: 13px;
   }
-  .empty {
-    min-height: 220px;
-    padding: 25px 0;
-  }
 }
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -1162,14 +1052,6 @@ td:first-child {
   .layer-row {
     min-height: 35px;
   }
-  .privacy {
-    display: block;
-    grid-column: 1/-1;
-    margin-top: 4px;
-  }
-  .connection button {
-    min-height: 36px;
-  }
   .image-panel {
     padding-bottom: 16px;
   }
@@ -1182,16 +1064,7 @@ td:first-child {
   }
 }
 
-.privacy summary {
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-}
-.privacy p {
-  margin-top: 8px;
-}
-
-/* Selected cases lead the experience; live inference is optional. */
+/* Precomputed cases lead the evidence explorer. */
 .examples {
   margin-top: 16px;
 }
@@ -1217,22 +1090,6 @@ td:first-child {
     font-size: 13px;
   }
 }
-
-.live-tools > summary {
-  font-size: 13px;
-  font-weight: 500;
-  min-height: 36px;
-  padding-block: 8px;
-}
-.live-tools .file-label {
-  margin-top: 12px;
-}
-.live-tools .connection {
-  margin-top: 16px;
-}
-.live-tools .privacy {
-  margin-top: 16px;
-}
 @media (max-width: 700px) {
   .image-panel {
     grid-template-columns: 72px minmax(0, 1fr);
@@ -1253,24 +1110,5 @@ td:first-child {
   }
   .image-name {
     font-size: 13px;
-  }
-  .live-tools {
-    grid-column: 1 / -1;
-  }
-  .live-tools > summary {
-    min-height: 44px;
-  }
-  .live-tools .file-label {
-    min-height: 44px;
-  }
-  .live-tools #upload-help {
-    margin-top: 8px;
-  }
-  .live-tools .connection {
-    display: block;
-  }
-  .live-tools .connection p,
-  .live-tools .connection button {
-    margin-top: 8px;
   }
 }
