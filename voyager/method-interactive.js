@@ -47,9 +47,9 @@
       key: "router",
       scope: "Inference",
       title: "Learn which expert to trust for this image",
-      copy: "A lightweight MLP takes the mean-pooled frozen visual features and predicts a distribution over the expert bank. At inference, its largest output selects one hard expert. The flame identifies this trainable router; the encoder stays frozen.",
+      copy: "A lightweight MLP takes the mean-pooled frozen visual features and predicts a distribution over the expert bank. At inference, its largest output selects one hard expert. The dashed guide magnifies the blue Voyager block: its inside is this router and expert-selection step. The flame identifies the trainable router; the encoder stays frozen.",
       equation: "Selected expert = arg maxᵢ Gθ(ϕ(x))ᵢ",
-      note: "The deployed model uses five independently seeded routers sharing one CLIP forward pass.",
+      note: "The zoom guide is not a data-flow arrow. The solid feature arrow inside the inset is the expanded view of the router input. Five independently seeded routers share one CLIP forward pass.",
     },
     {
       key: "output",

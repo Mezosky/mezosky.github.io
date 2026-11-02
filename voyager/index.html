@@ -211,11 +211,11 @@
                     <path id="method-wire-read-2" d="M414 392H443" />
                     <path id="method-wire-read-n" d="M414 470H443" />
                     <path id="method-wire-feature-skip" d="M137 490V548H467V492" />
-                    <path id="method-wire-router-input" d="M467 548H682V474" />
-                    <path id="method-wire-route-e1" d="M682 427V402H567V373" />
-                    <path id="method-wire-route-e2" d="M682 427V402H633V373" />
-                    <path id="method-wire-route-e3" d="M682 427V402H699V373" />
-                    <path id="method-wire-route-ek" d="M682 427V402H812V373" />
+                    <path id="method-wire-router-input" d="M520 510H682V474" />
+                    <path id="method-wire-route-e1" d="M682 427C642 416 598 409 567 373" />
+                    <path id="method-wire-route-e2" d="M682 427C665 414 644 397 633 373" />
+                    <path id="method-wire-route-e3" d="M682 427C689 410 699 395 699 373" />
+                    <path id="method-wire-route-ek" d="M682 427C730 413 779 400 812 373" />
                     <path id="method-wire-output-id" d="M567 328V276H605V242" />
                     <path id="method-wire-output-ood" d="M699 328V276H765V242" />
                     <path id="method-wire-bank-1" d="M944 105H973M993 105H1014" />
@@ -330,10 +330,35 @@
                     aria-controls="method-explanation"
                   >
                     <rect class="method-region" x="438" y="283" width="421" height="269" rx="10" />
-                    <rect x="444" y="306" width="46" height="185" rx="5" fill="#dce9f6" stroke="#7299ba" stroke-width="1.5" />
+                    <rect
+                      class="method-router-block"
+                      x="444"
+                      y="306"
+                      width="46"
+                      height="185"
+                      rx="5"
+                      fill="#dce9f6"
+                      stroke="#7299ba"
+                      stroke-width="1.5"
+                    />
                     <text x="467" y="400" text-anchor="middle" font-size="18" transform="rotate(-90 467 400)">Voyager</text>
-                    <rect x="520" y="286" width="334" height="254" rx="16" fill="#f6f8f7" stroke="#9daa9f" stroke-width="1.5" />
-                    <text x="687" y="309" font-size="17" text-anchor="middle" class="">Input-conditioned selection</text>
+                    <path
+                      class="method-zoom-guide"
+                      d="M490 399H500Q510 399 510 387V321Q510 307 520 307M490 399H500Q510 405 510 420V508Q510 523 520 523"
+                    />
+                    <rect
+                      class="method-router-detail-frame"
+                      x="520"
+                      y="286"
+                      width="334"
+                      height="254"
+                      rx="16"
+                      fill="#f6f8f7"
+                      stroke="#718078"
+                      stroke-width="1.5"
+                      stroke-dasharray="11 8"
+                    />
+                    <text x="687" y="309" font-size="17" text-anchor="middle" class="">Inside Voyager · enlarged view</text>
                     <rect x="542" y="328" width="50" height="44" rx="4" fill="#e1eedc" stroke="#8eae80" stroke-width="1.5" />
                     <text x="567.0" y="356.0" font-size="20" text-anchor="middle" class="">E₁</text>
                     <rect x="608" y="328" width="50" height="44" rx="4" fill="#fff" stroke="#9aa9a2" stroke-width="1.5" />
@@ -350,7 +375,8 @@
                     <rect x="799" y="466" width="8" height="7" rx="0" fill="#a3d5e3" stroke="#4d9bb2" stroke-width="1.5" />
                     <rect x="811" y="469" width="8" height="4" rx="0" fill="#a3d5e3" stroke="#4d9bb2" stroke-width="1.5" />
                     <rect x="823" y="451" width="8" height="22" rx="0" fill="#a3d5e3" stroke="#4d9bb2" stroke-width="1.5" />
-                    <text x="600" y="575" font-size="16" text-anchor="middle" class="">Mean layer features</text>
+                    <text x="600" y="528" font-size="15" text-anchor="middle">Mean layer features</text>
+                    <text x="838" y="528" font-size="16" text-anchor="end" class="method-inset-brand">Voyager</text>
                   </g>
                   <g
                     class="method-svg-part"
@@ -361,9 +387,19 @@
                     aria-controls="method-explanation"
                   >
                     <rect class="method-region" x="518" y="56" width="340" height="214" rx="10" />
-                    <rect x="526" y="65" width="324" height="196" rx="16" fill="#f8faf8" stroke="#9daa9f" stroke-width="1.5" />
-                    <text x="605" y="95" font-size="17" text-anchor="middle" class="">ID example</text>
-                    <text x="765" y="95" font-size="17" text-anchor="middle" class="">OOD example</text>
+                    <rect
+                      x="526"
+                      y="65"
+                      width="324"
+                      height="196"
+                      rx="16"
+                      fill="#f8faf8"
+                      stroke="#9daa9f"
+                      stroke-width="1.5"
+                      stroke-dasharray="11 8"
+                    />
+                    <text x="605" y="95" font-size="17" text-anchor="middle" class="">ID Penguin</text>
+                    <text x="765" y="95" font-size="17" text-anchor="middle" class="">OOD Puffin</text>
                     <rect x="544" y="106" width="122" height="136" rx="13" fill="#f6faf3" stroke="#8eb27e" stroke-width="1.5" />
                     <rect x="704" y="106" width="122" height="136" rx="13" fill="#fff6f4" stroke="#c47b72" stroke-width="1.5" />
                     <rect x="557" y="118" width="96" height="32" rx="4" fill="#e1eedc" stroke="#8eae80" stroke-width="1.5" />
@@ -536,19 +572,19 @@
                     <use href="#method-wire-router-input" class="method-signal" />
                   </g>
                   <g class="method-flow" data-for="router output">
-                    <use href="#method-wire-route-e1" class="method-wire green" marker-end="url(#method-arrow-green)" />
+                    <use href="#method-wire-route-e1" class="method-wire method-choice green" marker-end="url(#method-arrow-green)" />
                     <use href="#method-wire-route-e1" class="method-signal" />
                   </g>
                   <g class="method-flow" data-for="router output">
-                    <use href="#method-wire-route-e2" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-route-e2" class="method-wire method-choice ink" marker-end="url(#method-arrow-ink)" />
                     <use href="#method-wire-route-e2" class="method-signal" />
                   </g>
                   <g class="method-flow" data-for="router output">
-                    <use href="#method-wire-route-e3" class="method-wire red" marker-end="url(#method-arrow-red)" />
+                    <use href="#method-wire-route-e3" class="method-wire method-choice red" marker-end="url(#method-arrow-red)" />
                     <use href="#method-wire-route-e3" class="method-signal" />
                   </g>
                   <g class="method-flow" data-for="router output">
-                    <use href="#method-wire-route-ek" class="method-wire ink" marker-end="url(#method-arrow-ink)" />
+                    <use href="#method-wire-route-ek" class="method-wire method-choice ink" marker-end="url(#method-arrow-ink)" />
                     <use href="#method-wire-route-ek" class="method-signal" />
                   </g>
 
