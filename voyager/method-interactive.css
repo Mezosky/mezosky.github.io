@@ -1,0 +1,405 @@
+/* The manuscript's architecture is the map, with controls around its actual parts. */
+.method-walkthrough {
+  margin: 0 0 56px;
+  background: #fff;
+  padding: 28px;
+  color: var(--ink, #142c33);
+}
+.method-walkthrough [hidden] {
+  display: none !important;
+}
+.method-walkthrough-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+.method-walkthrough h3 {
+  font-size: 24px;
+  letter-spacing: -0.025em;
+  margin: 0 0 8px;
+  line-height: 1.2;
+}
+.method-walkthrough-heading p {
+  font-size: 15px;
+  margin: 0;
+}
+.method-walkthrough button,
+.method-walkthrough select {
+  font: inherit;
+  color: inherit;
+  border: 1px solid #c7d4ce;
+  border-radius: 4px;
+  background: #fff;
+  min-height: 44px;
+  padding: 8px 13px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.method-walkthrough button:hover {
+  border-color: #336e62;
+}
+.method-walkthrough button:focus-visible,
+.method-walkthrough select:focus-visible,
+.method-diagram-scroll:focus-visible {
+  outline: 3px solid #ae4a16;
+  outline-offset: 3px;
+}
+.method-playback {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.method-playback #method-play {
+  background: #152e32;
+  color: #fff;
+  border-color: #152e32;
+}
+.method-diagram-scroll {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #819e92 #edf2ee;
+  padding: 5px 0 10px;
+}
+.method-diagram {
+  position: relative;
+  width: 100%;
+  min-width: 1100px;
+  line-height: 0;
+}
+.method-vector {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-family: "Albert Sans", Arial, sans-serif;
+  color: #203a36;
+}
+.method-vector text {
+  fill: #263e38;
+  user-select: none;
+}
+.method-vector .method-region {
+  fill: transparent;
+  stroke: transparent;
+  stroke-width: 2;
+  pointer-events: all;
+}
+.method-svg-part,
+.method-svg-icon {
+  cursor: pointer;
+  outline: none;
+}
+.method-svg-part:hover > .method-region,
+.method-svg-part:focus-visible > .method-region {
+  stroke: #82a79b;
+}
+.method-svg-part.is-selected > .method-region {
+  stroke: #087365;
+}
+.method-svg-part:focus-visible > .method-region,
+.method-svg-icon:focus-visible > circle {
+  stroke: #ae4a16;
+  stroke-width: 3;
+}
+.method-flow {
+  pointer-events: none;
+  fill: none;
+}
+.method-wire {
+  stroke: #52635e;
+  stroke-width: 1.8;
+}
+.method-wire.green {
+  stroke: #65975b;
+}
+.method-wire.red {
+  stroke: #bc6058;
+}
+.method-signal {
+  stroke: #087a72;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 2 15;
+  opacity: 0;
+  animation: method-travel 1.7s linear infinite;
+  animation-play-state: paused;
+}
+.method-flow.is-active .method-signal {
+  opacity: 1;
+}
+.method-walkthrough[data-motion="off"] .method-signal {
+  opacity: 0;
+}
+.method-snowflake {
+  transform-origin: 0 0;
+  animation: method-ice 7s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.density-area {
+  stroke-width: 1.8;
+}
+.density-area.red {
+  fill: #f1ceca;
+  stroke: #bc6058;
+}
+.density-area.green {
+  fill: #dcebd4;
+  stroke: #65975b;
+}
+.density-area.neutral {
+  fill: #e9eeeb;
+  stroke: #a0ada5;
+  fill-opacity: 0.5;
+}
+.method-density-axis {
+  fill: none;
+  stroke: #829289;
+  stroke-width: 1.5;
+}
+.method-density-ood {
+  transform-origin: 1184px 516px;
+  animation: method-ood-density 8s ease-in-out infinite alternate;
+  animation-play-state: paused;
+}
+.method-density-id {
+  transform-origin: 1331px 516px;
+  animation: method-id-density 8s ease-in-out infinite alternate;
+  animation-play-state: paused;
+}
+.method-density-bank {
+  transform-origin: 977px 548px;
+  animation: method-bank-density 7s ease-in-out infinite alternate;
+  animation-play-state: paused;
+}
+.method-fire {
+  transform-origin: 15px 37px;
+  animation: method-flicker 0.8s ease-in-out infinite alternate;
+  animation-play-state: paused;
+}
+.method-fire-inner {
+  transform-origin: 15px 35px;
+  animation: method-inner 0.55s ease-in-out infinite alternate;
+  animation-play-state: paused;
+}
+.method-walkthrough.is-inview[data-motion="on"] .method-signal,
+.method-walkthrough.is-inview[data-motion="on"] .method-fire,
+.method-walkthrough.is-inview[data-motion="on"] .method-fire-inner,
+.method-walkthrough.is-inview[data-motion="on"] .method-snowflake,
+.method-walkthrough.is-inview[data-motion="on"] .method-density-ood,
+.method-walkthrough.is-inview[data-motion="on"] .method-density-id,
+.method-walkthrough.is-inview[data-motion="on"] .method-density-bank {
+  animation-play-state: running;
+}
+.method-part-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 20px 0 0;
+}
+.method-part-buttons button.is-selected {
+  background: #e7efea;
+  border-color: #6f9284;
+}
+.method-part-select {
+  display: none;
+}
+.method-explanation {
+  display: grid;
+  grid-template-columns: minmax(210px, 0.8fr) minmax(0, 1.8fr);
+  gap: 40px;
+  padding-top: 28px;
+  margin-top: 28px;
+  border-top: 1px solid #e0e9e4;
+  min-height: 265px;
+}
+.method-part-count {
+  font-size: 13px;
+  color: #546a61;
+  margin: 0 0 10px;
+}
+.method-explanation h4 {
+  font-size: 24px;
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  margin: 0;
+  max-width: 22ch;
+}
+.method-explanation #method-part-copy {
+  margin: 0;
+  font-size: 17px;
+  max-width: 70ch;
+}
+.method-part-equation {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 16px 0;
+  overflow-wrap: anywhere;
+}
+.method-explanation .method-part-note {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #52645c;
+  margin: 0 0 14px;
+  max-width: 78ch;
+}
+#method-trace-link {
+  font-size: 14px;
+  text-underline-offset: 4px;
+}
+.method-walkthrough-footer {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 32px;
+  margin-top: 20px;
+}
+.method-step-controls {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.method-walkthrough figcaption {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #52645c;
+  max-width: 70ch;
+  margin: 0;
+}
+.method-pan-hint {
+  display: none;
+  font-size: 13px;
+  color: #52645c;
+  margin: 0 0 10px;
+}
+@keyframes method-travel {
+  to {
+    stroke-dashoffset: -34;
+  }
+}
+@keyframes method-flicker {
+  0% {
+    transform: scale(0.94, 1) rotate(-2deg);
+  }
+  60% {
+    transform: scale(1.03, 0.94) rotate(1deg);
+  }
+  100% {
+    transform: scale(0.96, 1.08) rotate(2deg);
+  }
+}
+@keyframes method-inner {
+  to {
+    transform: scale(0.85, 1.14) translateY(-1px);
+  }
+}
+@media (max-width: 1100px) {
+  .method-walkthrough-heading {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .method-pan-hint {
+    display: block;
+  }
+  .method-explanation {
+    grid-template-columns: minmax(170px, 0.8fr) minmax(0, 1.4fr);
+    gap: 24px;
+  }
+}
+@media (max-width: 700px) {
+  .method-walkthrough {
+    padding: 20px 16px;
+    margin-inline: -16px;
+    margin-bottom: 40px;
+  }
+  .method-walkthrough h3 {
+    font-size: 22px;
+  }
+  .method-playback {
+    flex-wrap: wrap;
+  }
+  .method-part-buttons {
+    display: none;
+  }
+  .method-part-select {
+    display: grid;
+    gap: 8px;
+    font-size: 14px;
+    margin-top: 18px;
+  }
+  .method-part-select select {
+    width: 100%;
+    min-height: 44px;
+  }
+  .method-explanation {
+    display: block;
+    min-height: 0;
+    margin-top: 22px;
+    padding-top: 22px;
+  }
+  .method-explanation h4 {
+    font-size: 22px;
+    max-width: none;
+    margin-bottom: 18px;
+  }
+  .method-explanation #method-part-copy {
+    font-size: 16px;
+  }
+  .method-part-equation {
+    font-size: 15px;
+  }
+  .method-walkthrough-footer {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .method-step-controls {
+    width: 100%;
+  }
+  .method-step-controls button {
+    flex: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .method-flow {
+    transition: none;
+  }
+}
+
+@keyframes method-ice {
+  0%,
+  100% {
+    transform: rotate(-10deg) scale(0.95);
+  }
+  50% {
+    transform: rotate(18deg) scale(1.06);
+  }
+}
+@keyframes method-ood-density {
+  from {
+    transform: translateX(22px) scaleX(1.07);
+  }
+  to {
+    transform: translateX(-10px) scaleX(0.92);
+  }
+}
+@keyframes method-id-density {
+  from {
+    transform: translateX(-22px) scaleX(1.07);
+  }
+  to {
+    transform: translateX(10px) scaleX(0.92);
+  }
+}
+@keyframes method-bank-density {
+  from {
+    transform: scaleY(0.85) scaleX(0.95);
+  }
+  to {
+    transform: scaleY(1.08) scaleX(1.02);
+  }
+}
+.method-walkthrough figcaption {
+  margin-top: 20px;
+}
