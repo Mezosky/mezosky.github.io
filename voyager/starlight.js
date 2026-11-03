@@ -44,7 +44,8 @@
       const skyHeight = finale ? height * 0.67 : height;
       const count = Math.min(mobile ? 30 : 64, Math.round((width * skyHeight) / (mobile ? 16000 : 18000)));
       const glints = footer ? 1 : finale || mobile ? 2 : 4;
-      const diagram = hero ? scene.querySelector(".orbital-layers")?.getBoundingClientRect() : null;
+      const diagramElement = hero && scene.querySelector(".orbital-layers");
+      const diagram = diagramElement ? diagramElement.getBoundingClientRect() : null;
       const clearDisc = diagram
         ? {
             x: diagram.left - bounds.left + diagram.width / 2,
