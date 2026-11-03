@@ -44,23 +44,22 @@
       .join("");
     $("#results-caption").textContent = `${shots === "4" ? "Four" : "One"}-shot results; MCM, GL-MCM and MoD are training-free references.`;
     $("#table-note").textContent =
-      `Bold marks the lowest FPR@95 among methods with the selected shot count. Training-free references are shown for context. Baselines follow the manuscript’s reported comparisons; one-shot Local-Prompt is the authors’ rerun. Voyager additionally uses WebContEX, while Local-Prompt uses ID-derived local context. Voyager has the lowest average here; ${shots === "4" ? "Local-Prompt" : "LoCoOp"} is lower on SUN and ID-Like on DTD.${shots === "1" ? " One-shot Local-Prompt is the authors’ rerun." : ""}`;
+      `Bold marks the lowest FPR@95 among methods with the selected shot count. Training-free references are shown for context. Baselines follow the paper’s reported comparisons; one-shot Local-Prompt is the authors’ rerun. Voyager additionally uses WebContEX, while Local-Prompt uses ID-derived local context. Voyager has the lowest average here; ${shots === "4" ? "Local-Prompt" : "LoCoOp"} is lower on SUN and ID-Like on DTD.${shots === "1" ? " One-shot Local-Prompt is the authors’ rerun." : ""}`;
     updateColumns();
   });
   const figures = {
     routes: {
-      alt: "Manuscript figure showing Voyager’s distribution of selected layers.",
-      caption:
-        "Layer-selection distributions from the manuscript. These summarize routed behavior; the schematic above uses illustrative selections.",
+      alt: "Paper figure showing Voyager’s distribution of selected layers.",
+      caption: "Layer-selection distributions from the paper. These summarize routed behavior; the schematic above uses illustrative selections.",
     },
     sparsity: {
       alt: "Random-selection diagnostic plotting AUROC and FPR95 against sparsity level, compared with the last-layer baseline.",
       caption:
-        "Random-selection diagnostic from the manuscript, compared with the final-layer baseline (dashed). This plot is not Voyager’s headline result.",
+        "Random-selection diagnostic from the paper, compared with the final-layer baseline (dashed). This plot is not Voyager’s headline result.",
     },
     evidence: {
-      alt: "Recorded input images, routes, and supporting diagnostics from the manuscript.",
-      caption: "Recorded routing examples from the manuscript. These are research diagnostics, not live browser predictions.",
+      alt: "Recorded input images, routes, and supporting diagnostics from the paper.",
+      caption: "Recorded routing examples from the paper. These are research diagnostics, not live browser predictions.",
     },
   };
   document.querySelectorAll("[data-figure]").forEach((button) => {

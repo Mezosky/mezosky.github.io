@@ -18,10 +18,10 @@
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="method-interactive.css" />
-    <script src="script.js?v=20261102-layers" defer></script>
+    <script src="script.js?v=20261103-paper" defer></script>
     <script src="method-interactive.js?v=20261103" defer></script>
     <link rel="stylesheet" href="layer-lesson.css" />
-    <script src="layer-lesson.js?v=20261103" defer></script>
+    <script src="layer-lesson.js?v=20261103-paper" defer></script>
     <link rel="stylesheet" href="webcontex.css?v=20261103-fixed" />
     <link rel="stylesheet" href="space-theme.css?v=20261103-images" />
     <link rel="stylesheet" href="bird-finale.css?v=20261102-loop" />
@@ -48,7 +48,7 @@
           <p class="lead">Learning to select layers for reliable out-of-distribution detection.</p>
           <p>Voyager learns which frozen CLIP layers to trust for each image, instead of using one fixed fusion rule.</p>
           <div class="hero-actions">
-            <a class="button" href="assets/manuscript.pdf">Read the manuscript <span aria-hidden="true">↗</span></a
+            <a class="button" href="assets/manuscript.pdf">Read the paper <span aria-hidden="true">↗</span></a
             ><a class="text-link" href="demo/">Explore examples <span aria-hidden="true">↗</span></a>
           </div>
           <div class="authors">
@@ -263,13 +263,13 @@
         </div>
         <div class="sample-strip">
           <figure>
-            <img src="assets/example-dtd.webp" alt="Textured leaves, a DTD example from the manuscript." width="300" height="300" loading="lazy" />
+            <img src="assets/example-dtd.webp" alt="Textured leaves, a DTD example from the paper." width="300" height="300" loading="lazy" />
             <figcaption>Textures · DTD</figcaption>
           </figure>
           <figure>
             <img
               src="assets/example-inaturalist.webp"
-              alt="A flowering plant, an iNaturalist example from the manuscript."
+              alt="A flowering plant, an iNaturalist example from the paper."
               width="300"
               height="300"
               loading="lazy"
@@ -279,7 +279,7 @@
           <figure>
             <img
               src="assets/example-places.webp"
-              alt="A coastal landscape, a Places example from the manuscript."
+              alt="A coastal landscape, a Places example from the paper."
               width="300"
               height="300"
               loading="lazy"
@@ -287,10 +287,10 @@
             <figcaption>Places · Places365</figcaption>
           </figure>
           <figure>
-            <img src="assets/example-sun.webp" alt="A wooded lake, a SUN example from the manuscript." width="300" height="300" loading="lazy" />
+            <img src="assets/example-sun.webp" alt="A wooded lake, a SUN example from the paper." width="300" height="300" loading="lazy" />
             <figcaption>Scenes · SUN</figcaption>
           </figure>
-          <p class="note">Four OOD shifts from the study. Images are excerpts from the manuscript’s recorded routing examples.</p>
+          <p class="note">Four OOD shifts from the study. Images are excerpts from the paper’s recorded routing examples.</p>
         </div>
       </section>
 
@@ -947,8 +947,8 @@
             </div>
             <noscript><p>The interactive tour requires JavaScript. The original architecture and method descriptions remain available.</p></noscript>
             <figcaption>
-              Interactive reproduction of the manuscript architecture. Snowflakes indicate frozen weights; flames identify router learning. Moving
-              curves and signals are conceptual illustrations, not measurements.<br /><a href="assets/method.webp">Open the original figure ↗</a>
+              Interactive reproduction of the paper architecture. Snowflakes indicate frozen weights; flames identify router learning. Moving curves
+              and signals are conceptual illustrations, not measurements.<br /><a href="assets/method.webp">Open the original figure ↗</a>
             </figcaption>
           </figure>
           <section class="layer-lesson" data-ui id="layer-lesson" data-view="dynamic" aria-labelledby="lesson-title">
@@ -981,7 +981,7 @@
                   ><span>Puffin</span></label
                 >
               </fieldset>
-              <p id="lesson-context">The penguin is the ID example in the manuscript illustration.</p>
+              <p id="lesson-context">The penguin is the ID example in the paper illustration.</p>
             </div>
             <nav class="lesson-mobile-views" aria-label="Compare scoring structures">
               <button type="button" data-lesson-view="final" aria-pressed="false">Final layer</button
@@ -1680,15 +1680,15 @@
                 A small MLP router learns from few-shot in-distribution examples and WebContEX: weak web-retrieved context constructed from the ID
                 label set. Training uses no target-OOD images or labels. The deployed context comes from Wikimedia Commons; concepts are filtered to
                 be at least two WordNet hops from the ID taxonomy. This semantic filter is not a guarantee of complete image-level disjointness; the
-                manuscript details the construction and deduplication scope.
+                paper details the construction and deduplication scope.
               </p>
             </details>
             <details>
               <summary>Simple inference</summary>
               <p>
                 Each router chooses one expert. The deployed five-router ensemble averages their outputs while sharing one frozen CLIP forward pass.
-                WebContEX is needed only during training. The manuscript reports 4.18 ms per image for the deployed model versus 4.08 ms for fixed
-                12-layer GL-MCM and 3.21 ms for MCM on its measured single-GPU setup; these are hardware-specific timings.
+                WebContEX is needed only during training. The paper reports 4.18 ms per image for the deployed model versus 4.08 ms for fixed 12-layer
+                GL-MCM and 3.21 ms for MCM on its measured single-GPU setup; these are hardware-specific timings.
               </p>
             </details>
           </div>
@@ -1807,8 +1807,8 @@
         </div>
         <p class="note" id="table-note" aria-live="polite">
           Bold marks the lowest FPR@95 among methods with the selected shot count. Training-free references are shown for context. Baselines follow
-          the manuscript’s reported comparisons; one-shot Local-Prompt is the authors’ rerun. Voyager additionally uses WebContEX, while Local-Prompt
-          uses ID-derived local context. Voyager has the lowest average here; Local-Prompt is lower on SUN and ID-Like on DTD.
+          the paper’s reported comparisons; one-shot Local-Prompt is the authors’ rerun. Voyager additionally uses WebContEX, while Local-Prompt uses
+          ID-derived local context. Voyager has the lowest average here; Local-Prompt is lower on SUN and ID-Like on DTD.
         </p>
         <div class="results-reading">
           <p class="lead">The gain comes from both the training context and the routing decision.</p>
@@ -1831,8 +1831,8 @@
           <div class="section-intro">
             <h2 id="evidence-title">Look inside the routes.</h2>
             <p>
-              Explore the manuscript’s diagnostics. Layer use and routed examples help explain the mechanism; they do not certify that every OOD input
-              is detected.
+              Explore the paper’s diagnostics. Layer use and routed examples help explain the mechanism; they do not certify that every OOD input is
+              detected.
             </p>
           </div>
           <div class="evidence-layout">
@@ -1842,7 +1842,7 @@
               ><button type="button" data-figure="sparsity" aria-pressed="false">
                 Sparse experts<span>The effect of allowing more layers ↗</span></button
               ><button type="button" data-figure="evidence" aria-pressed="false">
-                Routed examples<span>Recorded evidence from the manuscript ↗</span>
+                Routed examples<span>Recorded evidence from the paper ↗</span>
               </button>
             </div>
             <figure class="evidence-frame">
@@ -1852,22 +1852,22 @@
                   src="assets/routes.webp"
                   width="1900"
                   height="1000"
-                  alt="Manuscript figure showing Voyager’s distribution of selected layers."
+                  alt="Paper figure showing Voyager’s distribution of selected layers."
                   loading="lazy"
               /></a>
               <figcaption id="evidence-caption" aria-live="polite">
-                Layer-selection distributions from the manuscript. These summarize routed behavior; the schematic above uses illustrative selections.
+                Layer-selection distributions from the paper. These summarize routed behavior; the schematic above uses illustrative selections.
               </figcaption>
             </figure>
           </div>
           <noscript
             ><div class="fallback-figures">
               <figure>
-                <img src="assets/sparsity.webp" width="1900" height="1000" alt="Manuscript sparsity analysis." loading="lazy" />
+                <img src="assets/sparsity.webp" width="1900" height="1000" alt="Paper sparsity analysis." loading="lazy" />
                 <figcaption>Sparse expert analysis.</figcaption>
               </figure>
               <figure>
-                <img src="assets/evidence.webp" width="1900" height="1000" alt="Recorded routing examples from the manuscript." loading="lazy" />
+                <img src="assets/evidence.webp" width="1900" height="1000" alt="Recorded routing examples from the paper." loading="lazy" />
                 <figcaption>Recorded routing evidence.</figcaption>
               </figure>
             </div></noscript
@@ -1880,8 +1880,8 @@
                 average does not mean the lowest FPR on every shift.
               </p>
               <p>
-                The wider study includes Pascal-VOC, ImageNet-100, near-OOD subsets, and additional backbones. See the manuscript for their protocols,
-                full comparisons, training costs, and limitations.
+                The wider study includes Pascal-VOC, ImageNet-100, near-OOD subsets, and additional backbones. See the paper for their protocols, full
+                comparisons, training costs, and limitations.
               </p>
             </div>
           </div>
@@ -1892,16 +1892,16 @@
         <div class="resource-copy">
           <h2 id="resources-title">Take a closer look.</h2>
           <p class="paper-title">Not All Layers Are Created Equal: Learning to Select Layers for Reliable Out-of-Distribution Detection</p>
-          <p>The manuscript, implementation, and the work that motivated input-conditioned layer selection.</p>
+          <p>The paper, implementation, and the work that motivated input-conditioned layer selection.</p>
           <div class="resource-links">
-            <a href="assets/manuscript.pdf">Read the manuscript <span aria-hidden="true">↗</span></a>
+            <a href="assets/manuscript.pdf">Read the paper <span aria-hidden="true">↗</span></a>
             <a href="demo/">Explore recorded Voyager examples <span aria-hidden="true">↗</span></a>
             <p class="repository-status">Code: DynAMO repository · public release pending</p>
             <a href="https://mezosky.github.io/mysteries-of-the-deep/">Read Mysteries of the Deep <span aria-hidden="true">↗</span></a>
           </div>
           <p class="note">
-            Camera-ready manuscript, updated 2 November 2026. Voyager is implemented in DynAMO. The repository is currently private; a public code
-            release is pending. MIT code licence · <a href="mailto:ignacio.mezadelajara@adelaide.edu.au">Contact</a>.
+            Camera-ready paper, updated 2 November 2026. Voyager is implemented in DynAMO. The repository is currently private; a public code release
+            is pending. MIT code licence · <a href="mailto:ignacio.mezadelajara@adelaide.edu.au">Contact</a>.
           </p>
         </div>
         <div class="citation">
@@ -1917,7 +1917,7 @@
     Rodriguez-Opazo, Cristian and
     Ranasinghe, Damith},
   year = {2027},
-  note = {WACV 2027, camera-ready manuscript},
+  note = {WACV 2027, camera-ready paper},
   url = {https://mezosky.github.io/voyager/}
 }</code></pre>
           <p class="note">Camera-ready citation, updated 2 November 2026. Final proceedings metadata will be added when available.</p>
@@ -2076,7 +2076,7 @@
             </g>
           </svg>
           <p class="finale-status">Penguin · ID. Puffin · OOD.</p>
-          <p class="finale-caption">A playful illustration of the manuscript’s penguin/puffin example.</p>
+          <p class="finale-caption">A playful illustration of the paper’s penguin/puffin example.</p>
         </div>
       </section>
     </main>
@@ -2088,7 +2088,7 @@
         <div>
           <p>Learn which layers to trust.</p>
           <p class="note">
-            Research by Ignacio M. De la Jara, Cristian Rodriguez-Opazo, and Damith Ranasinghe.<br />Figures reproduced from the authors’ manuscript.
+            Research by Ignacio M. De la Jara, Cristian Rodriguez-Opazo, and Damith Ranasinghe.<br />Figures reproduced from the authors’ paper.
           </p>
           <a href="https://mezosky.github.io/">Back to Ignacio’s research ↗</a>
         </div>

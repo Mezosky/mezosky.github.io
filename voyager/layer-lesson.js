@@ -141,9 +141,7 @@
       routes[bird].join(", ") +
       ".";
     $("#lesson-context").textContent =
-      bird === "penguin"
-        ? "The penguin is the ID example in the manuscript illustration."
-        : "The puffin is the OOD example in the manuscript illustration.";
+      bird === "penguin" ? "The penguin is the ID example in the paper illustration." : "The puffin is the OOD example in the paper illustration.";
     root.classList.remove("is-tracing");
     clearTimeout(timer);
     $("#lesson-replay").textContent = "Trace the paths";
