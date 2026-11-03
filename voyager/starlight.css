@@ -1,0 +1,85 @@
+/* Author-requested space motif: a quiet sky, with the scientific panels left still. */
+.voyager-page :is(.hero, .bird-finale, .footer).has-starlight {
+  position: relative;
+  isolation: isolate;
+  background-image: none;
+}
+.has-starlight > :not(.starlight-field) {
+  position: relative;
+  z-index: 1;
+}
+.starlight-field {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+.starlight-star {
+  position: absolute;
+  width: var(--star-size);
+  height: var(--star-size);
+  border-radius: 50%;
+  background: currentColor;
+  color: #dfe9f7;
+  opacity: var(--star-rest);
+}
+.starlight-star.is-blue {
+  color: #b9d0ef;
+}
+.starlight-star.is-glint {
+  width: 9px;
+  height: 7px;
+  background: none;
+}
+.starlight-star.is-glint::before,
+.starlight-star.is-glint::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
+}
+.starlight-star.is-glint::before {
+  inset: 0;
+  clip-path: polygon(50% 0, 58% 40%, 100% 50%, 58% 60%, 50% 100%, 42% 60%, 0 50%, 42% 40%);
+}
+.starlight-star.is-glint::after {
+  width: 1.5px;
+  height: 1.5px;
+  left: calc(50% - 0.75px);
+  top: calc(50% - 0.75px);
+  border-radius: 50%;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .starlight-star {
+    animation: starlight-twinkle var(--star-period) ease-in-out var(--star-delay) infinite;
+    animation-play-state: paused;
+  }
+  .starlight-star.is-glint {
+    animation-name: starlight-glint;
+    animation-duration: 14s;
+  }
+  .has-starlight.is-starlight-visible .starlight-star {
+    animation-play-state: running;
+  }
+}
+@keyframes starlight-twinkle {
+  0%,
+  100% {
+    opacity: var(--star-rest);
+  }
+  50% {
+    opacity: var(--star-peak);
+  }
+}
+@keyframes starlight-glint {
+  0%,
+  38%,
+  62%,
+  100% {
+    opacity: 0.12;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
